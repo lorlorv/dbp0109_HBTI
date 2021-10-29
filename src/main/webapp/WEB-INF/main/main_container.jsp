@@ -5,12 +5,12 @@
 <head>
 <meta charset="EUC-KR">
 <title>Main Layout</title>
-<link rel="stylesheet" href="../../css/mainContainer.css">
+<link rel="stylesheet" href="../../css/mainContainer.css" type="text/css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
 </head>
 <body>
-	<div class="page-wrapper">
+	<div class="page-wrapper" >
 		<nav class="nav-bar">
 			<div class="nav-logo">
 				<a href="#" id="text-deco">HBTI</a>
