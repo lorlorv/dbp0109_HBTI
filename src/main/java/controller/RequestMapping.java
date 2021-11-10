@@ -15,7 +15,9 @@ public class RequestMapping {
     public void initMapping() {
     	// 각 uri에 대응되는 controller 객체를 생성 및 저장
         mappings.put("/", new ForwardController("index.jsp"));
-        mappings.put("/main", new ForwardController("/main/main_container.jsp"));
+        mappings.put("/group/list", new ForwardController("/group/list.jsp"));
+        mappings.put("/group/join", new ForwardController("/group/join.jsp"));
+        mappings.put("/group/create", new ForwardController("/group/createForm.jsp"));
         
         logger.info("Initialized Request Mapping!");
     }
