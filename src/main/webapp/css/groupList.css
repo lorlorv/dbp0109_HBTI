@@ -1,0 +1,154 @@
+@charset "EUC-KR";
+
+@charset "EUC-KR";
+
+/* @font-face {
+    font-family: 'SDSamliphopangche_Basic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Basic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+ */
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ELAND_Choice_B';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_B.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.contents { 
+	display : flex;
+	align-items : center;
+	flex-direction: column;
+	padding : 200px 0px 0px 0px;
+	font-family: 'Pretendard-Regular';
+}
+
+#sub-title {
+	color:  #DBE2EF;
+	font-size: 30px;
+	font-family: 'ELAND_Choice_B';
+}
+
+/* contents-top */
+.contents-top , .contents-main{
+	margin-bottom : 50px;
+	padding : 50px 0px 50px 0px;
+	width : 1000px;
+	background-color : white;
+	display : flex;
+	align-items : center;
+	flex-direction: column;
+	border-radius : 10px;
+}
+
+#intro {
+	font-size: 20px;
+	text-align:center;
+}
+#contents-title {
+	color:  #112D4E;
+	font-size: 30px;
+	font-family: 'ELAND_Choice_B';
+}
+
+.search-group {
+	margin : 10px 0px 10px 0px;
+	padding: 10px;
+	height: 30px;
+	width: 30px;
+	background-color: #fff;
+	border: 1px solid #112D4E;
+	border-radius: 30px;
+	transition: 0.4s;
+}
+
+.search-group:hover {
+	box-shadow: 0px 0px .5px 1px #112D4E;
+	width: 500px;
+}
+
+.search-btn {
+	text-decoration: none;
+	float: right;
+	width: 30px;
+	height: 30px;
+	background-color: #fff;
+	border-radius: 50%;
+	display: flex; justify-content : center; align-items : center;
+	color: #112D4E;
+	justify-content: center;
+	align-items: center;
+}
+
+.search-group:hover .search-txt {
+	width: 240px;
+	padding: 0 6px;
+}
+
+.search-txt {
+	padding: 0;
+	width: 0px;
+	border: none;
+	background: none;
+	outline: none;
+	float: left;
+	font-size: 1rem;
+	line-height: 30px;
+	transition: .4s;
+}
+
+/*contents-main*/
+.list-row {
+	display : flex ;
+	align-items : center;
+}
+
+.list-box {
+	border : 1px solid;
+	border-radius : 10px;
+	width : 200px;
+	height : 200px;
+	margin : 10px;
+}
+
+table {
+	width:100%;
+	height:100%;
+	text-align:center;
+}
+th, td {
+	border: 0px solid #444444;
+    padding: 5px;
+    font-size : 20px;
+}
+
+#a-deco {
+	text-decoration : none;
+	color : white;
+	font-size : 20px;
+	background-color : #112D4E;
+	padding : 5px;
+	border-radius : 7px;
+}
+#a-deco:hover {
+	text-shadow: 2px 2px 2px #DBE2EF;
+}
+
+.page {
+	font-size : 30px;
+}
+#pageMove {
+	text-decoration : none;
+	color : black;
+}
+.create {
+	padding : 30px 0 0 0;
+}
