@@ -11,8 +11,15 @@
 <link rel="stylesheet" href="<c:url value='/css/mainContainer.css' />"
 	type="text/css">
 
+<!-- Contents 스타일시트 -->
+<link rel="stylesheet" href="<c:url value='/css/contents.css' />"
+	type="text/css">
+
+<!-- list 스타일시트 -->
 <link rel="stylesheet" href="<c:url value='/css/groupList.css' />"
 	type="text/css">
+
+<!-- 아이콘 -->
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
@@ -40,7 +47,7 @@
 	<!-- contents -->
 	<div class="contents">
 		<p id="sub-title">Hello! HBTI World</p>
-		<div class="contents-top">
+		<div class="contents-split">
 			<p id="intro">
 				HBTI에 오신 여러분들 모두 환영합니다.<br> 이곳에서는 나와 같은 HBTI를 가진 사람들과 함께 건강 습관을
 				실천할 수 있습니다.<br> 운동 키워드를 통해 검색하여 보다 마음에 맞는 사람들을 찾아보세요!
@@ -55,7 +62,7 @@
 				</form>
 			</div>
 		</div>
-		<div class="contents-main">
+		<div class="contents-split">
 			<p id="contents-title">GROUP LIST</p>
 			원하는 그룹에 가입하거나 자신이 그룹을 생성할 수 있습니다.
 
@@ -93,7 +100,7 @@
 					</c:url>"><i class="fas fa-chevron-circle-right"></i></a>
 			</div>
 			<div class="create">
-			<a href="<c:url value='/group/create' />" id="a-deco"><i class="fas fa-plus-square">&nbsp;Create Group&nbsp;</i></a>
+			<a href="<c:url value='/group/createForm' />" id="a-deco"><i class="fas fa-plus-square">&nbsp;Create Group&nbsp;</i></a>
 			</div>
 			
 		</div>

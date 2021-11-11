@@ -1,74 +1,38 @@
 @charset "EUC-KR";
 
-@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'ELAND_Choice_B';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_B.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-.contents { 
-	display : flex;
-	align-items : center;
-	flex-direction: column;
-	padding : 200px 0px 0px 0px;
-	font-family: 'Pretendard-Regular';
-}
-
-#sub-title {
-	color:  #DBE2EF;
-	font-size: 30px;
-	font-family: 'ELAND_Choice_B';
-}
-
-/* contents-top */
-.contents-main{
-	margin-bottom : 50px;
-	padding : 50px 0px 50px 0px;
-	width : 1000px;
-	background-color : white;
-	display : flex;
-	align-items : center;
-	flex-direction: column;
-	border-radius : 10px;
-	text-align:center;
-}
-
-#contents-title {
-	color:  #112D4E;
-	font-size: 30px;
-	font-family: 'ELAND_Choice_B';
-}
-
 /* 아이콘 이미지 라디오 버튼-->*/
-.contents-main input[type=radio] {
+.contents-split input[type=radio] {
 	display:none;
 }
-.contents-main input[type=radio] + label{
-	color: #e0e0e0;
+.contents-split input[type=radio] + label{
+	color: #DBE2EF;
     font-size: 5em;
 }
-.contents-main input[type=radio]:checked + label{
+.contents-split input[type=radio]:checked + label{
 	color: #000;
 }
 
-#input_deco {
-	width: 500px;
+input[type=text] {
+	width: 300px;
 	height: 50px;
 	padding: 0 10px;
-	background: none;
+	background-color: #DBE2EF;
 
 	font-size: 1rem;
 	line-height: 30px;
 	border-radius: 30px;
-	border : 0.5px soild #112D4E;
+	border : 0px;
+}
+input[type=number] {
+	width: 70px;
+	height: 50px;
+	padding: 0 10px;
+	background-color: #DBE2EF;
+
+	font-size: 1rem;
+	line-height: 30px;
+	border-radius: 30px;
+	border : 0px;
 }
 #a-deco {
 	text-decoration : none;

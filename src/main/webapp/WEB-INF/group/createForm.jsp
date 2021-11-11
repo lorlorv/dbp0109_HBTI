@@ -7,6 +7,8 @@
 <meta charset="EUC-KR">
 <title>HBTI 그룹 만들기</title>
 <link rel="stylesheet" href="<c:url value='/css/mainContainer.css' />" type="text/css">
+<link rel="stylesheet" href="<c:url value='/css/contents.css' />"
+	type="text/css">
 <link rel="stylesheet" href="<c:url value='/css/groupCreate.css' />" type="text/css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
@@ -17,19 +19,15 @@ function groupCreate() {
 		form.icon.focus();
 		return false;
 	}
-	if(form.group_name.value="") {
+	if(form.name.value=="") {
 		alert("그룹 이름을 입력하세요!");
-		form.group_name.focus();
+		form.name.focus();
 		return false;
 	}
-	if(form.group_member.value="") {
-		alert("그룹 인원을 설정해주세요!");
-		form.group_member.focus();
-		return false;
-	}
-	if(form.group_descr.value="") {
+	
+	if(form.descr.value=="") {
 		alert("그룹 소개를 입력해주세요!");
-		form.group_descr.focus();
+		form.descr.focus();
 		return false;
 	}
 	form.submit();
@@ -56,9 +54,11 @@ function groupCreate() {
 	</div>
 	<div class="contents">
 		<p id="sub-title">HBTI GROUP CREATE</p>
-		<div class="contents-main">
-		<form name="form" method="POST" action="<c:url value='/group/join' />">
+		<div class="contents-split">
+		<form name="form" method="POST" action="<c:url value='/group/create' />">
 			<p id="contents-title">GROUP ICON</p>
+			<p id="intro">
+				우리 그룹을 나타낼 아이콘을 골라보세요.</p>
 			<input type="radio" id="icon_1" name="icon" value='1'>
 			<label for="icon_1"><i class="fas fa-running"></i></label>
 			<input type="radio" id="icon_2" name="icon" value='2'>
@@ -77,14 +77,27 @@ function groupCreate() {
 			<label for="icon_8"><i class="far fa-kiss-wink-heart"></i></label>
 			
 			<p id="contents-title">GROUP NAME</p>
-			<input type="text"  name="group_name" id="input_deco">	
+			<p id="intro">
+				그룹의 이름을 지어주세요.<br>
+				관심있는 운동이나 취향이 드러나면 더욱 좋습니다. 
+			</p>
+			<input type="text"  name="name" maxlength="10" placeholder="최대 10글자">	
 			<p id="contents-title">NUMBER OF MEMBER</p>
-			<input type="number" min="2" max="50" name="group_memeber" id="input_deco">	
+			<p id="intro">
+				우리 그룹이 가입할 수 있는 정원을 입력해주세요.<br>
+				최소 2명에서 30명까지 가능합니다. 
+			</p>
+			<input type="number" min="2" max="30" name="memeber" placeholder="2~30" required>	
 			<p id="contents-title">DESCRIPTION</p>
-			<input type="text"  name="group_descr" id="input_deco">	
-			<p></p>
-			<a onclick="groupCreate()" id="a-deco">
+			<p id="intro">
+				우리 그룹을 재치있게 한마디로 소개해주세요!<br> 
+				이 설명을 통해 HBTI 친구들이 가입할 수 있습니다.
+			</p>
+			<input type="text"  name="descr" placeholder="그룹 한줄 소개">	
+			<p>
+				<a onclick="groupCreate()" id="a-deco">
 			<i class="fas fa-plus-square">&nbsp;Create Group&nbsp;</i></a>
+			
 		</form>
 		</div>
 	
