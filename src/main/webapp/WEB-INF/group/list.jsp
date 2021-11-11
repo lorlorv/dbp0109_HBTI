@@ -64,7 +64,7 @@
 		</div>
 		<div class="contents-split">
 			<p id="contents-title">GROUP LIST</p>
-			원하는 그룹에 가입하거나 자신이 그룹을 생성할 수 있습니다.
+			<p id="intro">원하는 그룹에 가입하거나 자신이 그룹을 생성할 수 있습니다.</p>
 
 			<c:forEach var="k" begin="1" end="2">
 				<div class="list-row">
