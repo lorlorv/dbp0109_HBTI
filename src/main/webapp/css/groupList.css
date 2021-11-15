@@ -47,17 +47,13 @@
 }
 
 /*contents-main*/
-.list-row {
-	display : flex ;
-	align-items : center;
-}
-
 .list-box {
-	border : 1px solid;
-	border-radius : 10px;
-	width : 200px;
-	height : 200px;
+	border-bottom : 3px solid #DBE2EF;
+	width : 70%;
+	height : 100px;
 	margin : 10px;
+	font-size : 15px;
+	padding: 20px;
 }
 
 table {
@@ -71,10 +67,14 @@ th, td {
     font-size : 20px;
 }
 
+#icon {
+	font-size: 5em;
+}
+
 #a-deco {
 	text-decoration : none;
 	color : white;
-	font-size : 20px;
+	font-size : 15px;
 	background-color : #112D4E;
 	padding : 5px;
 	border-radius : 7px;

@@ -22,8 +22,13 @@
 <!-- 아이콘 -->
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+	
+<script type="text/javascript">
 
-
+function search() {
+	form.submit();
+}
+</script>
 </head>
 <body>
 	<div class="page-wrapper">
@@ -34,7 +39,7 @@
 			<div class="nav-menu">
 				<ul class="menu-ul">
 					<li class="menu-li"><a href="#" id="text-deco">ToDo</a></li>
-					<li class="menu-li"><a href="#" id="text-deco">Group</a></li>
+					<li class="menu-li"><a href="<c:url value='/group/main' />" id="text-deco">Group</a></li>
 					<li class="menu-li"><a href="#" id="text-deco">MyPage</a></li>
 				</ul>
 			</div>
@@ -44,6 +49,11 @@
 		</nav>
 	</div>
 
+			<!-- 그룹 정원이 초과되었다면 가입하지 못한다는 경고창 -->
+			<c:if test="${joinFailed}">
+	  	  	<script>alert('${exception.getMessage()}'); </script>
+	    	</c:if>
+	    	
 	<!-- contents -->
 	<div class="contents">
 		<p id="sub-title">Hello! HBTI World</p>
@@ -54,9 +64,9 @@
 			</p>
 
 			<div class="search-group">
-				<form>
-					<input type="text" class="search-txt" name=""
-						placeholder="그룹 이름 입력"> <a class="search-btn" href="#">
+				<form name="form" method="POST" action="<c:url value='/group/search'/>">
+					<input type="text" class="search-txt" name="searchKeyword" placeholder="그룹 이름 입력">
+					<a class="search-btn" href="javascript:search();">
 						<i class="fas fa-search"></i>
 					</a>
 				</form>
@@ -66,42 +76,32 @@
 			<p id="contents-title">GROUP LIST</p>
 			<p id="intro">원하는 그룹에 가입하거나 자신이 그룹을 생성할 수 있습니다.</p>
 
-			<c:forEach var="k" begin="1" end="2">
-				<div class="list-row">
-					<c:forEach var="i" begin="1" end="3">
-						<div class="list-box">
-							<table>
-								<tr>
-									<td colspan='2'><i class="fas fa-chart-pie fa-3x"></i></td>
-								</tr>
-								<tr>
-									<td>그루비룸</td>
-									<td style="color: grey;">3/30</td>
-								</tr>
-								<tr>
-									<td colspan='2'>운동만이 살 길이다!</td>
-								</tr>
-								<tr>
-									<td colspan='2'><a href= "<c:url value='/group/join' />" id="a-deco">JOIN</a> </td>
-								</tr>
-							</table>
-						</div>
-					</c:forEach>
+			<div class="create">
+				<a href="<c:url value='/group/createForm' />" id="a-deco"><i class="fas fa-plus-square"></i>&nbsp;Create Group&nbsp;</a>
+			</div>
+	    
+			<c:forEach var="group" items="${groupList}" varStatus="status">
+				<div class="list-box">
+					<table>
+						<tr>
+						<td rowspan="2">
+						<i id="icon" class="${group.icon}"></i>
+						</td>
+						<td>
+							그룹이름 : ${group.name}
+							</td>
+							<td rowspan="2">
+							${group.numberOfMem}/${group.limitation}
+							</td>
+							<td rowspan="2"><a href= "<c:url value='/group/join' >
+												<c:param name="group_id" value='${group.group_id}' />
+												</c:url>" id="a-deco">JOIN</a></td>
+							<tr>
+							<td>한줄소개 : ${group.descr}</td>
+							</tr>
+					</table>
 				</div>
 			</c:forEach>
-			
-			<div class="page">
-			<a id="pageMove" href="<c:url value='/group/list'>
-					<c:param name='page_left' value='1' />
-					</c:url>"><i class="fas fa-chevron-circle-left"></i></a>
-					1 <!-- ${curPage} --> 
-					<a id="pageMove" href="<c:url value='/group/list'>
-					<c:param name='page_right' value='1' />
-					</c:url>"><i class="fas fa-chevron-circle-right"></i></a>
-			</div>
-			<div class="create">
-			<a href="<c:url value='/group/createForm' />" id="a-deco"><i class="fas fa-plus-square">&nbsp;Create Group&nbsp;</i></a>
-			</div>
 			
 		</div>
 	</div>
