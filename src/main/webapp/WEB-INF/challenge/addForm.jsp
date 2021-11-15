@@ -52,7 +52,7 @@ function PreviewImage() {
 				<ul class="menu-ul">
 					<li class="menu-li"><a href="#" id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />" id="text-deco">Group</a></li>
-					<li class="menu-li"><a href="#" id="text-deco">MyPage</a></li>
+					<li class="menu-li"><a href="#" id="/user/myPage">MyPage</a></li>
 				</ul>
 			</div>
 			<div class="nav-logout">
@@ -81,7 +81,7 @@ function PreviewImage() {
 				<br>당신의 이야기를 공유해주세요.
 			</p>
 			<textarea id="text" name="content"></textarea>
-			<p>
+			<div id="len"></div>
 				<a onclick="postAdd()" id="a-deco">
 			<i class="fas fa-plus-square"></i>&nbsp;등록하기&nbsp;</a>
 			

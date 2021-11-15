@@ -1,5 +1,10 @@
 @charset "EUC-KR";
 
+.split {
+	border-bottom : 3px solid  #DBE2EF;
+	padding: 10px;
+}
+
 table {
 	width : 50%;
 }

@@ -58,7 +58,7 @@ function groupDelete(targetURI) {
 				<ul class="menu-ul">
 					<li class="menu-li"><a href="#" id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />" id="text-deco">Group</a></li>
-					<li class="menu-li"><a href="#" id="text-deco">MyPage</a></li>
+					<li class="menu-li"><a href="#" id="/user/myPage">MyPage</a></li>
 				</ul>
 			</div>
 			<div class="nav-logout">
@@ -127,19 +127,25 @@ function groupDelete(targetURI) {
 			<input type="radio" id="icon_8" name="icon" value='far fa-kiss-wink-heart'>
 			<label for="icon_8"><i class="far fa-kiss-wink-heart"></i></label>
 			
+			<div class="split"> </div>
+			
 			<p id="contents-title">GROUP NAME</p>
 			<p id="intro">
 				그룹의 이름을 지어주세요.<br>
 				관심있는 운동이나 취향이 드러나면 더욱 좋습니다. 
 			</p>
 			<input type="text" name="name" maxlength="10" value="${groupInfo.name}">	
+			
+			<div class="split"> </div>
+			
 			<p id="contents-title">NUMBER OF MEMBER</p>
 			<p id="intro">
 				우리 그룹이 가입할 수 있는 정원을 입력해주세요.<br>
 				최소 2명에서 30명까지 가능합니다. 
 			</p>
-			
 			<input type="text" name="limit" value="${groupInfo.numberOfMem}" required>	
+			
+			<div class="split"> </div>
 			<p id="contents-title">DESCRIPTION</p>
 			<p id="intro">
 				우리 그룹을 재치있게 한마디로 소개해주세요!<br> 
@@ -147,10 +153,10 @@ function groupDelete(targetURI) {
 			</p>
 			<input type="text" name="descr" value="${groupInfo.descr}">	
 			<div id="len"></div>
-			<span><a onclick="groupUpdate()" id="a-deco">Update Group</a></span>
+			<span><a onclick="groupUpdate()" id="a-deco">수정 완료</a></span>
 			<span><a onclick="groupDelete('<c:url value='/group/delete'>
 											<c:param name="group_id" value='${groupInfo.group_id}'/></c:url>')"
-											 id="a-deco2">Delete Group</a></sapn>
+											 id="a-deco2">그룹 삭제</a></sapn>
 			
 		</form>
 		</div>

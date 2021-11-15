@@ -1,12 +1,9 @@
 package controller.group;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
-import model.User;
 import model.service.GroupManager;
 import model.service.UserManager;
 
@@ -19,10 +16,12 @@ public class DeleteGroupController implements Controller {
 		GroupManager groupManager = GroupManager.getInstance();
 		int group_id = Integer.parseInt(request.getParameter("group_id"));
 		
-		List<User> userList = groupManager.findUserList(group_id);
-		userManager.deleteGroup(group_id, userList);
+		System.out.println(group_id);
 		
-		return "redirect:/group/main";
+		groupManager.deleteAllPost(group_id);
+		userManager.deleteGroup(group_id);
+		
+		return "redirect:/group/main";	
 	}
 
 }

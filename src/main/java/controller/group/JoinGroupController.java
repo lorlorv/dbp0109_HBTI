@@ -9,6 +9,7 @@ import model.Group;
 import model.service.OverTheLimitException;
 
 import controller.Controller;
+import controller.user.UserSessionUtils;
 
 public class JoinGroupController implements Controller{
 
@@ -16,7 +17,7 @@ public class JoinGroupController implements Controller{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		String group_id = request.getParameter("group_id");
-		String user_id = "jeongmin";
+		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		//UserSessionUtils.getLoginUserId(request.getSession());
 		UserManager userManager = UserManager.getInstance();
 		

@@ -9,6 +9,7 @@ import model.service.UserManager;
 import model.Group;
 
 import controller.Controller;
+import controller.user.UserSessionUtils;
 
 public class CreateGroupController implements Controller{
 
@@ -17,7 +18,7 @@ public class CreateGroupController implements Controller{
 		// TODO Auto-generated method stub
 		UserManager userManager = UserManager.getInstance();
 		
-		String user_id = "jeongmin";
+		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		//UserSessionUtils.getLoginUserId(request.getSession());
 		
 		Group group = new Group(

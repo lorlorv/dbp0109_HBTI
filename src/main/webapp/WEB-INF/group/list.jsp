@@ -40,7 +40,7 @@ function search() {
 				<ul class="menu-ul">
 					<li class="menu-li"><a href="#" id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />" id="text-deco">Group</a></li>
-					<li class="menu-li"><a href="#" id="text-deco">MyPage</a></li>
+					<li class="menu-li"><a href="#" id="/user/myPage">MyPage</a></li>
 				</ul>
 			</div>
 			<div class="nav-logout">

@@ -28,6 +28,14 @@ function postUpdate() {
 	form.submit();
 }
 
+function postDelete(targetURI) {
+	 if (confirm("챌린지를 정말 삭제하시겠습니까??") == true){
+		 form.action = targetURI;
+		form.submit();
+	 } else{
+	     return false;
+	 }	
+}
 //이미지 업로드
 function PreviewImage() {
    // 파일리더 생성 
@@ -52,7 +60,7 @@ function PreviewImage() {
 				<ul class="menu-ul">
 					<li class="menu-li"><a href="#" id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />" id="text-deco">Group</a></li>
-					<li class="menu-li"><a href="#" id="text-deco">MyPage</a></li>
+					<li class="menu-li"><a href="#" id="/user/myPage">MyPage</a></li>
 				</ul>
 			</div>
 			<div class="nav-logout">
@@ -63,7 +71,7 @@ function PreviewImage() {
 	<div class="contents">
 		<p id="sub-title">UPDATE CHALLENGE POST</p>
 		<div class="contents-split">
-		<form name="form" method="POST" action="<c:url value='/challenge/update' />"  enctype="multipart/form-data">
+		<form name="form" method="POST" action="<c:url value='/challenge/update'/>" enctype="multipart/form-data">
 		<p id="contents-title">
 		<%= new SimpleDateFormat("yyyy년 MM월 dd일").format(new Date()) %></p>
 			<p id="intro">챌린지 인증 사진</p>
@@ -77,9 +85,13 @@ function PreviewImage() {
 			 
 			<p id="intro">챌린지 인증 내용</p>
 			<textarea id="text" name="content">${postInfo.content}</textarea>
-			<p>
-				<a onclick="postUpdate()" id="a-deco">
-			<i class="fas fa-plus-square"></i>&nbsp;수정하기&nbsp;</a>
+			<div id="len"></div>
+				<span><a onclick="postUpdate()" id="a-deco">
+			<i class="fas fa-plus-square"></i>&nbsp;수정하기&nbsp;</a></span>
+			<span><a onclick="postDelete('<c:url value='/challenge/delete'>
+											<c:param name="post_id" value='${postInfo.post_id}'/>
+											</c:url>')" id="a-deco">
+			<i class="fas fa-plus-square"></i>&nbsp;삭제하기&nbsp;</a></span>
 			
 		</form>
 		</div>

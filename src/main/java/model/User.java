@@ -13,14 +13,12 @@ public class User {
 
 	   public User() {
 	   } 
-
 	   
 	   public User(String user_id, String password) {
 	      super();
 	      this.user_id = user_id;
 	      this.password = password;
 	   }
-
 
 	   public User(String user_id, String password, String name, String descr, String image) {
 	      super();
@@ -31,8 +29,17 @@ public class User {
 	      this.image = image;
 	   }
 
-
-
+	   //group_id x 
+	   public User(String user_id, String password, String name, String descr, String image, int hbti_id) {
+			super();
+			this.user_id = user_id;
+			this.password = password;
+			this.name = name;
+			this.descr = descr;
+			this.image = image;
+			this.hbti_id = hbti_id;
+		}
+	   
 	   public User(String user_id, String password, String name, String descr, String image, int group_id, int hbti_id) {
 	      super();
 	      this.user_id = user_id;
@@ -141,6 +148,20 @@ public class User {
 	public void setIs_leader(boolean is_leader) {
 		this.is_leader = is_leader;
 	}
+	public boolean matchPassword(String password) {
+		if (password == null) {
+			return false;
+		}
+		return this.password.equals(password);
+	}
 
+	public boolean isSameUser(String userid) {
+		return this.user_id.equals(userid);
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + user_id + ", password=" + password + ", name=" + name + ", userdesc=" + descr + ", img= " + image + ", is_leader= " + is_leader + "]";
+	}
 	
 }

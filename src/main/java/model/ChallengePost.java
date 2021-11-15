@@ -12,12 +12,27 @@ public class ChallengePost {
 	private String writer_id;
 	private String writer_name;
 
-	public ChallengePost(String writer_name, String writer_id, String content, String image, int like_btn) {
+	public ChallengePost(int post_id, String writer_name, String writer_id, String content, String image, int like_btn) {
+		this.post_id = post_id;
 		this.writer_name = writer_name;
 		this.writer_id = writer_id;
 		this.content = content;
 		this.image = image;
 		this.like_btn = like_btn;
+	}
+	
+	//add에 쓰이는 생성자
+	public ChallengePost(String writer_name, String writer_id, String content, String image) {
+		this.writer_name = writer_name;
+		this.writer_id = writer_id;
+		this.content = content;
+		this.image = image;
+	}
+	
+	public ChallengePost(int post_id, String content, String image) {
+		this.post_id = post_id;
+		this.content = content;
+		this.image = image;
 	}
 
 	public int getPost_id() {

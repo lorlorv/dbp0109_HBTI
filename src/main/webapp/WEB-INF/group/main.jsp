@@ -28,7 +28,7 @@
 					<li class="menu-li"><a href="#" id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />"
 						id="text-deco">Group</a></li>
-					<li class="menu-li"><a href="#" id="text-deco">MyPage</a></li>
+					<li class="menu-li"><a href="#" id="/user/myPage">MyPage</a></li>
 				</ul>
 			</div>
 			<div class="nav-logout">
@@ -114,14 +114,15 @@
 							<td>이름 : ${post.writer_name}
 								<p>${post.content}</p>
 							</td>
-							<td><a href="<c:url value='/challenge/like' />"
-								id="like-btn"><i class="fas fa-heart"></i></a>&nbsp;${post.like_btn}</td>
+							<td><a href="<c:url value='/challenge/updateLike_btn'>
+									<c:param name="post_id" value='${post.post_id}' />
+									</c:url>" id="like-btn"><i class="fas fa-heart"></i></a>&nbsp;${post.like_btn}</td>
 						</tr>
 					</c:forEach>
 				</table>
 			</div>
 			<div style="cursor: pointer;" onclick="window.scrollTo(0,0);">
-				<i class="fas fa-caret-square-up fa-4x"></i>
+				<i class="fas fa-caret-square-up fa-3x"></i>
 			</div>
 		</div>
 	</div>

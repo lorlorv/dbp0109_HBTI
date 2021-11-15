@@ -5,6 +5,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import controller.user.*;
+import controller.group.*;
+import controller.challenge.*;
+
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -15,10 +19,57 @@ public class RequestMapping {
     public void initMapping() {
     	// 각 uri에 대응되는 controller 객체를 생성 및 저장
         mappings.put("/", new ForwardController("index.jsp"));
-        mappings.put("/group/list", new ForwardController("/group/list.jsp"));
-        mappings.put("/group/join", new ForwardController("/group/join.jsp"));
-        mappings.put("/group/create", new ForwardController("/group/createForm.jsp"));
         
+        // 로그인
+        mappings.put("/user/login", new LoginController());
+        mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
+        
+        // 회원가입
+        mappings.put("/user/join", new JoinUserController());
+        mappings.put("/user/hbtiTest", new HBTIController());
+        mappings.put("/user/hbtiTestResult", new HBTIController());
+        
+        // 마이페이지 (회원 정보 수정 & 회원 탈퇴 & 그룹 탈퇴)
+        mappings.put("/user/myPage", new MyPageController());
+        mappings.put("/user/update", new UpdateUserController());
+        mappings.put("/user/quit", new QuitUserController());
+        mappings.put("/group/quit", new QuitGroupController());
+        
+        // 로그 아웃
+        mappings.put("/user/logout", new LogoutController());
+        
+        // 그룹 메인 (검색 & 가입)
+        mappings.put("/group/main", new ViewGroupController());
+        mappings.put("/group/search", new SearchGroupController());
+        mappings.put("/group/join", new JoinGroupController());
+        
+        // 그룹 생성
+        mappings.put("/group/createForm", new ForwardController("/group/createForm.jsp"));
+        mappings.put("/group/create", new CreateGroupController());
+        
+        // 그룹 정보 수정 & 그룹원 관리
+        mappings.put("/group/updateForm", new UpdateGroupController());
+        mappings.put("/group/update", new UpdateGroupController());
+        mappings.put("/group/manageUser", new UpdateGroupController());
+        
+        // 그룹 삭제
+        mappings.put("/group/delete", new DeleteGroupController());
+        
+        // 챌린지 조회
+        mappings.put("/challenge/view", new ViewChallengeController());
+        
+        // 챌린지 추가
+        mappings.put("/challenge/addForm", new AddChallengeController());
+        mappings.put("/challenge/add", new AddChallengeController());
+        
+        // 챌린지 수정
+        mappings.put("/challenge/updateForm", new UpdateChallengeController());
+        mappings.put("/challenge/update", new UpdateChallengeController());
+        mappings.put("/challenge/updateLike_btn", new UpdateChallengeController());
+        
+        // 챌린지 삭제
+        mappings.put("/challenge/delete", new DeleteChallengeController());
+       
         logger.info("Initialized Request Mapping!");
     }
 

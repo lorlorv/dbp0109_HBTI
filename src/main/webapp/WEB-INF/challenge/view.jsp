@@ -30,7 +30,7 @@
 					<li class="menu-li"><a href="#" id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />"
 						id="text-deco">Group</a></li>
-					<li class="menu-li"><a href="#" id="text-deco">MyPage</a></li>
+					<li class="menu-li"><a href="#" id="/user/myPage">MyPage</a></li>
 				</ul>
 			</div>
 			<div class="nav-logout">
@@ -50,10 +50,11 @@
 		<div class="contents-split">
 			<form name="form" method="POST"
 				action="<c:url value='/challenge/add' />">
-				<p id="contents-title">유정민 님의 챌린지 인증</p>
+				<p id="contents-title">${postInfo.writer_name} 님의 챌린지 인증</p>
 				<p id="intro">
-					좋아요&nbsp;<a href="<c:url value='/challenge/like' />" id="like-btn"><i
-						class="fas fa-heart"></i></a>&nbsp;${postInfo.like_btn}
+					<a href="<c:url value='/challenge/updateLike_btn'>
+									<c:param name="post_id" value='${postInfo.post_id}' />
+									</c:url>" id="like-btn"><i class="fas fa-heart"></i></a>&nbsp;${postInfo.like_btn}
 				</p>
 				<p id="intro">챌린지 인증 사진</p>
 				<img id="challenge"

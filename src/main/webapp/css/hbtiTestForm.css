@@ -1,0 +1,159 @@
+@charset "EUC-KR";
+
+/* font */
+@font-face {
+	font-family: 'SDSamliphopangche_Outline';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'SDSamliphopangche_Basic';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Basic.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'ELAND_Choice_B';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_B.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Pretendard-Black';
+	src:
+		url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Black.woff')
+		format('woff');
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Pretendard-ExtraLight';
+	src:
+		url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraLight.woff')
+		format('woff');
+	font-weight: 200;
+	font-style: normal;
+}
+
+body {
+	width: 100%;
+	background-color: #112D4E;
+}
+
+.test-container {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+#test-title {
+	font-family: 'SDSamliphopangche_Outline';
+	color: white;
+	font-size: 35px;
+	text-align: center;
+	margin: 50px 0 100px 0;
+}
+span{
+	margin : 0 10px;
+}
+
+.q-container {
+	border-radius: 10px;
+	display: flex;
+	width: 1000px;
+	margin: 0 auto;
+	background-color: white;
+	font-family: 'Pretendard-ExtraLight';
+	font-size: 25px;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	padding: 0 0 20px 0;
+}
+
+.q-no {
+	font-family: 'SDSamliphopangche_Basic';
+	color: white;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.q-desc {
+	font-family: 'ELAND_Choice_B';
+}
+
+.q-box {
+	background-color: #DBE2EF;
+	border-radius: 10px;
+	padding: 0 0 0 10px;
+	font-family: 'Pretendard-Black';
+	text-align:center;
+}
+
+.a-box {
+	padding: 0 0 0 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.choice-container {
+	display: flex;
+	flex-direction: column;
+}
+
+
+.box-radio-input input[type="radio"] {
+	display: none;
+}
+
+.box-radio-input input[type="radio"]+span {
+	display: inline-block;
+	background: #F9F7F7;
+	border: 1px solid #dfdfdf;
+	padding: 10px 10px;
+	margin: 20px 0 0 0;
+	text-align: center;
+	line-height: 50px;
+	font-weight: bold;
+	cursor: pointer;
+	border-radius: 80px;
+	font-size: 20px;
+	width: 95%;
+}
+
+.box-radio-input input[type="radio"]:checked+span {
+	border: 1px solid #3F72AF;
+	background: #3F72AF;
+	color: white;
+}
+form{
+	text-align:center;
+}
+input[type=button] {
+	background-color: white;
+	border: none;
+	color: #112D4E;
+	border-radius: 80px;
+	width: 50%;
+	height: 50px;
+	font-size: 20pt;
+	margin:100px 100px;
+	padding: 15px 0 20px 0;
+	font-family: 'SDSamliphopangche_Outline';
+}
+input[type=button]:hover {
+	font-weight:bold;
+	color: #112D4E;
+	background-color: #DBE2EF;
+	transition: 0.5s;
+}

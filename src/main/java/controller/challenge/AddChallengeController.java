@@ -44,7 +44,6 @@ public class AddChallengeController implements Controller {
 				request.setAttribute("addFailed", true);
 				request.setAttribute("Exception", e);
 				
-				System.out.println(e.getMessage());
 				post = groupManager.findPost(user_id);
 				request.setAttribute("postInfo", post);
 				
@@ -132,8 +131,7 @@ public class AddChallengeController implements Controller {
 						user.getName(),
 						user_id,
 						content,
-						fileName,
-						0
+						fileName
 						);
 				groupManager.addPost(post, group_id);
 				
