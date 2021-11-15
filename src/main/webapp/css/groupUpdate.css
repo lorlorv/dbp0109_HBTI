@@ -1,0 +1,15 @@
+@charset "EUC-KR";
+
+table {
+	width : 50%;
+}
+td {
+	font-size : 20px;
+	padding : 5px;
+}
+#len {
+	height : 50px;
+}
+span {
+	padding : 10px;
+}
