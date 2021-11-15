@@ -14,11 +14,11 @@
 
 <script>
 function groupCreate() {
-	if(form.icon.value == "") {
+	if(form.icon.value=="") {
 		alert("iCON을 선택해주세요!");
-		form.icon.focus();
 		return false;
 	}
+	
 	if(form.name.value=="") {
 		alert("그룹 이름을 입력하세요!");
 		form.name.focus();
@@ -30,8 +30,15 @@ function groupCreate() {
 		form.descr.focus();
 		return false;
 	}
+	if(form.limit.value=="") {
+		alert("그룹 인원을 입력하세요!");
+		form.limit.focus();
+		return false;
+	}
+	
 	form.submit();
 }
+
 </script>
 </head>
 <body>
@@ -43,7 +50,7 @@ function groupCreate() {
 			<div class="nav-menu">
 				<ul class="menu-ul">
 					<li class="menu-li"><a href="#" id="text-deco">ToDo</a></li>
-					<li class="menu-li"><a href="#" id="text-deco">Group</a></li>
+					<li class="menu-li"><a href="<c:url value='/group/main' />" id="text-deco">Group</a></li>
 					<li class="menu-li"><a href="#" id="text-deco">MyPage</a></li>
 				</ul>
 			</div>
@@ -52,6 +59,19 @@ function groupCreate() {
 			</div>
 		</nav>
 	</div>
+	
+	<!-- 이미 그룹이름이 존재한다면 경고창 -->
+		<c:if test="${createFailed}">
+			<script>
+				alert('${exception.getMessage()}');
+			</script>
+		</c:if>
+	<!-- 그룹 정원을 잘못 입력하면 경고창 -->
+		<c:if test="${updateFailed}">
+		<script>
+			alert('${Exception.getMessage()}');
+		</script>
+	</c:if>
 	<div class="contents">
 		<p id="sub-title">HBTI GROUP CREATE</p>
 		<div class="contents-split">
@@ -59,21 +79,21 @@ function groupCreate() {
 			<p id="contents-title">GROUP ICON</p>
 			<p id="intro">
 				우리 그룹을 나타낼 아이콘을 골라보세요.</p>
-			<input type="radio" id="icon_1" name="icon" value='1'>
+			<input type="radio" id="icon_1" name="icon" value='fas fa-running'>
 			<label for="icon_1"><i class="fas fa-running"></i></label>
-			<input type="radio" id="icon_2" name="icon" value='2'>
+			<input type="radio" id="icon_2" name="icon" value='fas fa-swimmer'>
 			<label for="icon_2"><i class="fas fa-swimmer"></i></label>
-			<input type="radio" id="icon_3" name="icon" value='3'>
-			<label for="icon_3"><i class="fas fa-biking"></i></label>
-			<input type="radio" id="icon_4" name="icon" value='4'>
+			<input type="radio" id="icon_3" name="icon" value='fas fa-skiing'>
+			<label for="icon_3"><i class="fas fa-skiing"></i></label>
+			<input type="radio" id="icon_4" name="icon" value='fas fa-dumbbell'>
 			<label for="icon_4"><i class="fas fa-dumbbell"></i></label>
-			<input type="radio" id="icon_5" name="icon" value='5'>
+			<input type="radio" id="icon_5" name="icon" value='fas fa-table-tennis'>
 			<label for="icon_5"><i class="fas fa-table-tennis"></i></label>
-			<input type="radio" id="icon_6" name="icon" value='6'>
+			<input type="radio" id="icon_6" name="icon" value='far fa-futbol'>
 			<label for="icon_6"><i class="far fa-futbol"></i></label>
-			<input type="radio" id="icon_7" name="icon" value='7'>
+			<input type="radio" id="icon_7" name="icon" value='fas fa-cat'>
 			<label for="icon_7"><i class="fas fa-cat"></i></label>
-			<input type="radio" id="icon_8" name="icon" value='8'>
+			<input type="radio" id="icon_8" name="icon" value='far fa-kiss-wink-heart'>
 			<label for="icon_8"><i class="far fa-kiss-wink-heart"></i></label>
 			
 			<p id="contents-title">GROUP NAME</p>
@@ -81,22 +101,22 @@ function groupCreate() {
 				그룹의 이름을 지어주세요.<br>
 				관심있는 운동이나 취향이 드러나면 더욱 좋습니다. 
 			</p>
-			<input type="text"  name="name" maxlength="10" placeholder="최대 10글자">	
+			<input type="text" name="name" maxlength="10" placeholder="최대  10글자">	
 			<p id="contents-title">NUMBER OF MEMBER</p>
 			<p id="intro">
 				우리 그룹이 가입할 수 있는 정원을 입력해주세요.<br>
 				최소 2명에서 30명까지 가능합니다. 
 			</p>
-			<input type="number" min="2" max="30" name="memeber" placeholder="2~30" required>	
+			<input type="text" name="limit" placeholder="2~30" required>	
 			<p id="contents-title">DESCRIPTION</p>
 			<p id="intro">
 				우리 그룹을 재치있게 한마디로 소개해주세요!<br> 
 				이 설명을 통해 HBTI 친구들이 가입할 수 있습니다.
 			</p>
-			<input type="text"  name="descr" placeholder="그룹 한줄 소개">	
+			<input type="text" name="descr" placeholder="그룹 한줄 소개">	
 			<p>
 				<a onclick="groupCreate()" id="a-deco">
-			<i class="fas fa-plus-square">&nbsp;Create Group&nbsp;</i></a>
+			<i class="fas fa-plus-square"></i>&nbsp;Create Group&nbsp;</a>
 			
 		</form>
 		</div>
