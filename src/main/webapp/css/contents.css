@@ -21,7 +21,6 @@
 	align-items : center;
 	flex-direction: column;
 	padding : 200px 0px 0px 0px;
-	font-family: 'Pretendard-Regular';
 }
 
 #sub-title {
@@ -41,11 +40,12 @@
 	flex-direction: column;
 	border-radius : 10px;
 	text-align:center;
+	font-family: 'Pretendard-Regular';
 }
 
 /* 소제목 아래 설명 */
 #intro {
-	font-size: 15px;
+	font-size: 20px;
 	text-align:center;
 	color : #112D4E;
 }
