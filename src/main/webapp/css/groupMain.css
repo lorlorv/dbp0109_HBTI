@@ -1,0 +1,68 @@
+@charset "EUC-KR";
+
+table {
+	font-size : 20px;
+	padding: 10px;
+	width : 50%;
+}
+
+td { 
+	 text-align: center;
+	 font-size : 20px;
+	width : 30%;
+	height : 70px;
+}
+#icon { 
+	 border-radius : 50%;
+	 border: 20px solid #e2e2e2;
+	 background-color : #e2e2e2;
+	 font-size: 5em;
+}
+.member-img {
+	width : 5em;
+	height : 5em;
+	border-radius : 50%;
+}
+
+.challenge-box {
+	font-size : 30px;
+	background-color : #DBE2EF;
+	width : 70%;
+	padding : 20px;
+	border-radius : 10px;
+}
+
+#a-deco {
+	text-decoration : none;
+	color : #112D4E;;
+	font-size : 20px;
+	background-color : white;;
+	padding :10px;
+	transition: 0.5s;
+	border-radius : 5px;
+	border: 1px solid #112D4E;
+}
+#a-deco:hover {
+	color : white;
+	background-color : #112D4E;;
+}
+
+.challenge-img {
+	width : 7em;
+	height : 7em;
+}
+.challenge-list {
+	width : 70%;
+}
+.challenge-table {
+	width : 100%;
+}
+.challenge-table td {
+	padding : 5px;
+	border-bottom : 3px solid #DBE2EF;
+	text-align : left;
+}
+#like-btn {
+	text-decoration : none;
+	color : red;
+}
