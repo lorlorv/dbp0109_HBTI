@@ -31,7 +31,7 @@ public class UpdateChallengeController implements Controller {
 		UserManager userManager = UserManager.getInstance();
 		GroupManager groupManager = GroupManager.getInstance();
 
-		String user_id =UserSessionUtils.getLoginUserId(request.getSession());
+		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		ChallengePost post = groupManager.findPost(user_id);
 
 		// updateForm URI 요청
@@ -54,6 +54,7 @@ public class UpdateChallengeController implements Controller {
 			}
 		} else if (request.getServletPath().equals("/challenge/update")) {
 			// update URI 요청
+			String exist_img = post.getImage();
 			// 파일 전송 파라미터를 처리하는 코드
 			String content = null;
 			String fileName = null;
@@ -105,8 +106,10 @@ public class UpdateChallengeController implements Controller {
 							if (item.getFieldName().equals("image")) {
 								// key 값이 picture이면 파일 저장을 한다.
 								fileName = item.getName();// 파일 이름 획득 (자동 한글 처리 됨)
-								if (fileName == null || fileName.trim().length() == 0)
+								if (fileName == null || fileName.trim().length() == 0) {
+									fileName = exist_img;
 									continue;
+								}
 								// 파일이 전송되어 오지 않았다면 건너 뛴다.
 								fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
 								// 파일 이름이 파일의 전체 경로까지 포함하기 때문에 이름 부분만 추출해야 한다.

@@ -21,7 +21,10 @@ public class LoginController implements Controller {
 			// 모델에 로그인 처리를 위임
 			UserManager manager = UserManager.getInstance();
 			manager.login(user_id, password);
-			manager.findHBTI(user_id);
+			int hbti_id = manager.findHBTI(user_id);
+			if(hbti_id == 0) {
+				throw new UserHbtiException(user_id +"의 HBTI가 존재하지 않습니다.");
+			}
 			manager.updateLoginDate(user_id);
 	
 			// 세션에 사용자 이이디 저장

@@ -31,6 +31,7 @@ public class AddChallengeController implements Controller {
 		
 		UserManager userManager = UserManager.getInstance();
 		GroupManager groupManager = GroupManager.getInstance();
+		
 		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		ChallengePost post;
 		

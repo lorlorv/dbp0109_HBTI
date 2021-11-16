@@ -121,9 +121,9 @@ public class UserManager {
 	public int findHBTI(String user_id) throws SQLException, UserHbtiException{
 		int hbti_id = userDAO.findHBTI(user_id);
 		
-		if (hbti_id == 0) {
-			throw new UserHbtiException(user_id + "의 HBTI가 존재하지 않습니다.");
-		}
+		
+		 //if (hbti_id == 0) { throw new UserHbtiException(user_id +"의 HBTI가 존재하지 않습니다."); }
+
 		return hbti_id;
 	}
 	
