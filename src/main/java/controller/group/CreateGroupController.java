@@ -19,7 +19,6 @@ public class CreateGroupController implements Controller{
 		UserManager userManager = UserManager.getInstance();
 		
 		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
-		//UserSessionUtils.getLoginUserId(request.getSession());
 		
 		Group group = new Group(
 				request.getParameter("name"),

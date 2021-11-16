@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
+import controller.user.UserSessionUtils;
 import model.ChallengePost;
 import model.service.GroupManager;
 import model.service.UserManager;
@@ -30,7 +31,7 @@ public class UpdateChallengeController implements Controller {
 		UserManager userManager = UserManager.getInstance();
 		GroupManager groupManager = GroupManager.getInstance();
 
-		String user_id = "jeongmin";
+		String user_id =UserSessionUtils.getLoginUserId(request.getSession());
 		ChallengePost post = groupManager.findPost(user_id);
 
 		// updateForm URI ฟไรป

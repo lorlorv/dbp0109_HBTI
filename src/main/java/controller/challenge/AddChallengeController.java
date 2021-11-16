@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
+import controller.user.UserSessionUtils;
 import model.ChallengePost;
 import model.User;
 import model.service.ExistingChallengePostException;
@@ -30,8 +31,7 @@ public class AddChallengeController implements Controller {
 		
 		UserManager userManager = UserManager.getInstance();
 		GroupManager groupManager = GroupManager.getInstance();
-		String user_id = "jeongmin";
-		
+		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		ChallengePost post;
 		
 		if(request.getServletPath().equals("/challenge/addForm")) {
