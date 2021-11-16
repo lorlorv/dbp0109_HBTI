@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
+import controller.user.UserSessionUtils;
 import model.Group;
 import model.User;
 import model.service.DoNotQuitLeaderException;
@@ -21,7 +22,7 @@ public class UpdateGroupController implements Controller {
 		GroupManager groupManager = GroupManager.getInstance();
 		UserManager userManager = UserManager.getInstance();
 
-		String user_id = "jeongmin";
+		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 
 		if (request.getServletPath().equals("/group/updateForm")) {
 			int group_id = userManager.belongToGroup(user_id);

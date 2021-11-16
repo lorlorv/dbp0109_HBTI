@@ -85,7 +85,7 @@ public class GroupDAO {
 	public Group findGroup(int group_id) throws SQLException {
 		String sql = "SELECT  g.name AS g_name, icon, g.descr AS g_descr, leader_id , g.hbti_id AS hbti_id, content, limitation "
 				+ "FROM GroupInfo g, DayOfChallenge d, Challenge c "
-				+ "WHERE g.hbti_id = d.hbti_id AND d.challenge_id = c.challenge_id " + "AND g.group_id = ? ";
+				+ "WHERE g.hbti_id = d.hbti_id AND d.challenge_id = c.challenge_id AND g.group_id = ? ";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { group_id });
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
@@ -107,8 +107,9 @@ public class GroupDAO {
 	}
 	// group_id의 그룹원 인원을 반환
 	public int findNumberOfMember(int group_id) throws SQLException {
-		String sql = "SELECT count(*) AS cnt " + "FROM UserInfo JOIN GroupInfo USING (group_id) "
-				+ "WHERE group_id = ? " + "GROUP BY group_id ";
+		String sql = "SELECT COUNT(*) AS cnt "
+				+ "FROM UserInfo "
+				+ "WHERE group_id=?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { group_id });
 		int countMem;
 		try {
@@ -270,7 +271,9 @@ public class GroupDAO {
 
 	// 그룹 이름으로 그룹 아이디를 찾아냄
 	public int findGroupId(String name) throws SQLException {
-		String sql = "SELECT group_id " + "FROM GroupInfo " + "WHERE name=? AND ";
+		String sql = "SELECT group_id " 
+					+ "FROM GroupInfo " 
+					+ "WHERE name=? ";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { name });
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();

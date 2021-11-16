@@ -18,7 +18,7 @@ public class JoinGroupController implements Controller{
 		// TODO Auto-generated method stub
 		String group_id = request.getParameter("group_id");
 		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
-		//UserSessionUtils.getLoginUserId(request.getSession());
+		
 		UserManager userManager = UserManager.getInstance();
 		
 		try {
