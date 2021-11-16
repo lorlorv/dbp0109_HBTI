@@ -9,6 +9,11 @@ import model.dao.GroupDAO;
 import model.dao.HBTIDAO;
 import model.dao.PostDAO;
 import model.dao.UserDAO;
+import model.service.exception.ExistingUserException;
+import model.service.exception.OverTheLimitException;
+import model.service.exception.PasswordMismatchException;
+import model.service.exception.UserHbtiException;
+import model.service.exception.UserNotFoundException;
 
 public class UserManager {
 

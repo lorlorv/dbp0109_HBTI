@@ -12,7 +12,7 @@ import controller.user.UserSessionUtils;
 import model.ChallengePost;
 import model.service.GroupManager;
 import model.service.UserManager;
-import model.service.WriterMismatchException;
+import model.service.exception.WriterMismatchException;
 
 //파일 업로드를 위한 API를 사용하기 위해...
 import org.apache.commons.fileupload.*;

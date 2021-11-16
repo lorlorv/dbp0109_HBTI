@@ -9,9 +9,9 @@ import controller.Controller;
 import controller.user.UserSessionUtils;
 import model.Group;
 import model.User;
-import model.service.DoNotQuitLeaderException;
+import model.service.exception.DoNotQuitLeaderException;
 import model.service.GroupManager;
-import model.service.OverTheLimitException;
+import model.service.exception.OverTheLimitException;
 import model.service.UserManager;
 
 public class UpdateGroupController implements Controller {

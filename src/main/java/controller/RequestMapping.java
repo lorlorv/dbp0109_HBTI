@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import controller.user.*;
 import controller.group.*;
 import controller.challenge.*;
+import controller.todo.*;
 
 
 public class RequestMapping {
@@ -37,6 +38,23 @@ public class RequestMapping {
         
         // 로그 아웃
         mappings.put("/user/logout", new LogoutController());
+        
+        // 투두 조회
+         mappings.put("/todo/view", new ViewTodoController());
+         mappings.put("/todo/date", new ViewTodoController());
+         
+        // 투두 수정
+        mappings.put("/todo/modifyForm", new ModifyTodoController());
+        mappings.put("/todo/modify", new ModifyTodoController()); //변경내용 redirection
+        
+        mappings.put("/todo/doCheck", new ModifyTodoController());
+        mappings.put("/todo/doNotCheck", new ModifyTodoController());
+        //투두 추가
+        mappings.put("/todo/addForm", new ForwardController("/todo/addForm.jsp"));
+        mappings.put("/todo/add", new AddTodoController());
+       
+        //투두 삭제
+        mappings.put("/todo/delete", new DeleteTodoController());
         
         // 그룹 메인 (검색 & 가입)
         mappings.put("/group/main", new ViewGroupController());

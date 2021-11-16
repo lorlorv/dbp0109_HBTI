@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.service.UserManager;
 import model.Group;
-import model.service.OverTheLimitException;
+import model.service.exception.OverTheLimitException;
 
 import controller.Controller;
 import controller.user.UserSessionUtils;

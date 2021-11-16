@@ -171,7 +171,7 @@
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">
-					<li class="menu-li"><a href="" id="text-deco">ToDo</a></li>
+					<li class="menu-li"><a href="<c:url value='/todo/view'/>" id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main'/>" id="text-deco">Group</a></li>
 					<li class="menu-li"><a href="<c:url value='/user/myPage'/>"
 						id="text-deco">MyPage</a></li>

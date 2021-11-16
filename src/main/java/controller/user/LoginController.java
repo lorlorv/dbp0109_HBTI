@@ -5,11 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
-import model.User;
-import model.service.PasswordMismatchException;
-import model.service.UserHbtiException;
+import model.service.exception.*;
 import model.service.UserManager;
-import model.service.UserNotFoundException;
 
 public class LoginController implements Controller {
     @Override

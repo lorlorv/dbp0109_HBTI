@@ -13,13 +13,13 @@
 <link rel="stylesheet" href="<c:url value='/css/contents.css' />"
 	type="text/css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
-<link rel="stylesheet" href="<c:url value='/css/challengeAdd.css' />" type="text/css">
+<link rel="stylesheet" href="<c:url value='/css/challenge/challengeAdd.css' />" type="text/css">
 
 <script>
 function postUpdate() {
 	if(form.content.value == "") {
 		alert("내용을 입력하세요!");
-		form.text.focus();
+		form.content.focus();
 		return false;
 	}if(form.challenge.src == "") {
 		alert("미션 인증 사진을 등록하세요!");
@@ -58,7 +58,7 @@ function PreviewImage() {
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">
-					<li class="menu-li"><a href="#" id="text-deco">ToDo</a></li>
+					<li class="menu-li"><a href="<c:url value='/todo/view'/>" id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />" id="text-deco">Group</a></li>
 					<li class="menu-li"><a href="<c:url value='/user/myPage' />" id="text-deco">MyPage</a></li>
 				</ul>

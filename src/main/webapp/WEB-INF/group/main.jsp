@@ -13,7 +13,7 @@
 	href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 <link rel="stylesheet" href="<c:url value='/css/contents.css' />"
 	type="text/css">
-<link rel="stylesheet" href="<c:url value='/css/groupMain.css' />"
+<link rel="stylesheet" href="<c:url value='/css/group/groupMain.css' />"
 	type="text/css">
 
 </head>
@@ -25,7 +25,7 @@
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">
-					<li class="menu-li"><a href="#" id="text-deco">ToDo</a></li>
+					<li class="menu-li"><a href="<c:url value='/todo/view'/>" id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />"
 						id="text-deco">Group</a></li>
 					<li class="menu-li"><a href="<c:url value='/user/myPage' />" id="text-deco">MyPage</a></li>
@@ -71,12 +71,12 @@
 			<table>
 				<c:forEach var="user" items="${userList}" varStatus="status">
 					<c:choose>
-						<c:when test="${status.first || status.index % 6 == 0}">
+						<c:when test="${status.first || status.index % 5 == 0}">
 							<tr>
 								<td><img class="member-img"
 									src="<c:url value='/upload/${user.image }' />"><br>${user.name}</td>
 						</c:when>
-						<c:when test="${status.last || status.index % 5 == 0}">
+						<c:when test="${status.last || status.index % 4 == 0}">
 							<td><img class="member-img"
 								src="<c:url value='/upload/${user.image }' />"><br>${user.name}</td>
 							</tr>

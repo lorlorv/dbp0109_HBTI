@@ -11,7 +11,7 @@ import controller.Controller;
 import controller.user.UserSessionUtils;
 import model.ChallengePost;
 import model.User;
-import model.service.ExistingChallengePostException;
+import model.service.exception.ExistingChallengePostException;
 import model.service.GroupManager;
 import model.service.UserManager;
 

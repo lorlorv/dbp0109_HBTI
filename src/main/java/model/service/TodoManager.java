@@ -1,0 +1,64 @@
+package model.service;
+
+
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.List;
+import model.Todo;
+import model.dao.TodoDAO;
+import model.service.exception.TodoNotFoundException;
+
+public class TodoManager {
+	
+	
+	private static TodoManager dbp_HBTI = new TodoManager();
+	private TodoDAO todoDAO;
+
+
+		private TodoManager() {
+			try {
+				todoDAO = new TodoDAO();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}			
+		}
+		
+		public static TodoManager getInstance() {
+			return dbp_HBTI;
+		}
+		
+		public Todo create(Todo todo) throws SQLException {
+			return todoDAO.create(todo);
+		}
+
+		
+		public int addTodo(Todo todo) throws SQLException {
+			return todoDAO.add(todo);
+		}
+
+		public int update(int todo_id, Todo todo) throws SQLException {
+			return todoDAO.update(todo_id, todo);
+		}	
+
+		public int delete(int todo_id) throws SQLException, TodoNotFoundException {
+			return todoDAO.delete(todo_id);
+		}
+		
+		public List<Todo> findDateTodoList(Date todo_date) throws SQLException {
+				return todoDAO.findDateTodoList(todo_date);
+		}
+		
+		public List<Todo> findTodoList(String user_id) throws SQLException {
+			return todoDAO.findTodoList(user_id);
+	}
+
+			
+		public TodoDAO getTodoDAO() {
+			return this.todoDAO;
+		}
+
+
+		
+
+}
