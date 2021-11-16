@@ -16,16 +16,17 @@
 	href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
 <script>
-function searchDate() {
-	if(form.todo_date.value == "") {
-		alert("날짜를 입력하세요");
-		form.todo_date.focus();
+function modifyTodo(targetURI) {
+	if(form.content.value == "") {
+		alert("빈칸을 입력하세요");
+		form.content.focus();
 		return false;
 	}
+	form.action = targetURI;
 	form.submit();
 }
 
-function modifyTodo(targetURI) {
+function addTodo(targetURI) {
 	form.action = targetURI;
 	form.submit();
 }
@@ -58,42 +59,43 @@ function modifyTodo(targetURI) {
 		<p id="sub-title">MODIFY TODO</p>
 		<!-- TODO LIST 설명 출력 -->
 		<div class="contents-split">
-			<p id="intro">TODO를 추가하거나 수정할 수 있습니다.</p>
+			<p id="intro">TODO를 추가는 아래 버튼을 이용하세요.<br> 내용을 바꾸어 수정할 수 있습니다.<br> 삭제를 원한다면 휴지통을 클릭하세요.</p>
 		</div>
 		<div class="contents-split">
 			<p id="contents-title">TODAY TODO LIST</p>
-			<form name="form" action="<c:url value='/todo/date' />">
+			<form name="form" action="<c:url value='/todo/modify' />">
 				<div class="split"></div>
 				<p>
-					<c:if test='${!isTodayTodo}'>
+					<c:if test='${empty todoList}'>
 						<p id="intro">오늘의 TODO LIST가 없습니다. 추가해주세요!</p>
 					</c:if>
-				<div class="split"></div>
 				<c:forEach var="todo" items="${todoList}">
-					<div>
+					<div class="list-box">
 						<!-- is_done 여부에 따라 다르게 보여줌 -->
-						<span> <c:if test="${todo.is_done eq 1}">
-								<a
-									href="<c:url value="/todo/doCheck">
+						<span>
+								<c:if test="${todo.is_done eq 1}">
+								<a href="<c:url value="/todo/doCheck">
 										<c:param name="todo_id" value='${todo.todo_id }'/>
-										</c:url>"><i
-									class="fas fa-check-square"></i></a>
-							</c:if> <c:if test="${todo.is_done eq 0}">
-								<a
-									href="<c:url value="/todo/doNotCheck">
+										</c:url>" ><i class="fas fa-check-square"></i></a></c:if>
+								<c:if test="${todo.is_done eq 0}">
+								<a href="<c:url value="/todo/doNotCheck">
 										<c:param name="todo_id" value='${todo.todo_id }'/>
-										</c:url>"><i
-									class="far fa-square"></i></a>
-							</c:if>
-						</span> <span>${todo.content}</span> <span><a
-							href="<c:url value="/todo/delete">
+										</c:url>" ><i class="far fa-square"></i></a></c:if>
+							</span>
+							 <span><input type="text" name="content" value='${todo.content}'></span>
+							 <span>
+										<a onClick='modifyTodo("<c:url value='/todo/modify'>
+																<c:param name="todo_id" value="${todo.todo_id}"/>
+																</c:url>")' id="a-deco">&nbsp;수정&nbsp;</a>
+										</span>
+							 <span><a href="<c:url value="/todo/delete">
 										<c:param name="todo_id" value='${todo.todo_id }'/>
-										</c:url>"><i
-								class="far fa-trash-alt"></i></a></span>
+										</c:url>"><i class="far fa-trash-alt"></i></a></span>
 					</div>
+					<div class="split"></div>
 				</c:forEach>
 				<p>
-					<a onClick="modifyTodo('<c:url value='/todo/addForm'/>')"
+					<a onClick="addTodo('<c:url value='/todo/addForm'/>')"
 						id="a-deco"> <i class="fas fa-plus-square"></i>&nbsp;추가&nbsp;
 					</a>
 			</form>

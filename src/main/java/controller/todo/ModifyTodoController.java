@@ -1,6 +1,5 @@
 package controller.todo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,20 +21,21 @@ public class ModifyTodoController implements Controller {
     	
     	TodoManager manager = TodoManager.getInstance();
 		
-    	if (request.getMethod().equals("GET")) {	
+    	if (request.getServletPath().equals("/todo/modifyForm")) {	
     	
 			List<Todo> todoList = manager.findTodoList(user_id);
 			request.setAttribute("todoList", todoList);	
 				
 				return "/todo/modifyForm.jsp";   
-			}    
+			}    else {
+				int todo_id = Integer.parseInt(request.getParameter("todo_id"));
+				String content = request.getParameter("content");
     	
-    	// POST request (회원정보가 parameter로 전송됨)
-  
-    	List<Todo> todoList = new ArrayList<Todo>();
-    	request.setAttribute("todoList", todoList);
+    	manager.update(todo_id, content);
    
-        return "redirect:/todo/view";	
+        return "redirect:/todo/modifyForm";	
+			}
+    	
     	}
     }
 

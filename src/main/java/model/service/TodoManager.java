@@ -37,10 +37,13 @@ public class TodoManager {
 			return todoDAO.add(todo);
 		}
 
-		public int update(int todo_id, Todo todo) throws SQLException {
-			return todoDAO.update(todo_id, todo);
+		public int update(int todo_id, String content) throws SQLException {
+			return todoDAO.update(todo_id, content);
 		}	
 
+		public int updateIs_done(int todo_id, int is_done) throws SQLException {
+			return todoDAO.updateIs_done(todo_id, is_done);
+		}
 		public int delete(int todo_id) throws SQLException, TodoNotFoundException {
 			return todoDAO.delete(todo_id);
 		}

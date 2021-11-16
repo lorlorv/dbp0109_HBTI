@@ -69,11 +69,11 @@ public class TodoDAO {
 	/**
 	 * 기존의 투두 정보를 수정
 	 */
-	public int update(int todo_id, Todo todo) throws SQLException {
+	public int update(int todo_id, String content) throws SQLException {
 		String sql = "UPDATE TODO "
-					+ "SET content=?, is_done=? "
+					+ "SET content=? "
 					+ "WHERE todo_id=?";
-		Object[] param = new Object[] {todo.getContent(), todo.getIs_done(), todo_id};				
+		Object[] param = new Object[] {todo_id};				
 		jdbcUtil.setSqlAndParameters(sql, param);
 			
 		try {				
@@ -90,7 +90,26 @@ public class TodoDAO {
 		return 0;
 	}
 
-	
+	public int updateIs_done(int todo_id, int is_done) throws SQLException {
+		String sql = "UPDATE TODO "
+				+ "SET is_done=? "
+				+ "WHERE todo_id=?";
+	Object[] param = new Object[] {is_done, todo_id};				
+	jdbcUtil.setSqlAndParameters(sql, param);
+		
+	try {				
+		int result = jdbcUtil.executeUpdate();	// update 문 실행
+		return result;
+	} catch (Exception ex) {
+		jdbcUtil.rollback();
+		ex.printStackTrace();
+	}
+	finally {
+		jdbcUtil.commit();
+		jdbcUtil.close();	// resource 반환
+	}		
+	return 0;
+}
 	/**
 	 * 주어진 ID에 해당하는 커뮤니티 정보를 삭제.
 	 */

@@ -47,8 +47,8 @@ public class RequestMapping {
         mappings.put("/todo/modifyForm", new ModifyTodoController());
         mappings.put("/todo/modify", new ModifyTodoController()); //변경내용 redirection
         
-        mappings.put("/todo/doCheck", new ModifyTodoController());
-        mappings.put("/todo/doNotCheck", new ModifyTodoController());
+        mappings.put("/todo/doCheck", new CheckTodoController());
+        mappings.put("/todo/doNotCheck", new CheckTodoController());
         //투두 추가
         mappings.put("/todo/addForm", new ForwardController("/todo/addForm.jsp"));
         mappings.put("/todo/add", new AddTodoController());

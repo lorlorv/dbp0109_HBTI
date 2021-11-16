@@ -65,7 +65,9 @@ function modifyTodo(targetURI) {
 		</div>
 		<div class="contents-split">
 			<p id="contents-title">TODAY TODO LIST</p>
-			<p id="intro">원하는 날짜의 TODO LIST를 확인하려면 검색창을 활용하세요.</p>
+			<p id="intro">
+			투두를 갱신/변경하려면 편집하기를 누르세요.<br>
+			원하는 날짜의 TODO LIST를 확인하려면 검색창을 활용하세요.</p>
 			<form name="form" action="<c:url value='/todo/date' />">
 				<input type="date" name="todo_date" placeHolder="yy/mm/dd 형식으로 입력">
 				<a onClick="searchDate()" id="a-deco">날짜 검색</a>
@@ -75,21 +77,19 @@ function modifyTodo(targetURI) {
 					<c:if test='${empty todoList}'>
 						<p id="intro">오늘의 TODO LIST가 없습니다. 추가해주세요!</p>
 					</c:if>
-					<div class="split"></div>
-					<c:forEach var="todo" items="${todoList}">
+					<c:forEach var="todo" items="${todoList}" varStatus="status">
 						<div class="list-box">
 						<!-- is_done 여부에 따라 다르게 보여줌 -->
-							<span>
-								<c:if test="${todo.is_done eq 1}">
-								<a href="<c:url value="/todo/doCheck">
-										<c:param name="todo_id" value='${todo.todo_id }'/>
-										</c:url>" ><i class="fas fa-check-square"></i></a></c:if>
-								<c:if test="${todo.is_done eq 0}"><a href="<c:url value="/todo/doNotCheck">
-										<c:param name="todo_id" value='${todo.todo_id }'/>
-										</c:url>" ><i class="far fa-square"></i></a></c:if>
-							</span>
+							<span>${status.index + 1}번</span>
 							<span>${todo.content}</span>
+							<span>
+							<c:if test="${todo.is_done eq 1}">
+							<i class="fas fa-check-square"></i></c:if>
+							<c:if test="${todo.is_done eq 0}">
+							<i class="far fa-square"></i></c:if>
+										</span>
 						</div>
+						<div class="split"></div>
 					</c:forEach>
 					<p>
 					<a onClick="modifyTodo('<c:url value='/todo/modifyForm'/>')"
