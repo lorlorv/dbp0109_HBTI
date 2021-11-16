@@ -1,0 +1,58 @@
+@charset "EUC-KR";
+ 
+ /* º»¹® ±Û¾¾Ã¼ */
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Á¦¸ñ ±Û¾¾Ã¼ */
+@font-face {
+    font-family: 'ELAND_Choice_B';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_B.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.contents { 
+	display : flex;
+	align-items : center;
+	flex-direction: column;
+	padding : 200px 0px 0px 0px;
+}
+
+#sub-title {
+	color:  #DBE2EF;
+	font-size: 30px;
+	font-family: 'ELAND_Choice_B';
+}
+
+/* contents ½ºÅ¸ÀÏ */
+.contents-split{
+	margin-bottom : 50px;
+	padding : 50px 0px 50px 0px;
+	width : 1000px;
+	background-color : white;
+	display : flex;
+	align-items : center;
+	flex-direction: column;
+	border-radius : 10px;
+	text-align:center;
+	font-family: 'Pretendard-Regular';
+}
+
+/* ¼ÒÁ¦¸ñ ¾Æ·¡ ¼³¸í */
+#intro {
+	font-size: 20px;
+	text-align:center;
+	color : #112D4E;
+}
+
+/* ÄÁÅÙÃ÷ Á¦¸ñ */
+#contents-title {
+	color:  #112D4E;
+	font-size: 30px;
+	font-family: 'ELAND_Choice_B';
+}

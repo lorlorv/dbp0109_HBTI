@@ -1,0 +1,122 @@
+@charset "EUC-KR";
+
+/* font */
+@font-face {
+	font-family: 'SDSamliphopangche_Outline';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'SDSamliphopangche_Basic';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Basic.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'ELAND_Choice_B';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_B.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Pretendard-ExtraLight';
+	src:
+		url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraLight.woff')
+		format('woff');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Pretendard-Black';
+	src:
+		url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Black.woff')
+		format('woff');
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Pretendard-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+		format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+/* MyProfile */
+img {
+	border-radius: 100px;
+	width:250px;
+	/* width: 30%; */
+	margin: 0 100px 0 0px;
+}
+
+.info-text {
+	width: 70%;
+}
+
+#contents-title {
+	background-color: #DBE2EF;
+	height: 40px;
+	padding: 7px 0 0 0;
+	border-radius: 10px;
+}
+
+.my-btn button, #group-quit, #group-recommend {
+	font-family: 'Pretendard-Regular';
+	font-size: 15px;
+	border: 2px solid #112D4E;
+	background-color: white;
+	color: #112D4E;
+	font-weight: bold;
+	padding: 5px 20px 5px 20px;
+	margin: 10px 20px;
+	border-radius: 5px;
+}
+
+.my-btn button:hover, #group-quit:hover, #group-recommend:hover {
+	color: white;
+	background-color: #112D4E;
+	transition: 0.5s;
+}
+
+.box {
+	display: flex;
+	align-items: center;
+}
+
+
+
+#info-name, #info-HBTI, #group-name {
+	font-size: 20px;
+}
+
+/* Calendar */
+tr {
+	height: 60px;
+}
+table{
+	border : 3px solid #F9F7F7;
+	align : center;
+}
+td{
+	width:50px; 
+	height:40px;
+	text-align: center;
+	font-family: 'Pretendard-Regular';
+	border:2px border-color:#3333FF;
+	border-radius:80px;
+	font-weight:bold;
+	font-size:15px;
+}

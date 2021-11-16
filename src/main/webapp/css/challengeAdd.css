@@ -1,0 +1,40 @@
+@charset "EUC-KR";
+
+.split {
+	border-bottom : 3px solid  #DBE2EF;
+}
+
+img {
+	width : 400px;
+	border : 3px solid #DBE2EF;
+}
+#a-deco {
+	text-decoration : none;
+	color : #112D4E;;
+	font-size : 20px;
+	background-color : white;
+	padding :10px;
+	transition: 0.5s;
+	border-radius : 5px;
+	border: 1px solid #112D4E;
+}
+#a-deco:hover {
+	color : white;
+	background-color : #112D4E;;
+}
+
+#text {
+	width: 700px;
+	height: 300px;
+	padding: 10px;
+	background-color: #DBE2EF;
+	overflow:hidden;
+	font-size: 1rem;
+	line-height: 30px;
+	border-radius: 30px;
+	border : 0px;
+}
+
+#len {
+	height : 50px;
+}

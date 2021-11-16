@@ -1,0 +1,172 @@
+@charset "UTF-8";
+
+/* font */
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SDSamliphopangche_Basic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Basic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ELAND_Choice_B';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_B.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+ body {
+   background-color : #112D4E;
+}
+.page-wrapper {
+   font-family : 'SDSamliphopangche_Basic';
+}
+
+/* nav bar */
+.nav-bar {
+   display : flex;
+   flex-wrap : nowrap; /*너비 초과 시, 줄 바꿈 */
+   justify-content : space-around; /* 수평 */
+   align-items : center; /* 수직  */
+   height : 100px;
+   width : 100%;
+   position : fixed; /*상단 바는 스크롤 내려도 고정*/
+   top : 0; /*위 여백 없음*/
+   background-color : #112D4E;
+}
+
+.nav-logo a {
+   color : white;
+   font-size : 40px;
+   font-weight: bold;
+}
+
+.nav-menu a {
+   font-family : 'SDSamliphopangche_Outline';
+   color : white;
+   font-size : 20px;
+}
+
+.menu-ul {
+   list-style: none;
+   display : flex;   
+}
+
+.menu-li {
+   margin : 0px 80px 0px 45px;
+}
+
+.nav-logout a{
+   color : #DBE2EF;
+   font-size : 10px;
+   font-family :'ELAND_Choice_B';
+}
+
+#text-deco {
+   text-decoration : none;
+   color : white;
+   transition: 0.5s;
+   border-radius : 5px;
+}
+
+/* menu hover 이벤트 */
+.menu-li #text-deco:hover {
+   text-decoration : none;
+   background-color : white;
+   padding : 10px;
+   color : #112D4E;
+}
+
+/* contatiner stylesheet */
+
+
+   .contents {
+      background-color:#FFFFFF;
+      border-radius: 10px;
+       display : flex;
+      font-family : 'SDSamliphopangche_Outline';
+      width : 70%;
+      flex-direction : column;
+      margin : 10% auto;
+      padding : 30px;
+      
+   }
+
+   .profile {
+          object-fit: cover;
+          border-radius: 60%;
+          width : 200px;
+          height : 200px;
+          padding : 13px;
+       
+      }    
+    
+    .userInfo {
+  
+         text-align : center;
+      
+    }
+    
+    .intro {
+     margin-top : 30px;
+     text-align:center;
+     
+    }
+    
+         
+      .child {
+         text-align : center;
+      }
+      
+      
+      progress{
+         width : 100%;
+         background-color : #c0c0c0;
+         margin : 10px;
+       
+      }
+      
+      progress::-webkit-progress-bar {
+         width : 100%;
+         background-color:#c0c0c0
+         
+      
+      } 
+      
+      
+      progress::-webkit-progress-value {
+         width : 100%;
+         background-color: #112D4E;
+        
+       
+         
+      } 
+      progress::-moz-progress-bar {
+         width : 100%;
+         background-color: #c0c0c0
+         
+        
+      }   
+      
+     #title{
+     font-family : 'SDSamliphopangche_Outline';
+     }
+    
+/*footer*/
+footer{
+   background-color:#112D4E;
+   text-align:center;
+   padding: 50px 0 50px 0;
+   margin: 50px 0 0 0;
+   color : white;
+}
+footer ul{
+   list-style-type: none;
+}
