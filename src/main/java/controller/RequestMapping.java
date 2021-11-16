@@ -21,8 +21,8 @@ public class RequestMapping {
         mappings.put("/", new ForwardController("index.jsp"));
         
         // 로그인
-        mappings.put("/user/login", new LoginController());
         mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
+        mappings.put("/user/login", new LoginController());
         
         // 회원가입
         mappings.put("/user/join", new JoinUserController());

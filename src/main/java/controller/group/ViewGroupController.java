@@ -23,8 +23,7 @@ public class ViewGroupController implements Controller{
 		UserManager userManager = UserManager.getInstance();
 		GroupManager groupManager = GroupManager.getInstance();
 		
-		String user_id = "jeongmin";
-				//UserSessionUtils.getLoginUserId(request.getSession());
+		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		
 		// 현재 로그인한 user_Id가 그룹에 속해져 있는지를 확인
 		int group_id = userManager.belongToGroup(user_id);
