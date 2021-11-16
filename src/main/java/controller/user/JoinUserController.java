@@ -135,6 +135,7 @@ public class JoinUserController implements Controller {
 		try {
 			UserManager manager = UserManager.getInstance();
 			manager.create(user);
+			manager.updateLoginDate(user.getUser_id());
 
 			HttpSession session = request.getSession();
 			session.setAttribute(UserSessionUtils.USER_SESSION_KEY, user_id);

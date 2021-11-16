@@ -22,6 +22,7 @@ public class UserManager {
 		try {
 			userDAO = new UserDAO();
 			groupDAO = new GroupDAO();
+			hbtiDAO = new HBTIDAO();
 			postDAO = new PostDAO();
 			matchRlt = new UserHBTIMatching(userDAO);
 		} catch (Exception e) {
@@ -57,6 +58,7 @@ public class UserManager {
 		if (userDAO.existingUser(user.getUser_id()) == true) {
 			throw new ExistingUserException(user.getUser_id() + "는 존재하는 아이디입니다.");
 		}
+		
 		return userDAO.create(user);
 	}
 
@@ -175,8 +177,11 @@ public class UserManager {
 		// 그룹 기본 정보
 		Group group = groupDAO.findGroup(group_id);
 		
+		System.out.println(group.getName() + "hellos");
+		
 		// 그룹 인원 정보
-		int numOfMem = groupDAO.findNumberOfMember(group.getGroup_id());
+		int numOfMem = groupDAO.findNumberOfMember(group_id);
+		
 		group.setNumberOfMem(numOfMem);
 		
 		return group;
@@ -200,11 +205,7 @@ public class UserManager {
 	
 	//그룹 생성
 	public int createGroup(Group group) throws SQLException, OverTheLimitException {
-		int num = groupDAO.findNumberOfMember(group.getGroup_id());
-		
-		if(num > group.getLimitation()) {
-			throw new OverTheLimitException("그룹 정원을 늘리세요.");
-		} else if(group.getLimitation() > 30) {
+		 if(group.getLimitation() > 30) {
 			throw new OverTheLimitException("그룹 정원은 30명을 초과할 수 없습니다.");
 		} else if(group.getLimitation() < 2) {
 			throw new OverTheLimitException("그룹 정원은 적어도 2명 이상이어야 합니다.");

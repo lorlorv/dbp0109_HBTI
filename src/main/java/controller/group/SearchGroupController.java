@@ -18,7 +18,6 @@ public class SearchGroupController implements Controller{
     	
     	String keyword = request.getParameter("searchKeyword");
     	String user_id = UserSessionUtils.getLoginUserId(request.getSession());
-    			//UserSessionUtils.getLoginUserId(request.getSession());
     	
     	// 쿼리를 위해 세팅
     	keyword = keyword + "%";
