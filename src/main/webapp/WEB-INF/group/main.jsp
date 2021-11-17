@@ -107,7 +107,7 @@
 					<c:forEach var="post" items="${postList}">
 						<tr
 							onClick="location.href='<c:url value='/challenge/view'>
-												<c:param name="postInfo" value='${post}'/>
+												<c:param name="writer_id" value='${post.writer_id}'/>
 												</c:url>'">
 							<td><img class="challenge-img"
 								src="<c:url value='/upload/${post.image}' />"></td>
@@ -116,6 +116,7 @@
 							</td>
 							<td><a href="<c:url value='/challenge/updateLike_btn'>
 									<c:param name="post_id" value='${post.post_id}' />
+									<c:param name="writer_id" value='${post.writer_id}' />
 									</c:url>" id="like-btn"><i class="fas fa-heart"></i></a>&nbsp;${post.like_btn}</td>
 						</tr>
 					</c:forEach>

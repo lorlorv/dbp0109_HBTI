@@ -75,6 +75,7 @@ public class RequestMapping {
         
         // 챌린지 조회
         mappings.put("/challenge/view", new ViewChallengeController());
+        mappings.put("/challenge/myView", new ViewChallengeController());
         
         // 챌린지 추가
         mappings.put("/challenge/addForm", new AddChallengeController());

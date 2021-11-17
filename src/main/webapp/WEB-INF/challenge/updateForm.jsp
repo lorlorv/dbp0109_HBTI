@@ -87,11 +87,11 @@ function PreviewImage() {
 			<textarea id="text" name="content">${postInfo.content}</textarea>
 			<div id="len"></div>
 				<span><a onclick="postUpdate()" id="a-deco">
-			<i class="fas fa-plus-square"></i>&nbsp;수정하기&nbsp;</a></span>
+			<i class="fas fa-pencil-alt"></i>&nbsp;수정하기&nbsp;</a></span>
 			<span><a onclick="postDelete('<c:url value='/challenge/delete'>
 											<c:param name="post_id" value='${postInfo.post_id}'/>
-											</c:url>')" id="a-deco">
-			<i class="fas fa-plus-square"></i>&nbsp;삭제하기&nbsp;</a></span>
+											</c:url>')" id="a-deco-remove">
+			<i class="fas fa-trash-alt"></i>&nbsp;삭제하기&nbsp;</a></span>
 			
 		</form>
 		</div>

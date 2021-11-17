@@ -45,6 +45,12 @@
 		</script>
 	</c:if>
 	
+	<c:if test="${updateFailed }">
+	<script>
+			alert('${Exception.getMessage()}');
+		</script>
+	</c:if>
+	
 	<div class="contents">
 		<p id="sub-title">CHALLENGE POST</p>
 		<div class="contents-split">
@@ -54,6 +60,7 @@
 				<p id="intro">
 					<a href="<c:url value='/challenge/updateLike_btn'>
 									<c:param name="post_id" value='${postInfo.post_id}' />
+									<c:param name="writer_id" value='${postInfo.writer_id }'/>
 									</c:url>" id="like-btn"><i class="fas fa-heart"></i></a>&nbsp;${postInfo.like_btn}
 				</p>
 				<p id="intro">챌린지 인증 사진</p>
