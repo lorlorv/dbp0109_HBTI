@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -67,7 +68,7 @@ public class MainController implements Controller {
 			 * entry.getValue()); }
 			 */
 			
-			Map<String, String> imgMap = new HashMap<String, String>();
+			Map<String, String> imgMap = new LinkedHashMap<String, String>();
 			imgMap.put(list_entries.get(1).getKey(), hbtiManager.findHbtiImg(list_entries.get(1).getKey()));
 			imgMap.put(list_entries.get(0).getKey(), hbtiManager.findHbtiImg(list_entries.get(0).getKey()));
 			imgMap.put(list_entries.get(2).getKey(), hbtiManager.findHbtiImg(list_entries.get(2).getKey()));

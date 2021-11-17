@@ -69,55 +69,55 @@ public class UserHBTIMatching {
 			hbtiType += "P";
 
 		switch (hbtiType) {
-		case "ENFJ":
-			hbti_id = 1;
-			break;
-		case "ESTJ":
-			hbti_id = 2;
-			break;
-		case "ESFJ":
-			hbti_id = 3;
-			break;
-		case "ENTJ":
-			hbti_id = 4;
-			break;
-		case "ESTP":
-			hbti_id = 5;
-			break;
-		case "ESFP":
-			hbti_id = 6;
-			break;
-		case "ENFP":
-			hbti_id = 7;
-			break;
-		case "ISFJ":
-			hbti_id = 8;
-			break;
-		case "ISTJ":
-			hbti_id = 9;
-			break;
-		case "ENTP":
-			hbti_id = 10;
-			break;
-		case "INFJ":
-			hbti_id = 11;
-			break;
-		case "INTJ":
-			hbti_id = 12;
-			break;
-		case "ISTP":
-			hbti_id = 13;
-			break;
-		case "ISFP":
-			hbti_id = 14;
-			break;
-		case "INFP":
-			hbti_id = 15;
-			break;
-		case "INTP":
-			hbti_id = 16;
-			break;
-		}
+	      case "ENFJ":
+	         hbti_id = 1;
+	         break;
+	      case "ESTJ":
+	         hbti_id = 2;
+	         break;
+	      case "ESFJ":
+	         hbti_id = 3;
+	         break;
+	      case "ENTJ":
+	         hbti_id = 4;
+	         break;
+	      case "ESTP":
+	         hbti_id = 5;
+	         break;
+	      case "ESFP":
+	         hbti_id = 6;
+	         break;
+	      case "ENFP":
+	         hbti_id = 7;
+	         break;
+	      case "ISFJ":
+	         hbti_id = 8;
+	         break;
+	      case "ENTP":
+	         hbti_id = 9;
+	         break;
+	      case "INFJ":
+	         hbti_id = 10;
+	         break;
+	      case "INTJ":
+	         hbti_id = 11;
+	         break;
+	      case "ISTP":
+	         hbti_id = 12;
+	         break;
+	      case "ISFP":
+	         hbti_id = 13;
+	         break;
+	      case "INFP":
+	         hbti_id = 14;
+	         break;
+	      case "INTP":
+	         hbti_id = 15;
+	         break;
+	      case "ISTJ":
+	         hbti_id = 16;
+	         break;
+	      }
 		
 		userDAO.updateHBTI(user_id, hbti_id); //hbti ¹Ù²ñ
 		
