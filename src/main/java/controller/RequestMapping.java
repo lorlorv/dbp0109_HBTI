@@ -30,6 +30,9 @@ public class RequestMapping {
         mappings.put("/user/hbtiTest", new HBTIController());
         mappings.put("/user/hbtiTestResult", new HBTIController());
         
+        // 메인 페이지
+        mappings.put("/main", new MainController());
+        
         // 마이페이지 (회원 정보 수정 & 회원 탈퇴 & 그룹 탈퇴)
         mappings.put("/user/myPage", new MyPageController());
         mappings.put("/user/update", new UpdateUserController());

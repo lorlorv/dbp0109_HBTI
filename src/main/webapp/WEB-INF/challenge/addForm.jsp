@@ -46,7 +46,7 @@ function PreviewImage() {
 	<div class="page-wrapper" >
 		<nav class="nav-bar">
 			<div class="nav-logo">
-				<a href="#" id="text-deco">&lt;HBTI/&gt;</a>
+				<a href="<c:url value='/main'/>" id="text-deco">&lt;HBTI/&gt;</a>
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">

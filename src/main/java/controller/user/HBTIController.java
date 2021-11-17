@@ -44,18 +44,22 @@ public class HBTIController implements Controller {
 		
 		// hbti가 존재한다면 그룹 정보도 바꾸어 주어야 한다.
 		if(oldHbti != 0) {
+			manager.updateHBTI(user_id, testRst); // type결정 -> hbti_id로 변경 -> updateHBTI()
+			
 			int group_id = manager.belongToGroup(user_id);
 			//그룹 판별 후 그룹 있으면 +  leader이면 변경 후 탈퇴 아니면 그냥 탈퇴, 그룹 없으면 그냥 탈퇴  -> manager에게 역할 위임
-			manager.updateHBTIGroup(user_id, oldHbti, group_id);
+			if(group_id != 0) {
+				manager.updateHBTIGroup(user_id, oldHbti, group_id);
+			}
+			
 		}
 		
-		manager.updateHBTI(user_id, testRst); // type결정 -> hbti_id로 변경 -> updateHBTI()
 		
 		// 세션에 사용자 이이디 저장
 		HttpSession session = request.getSession();
 		session.setAttribute(UserSessionUtils.USER_SESSION_KEY, user_id);
 		
-		return "redirect:/user/myPage";
+		return "redirect:/main";
 
 	}
 }

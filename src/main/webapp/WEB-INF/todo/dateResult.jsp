@@ -32,7 +32,7 @@ function searchDate() {
 	<div class="page-wrapper">
 		<nav class="nav-bar">
 			<div class="nav-logo">
-				<a href="#" id="text-deco">&lt;HBTI/&gt;</a>
+				<a href="<c:url value='/main'/>" id="text-deco">&lt;HBTI/&gt;</a>
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">
@@ -65,29 +65,15 @@ function searchDate() {
 							<!-- is_done 여부에 따라 다르게 보여줌 -->
 							<div class="list">
 								<c:if test="${todo.is_done eq 1}">
-									<a id="check"
-										href="<c:url value="/todo/doCheck">
-										<c:param name="todo_id" value='${todo.todo_id }'/>
-										</c:url>"><i
+									<a id="check"><i
 										class="fas fa-check-square"></i></a>
 								</c:if>
 								<c:if test="${todo.is_done eq 0}">
-									<a id="check"
-										href="<c:url value="/todo/doNotCheck">
-										<c:param name="todo_id" value='${todo.todo_id }'/>
-										</c:url>"><i
+									<a id="check"><i
 										class="far fa-square"></i></a>
 								</c:if>
 							</div>
 							<div class="list">${todo.content}</div>
-							<div class="list">
-								<a id="a-deco_icon"
-									href="<c:url value='/todo/modifyForm'>
-								<c:param name="todo_id" value='${todo.todo_id}'/>
-								</c:url>">
-									<i class="fas fa-pencil-alt"></i>
-								</a>
-							</div>
 						</div>
 						<div class="split"></div>
 					</c:forEach>

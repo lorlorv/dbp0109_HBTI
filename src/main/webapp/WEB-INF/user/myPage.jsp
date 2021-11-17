@@ -44,11 +44,6 @@
 		form.submit();
 	}
 	
-	function groupList(targetUri) {
-		form.action = targetUri;
-		form.submit();
-	}
-	
 	var todoDate = "";
 	var today = new Date(); //오늘 날짜
     var date = new Date();//today의 Date를 세어주는 역할
@@ -57,7 +52,6 @@
      today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
      buildCalendar(); //달력 cell 만들어 출력 
     }
-
     function nextCalendar() {//다음 달
     	todoDate = "";
          today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
@@ -80,7 +74,6 @@
          tbCalendarYM.innerHTML = today.getFullYear() + " " + (today.getMonth() + 1) + " "; 
          todoDate += today.getFullYear() + "/";
          todoDate += today.getMonth() + 1 + "/";
-
          /*while은 이번달이 끝나면 다음달로 넘겨주는 역할*/
         while (tbCalendar.rows.length > 2) {
         //열을 지워줌
@@ -167,14 +160,14 @@
 	<div class="page-wrapper">
 		<nav class="nav-bar">
 			<div class="nav-logo">
-				<a href="#" id="text-deco">&lt;HBTI/&gt;</a>
+				<a href="<c:url value='/main'/>" id="text-deco">&lt;HBTI/&gt;</a>
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">
 					<li class="menu-li"><a href="<c:url value='/todo/view'/>" id="text-deco">ToDo</a></li>
-					<li class="menu-li"><a href="<c:url value='/group/main'/>" id="text-deco">Group</a></li>
-					<li class="menu-li"><a href="<c:url value='/user/myPage'/>"
-						id="text-deco">MyPage</a></li>
+					<li class="menu-li"><a href="<c:url value='/group/main' />"
+						id="text-deco">Group</a></li>
+					<li class="menu-li"><a href="<c:url value='/user/myPage' />" id="text-deco">MyPage</a></li>
 				</ul>
 			</div>
 			<div class="nav-logout">
@@ -241,13 +234,13 @@
 									가입된 그룹이 없습니다. <br> ${groupNum}개의 그룹들이 ${user.name}님을 기다리고
 									있습니다!
 								</p>
-								<button id="group-recommend" type="button" onClick="groupList('<c:url value='/group/main' />')">그룹
+								<button id="group-recommend" type="button" onClick="">그룹
 									구경하러 가기</button>
 							</c:if>
 							<c:if test="${user.group_id ne 0}">
 								<p id="group-name">${group_name}</p>
 								<button id="group-quit" type="button"
-									onClick="groupQuit('<c:url value='/user/group/quit' />')">그룹
+									onClick="groupQuit('<c:url value='/group/quit' />')">그룹
 									탈퇴</button>
 							</c:if>
 

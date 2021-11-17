@@ -138,8 +138,8 @@ public class TodoDAO {
 	public List<Todo> findDateTodoList(java.sql.Date todo_date, String user_id) throws SQLException {
 		 String sql = "SELECT todo_id, content, todo_date, user_id, is_done "
       		   + "FROM TODO "
-      		   + "WHERE todo_date >= ? AND user_id = ? "; 
-		  jdbcUtil.setSqlAndParameters(sql, new Object[] {todo_date, user_id});	// JDBCUtil에 query문과 매개 변수 설정
+      		   + "WHERE todo_date >= ? AND todo_date < ? + 1 AND user_id = ? "; 
+		  jdbcUtil.setSqlAndParameters(sql, new Object[] {todo_date,todo_date, user_id});	// JDBCUtil에 query문과 매개 변수 설정
 					
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
@@ -244,4 +244,21 @@ public class TodoDAO {
 		return null;
 	}
 	
+	public int deleteUserAllTodo(String user_id) {
+		String sql = "DELETE FROM Todo "
+				+ "WHERE user_id=? ";
+			jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});		// JDBCUtil에 query문 설정
+						
+			try {
+				int rlt = jdbcUtil.executeUpdate();			// query 실행				
+				return rlt;					
+			} catch (Exception ex) {
+				jdbcUtil.rollback();
+				ex.printStackTrace();
+			} finally {
+				jdbcUtil.commit();
+				jdbcUtil.close(); // resource 반환
+			}
+			return 0;
+	}
 }
