@@ -3,6 +3,8 @@ package model.service;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import model.Todo;
 import model.dao.TodoDAO;
@@ -48,8 +50,10 @@ public class TodoManager {
 			return todoDAO.delete(todo_id);
 		}
 		
-		public List<Todo> findDateTodoList(Date todo_date) throws SQLException {
-				return todoDAO.findDateTodoList(todo_date);
+		public List<Todo> findDateTodoList(java.util.Date date, String user_id) throws SQLException {
+			java.sql.Date date1 = new java.sql.Date(date.getTime());
+			
+			return todoDAO.findDateTodoList(date1, user_id);
 		}
 		
 		public List<Todo> findTodoList(String user_id) throws SQLException {

@@ -6,14 +6,14 @@ import java.util.List;
 public class Todo {
 	private int todo_id;
 	private String content;
-	private Date todo_date;
+	private java.sql.Date todo_date;
 	private String user_id;
 	private int is_done;
 	private List<Todo> todoList;
 
 	public Todo() { }
 
-	public Todo(int todo_id, String content, Date todo_date, String user_id, int is_done) {
+	public Todo(int todo_id, String content, java.sql.Date todo_date, String user_id, int is_done) {
 		super();
 		this.todo_id = todo_id;
 		this.content = content;
@@ -34,7 +34,7 @@ public class Todo {
 	
 	}
 	
-	public Todo(int todo_id, String content, Date todo_date, int is_done) {
+	public Todo(int todo_id, String content, java.sql.Date todo_date, int is_done) {
 		super();
 		this.todo_id = todo_id;
 		this.content = content;
@@ -63,7 +63,7 @@ public class Todo {
 		return todo_date;
 	}
 
-	public void setTodo_date(Date todo_date) {
+	public void setTodo_date(java.sql.Date todo_date) {
 		this.todo_date = todo_date;
 	}
 

@@ -40,7 +40,7 @@ public class UpdateGroupController implements Controller {
 		}
 		if (request.getServletPath().equals("/group/manageUser")) {
 			// 그룹 강퇴 요청
-			String quit_id = request.getParameter("user_id");
+			String quit_id = request.getParameter("quit_id");
 			int group_id = Integer.parseInt(request.getParameter("group_id"));
 
 			try {

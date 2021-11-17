@@ -52,7 +52,7 @@ function groupDelete(targetURI) {
 	<div class="page-wrapper" >
 		<nav class="nav-bar">
 			<div class="nav-logo">
-				<a href="#" id="text-deco">HBTI</a>
+				<a href="#" id="text-deco">&lt;HBTI/&gt;</a>
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">
@@ -95,7 +95,7 @@ function groupDelete(targetURI) {
 					<td>${user.name}</td>
 					<td>${user.login_date}</td>
 					<td><a href="<c:url value='/group/manageUser'>
-							<c:param name="user_id" value='${user.user_id}'/>
+							<c:param name="quit_id" value='${user.user_id}'/>
 							<c:param name="group_id" value='${groupInfo.group_id}' />
 					</c:url>" onclick="alert('강퇴하시겠습니까?');">강퇴</a> </td>
 				</tr>

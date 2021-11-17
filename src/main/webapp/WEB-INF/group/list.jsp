@@ -34,7 +34,7 @@ function search() {
 	<div class="page-wrapper">
 		<nav class="nav-bar">
 			<div class="nav-logo">
-				<a href="#" id="text-deco">HBTI</a>
+				<a href="#" id="text-deco">&lt;HBTI/&gt;</a>
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">

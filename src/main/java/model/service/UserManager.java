@@ -125,9 +125,6 @@ public class UserManager {
 	//user의 hbti ID를 반환 (HBTI 테스트를 안했다면 0이 반환)
 	public int findHBTI(String user_id) throws SQLException, UserHbtiException{
 		int hbti_id = userDAO.findHBTI(user_id);
-		
-		
-		 //if (hbti_id == 0) { throw new UserHbtiException(user_id +"의 HBTI가 존재하지 않습니다."); }
 
 		return hbti_id;
 	}
@@ -135,10 +132,7 @@ public class UserManager {
 	//hbti의 이름을 반환
 		public String findHbtiName(int hbti_id) throws SQLException, UserNotFoundException {
 			String name = hbtiDAO.findHbtiName(hbti_id);
-
-			if (name == null) {
-				throw new UserNotFoundException(hbti_id + "는 존재하지 않습니다.");
-			}
+			
 			return name;
 		}
 		
@@ -181,8 +175,6 @@ public class UserManager {
 	public Group findGroup(int group_id) throws SQLException {
 		// 그룹 기본 정보
 		Group group = groupDAO.findGroup(group_id);
-		
-		System.out.println(group.getName() + "hellos");
 		
 		// 그룹 인원 정보
 		int numOfMem = groupDAO.findNumberOfMember(group_id);

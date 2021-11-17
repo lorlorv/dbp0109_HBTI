@@ -35,7 +35,7 @@ public class UpdateChallengeController implements Controller {
 		// updateForm URI 요청
 		if (request.getServletPath().equals("/challenge/updateForm")) {
 			String writer_id = request.getParameter("writer_id");
-			System.out.println(writer_id);
+			
 			// 로그인한 user_id와 writer_id와 비교하여 같다면 updateForm으로 가게끔
 			try {
 				if(!user_id.equals(writer_id)) {

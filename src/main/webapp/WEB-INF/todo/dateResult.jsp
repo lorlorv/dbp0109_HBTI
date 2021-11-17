@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,10 +26,6 @@ function searchDate() {
 	form.submit();
 }
 
-function addTodo(targetURI) {
-	form.action = targetURI;
-	form.submit();
-}
 </script>
 </head>
 <body>
@@ -53,29 +50,17 @@ function addTodo(targetURI) {
 
 
 	<div class="contents">
-		<p id="sub-title">TODO</p>
-		<!-- TODO LIST 설명 출력 -->
+		<p id="sub-title">TODO 날짜 검색</p>
 		<div class="contents-split">
-			<p id="intro">
-				나만의 TODO LIST를 작성하세요!<br> 사소한 건강 습관, 공부, 일정 모두 좋습니다! 오늘도 좋은 하루를
-				위해 힘내보아요.
-			</p>
-		</div>
-		<div class="contents-split">
-			<p id="contents-title">TODAY TODO LIST</p>
-			<p id="intro">
-				투두를 갱신/변경하려면 편집하기를 누르세요.<br> 원하는 날짜의 TODO LIST를 확인하려면 검색창을
-				활용하세요.
-			</p>
-			<form name="form" action="<c:url value='/todo/date' />">
-				<input type="date" name="todo_date" placeHolder="yy/mm/dd 형식으로 입력">
-				<a onClick="searchDate()" id="a-deco"><i class="fas fa-search"></i></a>
-			
-				<p>
 					<c:if test='${empty todoList}'>
-						<p id="intro">오늘의 TODO LIST가 없습니다. 추가해주세요!</p>
+						<p id="intro"> 해당 날짜에 TODO LIST가 없습니다.!</p>
 					</c:if>
 					<c:forEach var="todo" items="${todoList}" varStatus="status">
+					<c:if test="${status.first}">
+						<p id="contents-title">
+				 		<fmt:formatDate value="${todo.todo_date}" pattern="yy년 MM월 dd일" /> : TODO LIST
+					</p>
+					</c:if>
 						<div class="list-box">
 							<!-- is_done 여부에 따라 다르게 보여줌 -->
 							<div class="list">
@@ -107,9 +92,7 @@ function addTodo(targetURI) {
 						<div class="split"></div>
 					</c:forEach>
 				<p>
-					<a onClick="addTodo('<c:url value='/todo/addForm'/>')" class="mar"
-						id="a-deco"><i class="fas fa-plus-square"></i>&nbsp;추가&nbsp;</a>
-			</form>
+
 		</div>
 	</div>
 

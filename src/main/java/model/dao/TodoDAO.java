@@ -135,11 +135,11 @@ public class TodoDAO {
 	/**
 	 * 날짜별 투두 정보를 검색하여 List에 저장 및 반환
 	 */
-	public List<Todo> findDateTodoList(Date todo_date) throws SQLException {
+	public List<Todo> findDateTodoList(java.sql.Date todo_date, String user_id) throws SQLException {
 		 String sql = "SELECT todo_id, content, todo_date, user_id, is_done "
       		   + "FROM TODO "
-      		   + "WHERE TO_CHAR(todo_date)=? "; 
-		  jdbcUtil.setSqlAndParameters(sql, new Object[] {todo_date});	// JDBCUtil에 query문과 매개 변수 설정
+      		   + "WHERE todo_date >= ? AND user_id = ? "; 
+		  jdbcUtil.setSqlAndParameters(sql, new Object[] {todo_date, user_id});	// JDBCUtil에 query문과 매개 변수 설정
 					
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			

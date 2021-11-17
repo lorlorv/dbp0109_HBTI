@@ -136,9 +136,9 @@ public class AddChallengeController implements Controller {
 						);
 				groupManager.addPost(post, group_id);
 				
-				request.setAttribute("postInfo", post);
 				
-				return "/challenge/view.jsp";
+				
+				return "redirect:/challenge/myView";
 			} catch (Exception e) { e.printStackTrace(); }
 		
 		}
