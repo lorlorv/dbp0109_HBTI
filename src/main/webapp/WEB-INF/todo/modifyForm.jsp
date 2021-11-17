@@ -16,20 +16,14 @@
 	href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
 <script>
-function modifyTodo(targetURI) {
-	if(form.content.value == "") {
-		alert("빈칸을 입력하세요");
-		form.content.focus();
-		return false;
+	function modifyTodo() {
+		if (form.content.value == "") {
+			alert("빈칸을 입력하세요");
+			form.content.focus();
+			return false;
+		}
+		form.submit();
 	}
-	form.action = targetURI;
-	form.submit();
-}
-
-function addTodo(targetURI) {
-	form.action = targetURI;
-	form.submit();
-}
 </script>
 </head>
 <body>
@@ -40,16 +34,14 @@ function addTodo(targetURI) {
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">
-					<li class="menu-li"><a href="<c:url value='/todo/view'/>"
-						id="text-deco">ToDo</a></li>
+					<li class="menu-li"><a href="<c:url value='/todo/view'/>" id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />"
 						id="text-deco">Group</a></li>
-					<li class="menu-li"><a href="<c:url value='/user/myPage' />"
-						id="text-deco">MyPage</a></li>
+					<li class="menu-li"><a href="<c:url value='/user/myPage' />" id="text-deco">MyPage</a></li>
 				</ul>
 			</div>
 			<div class="nav-logout">
-				<a href="#" id="text-deco">Logout</a>
+				<a href="<c:url value='/user/logout'/>" id="text-deco">Logout</a>
 			</div>
 		</nav>
 	</div>
@@ -59,46 +51,38 @@ function addTodo(targetURI) {
 		<p id="sub-title">MODIFY TODO</p>
 		<!-- TODO LIST 설명 출력 -->
 		<div class="contents-split">
-			<p id="intro">TODO를 추가는 아래 버튼을 이용하세요.<br> 내용을 바꾸어 수정할 수 있습니다.<br> 삭제를 원한다면 휴지통을 클릭하세요.</p>
+			<p id="intro">
+				TODO를 추가는 아래 버튼을 이용하세요.<br> 내용을 바꾸어 수정할 수 있습니다.<br> 삭제를
+				원한다면 휴지통을 클릭하세요.
+			</p>
 		</div>
 		<div class="contents-split">
 			<p id="contents-title">TODAY TODO LIST</p>
-			<form name="form" action="<c:url value='/todo/modify' />">
-				<div class="split"></div>
+			<form name="form" action="<c:url value='/todo/modify'/> ">
+			
 				<p>
-					<c:if test='${empty todoList}'>
-						<p id="intro">오늘의 TODO LIST가 없습니다. 추가해주세요!</p>
-					</c:if>
-				<c:forEach var="todo" items="${todoList}">
-					<div class="list-box">
-						<!-- is_done 여부에 따라 다르게 보여줌 -->
-						<span>
-								<c:if test="${todo.is_done eq 1}">
-								<a href="<c:url value="/todo/doCheck">
-										<c:param name="todo_id" value='${todo.todo_id }'/>
-										</c:url>" ><i class="fas fa-check-square"></i></a></c:if>
-								<c:if test="${todo.is_done eq 0}">
-								<a href="<c:url value="/todo/doNotCheck">
-										<c:param name="todo_id" value='${todo.todo_id }'/>
-										</c:url>" ><i class="far fa-square"></i></a></c:if>
-							</span>
-							 <span><input type="text" name="content" value='${todo.content}'></span>
-							 <span>
-										<a onClick='modifyTodo("<c:url value='/todo/modify'>
-																<c:param name="todo_id" value="${todo.todo_id}"/>
-																</c:url>")' id="a-deco">&nbsp;수정&nbsp;</a>
-										</span>
-							 <span><a href="<c:url value="/todo/delete">
-										<c:param name="todo_id" value='${todo.todo_id }'/>
-										</c:url>"><i class="far fa-trash-alt"></i></a></span>
-					</div>
-					<div class="split"></div>
-				</c:forEach>
-				<p>
-					<a onClick="addTodo('<c:url value='/todo/addForm'/>')"
-						id="a-deco"> <i class="fas fa-plus-square"></i>&nbsp;추가&nbsp;
-					</a>
+					<!-- 수정할 todo가 상단에 보임 -->
+					<span><input type="hidden" name="select_id"
+						value='${selectTodo.todo_id}'></span> 
+					<span><input type="text" name="content"
+						value='${selectTodo.content}'></span>
+					<span><a onClick='modifyTodo()' id="a-deco">&nbsp;수정&nbsp;</a></span>
 			</form>
+			<div>
+			<c:forEach var="todo" items="${todoList}">
+				<div class="list-box">
+					<!-- is_done 여부에 따라 다르게 보여줌 -->
+					<div class="list">${todo.content}</div> 
+					<div class="list"><a id="a-deco_icon" href="<c:url value="/todo/delete">
+									<c:param name="todo_id" value='${todo.todo_id }'/>
+									</c:url>"><i class="far fa-trash-alt"></i></a></div>
+				</div>
+				<div class="split"></div>
+			</c:forEach>
+			</div>
+			
+			<p>
+				<a href="<c:url value='/todo/view'/>" id="a-deco"> 완료 </a>
 		</div>
 	</div>
 

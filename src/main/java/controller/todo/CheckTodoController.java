@@ -21,7 +21,7 @@ public class CheckTodoController implements Controller{
 		} else {
 			todoManager.updateIs_done(todo_id, 1);
 		}
-		return "redirect:/todo/modifyForm";
+		return "redirect:/todo/view";
 	}
 
 }

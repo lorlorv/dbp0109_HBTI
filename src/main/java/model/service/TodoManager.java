@@ -54,8 +54,14 @@ public class TodoManager {
 		
 		public List<Todo> findTodoList(String user_id) throws SQLException {
 			return todoDAO.findTodoList(user_id);
-	}
-
+		}
+		public Todo findTodo(int todo_id, String user_id) throws SQLException {
+			return todoDAO.findTodo(todo_id, user_id);
+		}
+		// 수정 투두를 제외한 투두리스트
+		public List<Todo> findNotSelectTodoList(int todo_id, String user_id) throws SQLException {
+			return todoDAO.findNotSelectTodoList(todo_id, user_id);
+		}
 			
 		public TodoDAO getTodoDAO() {
 			return this.todoDAO;

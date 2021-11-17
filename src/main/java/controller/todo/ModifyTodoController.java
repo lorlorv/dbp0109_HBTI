@@ -23,17 +23,25 @@ public class ModifyTodoController implements Controller {
 		
     	if (request.getServletPath().equals("/todo/modifyForm")) {	
     	
-			List<Todo> todoList = manager.findTodoList(user_id);
+    		// 선택한 수정 투두의 정보
+    		int todo_id = Integer.parseInt(request.getParameter("todo_id"));
+    		
+    		Todo selectTodo = manager.findTodo(todo_id, user_id);
+    		request.setAttribute("selectTodo", selectTodo);
+    		
+			List<Todo> todoList = manager.findNotSelectTodoList(todo_id, user_id);
 			request.setAttribute("todoList", todoList);	
 				
 				return "/todo/modifyForm.jsp";   
-			}    else {
-				int todo_id = Integer.parseInt(request.getParameter("todo_id"));
+			} 
+    	else {
+				int todo_id = Integer.parseInt(request.getParameter("select_id"));
 				String content = request.getParameter("content");
     	
-    	manager.update(todo_id, content);
+				manager.update(todo_id, content);
    
-        return "redirect:/todo/modifyForm";	
+			
+				return "redirect:/todo/view";	
 			}
     	
     	}

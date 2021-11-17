@@ -73,7 +73,7 @@ public class TodoDAO {
 		String sql = "UPDATE TODO "
 					+ "SET content=? "
 					+ "WHERE todo_id=?";
-		Object[] param = new Object[] {todo_id};				
+		Object[] param = new Object[] {content, todo_id};				
 		jdbcUtil.setSqlAndParameters(sql, param);
 			
 		try {				
@@ -191,12 +191,13 @@ public class TodoDAO {
 		return null;
 	}
 	
-	public Todo findTodo() throws SQLException {
-        String sql = "SELECT todo_id, content, todo_date, user_id, is_done " 
+	// 수정할 todo의 정보를 가져옴
+	public Todo findTodo(int todo_id, String user_id) throws SQLException {
+        String sql = "SELECT todo_id, content, todo_date, is_done " 
      		   + "FROM TODO "
-        	  + "WHERE TO_CHAR(todo_date)= TO_CHAR(SYSDATE) ";
+        	  + "WHERE todo_date >= TO_DATE(SYSDATE) AND todo_id=? AND user_id=? ";
         		
-		jdbcUtil.setSqlAndParameters(sql, null);
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {todo_id, user_id});
 		Todo todo = null;
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		// query 실행	
@@ -214,6 +215,33 @@ public class TodoDAO {
 			jdbcUtil.close();		// resource 반환
 		}
 		return todo;
+	}
+	
+	public List<Todo> findNotSelectTodoList(int todo_id, String user_id) throws SQLException{
+		String sql = "SELECT todo_id, content, todo_date, user_id, is_done " 
+     		   + "FROM TODO "
+     		   + "WHERE todo_date >= TO_DATE(SYSDATE) AND user_id = ?  AND NOT todo_id=?";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id, todo_id});		// JDBCUtil에 query문 설정
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
+			List<Todo> todoList = new ArrayList<Todo>();	
+			while (rs.next()) {
+				Todo todo = new Todo(			
+						rs.getInt("todo_id"),
+						rs.getString("content"),
+						rs.getDate("todo_date"),
+						rs.getInt("is_done"));
+				todoList.add(todo);			
+			}		
+			return todoList;					
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource 반환
+		}
+		return null;
 	}
 	
 }

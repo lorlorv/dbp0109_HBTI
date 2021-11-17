@@ -19,7 +19,7 @@ public class AddTodoController implements Controller {
 	    	Todo todo = new Todo(request.getParameter("content"), user_id);
 	    	manager.addTodo(todo);
 	    	
-	    	return "redirect:/todo/modifyForm";
+	    	return "redirect:/todo/view";
 	    	
 	    }
 	}

@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 #a-deco {
 	text-decoration : none;
 	color : #112D4E;;
@@ -14,6 +13,19 @@
 #a-deco:hover {
 	color : white;
 	background-color : #112D4E;;
+}
+
+#a-deco_icon {
+	text-decoration : none;
+	color : #112D4E;;
+	font-size : 30px;
+	background-color : white;
+	padding :10px;
+	transition: 0.5s;
+}
+
+#a-deco_icon:hover {
+	color : red;
 }
 
 #todo-title {
@@ -39,16 +51,30 @@ input {
 }
 
 .list-box {
-	font-size : 20px;
+	font-size : 30px;
 	padding : 20px;
 	width : 100%;
+	display : flex;
+}
+.list {
+	margin-right : 20px;
+	width : 300px;
 }
 
-span { padding : 50px;}
-
-i {
+#icon {
 	text-decoration : none;
 	color : #112D4E;
+}
+
+/* 체크 버튼 */
+#check {
+	text-decoration : none;
+	font-size : 30px;
+	color : #112D4E;
+}
+
+.mar {
+	margin : 100px;
 }
 
 
