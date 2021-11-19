@@ -43,7 +43,10 @@
 		form.action = targetUri;
 		form.submit();
 	}
-	
+	function goToGroup(targetURI) {
+		form.action = targetURI;
+		form.submit();
+	}
 	var todoDate = "";
 	var today = new Date(); //오늘 날짜
     var date = new Date();//today의 Date를 세어주는 역할
@@ -234,7 +237,7 @@
 									가입된 그룹이 없습니다. <br> ${groupNum}개의 그룹들이 ${user.name}님을 기다리고
 									있습니다!
 								</p>
-								<button id="group-recommend" type="button" onClick="">그룹
+								<button id="group-recommend" type="button" onClick="goToGroup('<c:url value='/group/main' />')">그룹
 									구경하러 가기</button>
 							</c:if>
 							<c:if test="${user.group_id ne 0}">

@@ -23,6 +23,9 @@ public class MyPageController implements Controller {
     	
     	String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		
+    	if(request.getServletPath().equals("/group/main")) {
+    		return "redirect:/group/main";
+    	}
 		/* User Profile */
 		User user = manager.findUser(user_id);
 		String group_name = manager.findGroupName(user.getGroup_id());

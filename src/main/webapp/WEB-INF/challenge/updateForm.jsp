@@ -73,18 +73,18 @@ function PreviewImage() {
 		<div class="contents-split">
 		<form name="form" method="POST" action="<c:url value='/challenge/update'/>" enctype="multipart/form-data">
 		<p id="contents-title">
-		<%= new SimpleDateFormat("yyyy년 MM월 dd일").format(new Date()) %></p>
+		<%= new SimpleDateFormat("yyyy년 MM월 dd일").format(new Date()) %></p> 
+			<p id="intro">챌린지 인증 내용</p>
+			<textarea id="text" name="content">${postInfo.content}</textarea>
+			<div class="split"> 
+			<p></div>
+			
 			<p id="intro">챌린지 인증 사진</p>
 			<div class="image_container">
 				<img id="challenge" src="<c:url value='/upload/${postInfo.image}' />">
 			</div>
 			<input type="file" name="image" id="image" accept="image/*" onchange="PreviewImage();"/>
 			
-			<div class="split"> 
-			<p></div>
-			 
-			<p id="intro">챌린지 인증 내용</p>
-			<textarea id="text" name="content">${postInfo.content}</textarea>
 			<div id="len"></div>
 				<span><a onclick="postUpdate()" id="a-deco">
 			<i class="fas fa-pencil-alt"></i>&nbsp;수정하기&nbsp;</a></span>

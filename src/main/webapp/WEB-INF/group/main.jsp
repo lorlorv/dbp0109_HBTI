@@ -73,7 +73,8 @@
 					<c:choose>
 						<c:when test="${status.first || status.index % 5 == 0}">
 							<tr>
-								<td><img class="member-img"
+								<td>
+								<img class="member-img"
 									src="<c:url value='/upload/${user.image }' />"><br>${user.name}</td>
 						</c:when>
 						<c:when test="${status.last || status.index % 4 == 0}">

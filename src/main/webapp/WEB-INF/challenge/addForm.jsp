@@ -67,20 +67,19 @@ function PreviewImage() {
 		<p id="contents-title">
 		<%= new SimpleDateFormat("yyyy년 MM월 dd일").format(new Date()) %></p>
 			<p id="intro">
+				오늘의 챌린지는 어떠셨나요?
+				<br>당신의 이야기를 공유해주세요.
+			</p>
+			<textarea id="text" name="content"></textarea>
+			<div class="split"> 
+			<p></div>
+			 <p id="intro">
 				챌린지 인증 사진을 업로드해주세요!</p>
 			<div class="image_container">
 				<img id="challenge"/>
 			</div>
 			<input type="file" name="image" id="image" accept="image/*" onchange="PreviewImage();"/>
 			
-			<div class="split"> 
-			<p></div>
-			 
-			<p id="intro">
-				오늘의 챌린지는 어떠셨나요?
-				<br>당신의 이야기를 공유해주세요.
-			</p>
-			<textarea id="text" name="content"></textarea>
 			<div id="len"></div>
 				<a onclick="postAdd()" id="a-deco">
 			<i class="fas fa-plus-square"></i>&nbsp;등록하기&nbsp;</a>

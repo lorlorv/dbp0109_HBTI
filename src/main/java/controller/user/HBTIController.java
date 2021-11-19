@@ -51,7 +51,8 @@ public class HBTIController implements Controller {
 			if(group_id != 0) {
 				manager.updateHBTIGroup(user_id, oldHbti, group_id);
 			}
-			
+		} else {
+			manager.updateHBTI(user_id, testRst); // type결정 -> hbti_id로 변경 -> updateHBTI()
 		}
 		
 		
