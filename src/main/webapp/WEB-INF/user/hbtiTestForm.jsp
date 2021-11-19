@@ -12,6 +12,10 @@
 <!-- contents 스타일 시트 -->
 <link rel="stylesheet" href="<c:url value='/css/contents.css' />"
 	type="text/css">
+	
+	<link rel="stylesheet" href="<c:url value='/css/mainContainer.css' />"
+	type="text/css">
+	
 
 <!-- 아이콘 -->
 <link rel="stylesheet"
@@ -85,7 +89,6 @@
 		 }else{   //취소
 		     return false;
 		 }
-
 		form.submit();
 	}
 /* 	function jbFunc() {

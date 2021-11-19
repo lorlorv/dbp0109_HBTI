@@ -11,8 +11,7 @@ import controller.Controller;
 import controller.user.UserSessionUtils;
 import model.ChallengePost;
 import model.service.GroupManager;
-import model.service.UserManager;
-import model.service.WriterMismatchException;
+import model.service.exception.WriterMismatchException;
 
 //파일 업로드를 위한 API를 사용하기 위해...
 import org.apache.commons.fileupload.*;
@@ -28,18 +27,19 @@ public class UpdateChallengeController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 
-		UserManager userManager = UserManager.getInstance();
 		GroupManager groupManager = GroupManager.getInstance();
 
-		String user_id =UserSessionUtils.getLoginUserId(request.getSession());
+		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		ChallengePost post = groupManager.findPost(user_id);
 
 		// updateForm URI 요청
 		if (request.getServletPath().equals("/challenge/updateForm")) {
 			String writer_id = request.getParameter("writer_id");
+			
 			// 로그인한 user_id와 writer_id와 비교하여 같다면 updateForm으로 가게끔
 			try {
 				if(!user_id.equals(writer_id)) {
+					 post = groupManager.findPost(writer_id);
 					throw new WriterMismatchException("게시물 작성자만 수정이 가능합니다.");
 				}
 				request.setAttribute("postInfo", post);
@@ -54,6 +54,7 @@ public class UpdateChallengeController implements Controller {
 			}
 		} else if (request.getServletPath().equals("/challenge/update")) {
 			// update URI 요청
+			String exist_img = post.getImage();
 			// 파일 전송 파라미터를 처리하는 코드
 			String content = null;
 			String fileName = null;
@@ -105,8 +106,10 @@ public class UpdateChallengeController implements Controller {
 							if (item.getFieldName().equals("image")) {
 								// key 값이 picture이면 파일 저장을 한다.
 								fileName = item.getName();// 파일 이름 획득 (자동 한글 처리 됨)
-								if (fileName == null || fileName.trim().length() == 0)
+								if (fileName == null || fileName.trim().length() == 0) {
+									fileName = exist_img;
 									continue;
+								}
 								// 파일이 전송되어 오지 않았다면 건너 뛴다.
 								fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
 								// 파일 이름이 파일의 전체 경로까지 포함하기 때문에 이름 부분만 추출해야 한다.
@@ -136,7 +139,7 @@ public class UpdateChallengeController implements Controller {
 
 					groupManager.updatePost(post);
 
-					return "redirect:/challenge/view";
+					return "redirect:/challenge/myView";
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -145,10 +148,14 @@ public class UpdateChallengeController implements Controller {
 		} else if(request.getServletPath().equals("/challenge/updateLike_btn")) {
 			//좋아요 개수 업데이트
 			int post_id = Integer.parseInt(request.getParameter("post_id"));
+			String writer_id = request.getParameter("writer_id");
 			
 			groupManager.updatePostLike(post_id);
 			
-			return "redirect:/challenge/view";
+			ChallengePost like_post = groupManager.findPost(writer_id);
+			request.setAttribute("postInfo", like_post);
+			
+			return "/challenge/view.jsp";
 		}
 
 		return null;

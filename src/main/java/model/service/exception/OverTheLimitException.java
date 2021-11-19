@@ -1,4 +1,4 @@
-package model.service;
+package model.service.exception;
 
 /*
  * 그룹 가입을 신청했을 때, 인원이 만원이라면

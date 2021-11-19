@@ -257,7 +257,9 @@ public class UserDAO {
 	}
 	
 	public List<String> isTodo(String user_id) throws SQLException {
-		String sql = "SELECT TO_CHAR(todo_date, 'yyyy/mm/dd') AS todo_date FROM TODO WHERE user_id=? AND is_done=1";
+		String sql = "SELECT TO_CHAR(todo_date, 'yyyy/mm/dd') AS todo_date "
+				+ "FROM TODO "
+				+ "WHERE user_id=? AND is_done=1";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { user_id}); 
 
 		try {
@@ -273,5 +275,81 @@ public class UserDAO {
 			jdbcUtil.close(); 
 		}
 		return null;
+	}
+	
+	/* hbti가 hbti_id인 group_id 반환 */
+	public List<Integer> group_idByHBTI(int hbti_id) {
+		String sql = "SELECT group_id FROM GROUPINFO WHERE hbti_id=?";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { hbti_id });
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			List<Integer> groupList = new ArrayList<>();
+			while (rs.next()) {
+				groupList.add(rs.getInt("group_id"));
+			}
+			return groupList;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
+
+	/* 그 group에 해당하는 member수 구하기 */
+	public int getNumberOfUsersInGroup(int group_id) {
+		String sql = "SELECT COUNT(user_id) FROM UserInfo " + "WHERE group_id = ?";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { group_id });
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return 0;
+	}
+
+	/* 그 group에 해당하는 user_id 리스트 구하기 */
+	public List<String> userListEachGroup(int group_id){
+		String sql = "SELECT user_id FROM UserInfo WHERE group_id=?";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { group_id });
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			List<String> userList = new ArrayList<>();
+			while (rs.next()) {
+				userList.add(rs.getString("user_id"));
+			}
+			return userList;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
+	
+	/* 오늘 이 user가 챌린지를 했는지? */
+	public boolean didChallengeUser(String user_id) {
+		String sql = "SELECT COUNT(writer_id) AS cnt FROM CHALLENGEPOST WHERE writer_id=? AND write_date <= sysdate";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { user_id });
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			if (rs.next()) {
+				if (rs.getInt("cnt") > 0)
+					return true;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return false;
 	}
 }

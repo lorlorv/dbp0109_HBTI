@@ -1,4 +1,4 @@
-package model.service;
+package model.service.exception;
 
 public class DoNotQuitLeaderException extends Exception {
 

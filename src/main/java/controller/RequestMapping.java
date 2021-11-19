@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import controller.user.*;
 import controller.group.*;
 import controller.challenge.*;
+import controller.todo.*;
 
 
 public class RequestMapping {
@@ -29,6 +30,9 @@ public class RequestMapping {
         mappings.put("/user/hbtiTest", new HBTIController());
         mappings.put("/user/hbtiTestResult", new HBTIController());
         
+        // 메인 페이지
+        mappings.put("/main", new MainController());
+        
         // 마이페이지 (회원 정보 수정 & 회원 탈퇴 & 그룹 탈퇴)
         mappings.put("/user/myPage", new MyPageController());
         mappings.put("/user/update", new UpdateUserController());
@@ -37,6 +41,23 @@ public class RequestMapping {
         
         // 로그 아웃
         mappings.put("/user/logout", new LogoutController());
+        
+        // 투두 조회
+         mappings.put("/todo/view", new ViewTodoController());
+         mappings.put("/todo/date", new ViewTodoController());
+         
+        // 투두 수정
+        mappings.put("/todo/modifyForm", new ModifyTodoController());
+        mappings.put("/todo/modify", new ModifyTodoController()); //변경내용 redirection
+        
+        mappings.put("/todo/doCheck", new CheckTodoController());
+        mappings.put("/todo/doNotCheck", new CheckTodoController());
+        //투두 추가
+        mappings.put("/todo/addForm", new ForwardController("/todo/addForm.jsp"));
+        mappings.put("/todo/add", new AddTodoController());
+       
+        //투두 삭제
+        mappings.put("/todo/delete", new DeleteTodoController());
         
         // 그룹 메인 (검색 & 가입)
         mappings.put("/group/main", new ViewGroupController());
@@ -57,6 +78,7 @@ public class RequestMapping {
         
         // 챌린지 조회
         mappings.put("/challenge/view", new ViewChallengeController());
+        mappings.put("/challenge/myView", new ViewChallengeController());
         
         // 챌린지 추가
         mappings.put("/challenge/addForm", new AddChallengeController());

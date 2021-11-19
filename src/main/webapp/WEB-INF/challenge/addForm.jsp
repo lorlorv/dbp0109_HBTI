@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="<c:url value='/css/contents.css' />"
 	type="text/css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
-<link rel="stylesheet" href="<c:url value='/css/challengeAdd.css' />" type="text/css">
+<link rel="stylesheet" href="<c:url value='/css/challenge/challengeAdd.css' />" type="text/css">
 
 <script>
 function postAdd() {
@@ -46,11 +46,11 @@ function PreviewImage() {
 	<div class="page-wrapper" >
 		<nav class="nav-bar">
 			<div class="nav-logo">
-				<a href="#" id="text-deco">HBTI</a>
+				<a href="<c:url value='/main'/>" id="text-deco">&lt;HBTI/&gt;</a>
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">
-					<li class="menu-li"><a href="#" id="text-deco">ToDo</a></li>
+					<li class="menu-li"><a href="<c:url value='/todo/view'/>" id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />" id="text-deco">Group</a></li>
 					<li class="menu-li"><a href="<c:url value='/user/myPage' />" id="text-deco">MyPage</a></li>
 				</ul>
@@ -67,20 +67,19 @@ function PreviewImage() {
 		<p id="contents-title">
 		<%= new SimpleDateFormat("yyyy년 MM월 dd일").format(new Date()) %></p>
 			<p id="intro">
+				오늘의 챌린지는 어떠셨나요?
+				<br>당신의 이야기를 공유해주세요.
+			</p>
+			<textarea id="text" name="content"></textarea>
+			<div class="split"> 
+			<p></div>
+			 <p id="intro">
 				챌린지 인증 사진을 업로드해주세요!</p>
 			<div class="image_container">
 				<img id="challenge"/>
 			</div>
 			<input type="file" name="image" id="image" accept="image/*" onchange="PreviewImage();"/>
 			
-			<div class="split"> 
-			<p></div>
-			 
-			<p id="intro">
-				오늘의 챌린지는 어떠셨나요?
-				<br>당신의 이야기를 공유해주세요.
-			</p>
-			<textarea id="text" name="content"></textarea>
 			<div id="len"></div>
 				<a onclick="postAdd()" id="a-deco">
 			<i class="fas fa-plus-square"></i>&nbsp;등록하기&nbsp;</a>

@@ -13,13 +13,13 @@
 <link rel="stylesheet" href="<c:url value='/css/contents.css' />"
 	type="text/css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
-<link rel="stylesheet" href="<c:url value='/css/challengeAdd.css' />" type="text/css">
+<link rel="stylesheet" href="<c:url value='/css/challenge/challengeAdd.css' />" type="text/css">
 
 <script>
 function postUpdate() {
 	if(form.content.value == "") {
 		alert("내용을 입력하세요!");
-		form.text.focus();
+		form.content.focus();
 		return false;
 	}if(form.challenge.src == "") {
 		alert("미션 인증 사진을 등록하세요!");
@@ -54,11 +54,11 @@ function PreviewImage() {
 	<div class="page-wrapper" >
 		<nav class="nav-bar">
 			<div class="nav-logo">
-				<a href="#" id="text-deco">HBTI</a>
+				<a href="<c:url value='/main'/>" id="text-deco">&lt;HBTI/&gt;</a>
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">
-					<li class="menu-li"><a href="#" id="text-deco">ToDo</a></li>
+					<li class="menu-li"><a href="<c:url value='/todo/view'/>" id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />" id="text-deco">Group</a></li>
 					<li class="menu-li"><a href="<c:url value='/user/myPage' />" id="text-deco">MyPage</a></li>
 				</ul>
@@ -73,25 +73,25 @@ function PreviewImage() {
 		<div class="contents-split">
 		<form name="form" method="POST" action="<c:url value='/challenge/update'/>" enctype="multipart/form-data">
 		<p id="contents-title">
-		<%= new SimpleDateFormat("yyyy년 MM월 dd일").format(new Date()) %></p>
+		<%= new SimpleDateFormat("yyyy년 MM월 dd일").format(new Date()) %></p> 
+			<p id="intro">챌린지 인증 내용</p>
+			<textarea id="text" name="content">${postInfo.content}</textarea>
+			<div class="split"> 
+			<p></div>
+			
 			<p id="intro">챌린지 인증 사진</p>
 			<div class="image_container">
 				<img id="challenge" src="<c:url value='/upload/${postInfo.image}' />">
 			</div>
 			<input type="file" name="image" id="image" accept="image/*" onchange="PreviewImage();"/>
 			
-			<div class="split"> 
-			<p></div>
-			 
-			<p id="intro">챌린지 인증 내용</p>
-			<textarea id="text" name="content">${postInfo.content}</textarea>
 			<div id="len"></div>
 				<span><a onclick="postUpdate()" id="a-deco">
-			<i class="fas fa-plus-square"></i>&nbsp;수정하기&nbsp;</a></span>
+			<i class="fas fa-pencil-alt"></i>&nbsp;수정하기&nbsp;</a></span>
 			<span><a onclick="postDelete('<c:url value='/challenge/delete'>
 											<c:param name="post_id" value='${postInfo.post_id}'/>
-											</c:url>')" id="a-deco">
-			<i class="fas fa-plus-square"></i>&nbsp;삭제하기&nbsp;</a></span>
+											</c:url>')" id="a-deco-remove">
+			<i class="fas fa-trash-alt"></i>&nbsp;삭제하기&nbsp;</a></span>
 			
 		</form>
 		</div>

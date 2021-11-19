@@ -9,9 +9,9 @@ import controller.Controller;
 import controller.user.UserSessionUtils;
 import model.Group;
 import model.User;
-import model.service.DoNotQuitLeaderException;
+import model.service.exception.DoNotQuitLeaderException;
 import model.service.GroupManager;
-import model.service.OverTheLimitException;
+import model.service.exception.OverTheLimitException;
 import model.service.UserManager;
 
 public class UpdateGroupController implements Controller {
@@ -40,7 +40,7 @@ public class UpdateGroupController implements Controller {
 		}
 		if (request.getServletPath().equals("/group/manageUser")) {
 			// 그룹 강퇴 요청
-			String quit_id = request.getParameter("user_id");
+			String quit_id = request.getParameter("quit_id");
 			int group_id = Integer.parseInt(request.getParameter("group_id"));
 
 			try {

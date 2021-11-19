@@ -1,6 +1,7 @@
 package model.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Group;
@@ -8,7 +9,13 @@ import model.User;
 import model.dao.GroupDAO;
 import model.dao.HBTIDAO;
 import model.dao.PostDAO;
+import model.dao.TodoDAO;
 import model.dao.UserDAO;
+import model.service.exception.ExistingUserException;
+import model.service.exception.OverTheLimitException;
+import model.service.exception.PasswordMismatchException;
+import model.service.exception.UserHbtiException;
+import model.service.exception.UserNotFoundException;
 
 public class UserManager {
 
@@ -16,6 +23,7 @@ public class UserManager {
 	private UserDAO userDAO;
 	private HBTIDAO hbtiDAO;
 	private PostDAO postDAO;
+	private TodoDAO todoDAO;
 	private UserHBTIMatching matchRlt;
 	
 	public UserManager() {
@@ -24,6 +32,7 @@ public class UserManager {
 			groupDAO = new GroupDAO();
 			hbtiDAO = new HBTIDAO();
 			postDAO = new PostDAO();
+			todoDAO = new TodoDAO();
 			matchRlt = new UserHBTIMatching(userDAO);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,6 +78,11 @@ public class UserManager {
 
 	// user 삭제
 	public int remove(String user_id) throws SQLException, UserNotFoundException {
+		int group_id = groupDAO.findGroupUserId(user_id);
+		if(group_id != 0) {
+			quitGroup(user_id, group_id);
+		}
+		todoDAO.deleteUserAllTodo(user_id);
 		return userDAO.remove(user_id);
 	}
 	
@@ -79,13 +93,14 @@ public class UserManager {
 			
 			if(newLeader_id != null) {
 				groupDAO.updateLeader(newLeader_id, group_id);
+				postDAO.deleteUserAllPost(user_id);
 			}
 			else { // 그룹에 남는 멤버가 없다면 그룹을 삭제
 				postDAO.deleteAllPost(group_id);
 				return deleteGroup(group_id);
 			}
 		}
-		postDAO.deleteUserAllPost(user_id);
+		
 		return userDAO.quitGroup(user_id);
 	}
 	
@@ -93,15 +108,7 @@ public class UserManager {
 	public void updateHBTIGroup(String user_id, int oldHbti, int group_id) throws SQLException, UserHbtiException{	
 		int nowHbti = findHBTI(user_id);
 		if(oldHbti != nowHbti) { //hbti가 바뀌었다면
-			//그룹이 있는 지 없는 지 판단
-			if(group_id != 0) { //그룹이 있으면 leader인지 아닌지 확인
-				if(user_id.equals(groupDAO.findLeaderId(group_id))) { //leader라면
-					String nextLeader = groupDAO.findNextLeader(user_id, group_id);//다음 리더 찾고
-					groupDAO.updateLeader(nextLeader, group_id);
-				}
-				//그룹 탈퇴
-				userDAO.quitGroup(user_id);
-			}
+			quitGroup(user_id, group_id);
 		}
 		// 바뀌지 않았다면 아무것도 안해도 된다.
 	}
@@ -120,20 +127,14 @@ public class UserManager {
 	//user의 hbti ID를 반환 (HBTI 테스트를 안했다면 0이 반환)
 	public int findHBTI(String user_id) throws SQLException, UserHbtiException{
 		int hbti_id = userDAO.findHBTI(user_id);
-		
-		if (hbti_id == 0) {
-			throw new UserHbtiException(user_id + "의 HBTI가 존재하지 않습니다.");
-		}
+
 		return hbti_id;
 	}
 	
 	//hbti의 이름을 반환
 		public String findHbtiName(int hbti_id) throws SQLException, UserNotFoundException {
 			String name = hbtiDAO.findHbtiName(hbti_id);
-
-			if (name == null) {
-				throw new UserNotFoundException(hbti_id + "는 존재하지 않습니다.");
-			}
+			
 			return name;
 		}
 		
@@ -176,8 +177,6 @@ public class UserManager {
 	public Group findGroup(int group_id) throws SQLException {
 		// 그룹 기본 정보
 		Group group = groupDAO.findGroup(group_id);
-		
-		System.out.println(group.getName() + "hellos");
 		
 		// 그룹 인원 정보
 		int numOfMem = groupDAO.findNumberOfMember(group_id);
@@ -238,5 +237,75 @@ public class UserManager {
 	// user_id의 todo 정보를 받아옴 ** 개선사항 : 날짜 파라미터를 받아 해당하는 달의 레코드만 select **
 	public List<String> isTodo(String user_id) throws SQLException {
 		return userDAO.isTodo(user_id);
+	}
+	
+	/* main에서 사용 */
+
+	/* 이거 다 rankingManager로 이동 */
+	/* hbti_id에 해당하는 그룹의 총 인원 수 */
+	public int numOfGroupMem(int hbti_id) {
+		// 일단 hbti_id인 group이 뭐가 있는지 group_id 찾아오기
+		List<Integer> groupList = new ArrayList<>();
+		groupList = userDAO.group_idByHBTI(hbti_id);//groupDAO로 바꾸기
+
+		// groupList의 List하나 씩 돌려보며 그 group의 인원 수 얻어와서 총 인원 수 구하기
+		int sum = 0;
+		for (int i = 0; i < groupList.size(); i++) {
+			int group_id = groupList.get(i);
+			sum += userDAO.getNumberOfUsersInGroup(group_id);//groupDAO로 바꾸기
+		}
+
+		return sum;
+	}
+
+	public int numOfUserWhoDidChallengeInGroup(int hbti_id) {
+		// 일단 hbti_id인 group이 뭐가 있는지 group_id 찾아오기
+		List<Integer> groupList = new ArrayList<>();
+		groupList = userDAO.group_idByHBTI(hbti_id);
+
+		// groupList의 List하나 씩 돌려보며 그 group의 User_id 가져오기 List로
+		List<String> userList = new ArrayList<>();
+		List<String> userListEachGroup = new ArrayList<>();
+		for (int i = 0; i < groupList.size(); i++) {
+			int group_id = groupList.get(i);
+
+			userListEachGroup = userDAO.userListEachGroup(group_id); // 그룹에 있는 user리스트 불러오기
+
+			/*
+			 * for (int k = 0; k < userListEachGroup.size(); k++) {
+			 * System.out.println("userListEachGroup : " + userListEachGroup.get(k)); }
+			 */
+			for (int j = 0; j < userListEachGroup.size(); j++) {
+				userList.add(userListEachGroup.get(j)); // 그룹마다 가져오기
+			} // 여기까지 하면 한 hbti에 속한 모든 user_id list
+		}
+		for (int i = 0; i < userList.size(); i++) {
+			System.out.println("user_id : " + userList.get(i));
+		}
+		int cnt = 0;
+		for (int i = 0; i < userList.size(); i++) {
+			if (userDAO.didChallengeUser(userList.get(i)))
+				cnt++;
+		}
+		return cnt;
+	}
+
+	// 랭킹 구하기
+	public int ranking(int hbti_id) {
+		return numOfUserWhoDidChallengeInGroup(hbti_id);
+
+	}
+
+	// 퍼센트 구하기
+	public double percentOfChallenge(int hbti_id) {
+		double A = (double) numOfUserWhoDidChallengeInGroup(hbti_id);
+		double B = (double) numOfGroupMem(hbti_id);
+		double percentage = 0;
+		if (A == 0 || B == 0) {
+			percentage = 0;
+		} else
+			percentage = A / B * 100.0;
+
+		return percentage;
 	}
 }
