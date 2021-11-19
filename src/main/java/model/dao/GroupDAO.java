@@ -105,6 +105,27 @@ public class GroupDAO {
 		}
 		return null;
 	}
+	
+	// 유저ID의 그룹ID를 찾아옴
+	public int findGroupUserId(String user_id) {
+		String sql = "SELECT group_id "
+				+ "FROM UserInfo "
+				+ "WHERE user_id = ?";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { user_id });
+		
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			if (rs.next()) {
+				return 1;
+			}
+			return 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return 0;
+	}
 	// group_id의 그룹원 인원을 반환
 	public int findNumberOfMember(int group_id) throws SQLException {
 		String sql = "SELECT COUNT(*) AS cnt "
@@ -334,7 +355,7 @@ public class GroupDAO {
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { group_id });
 
 		try {
-			int result = jdbcUtil.executeUpdate(); // insert 문 실행
+			int result = jdbcUtil.executeUpdate(); 
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();

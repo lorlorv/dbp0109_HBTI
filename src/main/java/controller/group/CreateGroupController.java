@@ -3,7 +3,7 @@ package controller.group;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.service.OverTheLimitException;
+import model.service.exception.OverTheLimitException;
 import model.service.UserManager;
 
 import model.Group;

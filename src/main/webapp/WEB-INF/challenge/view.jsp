@@ -15,7 +15,7 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
-<link rel="stylesheet" href="<c:url value='/css/challengeView.css' />"
+<link rel="stylesheet" href="<c:url value='/css/challenge/challengeView.css' />"
 	type="text/css">
 
 </head>
@@ -23,11 +23,11 @@
 	<div class="page-wrapper">
 		<nav class="nav-bar">
 			<div class="nav-logo">
-				<a href="#" id="text-deco">HBTI</a>
+				<a href="<c:url value='/main'/>" id="text-deco">&lt;HBTI/&gt;</a>
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">
-					<li class="menu-li"><a href="#" id="text-deco">ToDo</a></li>
+					<li class="menu-li"><a href="<c:url value='/todo/view'/>" id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />"
 						id="text-deco">Group</a></li>
 					<li class="menu-li"><a href="<c:url value='/user/myPage' />" id="text-deco">MyPage</a></li>
@@ -45,6 +45,12 @@
 		</script>
 	</c:if>
 	
+	<c:if test="${updateFailed }">
+	<script>
+			alert('${Exception.getMessage()}');
+		</script>
+	</c:if>
+	
 	<div class="contents">
 		<p id="sub-title">CHALLENGE POST</p>
 		<div class="contents-split">
@@ -54,6 +60,7 @@
 				<p id="intro">
 					<a href="<c:url value='/challenge/updateLike_btn'>
 									<c:param name="post_id" value='${postInfo.post_id}' />
+									<c:param name="writer_id" value='${postInfo.writer_id }'/>
 									</c:url>" id="like-btn"><i class="fas fa-heart"></i></a>&nbsp;${postInfo.like_btn}
 				</p>
 				<p id="intro">챌린지 인증 사진</p>

@@ -14,6 +14,7 @@ public class DeleteGroupController implements Controller {
 		// TODO Auto-generated method stub
 		UserManager userManager = UserManager.getInstance();
 		GroupManager groupManager = GroupManager.getInstance();
+		
 		int group_id = Integer.parseInt(request.getParameter("group_id"));
 		
 		System.out.println(group_id);

@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="<c:url value='/css/mainContainer.css' />" type="text/css">
 <link rel="stylesheet" href="<c:url value='/css/contents.css' />"
 	type="text/css">
-<link rel="stylesheet" href="<c:url value='/css/groupCreate.css' />" type="text/css">
+<link rel="stylesheet" href="<c:url value='/css/group/groupCreate.css' />" type="text/css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
 <script>
@@ -45,11 +45,11 @@ function groupCreate() {
 	<div class="page-wrapper" >
 		<nav class="nav-bar">
 			<div class="nav-logo">
-				<a href="#" id="text-deco">HBTI</a>
+				<a href="<c:url value='/main'/>" id="text-deco">&lt;HBTI/&gt;</a>
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">
-					<li class="menu-li"><a href="#" id="text-deco">ToDo</a></li>
+					<li class="menu-li"><a href="<c:url value='/todo/view'/>" id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />" id="text-deco">Group</a></li>
 					<li class="menu-li"><a href="<c:url value='/user/myPage' />" id="text-deco">MyPage</a></li>
 				</ul>

@@ -16,7 +16,7 @@
 	type="text/css">
 
 <!-- list 스타일시트 -->
-<link rel="stylesheet" href="<c:url value='/css/groupList.css' />"
+<link rel="stylesheet" href="<c:url value='/css/group/groupList.css' />"
 	type="text/css">
 
 <!-- 아이콘 -->
@@ -34,11 +34,11 @@ function search() {
 	<div class="page-wrapper">
 		<nav class="nav-bar">
 			<div class="nav-logo">
-				<a href="#" id="text-deco">HBTI</a>
+				<a href="<c:url value='/main'/>" id="text-deco">&lt;HBTI/&gt;</a>
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">
-					<li class="menu-li"><a href="#" id="text-deco">ToDo</a></li>
+					<li class="menu-li"><a href="<c:url value='/todo/view'/>" id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />" id="text-deco">Group</a></li>
 					<li class="menu-li"><a href="<c:url value='/user/myPage' />" id="text-deco">MyPage</a></li>
 				</ul>

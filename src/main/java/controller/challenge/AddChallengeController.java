@@ -11,7 +11,7 @@ import controller.Controller;
 import controller.user.UserSessionUtils;
 import model.ChallengePost;
 import model.User;
-import model.service.ExistingChallengePostException;
+import model.service.exception.ExistingChallengePostException;
 import model.service.GroupManager;
 import model.service.UserManager;
 
@@ -31,6 +31,7 @@ public class AddChallengeController implements Controller {
 		
 		UserManager userManager = UserManager.getInstance();
 		GroupManager groupManager = GroupManager.getInstance();
+		
 		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		ChallengePost post;
 		
@@ -135,9 +136,9 @@ public class AddChallengeController implements Controller {
 						);
 				groupManager.addPost(post, group_id);
 				
-				request.setAttribute("postInfo", post);
 				
-				return "/challenge/view.jsp";
+				
+				return "redirect:/challenge/myView";
 			} catch (Exception e) { e.printStackTrace(); }
 		
 		}
