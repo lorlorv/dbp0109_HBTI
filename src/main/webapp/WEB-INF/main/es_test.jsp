@@ -7,6 +7,6 @@
 <title>이은서 test합니당.</title>
 </head>
 <body>
-	<H1>test 2 입니당</H1>
+	<H1>dev branch merge해오기 test</H1>
 </body>
 </html>
