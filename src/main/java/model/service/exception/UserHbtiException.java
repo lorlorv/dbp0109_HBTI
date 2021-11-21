@@ -1,5 +1,4 @@
-package model.service;
-
+package model.service.exception;
 /**
  * TODO
  */

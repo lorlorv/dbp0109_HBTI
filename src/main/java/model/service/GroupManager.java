@@ -8,6 +8,8 @@ import model.User;
 import model.dao.GroupDAO;
 import model.dao.PostDAO;
 import model.dao.UserDAO;
+import model.service.exception.DoNotQuitLeaderException;
+import model.service.exception.ExistingChallengePostException;
 
 public class GroupManager {
 	private GroupDAO groupDAO;

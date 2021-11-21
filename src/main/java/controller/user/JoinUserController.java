@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 import controller.Controller;
 //import model.Community;
 import model.User;
-import model.service.ExistingUserException;
+import model.service.exception.ExistingUserException;
 import model.service.UserManager;
 
 public class JoinUserController implements Controller {
