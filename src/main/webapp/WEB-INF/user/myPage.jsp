@@ -47,22 +47,28 @@
 		form.action = targetURI;
 		form.submit();
 	}
-	var todoDate = "";
-	var paramDate = "";
+	
+	/* Calendar  */
+	var todoDate = ""; //DB에서 가져온 값과 일치하는 지 확인 할 Date (yyyy/mm/dd)
+	var paramDate = ""; //parameter로 보낼 Date (yyyy-mm-dd)
+	var selectDate = ""; //해당하는 달의 레코드만 가져올 수 있도록
+	var param ="";
 	var today = new Date(); //오늘 날짜
     var date = new Date();//today의 Date를 세어주는 역할
+    
     function prevCalendar() {//이전 달
     	todoDate = "";
     	paramDate = "";
-     today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
-     buildCalendar(); //달력 cell 만들어 출력 
+		today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+		buildCalendar(); //달력 cell 만들어 출력 
     }
     function nextCalendar() {//다음 달
     	todoDate = "";
     	paramDate = "";
-         today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
-         buildCalendar();//달력 cell 만들어 출력
+		today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+		buildCalendar();//달력 cell 만들어 출력
     }
+    
     function buildCalendar(){//현재 달 달력 만들기
     	todoDate="";
     	paramDate="";
@@ -78,26 +84,26 @@
         var tbCalendarYM = document.getElementById("tbCalendarYM");
         //테이블에 정확한 날짜 찍는 변수
         
-         tbCalendarYM.innerHTML = today.getFullYear() + " " + (today.getMonth() + 1) + " "; 
-         todoDate += today.getFullYear() + "/";
-         paramDate += today.getFullYear() + "-";
-         todoDate += today.getMonth() + 1 + "/";
-         paramDate += today.getMonth() + 1 + "-";
+		tbCalendarYM.innerHTML = today.getFullYear() + " " + (today.getMonth() + 1) + " "; 
+		todoDate += today.getFullYear() + "/";
+		paramDate += today.getFullYear() + "-";
+		todoDate += today.getMonth() + 1 + "/";
+		paramDate += today.getMonth() + 1 + "-";
          /*while은 이번달이 끝나면 다음달로 넘겨주는 역할*/
         while (tbCalendar.rows.length > 2) {
         //열을 지워줌
-              tbCalendar.deleteRow(tbCalendar.rows.length-1);
-         }
-         var row = null;
-         row = tbCalendar.insertRow();
-         //테이블에 새로운 열 삽입
-         var cnt = 0;// count, 셀의 갯수를 세어주는 역할
+			tbCalendar.deleteRow(tbCalendar.rows.length-1);
+		}
+		var row = null;
+		row = tbCalendar.insertRow();
+		//테이블에 새로운 열 삽입
+		var cnt = 0;// count, 셀의 갯수를 세어주는 역할
         // 1일이 시작되는 칸을 맞추어 줌
-         for (i=0; i<doMonth.getDay(); i++) {
-         /*이번달의 day만큼 돌림*/
-              cell = row.insertCell();
-              cnt = cnt + 1;
-         }
+		for (i=0; i<doMonth.getDay(); i++) {
+		/*이번달의 day만큼 돌림*/
+			cell = row.insertCell();
+			cnt = cnt + 1;
+		}
         /*달력 출력*/
         var todoDate2 = "";
         var paramDate2 = "";
@@ -116,32 +122,31 @@
             cell = row.insertCell();
    			//foreach문 안에서는 break, continue 사용불가능
    			
-           <c:forEach items="${isTodo}" var="isTodo">
+      		<c:forEach items="${isTodo}" var="isTodo">
 				if(todoDate2 == "${isTodo}"){
-					var str = "<a href='<c:url value='/todo/date'/>?todo_date=";
+					var str = i + "<a href='<c:url value='/todo/date'/>?todo_date=";
 					str += paramDate2 + "'>";
-					str += i + "⭐";
+					str += "⭐";
 					str += "</a>";
 					
 					cell.innerHTML = str;
 					cnt++;
 					
-					if (cnt % 7 == 0){/*토요일 */
-						cell.innerHTML = str;
+					if (cnt % 7 == 0){
+						cell.innerHTML = "<font color=#3F72AF>" + str;
 			            row = calendar.insertRow();
 			          }
-					if (cnt % 7 == 1){/*일요일 */
-						cell.innerHTML = str;
+					if (cnt % 7 == 1){
+						cell.innerHTML = "<font color=#FD5E53>" + str;
 			          }
+
+					if (today.getFullYear() == date.getFullYear()
+						&& today.getMonth() == date.getMonth()
+						&& i == date.getDate()) 
+					{cell.bgColor = "#DBE2EF";}
 					
-					 /*오늘 날짜*/
-			          if (today.getFullYear() == date.getFullYear()
-			             && today.getMonth() == date.getMonth()
-			             && i == date.getDate()) {
-			            cell.bgColor = "#DBE2EF";
-			           }
-					 continue;
-					}
+					continue;
+				}
 				else{
 	            	cell.innerHTML = i;            	
 				}
@@ -156,22 +161,19 @@
 		            cell.innerHTML = "<font color=#FD5E53>" + i;
 	        }   
 	          
-	          if (cnt % 7 == 0){/*토요일 */
-					cell.innerHTML = "<font color=#3F72AF>" + i;	          
-	               row = calendar.insertRow();
-	          }
+			if (cnt % 7 == 0){/*토요일 */
+				cell.innerHTML = "<font color=#3F72AF>" + i;	          
+				row = calendar.insertRow();
+			}
 	          
-	          /*오늘 날짜*/
-	          if (today.getFullYear() == date.getFullYear()
-	             && today.getMonth() == date.getMonth()
-	             && i == date.getDate()) {
-	            cell.bgColor = "#DBE2EF";
-	           }
+			/*오늘 날짜*/
+			if (today.getFullYear() == date.getFullYear()
+				&& today.getMonth() == date.getMonth()
+				&& i == date.getDate()) 
+			{cell.bgColor = "#DBE2EF";}
          }
     }
 </script>
-
-<!-- <script type="text/javascipt" src=<c:url value='/js/Calendar.js'/>></script> -->
 
 </head>
 <body>
@@ -274,7 +276,7 @@
 		<p id="sub-title">MyCalendar</p>
 		<div class="contents" style="margin: -150px 0 0 0;">
 			<div class="contents-split">
-				<p id="contents-title" style="padding: 10px 30px;">My TODO Calendar</p>
+				<p id="contents-title" style="padding: 10px 30px;">My DONE Calendar</p>
 				<table id="calendar">
 					<tr>
 						<!-- label은 마우스로 클릭을 편하게 해줌 -->
