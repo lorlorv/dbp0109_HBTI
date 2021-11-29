@@ -169,10 +169,11 @@ public class GroupDAO {
 	}
 	
 	// 생성된 그룹의 총 개수 반환
-	public int findGroupCnt() throws SQLException {
+	public int findGroupCnt(int hbti_id) throws SQLException {
 		String sql = "SELECT COUNT(group_id) "
-					+ "FROM GroupInfo";
-		jdbcUtil.setSqlAndParameters(sql, null);
+					+ "FROM GroupInfo "
+					+ "WHERE hbti_id=?";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { hbti_id });
 
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();

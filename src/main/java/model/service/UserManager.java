@@ -144,8 +144,8 @@ public class UserManager {
 		}
 		
 		// 현재 만들어진 그룹의 개수 반환 **hbti_id에 따라 나올 수 있게 수정 필요**
-		public int findGroupCnt() throws SQLException {
-			return groupDAO.findGroupCnt();
+		public int findGroupCnt(int hbti_id) throws SQLException {
+			return groupDAO.findGroupCnt(hbti_id);
 		}
 		
 		// 테스트 결과에 따라 HBTI 매칭
