@@ -124,10 +124,14 @@
    			
       		<c:forEach items="${isTodo}" var="isTodo">
 				if(todoDate2 == "${isTodo}"){
-					var str = i + "<a href='<c:url value='/todo/date'/>?todo_date=";
+					var str = i + "<br>"+ "<a href='<c:url value='/todo/date'/>?todo_date=";
 					str += paramDate2 + "'>";
-					str += "⭐";
+					str += "⭐";				
 					str += "</a>";
+					<c:forEach items="${isChallenged}" var="isChallenged">
+						if(todoDate2 == "${isChallenged}")
+							str += " ✔ ";
+					</c:forEach>
 					
 					cell.innerHTML = str;
 					cnt++;
@@ -152,6 +156,34 @@
 				}
 				
             </c:forEach>
+            
+      		<c:forEach items="${isChallenged}" var="isChallenged">
+			if(todoDate2 == "${isChallenged}"){
+				var str = i + "<br>"+ " ✔ ";
+				
+				cell.innerHTML = str;
+				cnt++;
+				
+				if (cnt % 7 == 0){
+					cell.innerHTML = "<font color=#3F72AF>" + str;
+		            row = calendar.insertRow();
+		          }
+				if (cnt % 7 == 1){
+					cell.innerHTML = "<font color=#FD5E53>" + str;
+		          }
+
+				if (today.getFullYear() == date.getFullYear()
+					&& today.getMonth() == date.getMonth()
+					&& i == date.getDate()) 
+				{cell.bgColor = "#DBE2EF";}
+				
+				continue;
+			}
+			else{
+            	cell.innerHTML = i;            	
+			}
+			
+        </c:forEach>
            
             
             cell.innerHTML = i;

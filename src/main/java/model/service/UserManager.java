@@ -239,9 +239,11 @@ public class UserManager {
 		return userDAO.isTodo(user_id);
 	}
 	
+	public List<String> isChallenged(String user_id) throws SQLException{
+		return userDAO.isChallenged(user_id);
+	}
+	
 	/* main에서 사용 */
-
-	/* 이거 다 rankingManager로 이동 */
 	/* hbti_id에 해당하는 그룹의 총 인원 수 */
 	public int numOfGroupMem(int hbti_id) {
 		// 일단 hbti_id인 group이 뭐가 있는지 group_id 찾아오기

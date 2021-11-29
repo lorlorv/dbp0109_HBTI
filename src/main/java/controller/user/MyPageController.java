@@ -34,6 +34,7 @@ public class MyPageController implements Controller {
 		
 		/* Calendar */
 		List<String> is_todo = manager.isTodo(user_id);
+		List<String> is_challenged = manager.isChallenged(user_id);
 
 		log.debug("MyPage User : {}", user);
 		
@@ -42,6 +43,7 @@ public class MyPageController implements Controller {
     	request.setAttribute("groupNum", groupNum);
     	request.setAttribute("hbti_name", name);
     	request.setAttribute("isTodo", is_todo);
+    	request.setAttribute("isChallenged", is_challenged);
     	
 		return "/user/myPage.jsp";
     }

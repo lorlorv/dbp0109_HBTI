@@ -277,6 +277,27 @@ public class UserDAO {
 		return null;
 	}
 	
+	public List<String> isChallenged(String user_id) throws SQLException {
+		String sql = "SELECT TO_CHAR(write_date, 'yyyy/mm/dd') AS write_date "
+				+ "FROM CHALLENGEPOST "
+				+ "WHERE writer_id=?";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { user_id}); 
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery(); 
+			List<String> isChallenged = new ArrayList<String>();
+			while (rs.next()) { 
+				isChallenged.add(rs.getString("write_date"));
+			}
+			return isChallenged;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close(); 
+		}
+		return null;
+	}
+	
 	/* hbti가 hbti_id인 group_id 반환 */
 	public List<Integer> group_idByHBTI(int hbti_id) {
 		String sql = "SELECT group_id FROM GROUPINFO WHERE hbti_id=?";
