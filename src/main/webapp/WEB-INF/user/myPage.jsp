@@ -48,20 +48,24 @@
 		form.submit();
 	}
 	var todoDate = "";
+	var paramDate = "";
 	var today = new Date(); //오늘 날짜
     var date = new Date();//today의 Date를 세어주는 역할
     function prevCalendar() {//이전 달
     	todoDate = "";
+    	paramDate = "";
      today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
      buildCalendar(); //달력 cell 만들어 출력 
     }
     function nextCalendar() {//다음 달
     	todoDate = "";
+    	paramDate = "";
          today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
          buildCalendar();//달력 cell 만들어 출력
     }
     function buildCalendar(){//현재 달 달력 만들기
     	todoDate="";
+    	paramDate="";
         var doMonth = new Date(today.getFullYear(),today.getMonth(),1);
         //이번 달의 첫째 날
         
@@ -76,7 +80,9 @@
         
          tbCalendarYM.innerHTML = today.getFullYear() + " " + (today.getMonth() + 1) + " "; 
          todoDate += today.getFullYear() + "/";
+         paramDate += today.getFullYear() + "-";
          todoDate += today.getMonth() + 1 + "/";
+         paramDate += today.getMonth() + 1 + "-";
          /*while은 이번달이 끝나면 다음달로 넘겨주는 역할*/
         while (tbCalendar.rows.length > 2) {
         //열을 지워줌
@@ -94,29 +100,38 @@
          }
         /*달력 출력*/
         var todoDate2 = "";
+        var paramDate2 = "";
 		for (i = 1; i <= lastDate.getDate(); i++) {
 			todoDate2 = todoDate; // yyyy/mm/ 까지만
-			if(i < 10)
+			paramDate2 = paramDate;
+			if(i < 10){
 				todoDate2 += "0" + i;
-			else
+				paramDate2 = "0" + i;
+			}
+			else{
    				todoDate2 += i; //yyyy/mm/ + i -> yyyy/mm/dd
-   			
+   				paramDate2 += i;
+			}
          	//1일부터 마지막 일까지 돌림
             cell = row.insertCell();
    			//foreach문 안에서는 break, continue 사용불가능
    			
            <c:forEach items="${isTodo}" var="isTodo">
 				if(todoDate2 == "${isTodo}"){
+					var str = "<a href='<c:url value='/todo/date'/>?todo_date=";
+					str += paramDate2 + "'>";
+					str += i + "⭐";
+					str += "</a>";
 					
-					cell.innerHTML = i + "⭐";
+					cell.innerHTML = str;
 					cnt++;
 					
 					if (cnt % 7 == 0){/*토요일 */
-						cell.innerHTML = "<font color=#3F72AF>" + i + "⭐";
+						cell.innerHTML = str;
 			            row = calendar.insertRow();
 			          }
 					if (cnt % 7 == 1){/*일요일 */
-						cell.innerHTML = "<font color=#FD5E53>" + i + "⭐";
+						cell.innerHTML = str;
 			          }
 					
 					 /*오늘 날짜*/

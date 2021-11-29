@@ -29,7 +29,7 @@ public class MyPageController implements Controller {
 		/* User Profile */
 		User user = manager.findUser(user_id);
 		String group_name = manager.findGroupName(user.getGroup_id());
-		int groupNum = manager.findGroupCnt();
+		int groupNum = manager.findGroupCnt(user.getHbti_id());
 		String name = manager.findHbtiName(user.getHbti_id());
 		
 		/* Calendar */
