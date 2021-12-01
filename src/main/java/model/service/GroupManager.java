@@ -83,4 +83,9 @@ public class GroupManager {
 	public int deleteAllPost(int group_id) throws SQLException{
 		return postDAO.deleteAllPost(group_id);
 	}
+	
+	public int assignChallenge() throws SQLException {
+		int cntList = groupDAO.cntOfChallengeList();
+		return groupDAO.assignChallenge(cntList);
+	}
 }
