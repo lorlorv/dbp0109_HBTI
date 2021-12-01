@@ -366,5 +366,44 @@ public class GroupDAO {
 		}
 		return 0;
 	}
+	
+	// 챌린지 리스트 개수 반환
+	public int cntOfChallengeList() {
+		String sql = "SELECT COUNT(*) AS cnt " 
+					+ "FROM Challenge";
+		jdbcUtil.setSqlAndParameters(sql, null);
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			if (rs.next()) {
+				return rs.getInt("cnt");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return 0;
+	}
+	
+	// 랜덤으로 챌린지 배정
+	public int assignChallenge(int cntList) throws SQLException {
+		String sql = "UPDATE DayOfChallenge d "
+					+ "SET d.challenge_id = ROUND(DBMS_RANDOM.VALUE(1, ?)) " 
+					+ "WHERE d.hbti_id IN (select hbti_id from hbti) ";
+		Object[] param = new Object[] { cntList };
+		jdbcUtil.setSqlAndParameters(sql, param);
+
+		try {
+			int result = jdbcUtil.executeUpdate(); // insert 문 실행
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close(); // resource 반환
+		}
+		return 0;
+	}
 
 }

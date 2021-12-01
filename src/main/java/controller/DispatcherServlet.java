@@ -10,17 +10,24 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import scheduler.App;
+
 //@WebServlet(name = "userSevlet", urlPatterns = "/", loadOnStartup = 1)
 public class DispatcherServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
     
     private RequestMapping rm;
+    private App app;
 
     @Override
     public void init() throws ServletException {
         rm = new RequestMapping();
         rm.initMapping();
+        
+        // 스케줄러
+        app = new App();
+        app.startScheduler();
     }
 
     @Override
