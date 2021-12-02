@@ -29,11 +29,12 @@ public class MyPageController implements Controller {
 		/* User Profile */
 		User user = manager.findUser(user_id);
 		String group_name = manager.findGroupName(user.getGroup_id());
-		int groupNum = manager.findGroupCnt();
+		int groupNum = manager.findGroupCnt(user.getHbti_id());
 		String name = manager.findHbtiName(user.getHbti_id());
 		
 		/* Calendar */
 		List<String> is_todo = manager.isTodo(user_id);
+		List<String> is_challenged = manager.isChallenged(user_id);
 
 		log.debug("MyPage User : {}", user);
 		
@@ -42,6 +43,7 @@ public class MyPageController implements Controller {
     	request.setAttribute("groupNum", groupNum);
     	request.setAttribute("hbti_name", name);
     	request.setAttribute("isTodo", is_todo);
+    	request.setAttribute("isChallenged", is_challenged);
     	
 		return "/user/myPage.jsp";
     }
