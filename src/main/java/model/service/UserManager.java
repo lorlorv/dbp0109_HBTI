@@ -101,6 +101,9 @@ public class UserManager {
 			}
 		}
 		
+		else
+			postDAO.deleteUserAllPost(user_id);
+		
 		return userDAO.quitGroup(user_id);
 	}
 	
