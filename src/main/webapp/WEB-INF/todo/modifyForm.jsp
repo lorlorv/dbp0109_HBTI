@@ -57,16 +57,20 @@
 			</p>
 		</div>
 		<div class="contents-split">
-			<p id="contents-title">TODAY TODO LIST</p>
+			<p id="contents-title"> MODIFY TODO LIST</p>
 			<form name="form" action="<c:url value='/todo/modify'/> ">
 			
 				<p>
+					<div class="modfiy-box">
 					<!-- 수정할 todo가 상단에 보임 -->
 					<span><input type="hidden" name="select_id"
 						value='${selectTodo.todo_id}'></span> 
 					<span><input type="text" name="content"
 						value='${selectTodo.content}'></span>
 					<span><a onClick='modifyTodo()' id="a-deco">&nbsp;수정&nbsp;</a></span>
+					<span>&nbsp;<a id="a-deco_icon" href="<c:url value="/todo/delete">
+									<c:param name="todo_id" value='${selectTodo.todo_id}'/>
+									</c:url>"><i class="far fa-trash-alt"></i></a></span></div>
 			</form>
 			<div>
 			<c:forEach var="todo" items="${todoList}">

@@ -48,6 +48,7 @@ public class RequestMapping {
          
         // 투두 수정
         mappings.put("/todo/modifyForm", new ModifyTodoController());
+        mappings.put("/todo/modifyDateForm", new ModifyTodoController());
         mappings.put("/todo/modify", new ModifyTodoController()); //변경내용 redirection
         
         mappings.put("/todo/doCheck", new CheckTodoController());
