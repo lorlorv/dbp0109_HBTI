@@ -16,7 +16,7 @@
 	href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
 <script>
-function modifyTodo() {
+function modifyDateTodo() {
     if (form.content.value == "") {
        alert("빈칸을 입력하세요");
        form.content.focus();
@@ -59,7 +59,7 @@ function modifyTodo() {
 		</div>
 		<div class="contents-split">
 			<p id="contents-title"> MODIFY TODO LIST</p>
-			   <form name="form" action="<c:url value='/todo/modify'/> ">
+			   <form name="form" action="<c:url value='/todo/date/modify'/> ">
 				<p>
 					<div class="modfiy-box">
 					<!-- 수정할 todo가 상단에 보임 -->
@@ -67,11 +67,12 @@ function modifyTodo() {
 						value='${selectTodo.todo_id}'></span> 
 					<span><input type="text" name="content"
 						value='${selectTodo.content}'></span>
-					<span><a onClick='modifyTodo()' id="a-deco">&nbsp;수정&nbsp;</a></span>
-					<span>&nbsp;<a id="a-deco_icon" href="<c:url value="/todo/delete">
+					<span><a onClick='modifyDateTodo()' id="a-deco">&nbsp;수정&nbsp;</a></span>
+					<span>&nbsp;<a id="a-deco_icon" href="<c:url value="/todo/date/delete">
 									<c:param name="todo_id" value='${selectTodo.todo_id}'/>
+									<c:param name="todo_date" value='${selectTodo.todo_date }'/>
 									</c:url>"><i class="far fa-trash-alt"></i></a></span></div>
-			</form>
+			</form>						
 			<div>
 			<c:forEach var="todo" items="${todoList}">
 				<div class="list-box">
@@ -79,7 +80,7 @@ function modifyTodo() {
 					<div class="list">${todo.content}</div> 
 					<div class="list">
 						<a id="a-deco_icon" 
-								href="<c:url value="/todo/delete">
+								href="<c:url value="/todo/date/delete">
 									<c:param name="todo_id" value='${todo.todo_id }'/>
 									<c:param name="todo_date" value='${todo.todo_date }'/>
 									</c:url>"><i class="far fa-trash-alt"></i></a>
@@ -90,7 +91,12 @@ function modifyTodo() {
 			</div>
 			
 			<p>
-				<a href="<c:url value='/todo/view'/>" id="a-deco"> 완료 </a>
+			<c:forEach var="todo" items="${todoList}">
+				<a id="a-deco" 
+								href="<c:url value="/todo/date">
+									<c:param name="todo_date" value='${todo.todo_date }'/>
+									</c:url>">완료</a>
+				</c:forEach>
 		</div>
 	</div>
 

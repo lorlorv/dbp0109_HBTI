@@ -48,7 +48,9 @@ public class RequestMapping {
          
         // 투두 수정
         mappings.put("/todo/modifyForm", new ModifyTodoController());
+        mappings.put("/todo/modifyDateForm", new ModifyTodoController());
         mappings.put("/todo/modify", new ModifyTodoController()); //변경내용 redirection
+        mappings.put("/todo/date/modify", new ModifyTodoController()); //변경내용 redirection
         
         mappings.put("/todo/doCheck", new CheckTodoController());
         mappings.put("/todo/doNotCheck", new CheckTodoController());
@@ -58,6 +60,7 @@ public class RequestMapping {
        
         //투두 삭제
         mappings.put("/todo/delete", new DeleteTodoController());
+        mappings.put("/todo/date/delete", new DeleteTodoController());
         
         // 그룹 메인 (검색 & 가입)
         mappings.put("/group/main", new ViewGroupController());

@@ -74,6 +74,13 @@ function searchDate() {
 								</c:if>
 							</div>
 							<div class="list">${todo.content}</div>
+							<div class="list">
+								<a id="a-deco_icon"
+									href="<c:url value='/todo/modifyDateForm'>
+								<c:param name="todo_id" value='${todo.todo_id}'/>
+								<c:param name="todo_date" value='${todo.todo_date}'/>
+								</c:url>"><i class="fas fa-pencil-alt"></i></a>
+							</div>
 						</div>
 						<div class="split"></div>
 					</c:forEach>

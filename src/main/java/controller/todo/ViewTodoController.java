@@ -29,6 +29,8 @@ public class ViewTodoController implements Controller {
 			return "/todo/main.jsp";	
 		}
 		
+		else {
+			
 		String searchDate = request.getParameter("todo_date");
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
@@ -40,5 +42,7 @@ public class ViewTodoController implements Controller {
 		request.setAttribute("todoList", todo);
 		
 		return "/todo/dateResult.jsp";
+		}
+	
     }
 }
