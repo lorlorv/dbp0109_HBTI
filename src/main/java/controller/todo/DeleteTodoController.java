@@ -1,5 +1,7 @@
 package controller.todo;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,22 +21,43 @@ public class DeleteTodoController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String user_id =  UserSessionUtils.getLoginUserId(request.getSession());
-		
-		int deleteId = Integer.parseInt(request.getParameter("todo_id"));
-    	log.debug("Delete User : {}", deleteId);
-    	
-		TodoManager manager = TodoManager.getInstance();
-		manager.delete(deleteId);
-		
-		Todo selectTodo = manager.findTodo(deleteId, user_id);
-		request.setAttribute("selectTodo", selectTodo);
-		
-		List<Todo> todoList = manager.findNotSelectTodoList(deleteId, user_id);
-		request.setAttribute("todoList", todoList);	
-		
-		return "/todo/modifyForm.jsp";	
-		
-	}
 
+		TodoManager manager = TodoManager.getInstance();
+    	
+		 if (request.getServletPath().equals("/todo/delete")) {
+			
+			int deleteId = Integer.parseInt(request.getParameter("todo_id"));
+			manager.delete(deleteId);
+			
+			Todo selectTodo = manager.findTodo(deleteId, user_id);
+			request.setAttribute("selectTodo", selectTodo);
+			
+			List<Todo> todoList = manager.findNotSelectTodoList(deleteId, user_id);
+			request.setAttribute("todoList", todoList);	
 	
-}
+			return "/todo/modifyForm.jsp";  
+		 }
+		 
+		 else {
+		
+				int deleteId = Integer.parseInt(request.getParameter("todo_id"));
+				manager.delete(deleteId);
+			
+				String date = request.getParameter("todo_date");
+	     		
+	     		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+	     		Date todo_date = (Date) sdf.parse(date);
+	    
+	     		
+				Todo selectTodo = manager.findTodo(todo_date, deleteId, user_id);
+	     		request.setAttribute("selectTodo", selectTodo);
+	     		
+	 			List<Todo> todoList = manager.findNotSelectTodoList(todo_date, deleteId, user_id);
+	 			request.setAttribute("todoList", todoList);	
+		
+				return "/todo/modifyDateForm.jsp";  
+			 }
+		 }
+			
+			
+	}

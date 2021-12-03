@@ -313,4 +313,25 @@ public class TodoDAO {
 			}
 			return 0;
 	}
+	
+	public Date findDate(int todo_id) throws SQLException {
+		String sql = "SELECT todo_date " 
+					+ "FROM TODO " 
+					+ "WHERE todo_id=? ";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { todo_id });
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			if (rs.next()) {
+				Date todo_date = rs.getDate("todo_date");
+				return todo_date;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
+
 }

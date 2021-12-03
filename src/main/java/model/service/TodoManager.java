@@ -80,6 +80,7 @@ public class TodoManager {
 			return this.todoDAO;
 		}
 
-		
-
+		public java.sql.Date findDate(int todo_id) throws SQLException {
+			return todoDAO.findDate(todo_id);
+		}
 }

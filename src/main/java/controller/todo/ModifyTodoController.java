@@ -22,47 +22,59 @@ public class ModifyTodoController implements Controller {
     	String user_id = UserSessionUtils.getLoginUserId(request.getSession());
     	
     	TodoManager manager = TodoManager.getInstance();
-		
-    	if (request.getServletPath().equals("/todo/modifyForm")) {	
-    	
+			
+    	 if (request.getServletPath().equals("/todo/modify")) {
+				int todo_id = Integer.parseInt(request.getParameter("select_id"));
+				String content = request.getParameter("content");
+				manager.update(todo_id, content);
+				
+				return "redirect:/todo/view";	
+    	 }
+    	 
+    	 else if (request.getServletPath().equals("/todo/date/modify")) {
+				int todo_id = Integer.parseInt(request.getParameter("select_id"));
+				String content = request.getParameter("content");
+				manager.update(todo_id, content);
+				
+				Date todo_date = manager.findDate(todo_id);
+	 			List<Todo> todoList = manager.findDateTodoList(todo_date, user_id);
+	 			request.setAttribute("todoList", todoList);	
+	 			
+				return "/todo/dateResult.jsp";
+    	 }
+				
+ 	
+    	 else if (request.getServletPath().equals("/todo/modifyForm")){
+    		 
     		// 선택한 수정 투두의 정보
     		int todo_id = Integer.parseInt(request.getParameter("todo_id"));
     	
     		Todo selectTodo = manager.findTodo(todo_id, user_id);
-        	request.setAttribute("selectTodo", selectTodo);
-        		
-    		List<Todo> todoList = manager.findNotSelectTodoList(todo_id, user_id);
-    		request.setAttribute("todoList", todoList);	
-				
-				return "/todo/modifyForm.jsp";   
-			} 
-    	
-    	else if (request.getServletPath().equals("/todo/modifyDateForm")) {
-    		int todo_id = Integer.parseInt(request.getParameter("todo_id"));
-        	
-    		String date = request.getParameter("todo_date");
-    		
-    		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
-    		Date todo_date = (Date) sdf.parse(date);
-   
-    		Todo selectTodo = manager.findTodo(todo_date, todo_id, user_id);
     		request.setAttribute("selectTodo", selectTodo);
     		
-			List<Todo> todoList = manager.findNotSelectTodoList(todo_date, todo_id, user_id);
+			List<Todo> todoList = manager.findNotSelectTodoList(todo_id, user_id);
 			request.setAttribute("todoList", todoList);	
    
 			return "/todo/modifyForm.jsp";  
-    		
-    	}
-    	else {
-				int todo_id = Integer.parseInt(request.getParameter("select_id"));
-				String content = request.getParameter("content");
-    	
-				manager.update(todo_id, content);
-   
-			
-				return "redirect:/todo/view";	
-			}
+    	 }
+    	 
+    	 else {
+    		 int todo_id = Integer.parseInt(request.getParameter("todo_id"));
+    	    	
+     		String date = request.getParameter("todo_date");
+     		
+     		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+     		Date todo_date = (Date) sdf.parse(date);
+    
+     		Todo selectTodo = manager.findTodo(todo_date, todo_id, user_id);
+     		request.setAttribute("selectTodo", selectTodo);
+     		
+ 			List<Todo> todoList = manager.findNotSelectTodoList(todo_date, todo_id, user_id);
+ 			request.setAttribute("todoList", todoList);	
+    
+ 			return "/todo/modifyDateForm.jsp";  
+    		 
+    	 }
     	
     	}
     }
