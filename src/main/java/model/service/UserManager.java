@@ -11,6 +11,7 @@ import model.dao.HBTIDAO;
 import model.dao.mybatis.PostDAO;
 import model.dao.TodoDAO;
 import model.dao.UserDAO;
+import model.service.exception.ExistingGroupException;
 import model.service.exception.ExistingUserException;
 import model.service.exception.OverTheLimitException;
 import model.service.exception.PasswordMismatchException;
@@ -214,19 +215,25 @@ public class UserManager {
 	}
 	
 	//그룹 생성
-	public int createGroup(Group group) throws SQLException, OverTheLimitException {
+	public int createGroup(Group group) throws SQLException, OverTheLimitException, ExistingGroupException {
 		 if(group.getLimitation() > 30) {
 			throw new OverTheLimitException("그룹 정원은 30명을 초과할 수 없습니다.");
 		} else if(group.getLimitation() < 2) {
 			throw new OverTheLimitException("그룹 정원은 적어도 2명 이상이어야 합니다.");
 		}
+		 
+		 boolean exist = groupDAO.existingGroupName(group.getName());
+			if(exist) {
+				throw new ExistingGroupException("이미 존재하는 그룹 이름입니다.");
+			}
+			
 		groupDAO.create(group);
 		int group_id = groupDAO.findGroupId(group.getName());
 		return userDAO.updateUserGroupInfo(group_id, group.getLeader_id());
 	}
 	
 	// 그룹 정보 수정
-	public int updateGroup(Group group) throws OverTheLimitException {		
+	public int updateGroup(Group group) throws OverTheLimitException, ExistingGroupException {		
 		int numOfMem = groupDAO.findNumberOfMember(group.getGroup_id());
 		
 		if(numOfMem > group.getLimitation()) {
@@ -235,6 +242,11 @@ public class UserManager {
 			throw new OverTheLimitException("그룹 정원은 30명을 초과할 수 없습니다.");
 		} else if(group.getLimitation() < 2) {
 			throw new OverTheLimitException("그룹 정원은 적어도 2명 이상이어야 합니다.");
+		}
+		
+		boolean exist = groupDAO.existingGroupName(group.getName());
+		if(exist) {
+			throw new ExistingGroupException("이미 존재하는 그룹 이름입니다.");
 		}
 		return groupDAO.update(group);	
 	}

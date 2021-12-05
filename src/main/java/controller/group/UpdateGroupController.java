@@ -10,6 +10,7 @@ import controller.user.UserSessionUtils;
 import model.Group;
 import model.User;
 import model.service.exception.DoNotQuitLeaderException;
+import model.service.exception.ExistingGroupException;
 import model.service.GroupManager;
 import model.service.exception.OverTheLimitException;
 import model.service.UserManager;
@@ -79,6 +80,16 @@ public class UpdateGroupController implements Controller {
 				request.setAttribute("userList", userList);
 				request.setAttribute("groupInfo", group);
 
+				return "/group/updateForm.jsp";
+			} catch(ExistingGroupException e) {
+				request.setAttribute("existingName", true);
+				request.setAttribute("Exception", e);
+				
+				List<User> userList = groupManager.findUserList(group.getGroup_id());
+
+				request.setAttribute("userList", userList);
+				request.setAttribute("groupInfo", group);
+				
 				return "/group/updateForm.jsp";
 			}
 		}
