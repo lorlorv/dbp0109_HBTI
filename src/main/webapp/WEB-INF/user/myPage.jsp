@@ -51,8 +51,6 @@
 	/* Calendar  */
 	var todoDate = ""; //DB에서 가져온 값과 일치하는 지 확인 할 Date (yyyy/mm/dd)
 	var paramDate = ""; //parameter로 보낼 Date (yyyy-mm-dd)
-	var selectDate = ""; //해당하는 달의 레코드만 가져올 수 있도록
-	var param ="";
 	var today = new Date(); //오늘 날짜
     var date = new Date();//today의 Date를 세어주는 역할
     
@@ -112,7 +110,7 @@
 			paramDate2 = paramDate;
 			if(i < 10){
 				todoDate2 += "0" + i;
-				paramDate2 = "0" + i;
+				paramDate2 += "0" + i;
 			}
 			else{
    				todoDate2 += i; //yyyy/mm/ + i -> yyyy/mm/dd
