@@ -17,8 +17,6 @@ public class DeleteGroupController implements Controller {
 		
 		int group_id = Integer.parseInt(request.getParameter("group_id"));
 		
-		System.out.println(group_id);
-		
 		groupManager.deleteAllPost(group_id);
 		userManager.deleteGroup(group_id);
 		

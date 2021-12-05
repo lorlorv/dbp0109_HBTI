@@ -134,7 +134,8 @@ public class AddChallengeController implements Controller {
 						content,
 						fileName
 						);
-				groupManager.addPost(post, group_id);
+				post.setGroup_id(group_id);
+				groupManager.addPost(post);
 				
 				
 				

@@ -6,9 +6,9 @@ import java.util.List;
 
 import model.Group;
 import model.User;
-import model.dao.GroupDAO;
+import model.dao.mybatis.GroupDAO;
 import model.dao.HBTIDAO;
-import model.dao.PostDAO;
+import model.dao.mybatis.PostDAO;
 import model.dao.TodoDAO;
 import model.dao.UserDAO;
 import model.service.exception.ExistingUserException;
@@ -88,7 +88,8 @@ public class UserManager {
 	
 	// 그룹 탈퇴 + user_id의 모든 post 삭제
 	public int quitGroup(String user_id, int group_id) throws SQLException {
-		if(user_id.equals(groupDAO.findLeaderId(group_id))) { //leader라면
+		Group g = groupDAO.findLeader(group_id);
+		if(user_id.equals(g.getLeader_id())) { //leader라면
 			String newLeader_id = groupDAO.findNextLeader(user_id, group_id);//다음 리더 찾고
 			
 			if(newLeader_id != null) {
@@ -188,7 +189,14 @@ public class UserManager {
 	
 	// 그룹 검색
 	public List<Group> searchGroupList(int hbti_id, String keyword) throws SQLException {
-		return groupDAO.searchGroupList(hbti_id, keyword);
+		List<Group> searcgGroupList = groupDAO.searchGroupList(hbti_id, keyword);
+		// 얻어온 그룹 리스트에 멤버 인원을 추가
+		for(int i = 0; i < searcgGroupList.size(); i++) {
+			Group group = searcgGroupList.get(i);
+			int numOfMem = groupDAO.findNumberOfMember(group.getGroup_id());
+			group.setNumberOfMem(numOfMem);
+		}
+		return searcgGroupList;
 	}
 	
 	// 그룹 가입
@@ -215,7 +223,7 @@ public class UserManager {
 	}
 	
 	// 그룹 정보 수정
-	public int updateGroup(Group group) throws SQLException, OverTheLimitException {		
+	public int updateGroup(Group group) throws OverTheLimitException {		
 		int numOfMem = groupDAO.findNumberOfMember(group.getGroup_id());
 		
 		if(numOfMem > group.getLimitation()) {

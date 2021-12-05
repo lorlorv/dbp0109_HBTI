@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<!-- mapper를 모아놓은 XML 패키지명 : mapper interface와 연관됨 -->
+<mapper namespace="model.dao.mybatis.mapper.PostMapper">
+
+	<!-- SQL statement, parameter/result mapping 정의 -->
+	
+	<!-- user_id의 오늘 날짜 post를 구함 -->
+	<select id="selectPostByUserId" parameterType="String"
+	resultType="Post">
+		<![CDATA[
+			SELECT post_id, name AS writer_name, writer_id, content, p.image AS image, like_btn
+			FROM ChallengePost p JOIN UserInfo u ON writer_id = user_id
+			WHERE u.user_id = #{user_id} AND write_date >= TO_DATE(SYSDATE)
+		]]>
+	</select>
+	
+	<!-- group_id의 오늘 날짜의 post list를 구함 -->
+	<select id="selectPostListByGroupId" parameterType="int"
+	resultType="Post">
+		<![CDATA[
+			SELECT post_id, name AS writer_name, writer_id, content, p.image AS image, like_btn
+			FROM ChallengePost p JOIN UserInfo u ON writer_id = user_id
+			WHERE p.group_id = #{group_id} AND write_date >= TO_DATE(SYSDATE)
+		]]>
+	</select>
+	
+	<!-- post 추가 -->
+	<insert id="insertPost" parameterType="Post">
+	INSERT INTO ChallengePost 
+	VALUES (challenge_seq.nextval, SYSDATE, #{content}, #{image}, 0, #{group_id}, #{writer_id})
+	</insert>
+	
+	<!-- post 수정 -->
+	<update id="updatePost" parameterType="Post">
+		UPDATE ChallengePost
+		SET content = #{content}, image = #{image}
+		WHERE post_id = #{post_id}
+	</update>
+	
+	<!-- 좋아요 버튼 1 추가 -->
+	<update id="updatePostLikeByPostId" parameterType="int">
+		UPDATE ChallengePost
+		SET like_btn = like_btn + 1
+		WHERE post_id = #{post_id}
+	</update>
+	
+	<!-- post 삭제 -->
+	<delete id="deletePost" parameterType="int">
+		DELETE FROM ChallengePost
+		WHERE post_id = #{post_id}
+	</delete>
+	
+	<!-- group_id의 모든 포스트 삭제 (그룹 삭제) -->
+	<delete id="deleteAllPostByGroupId" parameterType="int">
+		DELETE FROM ChallengePost 
+		WHERE group_id = #{group_id}
+	</delete>
+	
+	<!-- user_id의 모든 포스트 삭제 (그룹 탈퇴) -->
+	<delete id="deleteAllPostByUserId" parameterType="String">
+		DELETE FROM ChallengePost
+		WHERE writer_id = #{writer_id}
+	</delete>
+</mapper>

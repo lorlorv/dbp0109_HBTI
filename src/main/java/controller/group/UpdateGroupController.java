@@ -29,6 +29,7 @@ public class UpdateGroupController implements Controller {
 
 			// form에 미리 출력할 그룹 정보를 얻어옴.
 			Group group = userManager.findGroup(group_id);
+			group.setGroup_id(group_id);
 
 			// form에 출력할 그룹원 정보를 얻어옴.
 			List<User> userList = groupManager.findUserList(group_id);
