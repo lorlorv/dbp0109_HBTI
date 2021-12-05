@@ -357,7 +357,9 @@ public class UserDAO {
 	
 	/* 오늘 이 user가 챌린지를 했는지? */
 	public boolean didChallengeUser(String user_id) {
-		String sql = "SELECT COUNT(writer_id) AS cnt FROM CHALLENGEPOST WHERE writer_id=? AND write_date <= sysdate";
+		String sql = "SELECT COUNT(writer_id) AS cnt "
+				+ "FROM CHALLENGEPOST "
+				+ "WHERE writer_id=? AND write_date >= TO_DATE(sysdate)";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { user_id });
 
 		try {

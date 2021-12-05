@@ -3,6 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   <configuration>
+	<settings>
+    	<setting name="cacheEnabled" value="false"/>
+  	</settings>
 	<typeAliases> <!-- type 에 대한 별칭 정의 -->
 		<typeAlias type="model.User" alias="User" />
 		<typeAlias type="model.Todo" alias="Todo" />
@@ -24,5 +27,6 @@
 	<mappers>
 	<!-- mapper XML file 설정 -->
 		<mapper resource="model/dao/mybatis/mapper/GroupMapper.xml" />
+		<mapper resource="model/dao/mybatis/mapper/PostMapper.xml" />
 	</mappers>
 </configuration>

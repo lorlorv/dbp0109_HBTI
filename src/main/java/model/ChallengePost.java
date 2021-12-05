@@ -12,6 +12,9 @@ public class ChallengePost {
 	private String writer_id;
 	private String writer_name;
 
+	public ChallengePost() {
+		
+	}
 	public ChallengePost(int post_id, String writer_name, String writer_id, String content, String image, int like_btn) {
 		this.post_id = post_id;
 		this.writer_name = writer_name;
