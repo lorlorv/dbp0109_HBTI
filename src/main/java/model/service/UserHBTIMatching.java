@@ -2,7 +2,7 @@ package model.service;
 
 import java.sql.SQLException;
 
-import model.dao.UserDAO;
+import model.dao.mybatis.UserDAO;
 
 public class UserHBTIMatching {
 	private UserDAO userDAO;
@@ -119,7 +119,7 @@ public class UserHBTIMatching {
 	         break;
 	      }
 		
-		userDAO.updateHBTI(user_id, hbti_id); //hbti ¹Ù²ñ
+		userDAO.updateHBTI(user_id, hbti_id); //hbti ï¿½Ù²ï¿½
 		
 		return hbti_id;
 	}

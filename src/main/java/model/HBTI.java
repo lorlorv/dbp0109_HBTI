@@ -1,6 +1,10 @@
 package model;
 
-public class HBTI {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+
+public class HBTI implements Serializable{
 	private String name;
 	private int hbti_id;
 	private int goodHbti;
