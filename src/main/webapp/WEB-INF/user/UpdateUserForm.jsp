@@ -6,10 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 화면</title>
-<link rel="stylesheet" href="<c:url value='/css/joinForm.css' />"
+<link rel="stylesheet" href="<c:url value='/css/user/joinForm.css' />"
 	type="text/css">
 <link rel="stylesheet" media="screen"
-	href="<c:url value='/css/snow_style.css' />" type="text/css">
+	href="<c:url value='/css/mainContainer.css' />" type="text/css">
 <script>
 	function userUpdate() {
 		if (form.password.value == "") {
@@ -72,7 +72,7 @@
 
 					<!-- 아이디 -->
 					<div class="input-box">
-						<input id="user_id" type="text" name="user_id" value="${user.user_id}" readonly>
+						<input id="user_id" type="text" name="user_id" value="${user_id}" readonly>
 						<label for="user_id">아이디</label>
 					</div>
 					<!-- 비밀번호 -->
