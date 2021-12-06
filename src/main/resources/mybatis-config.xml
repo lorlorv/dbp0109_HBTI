@@ -2,7 +2,10 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
-  <configuration>
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+	</settings>
 	<typeAliases> <!-- type 에 대한 별칭 정의 -->
 		<typeAlias type="model.User" alias="User" />
 		<typeAlias type="model.Todo" alias="Todo" />
@@ -10,19 +13,24 @@
 		<typeAlias type="model.Group" alias="Group" />
 		<typeAlias type="model.ChallengePost" alias="Post" />
 	</typeAliases>
+
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
-			<dataSource type="POOLED"> <!-- data source 설정-->
-				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
-				<property name="url" value="jdbc:oracle:thin:@202.20.119.117:1521:orcl" />
+			<dataSource type="POOLED"> <!-- data source 설정 -->
+				<property name="driver"
+					value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url"
+					value="jdbc:oracle:thin:@202.20.119.117:1521:orcl" />
 				<property name="username" value="dbpro0109" />
 				<property name="password" value="codinghip" />
 			</dataSource>
 		</environment>
 	</environments>
 	<mappers>
-	<!-- mapper XML file 설정 -->
-		<mapper resource="model/dao/mybatis/mapper/GroupMapper.xml" />
+		<!-- mapper XML file 설정 -->
+		<!-- <mapper resource="model/dao/mybatis/mapper/GroupMapper.xml" /> -->
+		<mapper resource="model/dao/mybatis/mapper/UserMapper.xml" />
+		<mapper resource="model/dao/mybatis/mapper/HbtiMapper.xml" />
 	</mappers>
 </configuration>
