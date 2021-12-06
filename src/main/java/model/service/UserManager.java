@@ -65,6 +65,7 @@ public class UserManager {
 		return userDAO.updateLoginDate(user_id);
 	}
 
+
 	// user 생성
 	public int create(User user) throws SQLException, ExistingUserException {
 		if (userDAO.existingUser(user.getUser_id()) != 0) {
@@ -131,7 +132,9 @@ public class UserManager {
 		return user;
 	}
 
+
 	// user의 hbti ID를 반환 (HBTI 테스트를 안했다면 0이 반환)
+
 	public int findHBTI(String user_id) throws SQLException, UserHbtiException {
 		int hbti_id = userDAO.findUser(user_id).getHbti_id();
 
@@ -153,7 +156,7 @@ public class UserManager {
 	public int findGroupCnt(int hbti_id) throws SQLException {
 		return groupDAO.findGroupCnt(hbti_id);
 	}
-
+  
 	// 테스트 결과에 따라 HBTI 매칭
 	public int updateHBTI(String user_id, String[] testRst) throws SQLException, UserNotFoundException {
 		return matchRlt.matchingHBTIResult(user_id, testRst);
@@ -215,6 +218,7 @@ public class UserManager {
 		return userDAO.updateUserGroupInfo(group_id, user_id);
 	}
 
+
 	//그룹 생성
 	public int createGroup(Group group) throws SQLException, OverTheLimitException, ExistingGroupException {
 		 if(group.getLimitation() > 30) {
@@ -250,14 +254,16 @@ public class UserManager {
 		if(exist) {
 			throw new ExistingGroupException("이미 존재하는 그룹 이름입니다.");
 		}
-		return groupDAO.update(group);	
+		return groupDAO.update(group);
 	}
+
 
 	// 그룹 삭제
 	public int deleteGroup(int group_id) throws SQLException {
 		userDAO.deleteGroup(group_id);
 		return groupDAO.delete(group_id);
 	}
+
 
 	// user_id의 todo 정보를 받아옴 ** 개선사항 : 날짜 파라미터를 받아 해당하는 달의 레코드만 select **
 	public List<String> isTodo(String user_id) throws SQLException {

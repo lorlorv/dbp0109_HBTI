@@ -6,10 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 화면</title>
-<link rel="stylesheet" href="<c:url value='/css/joinForm.css' />"
+<link rel="stylesheet" href="<c:url value='/css/user/joinForm.css' />"
 	type="text/css">
 <link rel="stylesheet" media="screen"
-	href="<c:url value='/css/snow_style.css' />" type="text/css">
+	href="<c:url value='/css/mainContainer.css' />" type="text/css">
 <script>
 	function userCreate() {		
 		if (form.user_id.value == "") {

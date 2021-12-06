@@ -11,7 +11,7 @@
 	rel="stylesheet">
 <script src="https://kit.fontawesome.com/53a8c415f1.js"
 	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="<c:url value='/css/loginForm.css' />"
+<link rel="stylesheet" href="<c:url value='/css/user/loginForm.css' />"
 	type="text/css">
 <script>
 	function login() {

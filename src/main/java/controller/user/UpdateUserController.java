@@ -34,6 +34,7 @@ public class UpdateUserController implements Controller {
 			log.debug("UpdateForm Request : {}", update_id);
 
 			User user = manager.findUser(update_id); //  // 수정하려는 사용자 정보 검색
+			request.setAttribute("user_id", user.getUser_id());
 			request.setAttribute("user", user);
 
 			return "/user/UpdateUserForm.jsp"; // 검색한 사용자 정보를 update form으로 전송

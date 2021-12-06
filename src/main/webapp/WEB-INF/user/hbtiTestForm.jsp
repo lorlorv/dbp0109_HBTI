@@ -6,16 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>HBTI TEST</title>
-<link rel="stylesheet" href="<c:url value='/css/hbtiTestForm.css' />"
-	type="text/css">
+<link rel="stylesheet"
+	href="<c:url value='/css/user/hbtiTestForm.css' />" type="text/css">
 
 <!-- contents 스타일 시트 -->
 <link rel="stylesheet" href="<c:url value='/css/contents.css' />"
 	type="text/css">
-	
-	<link rel="stylesheet" href="<c:url value='/css/mainContainer.css' />"
+
+<link rel="stylesheet" href="<c:url value='/css/mainContainer.css' />"
 	type="text/css">
-	
+
 
 <!-- 아이콘 -->
 <link rel="stylesheet"
@@ -83,36 +83,36 @@
 			form.a12.focus();
 			return false;
 		}
-		
-		if (confirm("정말 제출하시겠습니까?") == true){ 
-			 document.form.submit();
-		 }else{   //취소
-		     return false;
-		 }
+
+		if (confirm("정말 제출하시겠습니까?") == true) {
+			document.form.submit();
+		} else { //취소
+			return false;
+		}
 		form.submit();
 	}
-/* 	function jbFunc() {
-		document.getElementById('jb').value += '10';
-	} */
+	/* 	function jbFunc() {
+	 document.getElementById('jb').value += '10';
+	 } */
 </script>
 </head>
 <body>
 	<div class="test-container">
 		<p id="test-title">HBTI TEST</p>
-		
+
 		<!-- 프로그레스 바 추후 구현 -->
-<!-- 		<div class="progress-bar">
+		<!-- 		<div class="progress-bar">
 			<progress value="20" max="100" id="jb"></progress>
 		</div> -->
-		
+
 		<div class="contents-split">
 			<p id=intro>
 				회원 가입의 마지막 단계, 자신의 운동/습관 유형을 알아볼 수 있는 HBTI TEST입니다. <br> 문제를
 				정확히 읽고 자신에게 더 맞다고 생각하는 답안을 A와 B중에 골라 선택해주세요!<br> 준비 되셨나요?
-				시작합니다. <br> <span style="color: #dfdfdf"> <i class="fas fa-running"></i><i
-					class="fas fa-golf-ball"></i> <i class="fas fa-skating"></i><i
-					class="fas fa-swimmer"></i> <i class="fas fa-skiing"></i><i
-					class="fas fa-mountain"></i></span>
+				시작합니다. <br> <span style="color: #dfdfdf"> <i
+					class="fas fa-running"></i><i class="fas fa-golf-ball"></i> <i
+					class="fas fa-skating"></i><i class="fas fa-swimmer"></i> <i
+					class="fas fa-skiing"></i><i class="fas fa-mountain"></i></span>
 
 			</p>
 		</div>
