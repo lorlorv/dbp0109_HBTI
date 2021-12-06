@@ -17,6 +17,9 @@ public class Group {
 	private int limitation;
 
 
+	public Group() {
+		
+	}
 	// 그룹 create에 쓰이는 생성자
 	public Group(String name, String descr, String icon, String leader_id, int limitation, int hbti_id) {
 		this.name = name;

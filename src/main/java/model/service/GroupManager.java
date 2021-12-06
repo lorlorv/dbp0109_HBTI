@@ -5,8 +5,8 @@ import java.util.List;
 
 import model.ChallengePost;
 import model.User;
-import model.dao.GroupDAO;
-import model.dao.PostDAO;
+import model.dao.mybatis.GroupDAO;
+import model.dao.mybatis.PostDAO;
 import model.dao.UserDAO;
 import model.service.exception.DoNotQuitLeaderException;
 import model.service.exception.ExistingChallengePostException;
@@ -41,7 +41,7 @@ public class GroupManager {
 	}
 	
 	public String findLeaderName(int group_id) throws SQLException{
-		return groupDAO.findLeaderName(group_id);
+		return groupDAO.findLeader(group_id).getLeader_name();
 	}
 	
 	// user가 챌린지 post를 등록하였는지 확인
@@ -59,8 +59,8 @@ public class GroupManager {
 	public int updatePost(ChallengePost post) {
 		return postDAO.updatePost(post);
 	}
-	public int addPost(ChallengePost post, int group_id) throws SQLException{
-		return postDAO.addPost(post, group_id);
+	public int addPost(ChallengePost post) throws SQLException{
+		return postDAO.addPost(post);
 	}
 	
 	// post의 좋아요 버튼

@@ -29,8 +29,9 @@
 	</environments>
 	<mappers>
 		<!-- mapper XML file 설정 -->
-		<!-- <mapper resource="model/dao/mybatis/mapper/GroupMapper.xml" /> -->
 		<mapper resource="model/dao/mybatis/mapper/UserMapper.xml" />
 		<mapper resource="model/dao/mybatis/mapper/HbtiMapper.xml" />
+		<mapper resource="model/dao/mybatis/mapper/GroupMapper.xml" />
+		<mapper resource="model/dao/mybatis/mapper/PostMapper.xml" />
 	</mappers>
 </configuration>

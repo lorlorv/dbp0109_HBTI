@@ -6,11 +6,12 @@ import java.util.List;
 
 import model.Group;
 import model.User;
-import model.dao.GroupDAO;
 import model.dao.mybatis.HbtiDAO;
-import model.dao.PostDAO;
-import model.dao.TodoDAO;
 import model.dao.mybatis.UserDAO;
+import model.dao.mybatis.GroupDAO;
+import model.dao.mybatis.PostDAO;
+import model.dao.TodoDAO;
+import model.service.exception.ExistingGroupException;
 import model.service.exception.ExistingUserException;
 import model.service.exception.OverTheLimitException;
 import model.service.exception.PasswordMismatchException;
@@ -49,13 +50,13 @@ public class UserManager {
 		return this.userDAO;
 	}
 
-	// ¾ÆÀÌµğ¿Í ÆĞ½º¿öµå·Î ·Î±×ÀÎ
+	// ì•„ì´ë””ì™€ íŒ¨ìŠ¤ì›Œë“œë¡œ ë¡œê·¸ì¸
 	public boolean login(String user_id, String password)
 			throws SQLException, UserNotFoundException, PasswordMismatchException {
 		User user = findUser(user_id);
 
 		if (!user.matchPassword(password)) {
-			throw new PasswordMismatchException("ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+			throw new PasswordMismatchException("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		}
 		return true;
 	}
@@ -64,22 +65,23 @@ public class UserManager {
 		return userDAO.updateLoginDate(user_id);
 	}
 
-	// user »ı¼º
+
+	// user ìƒì„±
 	public int create(User user) throws SQLException, ExistingUserException {
 		if (userDAO.existingUser(user.getUser_id()) != 0) {
-			throw new ExistingUserException(user.getUser_id() + "´Â Á¸ÀçÇÏ´Â ¾ÆÀÌµğÀÔ´Ï´Ù.");
+			throw new ExistingUserException(user.getUser_id() + "ëŠ” ì¡´ì¬í•˜ëŠ” ì•„ì´ë””ì…ë‹ˆë‹¤.");
 		}
 
 		return userDAO.create(user);
 	}
 
-	// user Á¤º¸ ¼öÁ¤
+	// user ì •ë³´ ìˆ˜ì •
 	public int update(User user) throws SQLException, UserNotFoundException {
 
 		return userDAO.update(user);
 	}
 
-	// user »èÁ¦
+	// user ì‚­ì œ
 	public int remove(String user_id) throws SQLException, UserNotFoundException {
 		int group_id = groupDAO.findGroupUserId(user_id);
 		if (group_id != 0) {
@@ -89,15 +91,17 @@ public class UserManager {
 		return userDAO.remove(user_id);
 	}
 
-	// ±×·ì Å»Åğ + user_idÀÇ ¸ğµç post »èÁ¦
+	// ê·¸ë£¹ íƒˆí‡´ + user_idì˜ ëª¨ë“  post ì‚­ì œ
 	public int quitGroup(String user_id, int group_id) throws SQLException {
-		if (user_id.equals(groupDAO.findLeaderId(group_id))) { // leader¶ó¸é
-			String newLeader_id = groupDAO.findNextLeader(user_id, group_id);// ´ÙÀ½ ¸®´õ Ã£°í
-
-			if (newLeader_id != null) {
+    
+		Group g = groupDAO.findLeader(group_id);
+		if(user_id.equals(g.getLeader_id())) { //leaderë¼ë©´
+			String newLeader_id = groupDAO.findNextLeader(user_id, group_id);//ë‹¤ìŒ ë¦¬ë” ì°¾ê³ 
+			
+			if(newLeader_id != null) {
 				groupDAO.updateLeader(newLeader_id, group_id);
 				postDAO.deleteUserAllPost(user_id);
-			} else { // ±×·ì¿¡ ³²´Â ¸â¹ö°¡ ¾ø´Ù¸é ±×·ìÀ» »èÁ¦
+			} else { // ê·¸ë£¹ì— ë‚¨ëŠ” ë©¤ë²„ê°€ ì—†ë‹¤ë©´ ê·¸ë£¹ì„ ì‚­ì œ
 				postDAO.deleteAllPost(group_id);
 				return deleteGroup(group_id);
 			}
@@ -109,65 +113,67 @@ public class UserManager {
 		return userDAO.quitGroup(user_id);
 	}
 
-	// HBTI°¡ ¾÷µ¥ÀÌÆ®µÇ¸é ±×·ì Á¤º¸µµ ÃÊ±âÈ­
+	// HBTIê°€ ì—…ë°ì´íŠ¸ë˜ë©´ ê·¸ë£¹ ì •ë³´ë„ ì´ˆê¸°í™”
 	public void updateHBTIGroup(String user_id, int oldHbti, int group_id) throws SQLException, UserHbtiException {
 		int nowHbti = findHBTI(user_id);
-		if (oldHbti != nowHbti) { // hbti°¡ ¹Ù²î¾ú´Ù¸é
+		if (oldHbti != nowHbti) { // hbtiê°€ ë°”ë€Œì—ˆë‹¤ë©´
 			quitGroup(user_id, group_id);
 		}
-		// ¹Ù²îÁö ¾Ê¾Ò´Ù¸é ¾Æ¹«°Íµµ ¾ÈÇØµµ µÈ´Ù.
+		// ë°”ë€Œì§€ ì•Šì•˜ë‹¤ë©´ ì•„ë¬´ê²ƒë„ ì•ˆí•´ë„ ëœë‹¤.
 	}
 
-	// user_idÀÇ Á¤º¸¸¦ ¹İÈ¯
+	// user_idì˜ ì •ë³´ë¥¼ ë°˜í™˜
 	public User findUser(String user_id) throws SQLException, UserNotFoundException {
 		User user = userDAO.findUser(user_id);
 
 		if (user == null) {
-			throw new UserNotFoundException(user_id + "´Â Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌµğÀÔ´Ï´Ù.");
+			throw new UserNotFoundException(user_id + "ëŠ” ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´ë””ì…ë‹ˆë‹¤.");
 		}
 		return user;
 	}
 
-	// userÀÇ hbti ID¸¦ ¹İÈ¯ (HBTI Å×½ºÆ®¸¦ ¾ÈÇß´Ù¸é 0ÀÌ ¹İÈ¯)
+
+	// userì˜ hbti IDë¥¼ ë°˜í™˜ (HBTI í…ŒìŠ¤íŠ¸ë¥¼ ì•ˆí–ˆë‹¤ë©´ 0ì´ ë°˜í™˜)
+
 	public int findHBTI(String user_id) throws SQLException, UserHbtiException {
 		int hbti_id = userDAO.findUser(user_id).getHbti_id();
 
 		return hbti_id;
 	}
 
-	// hbtiÀÇ ÀÌ¸§À» ¹İÈ¯
+	// hbtiì˜ ì´ë¦„ì„ ë°˜í™˜
 	public String findHbtiName(int hbti_id) throws SQLException, UserNotFoundException {
 		String name = hbtiDAO.findHBTI(hbti_id).getName();
 		return name;
 	}
 
-	// group_idÀÇ ±×·ì ÀÌ¸§ ¹İÈ¯
+	// group_idì˜ ê·¸ë£¹ ì´ë¦„ ë°˜í™˜
 	public String findGroupName(int group_id) throws SQLException, UserNotFoundException {
 		return groupDAO.findGroupName(group_id);
 	}
 
-	// ÇöÀç ¸¸µé¾îÁø ±×·ìÀÇ °³¼ö ¹İÈ¯ **hbti_id¿¡ µû¶ó ³ª¿Ã ¼ö ÀÖ°Ô ¼öÁ¤ ÇÊ¿ä -> ¼öÁ¤¿Ï·á!**
+	// í˜„ì¬ ë§Œë“¤ì–´ì§„ ê·¸ë£¹ì˜ ê°œìˆ˜ ë°˜í™˜ **hbti_idì— ë”°ë¼ ë‚˜ì˜¬ ìˆ˜ ìˆê²Œ ìˆ˜ì • í•„ìš” -> ìˆ˜ì •ì™„ë£Œ!**
 	public int findGroupCnt(int hbti_id) throws SQLException {
 		return groupDAO.findGroupCnt(hbti_id);
 	}
-
-	// Å×½ºÆ® °á°ú¿¡ µû¶ó HBTI ¸ÅÄª
+  
+	// í…ŒìŠ¤íŠ¸ ê²°ê³¼ì— ë”°ë¼ HBTI ë§¤ì¹­
 	public int updateHBTI(String user_id, String[] testRst) throws SQLException, UserNotFoundException {
 		return matchRlt.matchingHBTIResult(user_id, testRst);
 	}
 
-	// ±×·ì¿¡ ¼Ò¼ÓµÇ¾ú´ÂÁö¸¦ È®ÀÎ
+	// ê·¸ë£¹ì— ì†Œì†ë˜ì—ˆëŠ”ì§€ë¥¼ í™•ì¸
 	public int belongToGroup(String user_id) throws SQLException {
 		int group_id = userDAO.belongToGroup(user_id);
 
 		return group_id;
 	}
 
-	// hbti¿¡ µû¶ó ±×·ì ¸®½ºÆ®¸¦ ¹İÈ¯
+	// hbtiì— ë”°ë¼ ê·¸ë£¹ ë¦¬ìŠ¤íŠ¸ë¥¼ ë°˜í™˜
 	public List<Group> findGroupList(int user_HBTI) throws SQLException {
 		List<Group> groupList = groupDAO.findGroupList(user_HBTI);
 
-		// ¾ò¾î¿Â ±×·ì ¸®½ºÆ®¿¡ ¸â¹ö ÀÎ¿øÀ» Ãß°¡
+		// ì–»ì–´ì˜¨ ê·¸ë£¹ ë¦¬ìŠ¤íŠ¸ì— ë©¤ë²„ ì¸ì›ì„ ì¶”ê°€
 		for (int i = 0; i < groupList.size(); i++) {
 			Group group = groupList.get(i);
 			int numOfMem = groupDAO.findNumberOfMember(group.getGroup_id());
@@ -176,12 +182,12 @@ public class UserManager {
 		return groupList;
 	}
 
-	// ±×·ì Á¤º¸¸¦ ¾ò¾î¿È
+	// ê·¸ë£¹ ì •ë³´ë¥¼ ì–»ì–´ì˜´
 	public Group findGroup(int group_id) throws SQLException {
-		// ±×·ì ±âº» Á¤º¸
+		// ê·¸ë£¹ ê¸°ë³¸ ì •ë³´
 		Group group = groupDAO.findGroup(group_id);
 
-		// ±×·ì ÀÎ¿ø Á¤º¸
+		// ê·¸ë£¹ ì¸ì› ì •ë³´
 		int numOfMem = groupDAO.findNumberOfMember(group_id);
 
 		group.setNumberOfMem(numOfMem);
@@ -189,55 +195,77 @@ public class UserManager {
 		return group;
 	}
 
-	// ±×·ì °Ë»ö
+	// ê·¸ë£¹ ê²€ìƒ‰
 	public List<Group> searchGroupList(int hbti_id, String keyword) throws SQLException {
-		return groupDAO.searchGroupList(hbti_id, keyword);
+		List<Group> searcgGroupList = groupDAO.searchGroupList(hbti_id, keyword);
+		// ì–»ì–´ì˜¨ ê·¸ë£¹ ë¦¬ìŠ¤íŠ¸ì— ë©¤ë²„ ì¸ì›ì„ ì¶”ê°€
+		for(int i = 0; i < searcgGroupList.size(); i++) {
+			Group group = searcgGroupList.get(i);
+			int numOfMem = groupDAO.findNumberOfMember(group.getGroup_id());
+			group.setNumberOfMem(numOfMem);
+		}
+		return searcgGroupList;
 	}
 
-	// ±×·ì °¡ÀÔ
+	// ê·¸ë£¹ ê°€ì…
 	public int joinGroup(int group_id, String user_id) throws SQLException, OverTheLimitException {
 		Group g = groupDAO.findGroup(group_id);
 		int num = groupDAO.findNumberOfMember(group_id);
 
 		if (g.getLimitation() == num) {
-			throw new OverTheLimitException("±×·ì Á¤¿øÀÌ ÃÊ°úµÇ¾ú½À´Ï´Ù.");
+			throw new OverTheLimitException("ê·¸ë£¹ ì •ì›ì´ ì´ˆê³¼ë˜ì—ˆìŠµë‹ˆë‹¤.");
 		}
 		return userDAO.updateUserGroupInfo(group_id, user_id);
 	}
 
-	// ±×·ì »ı¼º
-	public int createGroup(Group group) throws SQLException, OverTheLimitException {
-		if (group.getLimitation() > 30) {
-			throw new OverTheLimitException("±×·ì Á¤¿øÀº 30¸íÀ» ÃÊ°úÇÒ ¼ö ¾ø½À´Ï´Ù.");
+
+	//ê·¸ë£¹ ìƒì„±
+	public int createGroup(Group group) throws SQLException, OverTheLimitException, ExistingGroupException {
+		 if(group.getLimitation() > 30) {
+			throw new OverTheLimitException("ê·¸ë£¹ ì •ì›ì€ 30ëª…ì„ ì´ˆê³¼í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 		} else if (group.getLimitation() < 2) {
-			throw new OverTheLimitException("±×·ì Á¤¿øÀº Àû¾îµµ 2¸í ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.");
+			throw new OverTheLimitException("ê·¸ë£¹ ì •ì›ì€ ì ì–´ë„ 2ëª… ì´ìƒì´ì–´ì•¼ í•©ë‹ˆë‹¤.");
 		}
+		 
+		 boolean exist = groupDAO.existingGroupName(group.getName());
+			if(exist) {
+				throw new ExistingGroupException("ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ê·¸ë£¹ ì´ë¦„ì…ë‹ˆë‹¤.");
+			}
+			
 		groupDAO.create(group);
 		int group_id = groupDAO.findGroupId(group.getName());
 		return userDAO.updateUserGroupInfo(group_id, group.getLeader_id());
 	}
 
-	// ±×·ì Á¤º¸ ¼öÁ¤
-	public int updateGroup(Group group) throws SQLException, OverTheLimitException {
+	// ê·¸ë£¹ ì •ë³´ ìˆ˜ì •
+	public int updateGroup(Group group) throws OverTheLimitException, ExistingGroupException {		
+
 		int numOfMem = groupDAO.findNumberOfMember(group.getGroup_id());
 
 		if (numOfMem > group.getLimitation()) {
-			throw new OverTheLimitException("±×·ì Á¤¿øÀ» ´Ã¸®¼¼¿ä.");
+			throw new OverTheLimitException("ê·¸ë£¹ ì •ì›ì„ ëŠ˜ë¦¬ì„¸ìš”.");
 		} else if (group.getLimitation() > 30) {
-			throw new OverTheLimitException("±×·ì Á¤¿øÀº 30¸íÀ» ÃÊ°úÇÒ ¼ö ¾ø½À´Ï´Ù.");
+			throw new OverTheLimitException("ê·¸ë£¹ ì •ì›ì€ 30ëª…ì„ ì´ˆê³¼í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 		} else if (group.getLimitation() < 2) {
-			throw new OverTheLimitException("±×·ì Á¤¿øÀº Àû¾îµµ 2¸í ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.");
+			throw new OverTheLimitException("ê·¸ë£¹ ì •ì›ì€ ì ì–´ë„ 2ëª… ì´ìƒì´ì–´ì•¼ í•©ë‹ˆë‹¤.");
+		}
+    
+		boolean exist = groupDAO.existingGroupName(group.getName());
+		if(exist) {
+			throw new ExistingGroupException("ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ê·¸ë£¹ ì´ë¦„ì…ë‹ˆë‹¤.");
 		}
 		return groupDAO.update(group);
 	}
 
-	// ±×·ì »èÁ¦
+
+	// ê·¸ë£¹ ì‚­ì œ
 	public int deleteGroup(int group_id) throws SQLException {
 		userDAO.deleteGroup(group_id);
 		return groupDAO.delete(group_id);
 	}
 
-	// user_idÀÇ todo Á¤º¸¸¦ ¹Ş¾Æ¿È ** °³¼±»çÇ× : ³¯Â¥ ÆÄ¶ó¹ÌÅÍ¸¦ ¹Ş¾Æ ÇØ´çÇÏ´Â ´ŞÀÇ ·¹ÄÚµå¸¸ select **
+
+	// user_idì˜ todo ì •ë³´ë¥¼ ë°›ì•„ì˜´ ** ê°œì„ ì‚¬í•­ : ë‚ ì§œ íŒŒë¼ë¯¸í„°ë¥¼ ë°›ì•„ í•´ë‹¹í•˜ëŠ” ë‹¬ì˜ ë ˆì½”ë“œë§Œ select **
 	public List<String> isTodo(String user_id) throws SQLException {
 		return userDAO.isTodo(user_id);
 	}
@@ -246,39 +274,39 @@ public class UserManager {
 		return userDAO.isChallenged(user_id);
 	}
 
-	/* main¿¡¼­ »ç¿ë */
-	/* hbti_id¿¡ ÇØ´çÇÏ´Â ±×·ìÀÇ ÃÑ ÀÎ¿ø ¼ö */
+	/* mainì—ì„œ ì‚¬ìš© */
+	/* hbti_idì— í•´ë‹¹í•˜ëŠ” ê·¸ë£¹ì˜ ì´ ì¸ì› ìˆ˜ */
 	public int numOfGroupMem(int hbti_id) {
-		// ÀÏ´Ü hbti_idÀÎ groupÀÌ ¹¹°¡ ÀÖ´ÂÁö group_id Ã£¾Æ¿À±â
+		// ì¼ë‹¨ hbti_idì¸ groupì´ ë­ê°€ ìˆëŠ”ì§€ group_id ì°¾ì•„ì˜¤ê¸°
 		List<Integer> groupList = new ArrayList<>();
-		groupList = hbtiDAO.group_idByHBTI(hbti_id);// groupDAO·Î ¹Ù²Ù±â
+		groupList = hbtiDAO.group_idByHBTI(hbti_id);// groupDAOë¡œ ë°”ê¾¸ê¸°
 
-		// groupListÀÇ ListÇÏ³ª ¾¿ µ¹·Áº¸¸ç ±× groupÀÇ ÀÎ¿ø ¼ö ¾ò¾î¿Í¼­ ÃÑ ÀÎ¿ø ¼ö ±¸ÇÏ±â
+		// groupListì˜ Listí•˜ë‚˜ ì”© ëŒë ¤ë³´ë©° ê·¸ groupì˜ ì¸ì› ìˆ˜ ì–»ì–´ì™€ì„œ ì´ ì¸ì› ìˆ˜ êµ¬í•˜ê¸°
 		int sum = 0;
 		for (int i = 0; i < groupList.size(); i++) {
 			int group_id = groupList.get(i);
-			sum += hbtiDAO.getNumberOfUsersInGroup(group_id);// groupDAO·Î ¹Ù²Ù±â
+			sum += hbtiDAO.getNumberOfUsersInGroup(group_id);// groupDAOë¡œ ë°”ê¾¸ê¸°
 		}
 
 		return sum;
 	}
 
 	public int numOfUserWhoDidChallengeInGroup(int hbti_id) {
-		// ÀÏ´Ü hbti_idÀÎ groupÀÌ ¹¹°¡ ÀÖ´ÂÁö group_id Ã£¾Æ¿À±â
+		// ì¼ë‹¨ hbti_idì¸ groupì´ ë­ê°€ ìˆëŠ”ì§€ group_id ì°¾ì•„ì˜¤ê¸°
 		List<Integer> groupList = new ArrayList<>();
 		groupList = hbtiDAO.group_idByHBTI(hbti_id);
 
-		// groupListÀÇ ListÇÏ³ª ¾¿ µ¹·Áº¸¸ç ±× groupÀÇ User_id °¡Á®¿À±â List·Î
+		// groupListì˜ Listí•˜ë‚˜ ì”© ëŒë ¤ë³´ë©° ê·¸ groupì˜ User_id ê°€ì ¸ì˜¤ê¸° Listë¡œ
 		List<String> userList = new ArrayList<>();
 		List<String> userListEachGroup = new ArrayList<>();
 		for (int i = 0; i < groupList.size(); i++) {
 			int group_id = groupList.get(i);
 
-			userListEachGroup = hbtiDAO.userListEachGroup(group_id); // ±×·ì¿¡ ÀÖ´Â user¸®½ºÆ® ºÒ·¯¿À±â
+			userListEachGroup = hbtiDAO.userListEachGroup(group_id); // ê·¸ë£¹ì— ìˆëŠ” userë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°
 
 			for (int j = 0; j < userListEachGroup.size(); j++) {
-				userList.add(userListEachGroup.get(j)); // ±×·ì¸¶´Ù °¡Á®¿À±â
-			} // ¿©±â±îÁö ÇÏ¸é ÇÑ hbti¿¡ ¼ÓÇÑ ¸ğµç user_id list
+				userList.add(userListEachGroup.get(j)); // ê·¸ë£¹ë§ˆë‹¤ ê°€ì ¸ì˜¤ê¸°
+			} // ì—¬ê¸°ê¹Œì§€ í•˜ë©´ í•œ hbtiì— ì†í•œ ëª¨ë“  user_id list
 		}
 
 		int cnt = 0;
@@ -290,13 +318,13 @@ public class UserManager {
 		return cnt;
 	}
 
-	// ·©Å· ±¸ÇÏ±â
+	// ë­í‚¹ êµ¬í•˜ê¸°
 	public int ranking(int hbti_id) {
 		return numOfUserWhoDidChallengeInGroup(hbti_id);
 
 	}
 
-	// ÆÛ¼¾Æ® ±¸ÇÏ±â
+	// í¼ì„¼íŠ¸ êµ¬í•˜ê¸°
 	public double percentOfChallenge(int hbti_id) {
 		double A = (double) numOfUserWhoDidChallengeInGroup(hbti_id);
 		double B = (double) numOfGroupMem(hbti_id);

@@ -1,9 +1,6 @@
 package model.service;
 
-import java.util.Date;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import model.Todo;
 import model.dao.TodoDAO;
