@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="<c:url value='/css/mainContainer.css' />"
 	type="text/css">
 <!--  Main 스타일시트 -->
-<link rel="stylesheet" href="<c:url value='/css/main.css' />"
+<link rel="stylesheet" href="<c:url value='/css/main/main.css' />"
 	type="text/css">
 <!-- Contents 스타일시트 -->
 <link rel="stylesheet" href="<c:url value='/css/contents.css' />"

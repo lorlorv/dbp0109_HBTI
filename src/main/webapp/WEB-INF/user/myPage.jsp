@@ -16,7 +16,7 @@
 	type="text/css">
 
 <!-- MyPage 스타일 시트 -->
-<link rel="stylesheet" href="<c:url value='/css/myPage.css' />"
+<link rel="stylesheet" href="<c:url value='/css/user/myPage.css' />"
 	type="text/css">
 
 <!-- snow 스타일 시트 -->
@@ -49,26 +49,22 @@
 	}
 	
 	/* Calendar  */
-	var todoDate = ""; //DB에서 가져온 값과 일치하는 지 확인 할 Date (yyyy/mm/dd)
-	var paramDate = ""; //parameter로 보낼 Date (yyyy-mm-dd)
+	var paramDate = ""; //DB에서 가져온 값과 일치하는 지 확인 할 Date + parameter로 보낼 Date (yyyy-mm-dd)
 	var today = new Date(); //오늘 날짜
     var date = new Date();//today의 Date를 세어주는 역할
     
     function prevCalendar() {//이전 달
-    	todoDate = "";
     	paramDate = "";
 		today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
 		buildCalendar(); //달력 cell 만들어 출력 
     }
     function nextCalendar() {//다음 달
-    	todoDate = "";
     	paramDate = "";
 		today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
 		buildCalendar();//달력 cell 만들어 출력
     }
     
     function buildCalendar(){//현재 달 달력 만들기
-    	todoDate="";
     	paramDate="";
         var doMonth = new Date(today.getFullYear(),today.getMonth(),1);
         //이번 달의 첫째 날
@@ -83,9 +79,7 @@
         //테이블에 정확한 날짜 찍는 변수
         
 		tbCalendarYM.innerHTML = today.getFullYear() + " " + (today.getMonth() + 1) + " "; 
-		todoDate += today.getFullYear() + "/";
 		paramDate += today.getFullYear() + "-";
-		todoDate += today.getMonth() + 1 + "/";
 		paramDate += today.getMonth() + 1 + "-";
          /*while은 이번달이 끝나면 다음달로 넘겨주는 역할*/
         while (tbCalendar.rows.length > 2) {
@@ -103,17 +97,13 @@
 			cnt = cnt + 1;
 		}
         /*달력 출력*/
-        var todoDate2 = "";
         var paramDate2 = "";
 		for (i = 1; i <= lastDate.getDate(); i++) {
-			todoDate2 = todoDate; // yyyy/mm/ 까지만
 			paramDate2 = paramDate;
 			if(i < 10){
-				todoDate2 += "0" + i;
 				paramDate2 += "0" + i;
 			}
 			else{
-   				todoDate2 += i; //yyyy/mm/ + i -> yyyy/mm/dd
    				paramDate2 += i;
 			}
          	//1일부터 마지막 일까지 돌림
@@ -121,13 +111,13 @@
    			//foreach문 안에서는 break, continue 사용불가능
    			
       		<c:forEach items="${isTodo}" var="isTodo">
-				if(todoDate2 == "${isTodo}"){
+				if(paramDate2 == "${isTodo}"){
 					var str = i + "<br>"+ "<a href='<c:url value='/todo/date'/>?todo_date=";
 					str += paramDate2 + "'>";
 					str += "⭐";				
 					str += "</a>";
 					<c:forEach items="${isChallenged}" var="isChallenged">
-						if(todoDate2 == "${isChallenged}")
+						if(paramDate2 == "${isChallenged}")
 							str += " ✔ ";
 					</c:forEach>
 					
@@ -156,7 +146,7 @@
             </c:forEach>
             
       		<c:forEach items="${isChallenged}" var="isChallenged">
-			if(todoDate2 == "${isChallenged}"){
+			if(paramDate2 == "${isChallenged}"){
 				var str = i + "<br>"+ " ✔ ";
 				
 				cell.innerHTML = str;
