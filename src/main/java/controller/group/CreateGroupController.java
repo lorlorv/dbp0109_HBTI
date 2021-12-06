@@ -3,6 +3,7 @@ package controller.group;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.service.exception.ExistingGroupException;
 import model.service.exception.OverTheLimitException;
 import model.service.UserManager;
 
@@ -34,6 +35,11 @@ public class CreateGroupController implements Controller{
 			return "redirect:/group/main";
 		} catch(OverTheLimitException e) {
 			request.setAttribute("updateFailed", true);
+			request.setAttribute("Exception", e);
+			request.setAttribute("group", group);
+			return "/group/createForm.jsp";
+		} catch(ExistingGroupException e) {
+			request.setAttribute("existingName", true);
 			request.setAttribute("Exception", e);
 			request.setAttribute("group", group);
 			return "/group/createForm.jsp";

@@ -61,9 +61,9 @@ function groupCreate() {
 	</div>
 	
 	<!-- 이미 그룹이름이 존재한다면 경고창 -->
-		<c:if test="${createFailed}">
+		<c:if test="${existingName}">
 			<script>
-				alert('${exception.getMessage()}');
+				alert('${Exception.getMessage()}');
 			</script>
 		</c:if>
 	<!-- 그룹 정원을 잘못 입력하면 경고창 -->

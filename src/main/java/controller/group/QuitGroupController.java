@@ -17,6 +17,8 @@ public class QuitGroupController implements Controller {
 		String groupQuit_user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		int group_id = manager.belongToGroup(groupQuit_user_id);
 		
+		System.out.println(group_id);
+		
 		manager.quitGroup(groupQuit_user_id, group_id);
 		
 		return "redirect:/user/myPage";

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<!-- mapper를 모아놓은 XML 패키지명 : mapper interface와 연관됨 -->
+<mapper namespace="model.dao.mybatis.mapper.GroupMapper">
+
+	<!-- SQL statement, parameter/result mapping 정의 -->
+	
+	<!--  hbti_id의 그룹 리스트를 구함 -->
+	<select id="selectGroupListByGroupId" parameterType="int"
+	 resultType="Group">
+		SELECT group_id, name, icon, descr ,limitation 
+		FROM GroupInfo
+		WHERE hbti_id = #{hbti_id}
+		ORDER BY group_id DESC
+	</select>
+	
+	<!-- 키워드에 맞는 그룹 리스트를 반환 -->
+	<select id="selectGroupListByKeyword" resultType="Group">
+		SELECT group_id, name, icon, descr, limitation
+		FROM GroupInfo
+		WHERE hbti_id = #{hbti_id} AND name LIKE #{keyword}
+		ORDER BY group_id DESC 
+	</select>
+	
+	<!-- group_id의 그룹원 리스트를 구함 -->
+	<select id="selectUserListByGroupId" parameterType="int"
+	resultType="User">
+		SELECT user_id, name, image, login_date 
+		FROM UserInfo
+		WHERE group_id = #{group_id}
+	</select>
+	
+	<!-- group_id의 그룹 정보를 반환 -->
+	<select id="selectGroupByGroupId" parameterType="int"
+	resultType="Group">
+	 	SELECT  g.name AS name, icon, g.descr AS descr, leader_id , g.hbti_id AS hbti_id, content AS challengeContent, limitation
+		FROM GroupInfo g, DayOfChallenge d, Challenge c
+		WHERE g.hbti_id = d.hbti_id AND d.challenge_id = c.challenge_id AND g.group_id = #{group_id}
+	</select>
+	
+	<!-- user_id의 group_id를 구함 -->
+	<select id="selectGroupIdByUserId" parameterType="String"
+	resultType="int">
+		SELECT group_id
+		FROM UserInfo
+		WHERE user_id = #{user_id}
+	</select>
+	
+	<!-- group_id의 그룹원 인원을 반환 -->
+	<select id="selectGroupNumByGroupId" parameterType="int"
+	resultType="int">
+		SELECT COUNT(*)
+		FROM UserInfo 
+		WHERE group_id = #{group_id}
+	</select>
+	
+	<!-- group_id를 통해 그룹 이름을 반환 -->
+	<select id="selectGroupNameByGroupId" parameterType="int"
+	resultType="String">
+		SELECT name
+		FROM GroupInfo
+		WHERE group_id = #{group_id}
+	</select>
+	
+	<!-- hbti_id별 생성된 그룹의 총 개수 반환 -->
+	<select id="selectGroupCntByHbtiId" parameterType="int"
+	resultType="int">
+		SELECT COUNT(group_id)
+		FROM GroupInfo
+		WHERE hbti_id = #{hbti_id}
+	</select>
+	
+	<!-- group_id의 리더 id를 반환 -->
+	<select id="selectGroupLeaderByGroupId" parameterType="int"
+	resultType="Group">
+		SELECT u.name AS leader_name, leader_id
+		FROM GroupInfo g JOIN UserInfo u ON g.leader_id = u.user_id
+		WHERE g.group_id = #{group_id}
+	</select>
+	
+	<!-- 다음 리더 후보를 반환 -->
+	<select id="selectNextLeaderByGroupId" resultType="String">
+		SELECT user_id
+		FROM USERINFO
+		WHERE group_id = #{group_id} AND NOT user_id = #{leader_id}
+		AND NOT login_date IS NULL
+		ORDER BY login_date DESC
+	</select>
+	
+	<!-- 그룹의 리더 변경 -->
+	<update id="updateLeader">
+		UPDATE GroupInfo
+		SET leader_id = #{leader_id}
+		WHERE group_id = #{group_id}
+	</update>
+	
+	<!-- 그룹 이름이 존재하는지 확인 -->
+	<select id="selectExistingGroupName" parameterType="String"
+	resultType="String">
+		SELECT name
+		FROM GroupInfo
+		WHERE name = #{group_name}
+	</select>
+	
+	<!-- 그룹 이름으로 그룹 아이디를 찾아냄 -->
+	<select id="selectGroupIdByGroupName" parameterType="String"
+	resultType="int">
+		SELECT group_id
+		FROM GroupInfo 
+		WHERE name = #{group_name}
+	</select>
+	
+	<!-- 그룹 생성 -->
+	<insert id="insertGroup" parameterType="Group">
+		INSERT INTO GroupInfo 
+		VALUES (GROUP_SEQ.NEXTVAL, #{name}, SYSDATE, #{icon}, #{descr}, #{hbti_id}, #{leader_id}, #{limitation})
+	</insert>
+	
+	<!-- 그룹 정보 수정 -->
+	<update id="updateGroup" parameterType="Group">
+		UPDATE GroupInfo
+		SET name = #{name}, icon = #{icon}, descr = #{descr}, limitation = #{limitation}
+		WHERE group_id = #{group_id}
+	</update>
+	
+	<!-- 그룹 삭제 -->
+	<delete id="deleteGroup" parameterType="int">
+		DELETE FROM GroupInfo
+		WHERE group_id = #{group_id}
+	</delete>
+	
+	<!-- 챌린지 리스트 개수 반환 -->
+	<select id="selectChallengeListCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM Challenge
+	</select>
+	
+	<!-- 챌린지 리스트 업데이트 -->
+	<update id="updateChallengeList" parameterType="int">
+		UPDATE DayOfChallenge d
+		SET d.challenge_id = ROUND(DBMS_RANDOM.VALUE(1, #{cntList}))
+		WHERE d.hbti_id IN (select hbti_id from hbti)
+	</update>
+</mapper>
