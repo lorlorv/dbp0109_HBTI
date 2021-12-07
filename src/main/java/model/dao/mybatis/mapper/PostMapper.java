@@ -6,27 +6,27 @@ import model.ChallengePost;
 
 public interface PostMapper {
 
-	// user_idÀÇ ¿À´Ã ³¯Â¥ post¸¦ Ã£À½
+	// user_idì˜ ì˜¤ëŠ˜ ë‚ ì§œ postë¥¼ ì°¾ìŒ
 	public ChallengePost selectPostByUserId(String user_id);
 	
-	// group_idÀÇ ¿À´Ã ³¯Â¥ÀÇ post list¸¦ ±¸ÇÔ.
+	// group_idì˜ ì˜¤ëŠ˜ ë‚ ì§œì˜ post listë¥¼ êµ¬í•¨.
 	public List<ChallengePost> selectPostListByGroupId(int group_id);
 	
-	// post Ãß°¡
+	// post ì¶”ê°€
 	public int insertPost(ChallengePost post);
 	
-	// post ¼öÁ¤
+	// post ìˆ˜ì •
 	public int updatePost(ChallengePost post);
 	
-	// ÁÁ¾Æ¿ä ¹öÆ° 1 Ãß°¡
+	// ì¢‹ì•„ìš” ë²„íŠ¼ 1 ì¶”ê°€
 	public int updatePostLikeByPostId(int post_id);
 	
-	// post »èÁ¦
+	// post ì‚­ì œ
 	public int deletePost(int post_id);
 	
-	// group_idÀÇ ¸ğµç Æ÷½ºÆ® »èÁ¦ (±×·ì »èÁ¦)
+	// group_idì˜ ëª¨ë“  í¬ìŠ¤íŠ¸ ì‚­ì œ (ê·¸ë£¹ ì‚­ì œ)
 	public int deleteAllPostByGroupId(int group_id);
 	
-	// user_idÀÇ ¸ğµç Æ÷½ºÆ® »èÁ¦ (±×·ì Å»Åğ)
+	// user_idì˜ ëª¨ë“  í¬ìŠ¤íŠ¸ ì‚­ì œ (ê·¸ë£¹ íƒˆí‡´)
 	public int deleteAllPostByUserId(String writer_id);
 }

@@ -14,7 +14,7 @@ public class PostDAO {
 
 	private SqlSessionFactory sqlSessionFactory;
 	
-	// sqlSessionFactory »ı¼º
+	// sqlSessionFactory ìƒì„±
 	public PostDAO() {
 		String resource = "mybatis-config.xml";
 		InputStream inputStream;
@@ -27,7 +27,7 @@ public class PostDAO {
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 	}
 	
-	// user_idÀÇ ¿À´Ã ³¯Â¥ post¸¦ Ã£À½
+	// user_idì˜ ì˜¤ëŠ˜ ë‚ ì§œ postë¥¼ ì°¾ìŒ
 	public ChallengePost findPost(String user_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
@@ -38,7 +38,7 @@ public class PostDAO {
 		}
 	}
 	
-	// group_idÀÇ ¿À´Ã ³¯Â¥ÀÇ post list¸¦ ±¸ÇÔ.
+	// group_idì˜ ì˜¤ëŠ˜ ë‚ ì§œì˜ post listë¥¼ êµ¬í•¨.
 	public List<ChallengePost> findPostList(int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
@@ -49,7 +49,7 @@ public class PostDAO {
 		}
 	}
 	
-	//post Ãß°¡
+	//post ì¶”ê°€
 	public int addPost(ChallengePost post) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
@@ -64,7 +64,7 @@ public class PostDAO {
 		}
 	}
 		
-	//post ¼öÁ¤
+	//post ìˆ˜ì •
 	public int updatePost(ChallengePost post) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
@@ -79,7 +79,7 @@ public class PostDAO {
 		}
 	}
 	
-	// ÁÁ¾Æ¿ä ¹öÆ° 1 Ãß°¡
+	// ì¢‹ì•„ìš” ë²„íŠ¼ 1 ì¶”ê°€
 	public int updatePostLike(int post_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
@@ -94,7 +94,7 @@ public class PostDAO {
 		}
 	}
 	
-	// post »èÁ¦
+	// post ì‚­ì œ
 	public int deletePost(int post_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
@@ -109,7 +109,7 @@ public class PostDAO {
 		}
 	}
 	
-	// group_idÀÇ ¸ğµç Æ÷½ºÆ® »èÁ¦ (±×·ì »èÁ¦¿ë)
+	// group_idì˜ ëª¨ë“  í¬ìŠ¤íŠ¸ ì‚­ì œ (ê·¸ë£¹ ì‚­ì œìš©)
 	public int deleteAllPost(int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
@@ -124,7 +124,7 @@ public class PostDAO {
 		}
 	}
 	
-	// user_idÀÇ ¸ğµç Æ÷½ºÆ® »èÁ¦ (±×·ì Å»Åğ¿ë)
+	// user_idì˜ ëª¨ë“  í¬ìŠ¤íŠ¸ ì‚­ì œ (ê·¸ë£¹ íƒˆí‡´ìš©)
 	public int deleteUserAllPost(String user_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		

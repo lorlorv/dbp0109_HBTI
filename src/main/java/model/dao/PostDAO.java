@@ -12,10 +12,10 @@ public class PostDAO {
 	private JDBCUtil jdbcUtil = null;
 
 	public PostDAO() {
-		jdbcUtil = new JDBCUtil(); // JDBCUtil °´Ã¼ »ı¼º
+		jdbcUtil = new JDBCUtil(); // JDBCUtil ê°ì²´ ìƒì„±
 	}
 
-	// user_idÀÇ ¿À´Ã ³¯Â¥ post¸¦ Ã£À½
+	// user_idì˜ ì˜¤ëŠ˜ ë‚ ì§œ postë¥¼ ì°¾ìŒ
 	public ChallengePost findPost(String user_id) throws SQLException {
 		String sql = "SELECT post_id, name, writer_id, content, p.image AS postImage, like_btn "
 				+ "FROM ChallengePost p JOIN UserInfo u ON writer_id = user_id "
@@ -34,12 +34,12 @@ public class PostDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close(); // resource ¹İÈ¯
+			jdbcUtil.close(); // resource ë°˜í™˜
 		}
 		return null;
 	}
 
-	// group_idÀÇ ¿À´Ã ³¯Â¥ÀÇ post list¸¦ ±¸ÇÔ.
+	// group_idì˜ ì˜¤ëŠ˜ ë‚ ì§œì˜ post listë¥¼ êµ¬í•¨.
 	public List<ChallengePost> findPostList(int group_id) throws SQLException {
 		String sql = "SELECT post_id, name, writer_id, content, p.image AS postImage, like_btn "
 				+ "FROM ChallengePost p JOIN UserInfo u ON writer_id = user_id "
@@ -60,31 +60,31 @@ public class PostDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close(); // resource ¹İÈ¯
+			jdbcUtil.close(); // resource ë°˜í™˜
 		}
 		return null;
 	}
 
-	//post Ãß°¡
+	//post ì¶”ê°€
 	public int addPost(ChallengePost post, int group_id) throws SQLException {
 		String sql = "INSERT INTO ChallengePost VALUES (challenge_seq.nextval, sysdate, ?, ?, 0, ?, ?)";
 		Object[] param = new Object[] { post.getContent(), post.getImage(), group_id, post.getWriter_id() };
 		jdbcUtil.setSqlAndParameters(sql, param);
 
 		try {
-			int result = jdbcUtil.executeUpdate(); // insert ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate(); // insert ë¬¸ ì‹¤í–‰
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
-			jdbcUtil.close(); // resource ¹İÈ¯
+			jdbcUtil.close(); // resource ë°˜í™˜
 		}
 		return 0;
 	}
 
-	//post ¼öÁ¤
+	//post ìˆ˜ì •
 	public int updatePost(ChallengePost post) {
 		String sql = "UPDATE ChallengePost " + "SET content=?, image=? " + "WHERE post_id=?";
 		Object[] param = new Object[] { post.getContent(), post.getImage(), post.getPost_id() };
@@ -98,12 +98,12 @@ public class PostDAO {
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
-			jdbcUtil.close(); // resource ¹İÈ¯
+			jdbcUtil.close(); // resource ë°˜í™˜
 		}
 		return 0;
 	}
 
-	// ÁÁ¾Æ¿ä ¹öÆ° 1 Ãß°¡
+	// ì¢‹ì•„ìš” ë²„íŠ¼ 1 ì¶”ê°€
 	public int updatePostLike(int post_id) {
 		String sql = "UPDATE ChallengePost " + "SET like_btn = like_btn + 1 " + "WHERE post_id=?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { post_id });
@@ -115,47 +115,47 @@ public class PostDAO {
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
-			jdbcUtil.close(); // resource ¹İÈ¯
+			jdbcUtil.close(); // resource ë°˜í™˜
 		}
 		return 0;
 	}
 
-	// post »èÁ¦
+	// post ì‚­ì œ
 	public int deletePost(int post_id) throws SQLException {
 		String sql = "DELETE FROM ChallengePost " + "WHERE post_id=?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { post_id });
 
 		try {
-			int result = jdbcUtil.executeUpdate(); // insert ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate(); // insert ë¬¸ ì‹¤í–‰
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
-			jdbcUtil.close(); // resource ¹İÈ¯
+			jdbcUtil.close(); // resource ë°˜í™˜
 		}
 		return 0;
 	}
 
-	// group_idÀÇ ¸ğµç Æ÷½ºÆ® »èÁ¦ (±×·ì »èÁ¦)
+	// group_idì˜ ëª¨ë“  í¬ìŠ¤íŠ¸ ì‚­ì œ (ê·¸ë£¹ ì‚­ì œ)
 	public int deleteAllPost(int group_id) throws SQLException {
 		String sql = "DELETE FROM ChallengePost " + "WHERE group_id=? ";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { group_id });
 		try {
-			int result = jdbcUtil.executeUpdate(); // insert ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate(); // insert ë¬¸ ì‹¤í–‰
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
-			jdbcUtil.close(); // resource ¹İÈ¯
+			jdbcUtil.close(); // resource ë°˜í™˜
 		}
 		return 0;
 	}
 	
-	// user_idÀÇ ¸ğµç Æ÷½ºÆ® »èÁ¦ (±×·ì Å»Åğ)
+	// user_idì˜ ëª¨ë“  í¬ìŠ¤íŠ¸ ì‚­ì œ (ê·¸ë£¹ íƒˆí‡´)
 	public int deleteUserAllPost(String user_id) {
 		String sql = "DELETE FROM CHALLENGEPOST WHERE writer_id=?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { user_id }); 

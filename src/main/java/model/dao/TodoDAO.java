@@ -9,29 +9,29 @@ import model.Todo;
 
 
 /**
- * »ç¿ëÀÚ °ü¸®¸¦ À§ÇØ µ¥ÀÌÅÍº£ÀÌ½º ÀÛ¾÷À» Àü´ãÇÏ´Â DAO Å¬·¡½º
- * Todo Å×ÀÌºí¿¡¼­ Ä¿¹Â´ÏÆ¼ Á¤º¸¸¦ Ãß°¡, ¼öÁ¤, »èÁ¦, °Ë»ö ¼öÇà 
+ * ì‚¬ìš©ì ê´€ë¦¬ë¥¼ ìœ„í•´ ë°ì´í„°ë² ì´ìŠ¤ ì‘ì—…ì„ ì „ë‹´í•˜ëŠ” DAO í´ë˜ìŠ¤
+ * Todo í…Œì´ë¸”ì—ì„œ ì»¤ë®¤ë‹ˆí‹° ì •ë³´ë¥¼ ì¶”ê°€, ìˆ˜ì •, ì‚­ì œ, ê²€ìƒ‰ ìˆ˜í–‰ 
  */
 public class TodoDAO {
 	private JDBCUtil jdbcUtil = null;
 	
 	public TodoDAO() {			
-		jdbcUtil = new JDBCUtil();	// JDBCUtil °´Ã¼ »ı¼º
+		jdbcUtil = new JDBCUtil();	// JDBCUtil ê°ì²´ ìƒì„±
 	}
 	
 	
 	public Todo create(Todo todo) throws SQLException {
 		String sql = "INSERT INTO TODO VALUES (todo_seq.nextval, ?, SYSDATE, ?, 0)";
 		Object[] param = new Object[] {todo.getContent(), todo.getUser_id()};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil ¿¡ insert¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil ì— insertë¬¸ê³¼ ë§¤ê°œ ë³€ìˆ˜ ì„¤ì •
 						
-		String key[] = {"todo_id"};	// PK ÄÃ·³ÀÇ ÀÌ¸§     
+		String key[] = {"todo_id"};	// PK ì»¬ëŸ¼ì˜ ì´ë¦„     
 		try {    
-			jdbcUtil.executeUpdate(key);  // insert ¹® ½ÇÇà
+			jdbcUtil.executeUpdate(key);  // insert ë¬¸ ì‹¤í–‰
 		   	ResultSet rs = jdbcUtil.getGeneratedKeys();
 		   	if(rs.next()) {
-		   		int generatedKey = rs.getInt(1);   // »ı¼ºµÈ PK °ª
-		   		todo.setTodo_id(generatedKey); 	// idÇÊµå¿¡ ÀúÀå  
+		   		int generatedKey = rs.getInt(1);   // ìƒì„±ëœ PK ê°’
+		   		todo.setTodo_id(generatedKey); 	// idí•„ë“œì— ì €ì¥  
 		   	}
 		   	return todo;
 		} catch (Exception ex) {
@@ -39,35 +39,35 @@ public class TodoDAO {
 			ex.printStackTrace();
 		} finally {		
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ¹İÈ¯
+			jdbcUtil.close();	// resource ë°˜í™˜
 		}		
 		return null;			
 	}
 	
 		
 	/**
-	 * ÅõµÎ Å×ÀÌºí¿¡ »õ·Î¿î Çà »ı¼º (PK °ªÀº Sequence¸¦ ÀÌ¿ëÇÏ¿© ÀÚµ¿ »ı¼º)
+	 * íˆ¬ë‘ í…Œì´ë¸”ì— ìƒˆë¡œìš´ í–‰ ìƒì„± (PK ê°’ì€ Sequenceë¥¼ ì´ìš©í•˜ì—¬ ìë™ ìƒì„±)
 	 */
 	public int add(Todo todo) throws SQLException {
 		String sql = "INSERT INTO TODO VALUES (todo_seq.nextval, ?, SYSDATE, ?, 0)";		
 		Object[] param = new Object[] {todo.getContent(), todo.getUser_id()};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil ¿¡ insert¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil ì— insertë¬¸ê³¼ ë§¤ê°œ ë³€ìˆ˜ ì„¤ì •
 						
 		try {    
-			return jdbcUtil.executeUpdate();  // insert ¹® ½ÇÇà
+			return jdbcUtil.executeUpdate();  // insert ë¬¸ ì‹¤í–‰
 		   
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {		
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ¹İÈ¯
+			jdbcUtil.close();	// resource ë°˜í™˜
 		}		
 		return 0;		
 	}
 
 	/**
-	 * ±âÁ¸ÀÇ ÅõµÎ Á¤º¸¸¦ ¼öÁ¤
+	 * ê¸°ì¡´ì˜ íˆ¬ë‘ ì •ë³´ë¥¼ ìˆ˜ì •
 	 */
 	public int update(int todo_id, String content) throws SQLException {
 		String sql = "UPDATE TODO "
@@ -77,7 +77,7 @@ public class TodoDAO {
 		jdbcUtil.setSqlAndParameters(sql, param);
 			
 		try {				
-			int result = jdbcUtil.executeUpdate();	// update ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate();	// update ë¬¸ ì‹¤í–‰
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -85,7 +85,7 @@ public class TodoDAO {
 		}
 		finally {
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ¹İÈ¯
+			jdbcUtil.close();	// resource ë°˜í™˜
 		}		
 		return 0;
 	}
@@ -98,7 +98,7 @@ public class TodoDAO {
 	jdbcUtil.setSqlAndParameters(sql, param);
 		
 	try {				
-		int result = jdbcUtil.executeUpdate();	// update ¹® ½ÇÇà
+		int result = jdbcUtil.executeUpdate();	// update ë¬¸ ì‹¤í–‰
 		return result;
 	} catch (Exception ex) {
 		jdbcUtil.rollback();
@@ -106,20 +106,20 @@ public class TodoDAO {
 	}
 	finally {
 		jdbcUtil.commit();
-		jdbcUtil.close();	// resource ¹İÈ¯
+		jdbcUtil.close();	// resource ë°˜í™˜
 	}		
 	return 0;
 }
 	/**
-	 * ÁÖ¾îÁø ID¿¡ ÇØ´çÇÏ´Â Ä¿¹Â´ÏÆ¼ Á¤º¸¸¦ »èÁ¦.
+	 * ì£¼ì–´ì§„ IDì— í•´ë‹¹í•˜ëŠ” ì»¤ë®¤ë‹ˆí‹° ì •ë³´ë¥¼ ì‚­ì œ.
 	 */
 	public int delete(int todo_id ) throws SQLException {
 		String sql = "DELETE FROM TODO WHERE todo_id=?";
 		Object[] param = new Object[] {todo_id};		
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil¿¡ delete¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtilì— deleteë¬¸ê³¼ ë§¤ê°œ ë³€ìˆ˜ ì„¤ì •
 
 		try {				
-			int result = jdbcUtil.executeUpdate();	// delete ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate();	// delete ë¬¸ ì‹¤í–‰
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -127,22 +127,22 @@ public class TodoDAO {
 		}
 		finally {
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ¹İÈ¯
+			jdbcUtil.close();	// resource ë°˜í™˜
 		}		
 		return 0;
 	}
 
 	/**
-	 * ³¯Â¥º° ÅõµÎ Á¤º¸¸¦ °Ë»öÇÏ¿© List¿¡ ÀúÀå ¹× ¹İÈ¯
+	 * ë‚ ì§œë³„ íˆ¬ë‘ ì •ë³´ë¥¼ ê²€ìƒ‰í•˜ì—¬ Listì— ì €ì¥ ë° ë°˜í™˜
 	 */
 	public List<Todo> findDateTodoList(java.sql.Date todo_date, String user_id) throws SQLException {
 		 String sql = "SELECT todo_id, content, todo_date, user_id, is_done "
       		   + "FROM TODO "
       		   + "WHERE todo_date >= ? AND todo_date < ? + 1 AND user_id = ? "; 
-		  jdbcUtil.setSqlAndParameters(sql, new Object[] {todo_date,todo_date, user_id});	// JDBCUtil¿¡ query¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+		  jdbcUtil.setSqlAndParameters(sql, new Object[] {todo_date,todo_date, user_id});	// JDBCUtilì— queryë¬¸ê³¼ ë§¤ê°œ ë³€ìˆ˜ ì„¤ì •
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query ½ÇÇà			
+			ResultSet rs = jdbcUtil.executeQuery();			// query ì‹¤í–‰			
 			List<Todo> todoList = new ArrayList<Todo>();	
 			while (rs.next()) {
 				Todo todo = new Todo(		
@@ -151,14 +151,14 @@ public class TodoDAO {
 						todo_date,
 						rs.getString("user_id"),
 						rs.getInt("is_done"));
-				todoList.add(todo);				// List¿¡ Community °´Ã¼ ÀúÀå
+				todoList.add(todo);				// Listì— Community ê°ì²´ ì €ì¥
 			}		
 			return todoList;					
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹İÈ¯
+			jdbcUtil.close();		// resource ë°˜í™˜
 		}
 		return null;
 	}
@@ -168,10 +168,10 @@ public class TodoDAO {
         String sql = "SELECT todo_id, content, todo_date, user_id, is_done " 
         		   + "FROM TODO "
         		   + "WHERE todo_date >= TO_DATE(SYSDATE) AND user_id = ? ";
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});		// JDBCUtil¿¡ query¹® ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});		// JDBCUtilì— queryë¬¸ ì„¤ì •
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query ½ÇÇà			
+			ResultSet rs = jdbcUtil.executeQuery();			// query ì‹¤í–‰			
 			List<Todo> todoList = new ArrayList<Todo>();	
 			while (rs.next()) {
 				Todo todo = new Todo(			
@@ -186,12 +186,12 @@ public class TodoDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹İÈ¯
+			jdbcUtil.close();		// resource ë°˜í™˜
 		}
 		return null;
 	}
 	
-	// ¼öÁ¤ÇÒ todoÀÇ Á¤º¸¸¦ °¡Á®¿È
+	// ìˆ˜ì •í•  todoì˜ ì •ë³´ë¥¼ ê°€ì ¸ì˜´
 	public Todo findTodo(java.sql.Date todo_date, int todo_id, String user_id) throws SQLException {
         String sql = "SELECT todo_id, content, todo_date, is_done " 
      		   + "FROM TODO "
@@ -200,7 +200,7 @@ public class TodoDAO {
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {todo_date, todo_date, todo_id, user_id});
 		Todo todo = null;
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query ½ÇÇà	
+			ResultSet rs = jdbcUtil.executeQuery();		// query ì‹¤í–‰	
 			if (rs.next()) {
 				 todo = new Todo(			
 						rs.getInt("todo_id"),
@@ -212,7 +212,7 @@ public class TodoDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹İÈ¯
+			jdbcUtil.close();		// resource ë°˜í™˜
 		}
 		return todo;
 	}
@@ -225,7 +225,7 @@ public class TodoDAO {
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {todo_id, user_id});
 		Todo todo = null;
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query ½ÇÇà	
+			ResultSet rs = jdbcUtil.executeQuery();		// query ì‹¤í–‰	
 			if (rs.next()) {
 				 todo = new Todo(			
 						rs.getInt("todo_id"),
@@ -237,7 +237,7 @@ public class TodoDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹İÈ¯
+			jdbcUtil.close();		// resource ë°˜í™˜
 		}
 		return todo;
 	}
@@ -246,10 +246,10 @@ public class TodoDAO {
 		String sql = "SELECT todo_id, content, todo_date, user_id, is_done " 
      		   + "FROM TODO "
      		   + "WHERE todo_date >= ? AND todo_date < ? + 1 AND user_id = ? AND NOT todo_id =? ";
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {todo_date, todo_date, user_id, todo_id});		// JDBCUtil¿¡ query¹® ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {todo_date, todo_date, user_id, todo_id});		// JDBCUtilì— queryë¬¸ ì„¤ì •
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query ½ÇÇà			
+			ResultSet rs = jdbcUtil.executeQuery();			// query ì‹¤í–‰			
 			List<Todo> todoList = new ArrayList<Todo>();	
 			while (rs.next()) {
 				Todo todo = new Todo(			
@@ -264,7 +264,7 @@ public class TodoDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹İÈ¯
+			jdbcUtil.close();		// resource ë°˜í™˜
 		}
 		return null;
 	}
@@ -273,10 +273,10 @@ public class TodoDAO {
 		String sql = "SELECT todo_id, content, todo_date, user_id, is_done " 
      		   + "FROM TODO "
      		   + "WHERE todo_date >= TO_DATE(SYSDATE) AND user_id = ?  AND NOT todo_id =? ";
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id, todo_id});		// JDBCUtil¿¡ query¹® ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id, todo_id});		// JDBCUtilì— queryë¬¸ ì„¤ì •
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query ½ÇÇà			
+			ResultSet rs = jdbcUtil.executeQuery();			// query ì‹¤í–‰			
 			List<Todo> todoList = new ArrayList<Todo>();	
 			while (rs.next()) {
 				Todo todo = new Todo(			
@@ -291,7 +291,7 @@ public class TodoDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹İÈ¯
+			jdbcUtil.close();		// resource ë°˜í™˜
 		}
 		return null;
 	}
@@ -299,17 +299,17 @@ public class TodoDAO {
 	public int deleteUserAllTodo(String user_id) {
 		String sql = "DELETE FROM Todo "
 				+ "WHERE user_id=? ";
-			jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});		// JDBCUtil¿¡ query¹® ¼³Á¤
+			jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});		// JDBCUtilì— queryë¬¸ ì„¤ì •
 						
 			try {
-				int rlt = jdbcUtil.executeUpdate();			// query ½ÇÇà				
+				int rlt = jdbcUtil.executeUpdate();			// query ì‹¤í–‰				
 				return rlt;					
 			} catch (Exception ex) {
 				jdbcUtil.rollback();
 				ex.printStackTrace();
 			} finally {
 				jdbcUtil.commit();
-				jdbcUtil.close(); // resource ¹İÈ¯
+				jdbcUtil.close(); // resource ë°˜í™˜
 			}
 			return 0;
 	}

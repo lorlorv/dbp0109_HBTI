@@ -20,7 +20,7 @@ public class Group {
 	public Group() {
 		
 	}
-	// ±×·ì create¿¡ ¾²ÀÌ´Â »ı¼ºÀÚ
+	// ê·¸ë£¹ createì— ì“°ì´ëŠ” ìƒì„±ì
 	public Group(String name, String descr, String icon, String leader_id, int limitation, int hbti_id) {
 		this.name = name;
 		this.descr = descr;
@@ -30,7 +30,7 @@ public class Group {
 		this.hbti_id = hbti_id;
 	}
 
-	// ±×·ì find¿¡ ¾²ÀÌ´Â »ı¼ºÀÚ
+	// ê·¸ë£¹ findì— ì“°ì´ëŠ” ìƒì„±ì
 	public Group(int group_id, String name, String icon, String descr, int limitation) {
 		this.group_id = group_id;
 		this.name = name;

@@ -44,14 +44,14 @@ public class GroupManager {
 		return groupDAO.findLeader(group_id).getLeader_name();
 	}
 	
-	// user°¡ Ã§¸°Áö post¸¦ µî·ÏÇÏ¿´´ÂÁö È®ÀÎ
+	// userê°€ ì±Œë¦°ì§€ postë¥¼ ë“±ë¡í•˜ì˜€ëŠ”ì§€ í™•ì¸
 	public boolean isPost(String user_id) throws SQLException, ExistingChallengePostException {
 		if(postDAO.findPost(user_id) != null) {
-			throw new ExistingChallengePostException("ÀÌ¹Ì Ã§¸°Áö¸¦ ÀÎÁõÇÏ¼Ì½À´Ï´Ù. ³»ÀÏÀÇ Ã§¸°Áö¸¦ ±â´ëÇØÁÖ¼¼¿ä!");
+			throw new ExistingChallengePostException("ì´ë¯¸ ì±Œë¦°ì§€ë¥¼ ì¸ì¦í•˜ì…¨ìŠµë‹ˆë‹¤. ë‚´ì¼ì˜ ì±Œë¦°ì§€ë¥¼ ê¸°ëŒ€í•´ì£¼ì„¸ìš”!");
 		}
 		return false;
 	}
-	// user°¡ µî·ÏÇÑ post¸¦ °¡Á®¿È.
+	// userê°€ ë“±ë¡í•œ postë¥¼ ê°€ì ¸ì˜´.
 	public ChallengePost findPost (String user_id) throws SQLException{
 		return postDAO.findPost(user_id);
 	}
@@ -63,23 +63,23 @@ public class GroupManager {
 		return postDAO.addPost(post);
 	}
 	
-	// postÀÇ ÁÁ¾Æ¿ä ¹öÆ°
+	// postì˜ ì¢‹ì•„ìš” ë²„íŠ¼
 	public int updatePostLike(int post_id) {
 		return postDAO.updatePostLike(post_id);
 	}
 	
-	// ¼±ÅÃÇÑ post »èÁ¦
+	// ì„ íƒí•œ post ì‚­ì œ
 	public int deletePost(int post_id) throws SQLException{
 		return postDAO.deletePost(post_id);
 	}
 	
 	public int quitMember(int group_id, String quit_id, String user_id) throws DoNotQuitLeaderException {
 		if(quit_id.equals(user_id)) {
-			throw new DoNotQuitLeaderException("±×·ìÀåÀº °­ÅğÇÒ ¼ö ¾ø½À´Ï´Ù.");
+			throw new DoNotQuitLeaderException("ê·¸ë£¹ì¥ì€ ê°•í‡´í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 		}
 		return userDAO.quitGroup(quit_id);
 	}
-	// ±×·ì »èÁ¦ ½Ã ÇØ´ç ±×·ìÀÇ post°¡ ÀüºÎ »èÁ¦µÈ´Ù.
+	// ê·¸ë£¹ ì‚­ì œ ì‹œ í•´ë‹¹ ê·¸ë£¹ì˜ postê°€ ì „ë¶€ ì‚­ì œëœë‹¤.
 	public int deleteAllPost(int group_id) throws SQLException{
 		return postDAO.deleteAllPost(group_id);
 	}
