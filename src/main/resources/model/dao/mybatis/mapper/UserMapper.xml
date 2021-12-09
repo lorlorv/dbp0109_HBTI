@@ -51,17 +51,17 @@
 	<!-- Update User's GroupInfo -->
 	<update id="updateUserGroup">
 		UPDATE UserInfo
-		SET group_id = #{param1}
+		SET group_id = #{group_id}
 		WHERE user_id
-		= #{param2}
+		= #{user_id}
 	</update>
 
 	<!-- Update HBTI -->
 	<update id="updateHBTI">
 		UPDATE UserInfo
-		SET hbti_id = #{param1}
+		SET hbti_id = #{hbti_id}
 		WHERE user_id =
-		#{param2}
+		#{user_id}
 	</update>
 
 	<!-- Delete User -->

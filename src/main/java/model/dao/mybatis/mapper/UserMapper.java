@@ -1,6 +1,9 @@
 package model.dao.mybatis.mapper;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import model.User;
 
 public interface UserMapper {
@@ -15,9 +18,9 @@ public interface UserMapper {
 	
 	public int quitGroup(String user_id);
 	
-	public int updateUserGroup(int group_id, String user_id);
+	public int updateUserGroup(@Param("group_id") int group_id, @Param("user_id") String user_id);
 	
-	public int updateHBTI(int hbti_id, String user_id);
+	public int updateHBTI(@Param("hbti_id") int hbti_id, @Param("user_id") String user_id);
 	
 	public int deleteUser(String user_id);
 	
