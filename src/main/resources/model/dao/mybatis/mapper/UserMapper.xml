@@ -43,46 +43,50 @@
 	<!-- Quit Group 해당 유저는 그룹을 탈퇴 -->
 	<update id="quitGroup" parameterType="string">
 		UPDATE UserInfo
-		SET group_id = null
+		SET group_id
+		= null
 		WHERE user_id = #{user_id}
 	</update>
 
 	<!-- Update User's GroupInfo -->
 	<update id="updateUserGroup">
 		UPDATE UserInfo
-		SET group_id = #{param1}
-		WHERE user_id = #{param2}
+		SET group_id = #{group_id}
+		WHERE user_id
+		= #{user_id}
 	</update>
 
 	<!-- Update HBTI -->
 	<update id="updateHBTI">
 		UPDATE UserInfo
-		SET hbti_id = #{param1}
-		WHERE user_id = #{param2}
+		SET hbti_id = #{hbti_id}
+		WHERE user_id =
+		#{user_id}
 	</update>
 
 	<!-- Delete User -->
 	<delete id="deleteUser" parameterType="string">
-		DELETE FROM UserInfo
-		WHERE
-		user_id = #{user_id}
+		DELETE <include refid="userInfo_fragment"/>
 	</delete>
-
+	
+	<!-- Fragment -->
+	<sql id="userInfo_fragment">
+		FROM UserInfo
+		WHERE user_id = #{user_id}
+	</sql>
+	
 	<!-- 해당 유저가 존재하는지 확인 -->
 	<select id="existingUser" parameterType="string"
 		resultType="int">
 		SELECT COUNT(*)
-		FROM UserInfo
-		WHERE user_id =
-		#{user_id}
+		<include refid="userInfo_fragment"/>
 	</select>
 
 	<!-- 해당 유저가 그룹에 속해있는지 확인 -->
 	<select id="existingGroup" parameterType="string"
 		resultType="int">
 		SELECT NVL(group_id, 0) as group_id
-		FROM UserInfo
-		WHERE user_id = #{user_id}
+		<include refid="userInfo_fragment"/>
 	</select>
 
 	<!-- 해당 유저의 정보 반환 -->
@@ -90,8 +94,7 @@
 		resultType="User">
 		SELECT password, name, descr, image, NVL(group_id, 0) AS
 		group_id, hbti_id
-		FROM UserInfo
-		WHERE user_id = #{user_id}
+		<include refid="userInfo_fragment"/>
 	</select>
 
 	<!-- 해당 유저가 Todo를 완료한 날짜 select -->
