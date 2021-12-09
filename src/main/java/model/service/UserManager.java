@@ -265,7 +265,7 @@ public class UserManager {
 	}
 
 
-	// user_id의 todo 정보를 받아옴 ** 개선사항 : 날짜 파라미터를 받아 해당하는 달의 레코드만 select **
+	// user_id의 todo 정보를 받아옴
 	public List<String> isTodo(String user_id) throws SQLException {
 		return userDAO.isTodo(user_id);
 	}
@@ -311,17 +311,10 @@ public class UserManager {
 
 		int cnt = 0;
 		for (int i = 0; i < userList.size(); i++) {
-			int flag = hbtiDAO.didChallengeUser(userList.get(i));
-			if (flag != 0)
+			if (hbtiDAO.didChallengeUser(userList.get(i)) != 0)
 				cnt++;
 		}
 		return cnt;
-	}
-
-	// 랭킹 구하기
-	public int ranking(int hbti_id) {
-		return numOfUserWhoDidChallengeInGroup(hbti_id);
-
 	}
 
 	// 퍼센트 구하기
