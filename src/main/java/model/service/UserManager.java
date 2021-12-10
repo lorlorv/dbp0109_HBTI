@@ -300,18 +300,18 @@ public class UserManager {
 		groupList = hbtiDAO.group_idByHBTI(hbti_id);
 
 		// groupList의 List하나 씩 돌려보며 그 group의 User_id 가져오기 List로
-		Map<String, String[]> userList = new HashMap<>();
 		List<String> userListEachGroup = new ArrayList<>();
 		int cnt = 0;
 		for (int i = 0; i < groupList.size(); i++) {
 			int group_id = groupList.get(i);
 
 			userListEachGroup = hbtiDAO.userListEachGroup(group_id); // 그룹에 있는 user리스트 불러오기
-
+			
+			List<String> userList = new ArrayList<>();
 			for (int j = 0; j < userListEachGroup.size(); j++) {
-				String[] value = {userListEachGroup.get(j)};
-				userList.put("userList", value);
+				userList.add(userListEachGroup.get(j));
 			}
+			
 			cnt += hbtiDAO.todayChallegeUserNum(userList);
 		}
 		return cnt;
