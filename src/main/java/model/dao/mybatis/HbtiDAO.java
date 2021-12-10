@@ -68,7 +68,7 @@ public class HbtiDAO {
 	}
 
 	
-	public int todayChallegeUserNum(Map<String, String[]> userList) {
+	public int todayChallegeUserNum(List<String> userList) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
 			return sqlSession.getMapper(HbtiMapper.class).countTodayChallengeUserByUserId(userList);

@@ -14,5 +14,5 @@ public interface HbtiMapper {
 
 	public List<String> selectUserListByGroupId(int group_id);
 	
-	public int countTodayChallengeUserByUserId(Map<String, String[]> userList);
+	public int countTodayChallengeUserByUserId(List<String> userList);
 }
