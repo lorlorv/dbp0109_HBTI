@@ -1,6 +1,7 @@
 package model.dao.mybatis.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import model.HBTI;
 
@@ -12,6 +13,6 @@ public interface HbtiMapper {
 	public int selectGroupMemberNumByGroupId(int group_id);
 
 	public List<String> selectUserListByGroupId(int group_id);
-
-	public int selectTodayChallengeByUserId(String user_id);
+	
+	public int countTodayChallengeUserByUserId(Map<String, String[]> userList);
 }
