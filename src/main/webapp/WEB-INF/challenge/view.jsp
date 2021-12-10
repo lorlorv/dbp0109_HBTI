@@ -20,12 +20,7 @@
 
 <script>
 function postDelete() {
-	 if (confirm("챌린지를 정말 삭제하시겠습니까??") == true){
-		return true;
-	 } else{
-	
-	     return false;
-	 }	
+		return confirm("챌린지를 정말 삭제하시겠습니까??");
 }
 </script>
 </head>
@@ -87,7 +82,7 @@ function postDelete() {
 							</c:url>" id="a-deco">&nbsp;수정하기&nbsp;</a></span>
 					<span><a href="<c:url value='/challenge/delete'>
 							<c:param name="post_id" value='${postInfo.post_id}'/>
-							</c:url>" onclick="postDelete()" id="a-deco-remove">
+							</c:url>" onclick=" return postDelete()" id="a-deco-remove">
 			<i class="fas fa-trash-alt"></i>&nbsp;삭제하기&nbsp;</a></span>
 				</div>
 			
