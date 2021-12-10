@@ -15,7 +15,23 @@
 	type="text/css">
 <link rel="stylesheet" href="<c:url value='/css/group/groupMain.css' />"
 	type="text/css">
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+<script>
+
+$(function(){
+    $("#table tr").slice(0, 5).show(); // select the first ten
+    $("#load").click(function(e){ // click event for load more
+        e.preventDefault();
+        $("#table tr:hidden").slice(0, 5).show(); // select next 10 hidden divs and show them
+        if($("#table tr:hidden").length == 0){ // check if any hidden divs still exist
+            alert("더 이상 가져올 챌린지 게시물이 없습니다."); // alert if there are none left
+        }
+    });
+});
+
+</script>
 </head>
 <body>
 	<div class="page-wrapper">
@@ -102,11 +118,12 @@
 			<p id="contents-title">CHALLENGE POST</p>
 			<p id="intro">
 				오늘의 챌린지를 완료해서 HBTI 랭킹 1등을 차지하세요!<br>
+				게시물을 클릭해 상세 내용을 확인할 수 있습니다.
 			</p>
 			<div class="challenge-list">
-				<table class="challenge-table">
+				<table id="table" class="challenge-table">
 					<c:forEach var="post" items="${postList}">
-						<tr
+						<tr id="list"
 							onClick="location.href='<c:url value='/challenge/view'>
 												<c:param name="writer_id" value='${post.writer_id}'/>
 												</c:url>'">
@@ -122,6 +139,7 @@
 						</tr>
 					</c:forEach>
 				</table>
+				<a href="#" id="load">더 보기</a>
 			</div>
 			<div style="cursor: pointer;" onclick="window.scrollTo(0,0);">
 				<i class="fas fa-caret-square-up fa-3x"></i>
