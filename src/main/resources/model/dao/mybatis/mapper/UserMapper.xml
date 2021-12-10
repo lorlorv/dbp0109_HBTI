@@ -16,7 +16,7 @@
 	</insert>
 
 	<!-- Login 시간 갱신 -->
-	<update id="updateLoginDate" parameterType="string">
+	<update id="updateLoginDate" parameterType="String">
 		UPDATE UserInfo
 		SET
 		login_date = sysdate
@@ -41,7 +41,7 @@
 	</update>
 
 	<!-- Quit Group 해당 유저는 그룹을 탈퇴 -->
-	<update id="quitGroup" parameterType="string">
+	<update id="quitGroup" parameterType="String">
 		UPDATE UserInfo
 		SET group_id
 		= null
@@ -65,7 +65,7 @@
 	</update>
 
 	<!-- Delete User -->
-	<delete id="deleteUser" parameterType="string">
+	<delete id="deleteUser" parameterType="String">
 		DELETE <include refid="userInfo_fragment"/>
 	</delete>
 	
@@ -76,21 +76,21 @@
 	</sql>
 	
 	<!-- 해당 유저가 존재하는지 확인 -->
-	<select id="existingUser" parameterType="string"
+	<select id="existingUser" parameterType="String"
 		resultType="int">
 		SELECT COUNT(*)
 		<include refid="userInfo_fragment"/>
 	</select>
 
 	<!-- 해당 유저가 그룹에 속해있는지 확인 -->
-	<select id="existingGroup" parameterType="string"
+	<select id="existingGroup" parameterType="String"
 		resultType="int">
 		SELECT NVL(group_id, 0) as group_id
 		<include refid="userInfo_fragment"/>
 	</select>
 
 	<!-- 해당 유저의 정보 반환 -->
-	<select id="selectUserByUserId" parameterType="string"
+	<select id="selectUserByUserId" parameterType="String"
 		resultType="User">
 		SELECT password, name, descr, image, NVL(group_id, 0) AS
 		group_id, hbti_id
@@ -98,7 +98,7 @@
 	</select>
 
 	<!-- 해당 유저가 Todo를 완료한 날짜 select -->
-	<select id="selectTodoListByUserId" resultType="string">
+	<select id="selectTodoListByUserId" resultType="String">
 		SELECT
 		TO_CHAR(todo_date, 'yyyy-mm-dd') AS todo_date
 		FROM Todo
@@ -108,7 +108,7 @@
 	</select>
 
 	<!-- 해당 유저가 Challenge를 완료한 날짜 select -->
-	<select id="selectChallengePostListByUserId" resultType="string">
+	<select id="selectChallengePostListByUserId" resultType="String">
 		SELECT
 		TO_CHAR(write_date, 'yyyy-mm-dd') AS write_date
 		FROM ChallengePost
