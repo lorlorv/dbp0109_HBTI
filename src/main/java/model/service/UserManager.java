@@ -2,7 +2,9 @@ package model.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import model.Group;
 import model.User;
@@ -291,28 +293,26 @@ public class UserManager {
 		return sum;
 	}
 
+	
 	public int numOfUserWhoDidChallengeInGroup(int hbti_id) {
 		// 일단 hbti_id인 group이 뭐가 있는지 group_id 찾아오기
 		List<Integer> groupList = new ArrayList<>();
 		groupList = hbtiDAO.group_idByHBTI(hbti_id);
 
 		// groupList의 List하나 씩 돌려보며 그 group의 User_id 가져오기 List로
-		List<String> userList = new ArrayList<>();
+		Map<String, String[]> userList = new HashMap<>();
 		List<String> userListEachGroup = new ArrayList<>();
+		int cnt = 0;
 		for (int i = 0; i < groupList.size(); i++) {
 			int group_id = groupList.get(i);
 
 			userListEachGroup = hbtiDAO.userListEachGroup(group_id); // 그룹에 있는 user리스트 불러오기
 
 			for (int j = 0; j < userListEachGroup.size(); j++) {
-				userList.add(userListEachGroup.get(j)); // 그룹마다 가져오기
-			} // 여기까지 하면 한 hbti에 속한 모든 user_id list
-		}
-
-		int cnt = 0;
-		for (int i = 0; i < userList.size(); i++) {
-			if (hbtiDAO.didChallengeUser(userList.get(i)) != 0)
-				cnt++;
+				String[] value = {userListEachGroup.get(j)};
+				userList.put("userList", value);
+			}
+			cnt += hbtiDAO.todayChallegeUserNum(userList);
 		}
 		return cnt;
 	}
