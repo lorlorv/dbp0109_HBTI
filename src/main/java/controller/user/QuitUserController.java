@@ -14,6 +14,7 @@ public class QuitUserController implements Controller {
 		UserManager manager = UserManager.getInstance();
 		String remove_user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		
+		//회원 삭제
 		manager.remove(remove_user_id);
 		
 		return "/user/loginForm.jsp";

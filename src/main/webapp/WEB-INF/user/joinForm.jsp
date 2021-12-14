@@ -64,7 +64,6 @@
 			<form name="form" method="POST" action="<c:url value='/user/join'/>" enctype="multipart/form-data">
 				<div class="join-form">
 
-
 					<c:if test="${registerFailed}">
 						<font color="red"><c:out value="${exception.getMessage()}" /></font>
 					</c:if>
@@ -105,7 +104,6 @@
 					<input type="button" value="HBTI TEST →" onClick="userCreate()">
 				</div>
 			</form>
-
 		</div>
 	</div>
 </body>

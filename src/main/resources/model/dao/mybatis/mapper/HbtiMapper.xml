@@ -12,6 +12,13 @@
 		FROM HBTI
 		WHERE hbti_id = #{hbti_id}
 	</select>
+	
+	<select id="selectHbtiImgByName" parameterType="String"
+		resultType="String">
+		SELECT icon
+		FROM HBTI
+		WHERE name = #{name}
+	</select>
 
 	<!-- 랭킹에 사용 -->
 

@@ -22,7 +22,7 @@ public class MyPageController implements Controller {
     	UserManager manager = UserManager.getInstance();
     	
     	String user_id = UserSessionUtils.getLoginUserId(request.getSession());
-		
+    	
     	if(request.getServletPath().equals("/group/main")) {
     		return "redirect:/group/main";
     	}
@@ -35,8 +35,6 @@ public class MyPageController implements Controller {
 		/* Calendar */
 		List<String> is_todo = manager.isTodo(user_id);
 		List<String> is_challenged = manager.isChallenged(user_id);
-
-		log.debug("MyPage User : {}", user);
 		
     	request.setAttribute("user", user);
     	request.setAttribute("group_name", group_name);

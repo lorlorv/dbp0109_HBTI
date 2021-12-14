@@ -70,7 +70,6 @@
 				action="<c:url value='/user/update'/>" enctype="multipart/form-data">
 				<div class="join-form">
 
-
 					<c:if test="${registerFailed}">
 						<font color="red"><c:out value="${exception.getMessage()}" /></font>
 					</c:if>
@@ -110,9 +109,9 @@
 					</div>
 
 					<input type="button" value="정보 수정 완료!" onClick="userUpdate()">
+					
 				</div>
 			</form>
-
 		</div>
 	</div>
 </body>

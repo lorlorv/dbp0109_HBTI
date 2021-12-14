@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -46,6 +45,15 @@ public class HbtiDAO {
 			sqlSession.close();
 		}
 	}
+	
+	public String findHbtiImg(String name) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			return sqlSession.getMapper(HbtiMapper.class).selectHbtiImgByName(name);
+		} finally {
+			sqlSession.close();
+		}
+	}
 
 	/* 그 group에 해당하는 member수 구하기 */
 	public int getNumberOfUsersInGroup(int group_id) {
@@ -67,7 +75,6 @@ public class HbtiDAO {
 		}
 	}
 
-	
 	public int todayChallegeUserNum(List<String> userList) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {

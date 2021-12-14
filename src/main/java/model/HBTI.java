@@ -19,7 +19,6 @@ public class HBTI implements Serializable{
 		super();
 	}
 	
-	
 	public HBTI(String name, int hbti_id, int goodHbti, int badHbti, String icon, String good_descr, String bad_descr, String exercise) {
 		super();
 		this.name = name;
@@ -31,7 +30,6 @@ public class HBTI implements Serializable{
 		this.bad_descr = bad_descr;
 		this.exercise = exercise;
 	}
-
 
 	public String getName() {
 		return name;
@@ -75,19 +73,11 @@ public class HBTI implements Serializable{
 	public void setBad_descr(String bad_descr) {
 		this.bad_descr = bad_descr;
 	}
-
-
 	public String getExercise() {
 		return exercise;
 	}
-
-
 	public void setExercise(String exercise) {
 		this.exercise = exercise;
 	}
 	
-	
-	
-	
-
 }
