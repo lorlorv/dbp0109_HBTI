@@ -326,7 +326,7 @@
 						<!-- label은 마우스로 클릭을 편하게 해줌 -->
 						<td><label onclick="prevCalendar()"><i
 								class="fas fa-chevron-left"></i></label></td>
-						<td align="center" id="tbCalendarYM" colspan="5">yyyy년 m월</td>
+						<td align="center" id="tbCalendarYM" colspan="5" style="font-size:20px;">yyyy년 m월</td>
 						<td><label onclick="nextCalendar()"><i
 								class="fas fa-chevron-right"></i></label></td>
 					</tr>
@@ -341,8 +341,8 @@
 					</tr>
 				</table>
 				<script>
-		    buildCalendar();
-			</script>
+		    		buildCalendar();
+				</script>
 			</div>
 		</div>
 	</div>
