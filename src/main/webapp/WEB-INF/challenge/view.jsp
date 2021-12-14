@@ -59,8 +59,6 @@ function postDelete() {
 	<div class="contents">
 		<p id="sub-title">CHALLENGE POST</p>
 		<div class="contents-split">
-		<span><a href="<c:url value='/group/main'/> " id="a-deco">&nbsp;돌아가기&nbsp;</a></span>
-		
 				<p id="contents-title">${postInfo.writer_name} 님의 챌린지 인증</p>
 				<p id="intro">
 					<a href="<c:url value='/challenge/updateLike_btn'>
@@ -77,6 +75,9 @@ function postDelete() {
 				<div class="challenge-content">${postInfo.content }</div>
 				<p>
 				<div>
+					<span>
+						<a href="<c:url value='/group/main'/> " id="a-deco" class="right">&nbsp;돌아가기&nbsp;</a>
+					</span>
 					<span><a href="<c:url value='/challenge/updateForm'>
 							<c:param name="writer_id" value="${postInfo.writer_id }"/>
 							</c:url>" id="a-deco">&nbsp;수정하기&nbsp;</a></span>
