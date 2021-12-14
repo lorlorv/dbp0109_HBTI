@@ -34,6 +34,15 @@ public class HbtiDAO {
 		} finally {
 			sqlSession.close();
 		}
+	}	
+	
+	public String findHbtiImg(String name) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			return sqlSession.getMapper(HbtiMapper.class).selectHbtiImgByName(name);
+		} finally {
+			sqlSession.close();
+		}
 	}
 	
 	/* hbti가 hbti_id인 group_id 반환 */
@@ -46,14 +55,7 @@ public class HbtiDAO {
 		}
 	}
 	
-	public String findHbtiImg(String name) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try {
-			return sqlSession.getMapper(HbtiMapper.class).selectHbtiImgByName(name);
-		} finally {
-			sqlSession.close();
-		}
-	}
+
 
 	/* 그 group에 해당하는 member수 구하기 */
 	public int getNumberOfUsersInGroup(int group_id) {
