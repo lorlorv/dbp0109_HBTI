@@ -271,7 +271,7 @@ public class UserManager {
 	public List<String> isTodo(String user_id) throws SQLException {
 		return userDAO.isTodo(user_id);
 	}
-
+	// user_id의 Challenge 정보를 받아옴
 	public List<String> isChallenged(String user_id) throws SQLException {
 		return userDAO.isChallenged(user_id);
 	}
