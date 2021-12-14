@@ -162,8 +162,18 @@
 						</c:if>
 
 						<c:if test="${status.index eq 1  }">
-							<td class="td1"><img id="ranking-image"
-								src="<c:url value='/images/hbti_img/${img.value}.JPG'/>" /></td>
+						<c:if
+								test="${rankValue[status.index] ne 0.0 || rankValue[status.index] ne 0.0}">
+								<td class="td1"><img id="ranking-image"
+									src="<c:url value='/images/hbti_img/${img.value}.JPG'/>" /></td>
+							</c:if>
+
+							<c:if
+								test="${rankValue[status.index] eq 0.0 || rankValue[status.index] eq 0.0}">
+								<td class="td1"><img id="ranking-image"
+									style="width: 150px;"
+									src="<c:url value='/images/mypage_img/profile-image.jpg'/>" /></td>
+							</c:if>
 						</c:if>
 					</c:forEach>
 				</tr>
@@ -179,7 +189,13 @@
 							</c:if>
 						</c:if>
 						<c:if test="${status.index eq 1  }">
-							<td style="font-size: 15px;">${img.key }</td>
+							<c:if
+								test="${rankValue[status.index] ne 0.0 || rankValue[status.index] ne 0.0}">
+								<td style="font-size: 15px;">${img.key }</td>
+							</c:if>
+							<c:if test="${rankValue[status.index] eq 0.0}">
+								<td></td>
+							</c:if>
 						</c:if>
 					</c:forEach>
 				</tr>

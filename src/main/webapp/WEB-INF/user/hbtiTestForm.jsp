@@ -91,9 +91,6 @@
 		}
 		form.submit();
 	}
-	/* 	function jbFunc() {
-	 document.getElementById('jb').value += '10';
-	 } */
 </script>
 </head>
 <body>
