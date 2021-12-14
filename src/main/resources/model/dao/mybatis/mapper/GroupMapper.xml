@@ -43,7 +43,7 @@
 	<!-- user_id의 group_id를 구함 -->
 	<select id="selectGroupIdByUserId" parameterType="String"
 	resultType="int">
-		SELECT group_id
+		SELECT NVL(group_id, 0) AS group_id
 		FROM UserInfo
 		WHERE user_id = #{user_id}
 	</select>
