@@ -165,7 +165,6 @@
 						<c:if
 								test="${rankValue[status.index] ne 0.0 || rankValue[status.index] ne 0.0}">
 								<td class="td1"><img id="ranking-image"
-									style="width: 150px;"
 									src="<c:url value='/images/hbti_img/${img.value}.JPG'/>" /></td>
 							</c:if>
 
