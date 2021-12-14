@@ -91,12 +91,12 @@ function modifyDateTodo() {
 			</div>
 			
 			<p>
-			<c:forEach var="todo" items="${todoList}">
+			
 				<a id="a-deco" 
-								href="<c:url value="/todo/date">
-									<c:param name="todo_date" value='${todo.todo_date }'/>
-									</c:url>">완료</a>
-				</c:forEach>
+						href="<c:url value="/todo/date">
+							<c:param name="todo_date" value='${todoList[0].todo_date }'/>
+							</c:url>">완료</a>
+
 		</div>
 	</div>
 

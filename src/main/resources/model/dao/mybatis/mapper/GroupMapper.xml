@@ -33,7 +33,7 @@
 	</select>
 	
 	<!-- group_id의 그룹 정보를 반환 -->
-	<select id="selectGroupByGroupId" parameterType="int"
+		<select id="selectGroupByGroupId" parameterType="int"
 	resultType="Group">
 	 	SELECT  g.name AS name, icon, g.descr AS descr, leader_id , g.hbti_id AS hbti_id, content AS challengeContent, limitation
 		FROM GroupInfo g, DayOfChallenge d, Challenge c
@@ -72,7 +72,7 @@
 		WHERE hbti_id = #{hbti_id}
 	</select>
 	
-	<!-- group_id의 리더 id를 반환 -->
+	<!-- group_id의 리더를 반환 -->
 	<select id="selectGroupLeaderByGroupId" parameterType="int"
 	resultType="Group">
 		SELECT u.name AS leader_name, leader_id

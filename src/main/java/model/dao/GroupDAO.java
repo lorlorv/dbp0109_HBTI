@@ -13,32 +13,37 @@ public class GroupDAO {
 	private JDBCUtil jdbcUtil = null;
 
 	public GroupDAO() {
-		jdbcUtil = new JDBCUtil(); // JDBCUtil °´Ã¼ »ý¼º
+		jdbcUtil = new JDBCUtil(); // JDBCUtil ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 	}
 
-	// hbti_idÀÇ ±×·ì ¸®½ºÆ®¸¦ ±¸ÇÔ
+	// hbti_idï¿½ï¿½ ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public List<Group> findGroupList(int hbti_id) throws SQLException {
 		String sql = "SELECT group_id, name, icon, descr ,limitation " + "FROM GroupInfo " + "WHERE hbti_id=? "
 				+ "ORDER BY group_id DESC ";
-		jdbcUtil.setSqlAndParameters(sql, new Object[] { hbti_id }); // JDBCUtil¿¡ query¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { hbti_id }); // JDBCUtilï¿½ï¿½ queryï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		List<Group> groupList = new ArrayList<Group>();
 		try {
-			ResultSet rs = jdbcUtil.executeQuery(); // query ½ÇÇà
+			ResultSet rs = jdbcUtil.executeQuery(); // query ï¿½ï¿½ï¿½ï¿½
 			while (rs.next()) {
-				Group g = new Group(rs.getInt("group_id"), rs.getString("name"), rs.getString("icon"),
-						rs.getString("descr"), rs.getInt("limitation"));
+				Group g = new Group(
+						rs.getInt("group_id"),
+						rs.getString("name"),
+						rs.getString("icon"),
+						rs.getString("descr"),
+						rs.getInt("limitation"),
+						hbti_id);
 				groupList.add(g);
 			}
 			return groupList;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close(); // resource ¹ÝÈ¯
+			jdbcUtil.close(); // resource ï¿½ï¿½È¯
 		}
 		return null;
 	}
 
-	// Å°¿öµå¿¡ ¸Â´Â ±×·ì ¸®½ºÆ®¸¦ ¹ÝÈ¯
+	// Å°ï¿½ï¿½ï¿½å¿¡ ï¿½Â´ï¿½ ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½È¯
 	public List<Group> searchGroupList(int hbti_id, String keyword) throws SQLException {
 		String sql = "SELECT group_id, name, icon, descr, limitation " + "FROM GroupInfo "
 				+ "WHERE hbti_id=? AND name LIKE ? " // keyword 'ad%'
@@ -46,27 +51,32 @@ public class GroupDAO {
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { hbti_id, keyword });
 		List<Group> groupList = new ArrayList<Group>();
 		try {
-			ResultSet rs = jdbcUtil.executeQuery(); // query ½ÇÇà
+			ResultSet rs = jdbcUtil.executeQuery(); // query ï¿½ï¿½ï¿½ï¿½
 			while (rs.next()) {
-				Group g = new Group(rs.getInt("group_id"), rs.getString("name"), rs.getString("icon"),
-						rs.getString("descr"), rs.getInt("limitation"));
+				Group g = new Group(
+						rs.getInt("group_id"),
+						rs.getString("name"),
+						rs.getString("icon"),
+						rs.getString("descr"),
+						rs.getInt("limitation"),
+						hbti_id);
 				groupList.add(g);
 			}
 			return groupList;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close(); // resource ¹ÝÈ¯
+			jdbcUtil.close(); // resource ï¿½ï¿½È¯
 		}
 		return null;
 	}
 
-	// group_idÀÇ ±×·ì¿ø ¸®½ºÆ®¸¦ ±¸ÇÔ
+	// group_idï¿½ï¿½ ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public List<User> findUserList(int group_id) throws SQLException {
 		String sql = "SELECT user_id, name, image, login_date " + "FROM UserInfo " + "WHERE group_id = ? ";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { group_id });
 		try {
-			ResultSet rs = jdbcUtil.executeQuery(); // query ½ÇÇà
+			ResultSet rs = jdbcUtil.executeQuery(); // query ï¿½ï¿½ï¿½ï¿½
 			List<User> userList = new ArrayList<User>();
 			while (rs.next()) {
 				userList.add(new User(rs.getString("user_id"), rs.getString("name"), rs.getString("image"),
@@ -76,12 +86,12 @@ public class GroupDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close(); // resource ¹ÝÈ¯
+			jdbcUtil.close(); // resource ï¿½ï¿½È¯
 		}
 		return null;
 	}
 	
-	// group_idÀÇ ±×·ì Á¤º¸¸¦ ¹ÝÈ¯
+	// group_idï¿½ï¿½ ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
 	public Group findGroup(int group_id) throws SQLException {
 		String sql = "SELECT  g.name AS g_name, icon, g.descr AS g_descr, leader_id , g.hbti_id AS hbti_id, content, limitation "
 				+ "FROM GroupInfo g, DayOfChallenge d, Challenge c "
@@ -90,10 +100,16 @@ public class GroupDAO {
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
 			if (rs.next()) {
-				Group group = new Group(group_id, rs.getString("g_name"), rs.getString("icon"), rs.getString("g_descr"),
-						rs.getInt("limitation"));
+				Group group = new Group(
+						group_id,
+						rs.getString("g_name"),
+						rs.getString("icon"), 
+						rs.getString("g_descr"),
+						rs.getInt("limitation"),
+						rs.getInt("hbti_id")
+						);
 				group.setLeader_id(rs.getString("leader_id"));
-				group.setHbti_id(rs.getInt("hbti_id"));
+				
 				group.setChallengeContent(rs.getString("content"));
 
 				return group;
@@ -106,7 +122,7 @@ public class GroupDAO {
 		return null;
 	}
 	
-	// À¯ÀúIDÀÇ ±×·ìID¸¦ Ã£¾Æ¿È
+	// ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½ ï¿½×·ï¿½IDï¿½ï¿½ Ã£ï¿½Æ¿ï¿½
 	public int findGroupUserId(String user_id) {
 		String sql = "SELECT group_id "
 				+ "FROM UserInfo "
@@ -126,7 +142,7 @@ public class GroupDAO {
 		}
 		return 0;
 	}
-	// group_idÀÇ ±×·ì¿ø ÀÎ¿øÀ» ¹ÝÈ¯
+	// group_idï¿½ï¿½ ï¿½×·ï¿½ï¿½ ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
 	public int findNumberOfMember(int group_id) throws SQLException {
 		String sql = "SELECT COUNT(*) AS cnt "
 				+ "FROM UserInfo "
@@ -147,7 +163,7 @@ public class GroupDAO {
 		return 0;
 	}
 
-	// group_id¸¦ ÅëÇØ ±×·ì ÀÌ¸§À» ¹ÝÈ¯
+	// group_idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
 	public String findGroupName(int group_id) throws SQLException {
 		String sql = "SELECT name " 
 					+ "FROM GroupInfo " 
@@ -168,7 +184,7 @@ public class GroupDAO {
 		return null;
 	}
 	
-	// »ý¼ºµÈ ±×·ìÀÇ ÃÑ °³¼ö ¹ÝÈ¯
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
 	public int findGroupCnt(int hbti_id) throws SQLException {
 		String sql = "SELECT COUNT(group_id) "
 					+ "FROM GroupInfo "
@@ -187,8 +203,8 @@ public class GroupDAO {
 		return 0; //
 	}
 	
-	//group_idÀÇ ¸®´õ id¸¦ ¹ÝÈ¯
-	public String findLeaderId(int group_id) { //±× ±×·ìÀÇ leader Ã£¾Æ¿À±â
+	//group_idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ idï¿½ï¿½ ï¿½ï¿½È¯
+	public String findLeaderId(int group_id) { //ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ leader Ã£ï¿½Æ¿ï¿½ï¿½ï¿½
 		String sql = "SELECT leader_id " 
 					+ "FROM GROUPINFO " 
 					+ "WHERE group_id=? ";
@@ -209,7 +225,7 @@ public class GroupDAO {
 		return null;
 	}
 	
-	// group_idÀÇ ¸®´õ ÀÌ¸§À» ¹ÝÈ¯
+	// group_idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
 	public String findLeaderName(int group_id) throws SQLException {
 		String sql = "SELECT u.name AS name " 
 					+ "FROM GroupInfo g JOIN UserInfo u ON g.leader_id = u.user_id "
@@ -228,7 +244,7 @@ public class GroupDAO {
 		return null;
 	}
 	
-	// ´ÙÀ½ ¸®´õ ÈÄº¸¸¦ ¹ÝÈ¯
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Äºï¿½ï¿½ï¿½ ï¿½ï¿½È¯
 	public String findNextLeader(String user_id, int group_id) { 
 		String sql = "SELECT user_id " 
 					+ "FROM USERINFO " 
@@ -241,7 +257,7 @@ public class GroupDAO {
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
 			
-			// Ã¹¹øÂ° ·¹ÄÚµå¸¸ È®ÀÎ (°¡Àå ÃÖ±Ù Á¢¼ÓÇÑ À¯Àú)
+			// Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½Úµå¸¸ È®ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 			if (rs.next()) {
 				return rs.getString("user_id");
 			}
@@ -250,10 +266,10 @@ public class GroupDAO {
 		} finally {
 			jdbcUtil.close();
 		}
-		return null; // ±×·ìÀå ¿Ü¿¡ ¾Æ¹« ¸â¹ö°¡ ¾ø´Ù¸é nullÀ» ¹ÝÈ¯
+		return null; // ï¿½×·ï¿½ï¿½ï¿½ ï¿½Ü¿ï¿½ ï¿½Æ¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ nullï¿½ï¿½ ï¿½ï¿½È¯
 	}
 
-	// ±×·ìÀÇ ¸®´õ º¯°æ
+	// ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int updateLeader(String leader_id, int group_id) throws SQLException{
 		String sql = "UPDATE GROUPINFO " 
 					+ "SET leader_id=? " 
@@ -274,7 +290,7 @@ public class GroupDAO {
 		return 0;
 	}
 	
-	// ±×·ì ÀÌ¸§ÀÌ Á¸ÀçÇÏ´ÂÁö È®ÀÎ
+	// ï¿½×·ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	public boolean existingGroupName(String group_name) throws SQLException {
 		String sql = "SELECT name " + "FROM GroupInfo " + "WHERE name = ?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { group_name });
@@ -291,7 +307,7 @@ public class GroupDAO {
 		return false;
 	}
 
-	// ±×·ì ÀÌ¸§À¸·Î ±×·ì ¾ÆÀÌµð¸¦ Ã£¾Æ³¿
+	// ï¿½×·ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½Æ³ï¿½
 	public int findGroupId(String name) throws SQLException {
 		String sql = "SELECT group_id " 
 					+ "FROM GroupInfo " 
@@ -310,7 +326,7 @@ public class GroupDAO {
 		return 0;
 	}
 	
-	// ±×·ì »ý¼º
+	// ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int create(Group group) throws SQLException {
 		String sql = "INSERT INTO GroupInfo VALUES (GROUP_SEQ.NEXTVAL, ?, SYSDATE, ?, ?, ?, ?, ?)";
 		Object[] param = new Object[] { group.getName(), group.getIcon(), group.getDescr(), group.getHbti_id(),
@@ -318,19 +334,19 @@ public class GroupDAO {
 		jdbcUtil.setSqlAndParameters(sql, param);
 
 		try {
-			int result = jdbcUtil.executeUpdate(); // insert ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate(); // insert ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
-			jdbcUtil.close(); // resource ¹ÝÈ¯
+			jdbcUtil.close(); // resource ï¿½ï¿½È¯
 		}
 		return 0;
 	}
 
-	// ±×·ì Á¤º¸ ¼öÁ¤
+	// ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int update(Group group) {
 		String sql = "UPDATE GroupInfo " + "SET name=?, icon=?, descr=?, limitation=? " + "WHERE group_id=?";
 		Object[] param = new Object[] { group.getName(), group.getIcon(), group.getDescr(), group.getLimitation(),
@@ -338,19 +354,19 @@ public class GroupDAO {
 		jdbcUtil.setSqlAndParameters(sql, param);
 
 		try {
-			int result = jdbcUtil.executeUpdate(); // insert ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate(); // insert ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
-			jdbcUtil.close(); // resource ¹ÝÈ¯
+			jdbcUtil.close(); // resource ï¿½ï¿½È¯
 		}
 		return 0;
 	}
 
-	// ±×·ì »èÁ¦
+	// ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int delete(int group_id) throws SQLException {
 		String sql = "DELETE FROM GroupInfo " + "WHERE group_id=? ";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { group_id });
@@ -363,12 +379,12 @@ public class GroupDAO {
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
-			jdbcUtil.close(); // resource ¹ÝÈ¯
+			jdbcUtil.close(); // resource ï¿½ï¿½È¯
 		}
 		return 0;
 	}
 	
-	// Ã§¸°Áö ¸®½ºÆ® °³¼ö ¹ÝÈ¯
+	// Ã§ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
 	public int cntOfChallengeList() {
 		String sql = "SELECT COUNT(*) AS cnt " 
 					+ "FROM Challenge";
@@ -386,7 +402,7 @@ public class GroupDAO {
 		return 0;
 	}
 	
-	// ·£´ýÀ¸·Î Ã§¸°Áö ¹èÁ¤
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã§ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int assignChallenge(int cntList) throws SQLException {
 		String sql = "UPDATE DayOfChallenge d "
 					+ "SET d.challenge_id = ROUND(DBMS_RANDOM.VALUE(1, ?)) " 
@@ -395,14 +411,14 @@ public class GroupDAO {
 		jdbcUtil.setSqlAndParameters(sql, param);
 
 		try {
-			int result = jdbcUtil.executeUpdate(); // insert ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate(); // insert ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
-			jdbcUtil.close(); // resource ¹ÝÈ¯
+			jdbcUtil.close(); // resource ï¿½ï¿½È¯
 		}
 		return 0;
 	}
