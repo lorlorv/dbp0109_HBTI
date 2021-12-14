@@ -39,7 +39,6 @@ public class MainController implements Controller {
 			request.setAttribute("goodName", goodName);
 			request.setAttribute("badName", badName);
 
-			
 			/* Ranking */
 
 			Map<String, Double> percentMap = new HashMap<String, Double>();
@@ -55,26 +54,26 @@ public class MainController implements Controller {
 			// 비교함수 Comparator를 사용하여 내림 차순으로 정렬
 			Collections.sort(list_entries, new Comparator<Entry<String, Double>>() {
 				// compare로 값을 비교
-				public int compare(Entry<String, Double> obj1, Entry<String, Double> obj2)
-				{
+				public int compare(Entry<String, Double> obj1, Entry<String, Double> obj2) {
 					// 내림 차순으로 정렬
 					return obj2.getValue().compareTo(obj1.getValue());
 				}
 			});
-			
-			/*
-			 * System.out.println("내림 차순 정렬"); // 결과 출력 for(Entry<String, Double> entry :
-			 * list_entries) { System.out.println(entry.getKey() + " : " +
-			 * entry.getValue()); }
-			 */
-			
+
+
 			Map<String, String> imgMap = new LinkedHashMap<String, String>();
 			imgMap.put(list_entries.get(1).getKey(), hbtiManager.findHbtiImg(list_entries.get(1).getKey()));
 			imgMap.put(list_entries.get(0).getKey(), hbtiManager.findHbtiImg(list_entries.get(0).getKey()));
 			imgMap.put(list_entries.get(2).getKey(), hbtiManager.findHbtiImg(list_entries.get(2).getKey()));
-			
+
+			List<Double> rankValue = new ArrayList<>();
+			rankValue.add(list_entries.get(1).getValue());
+			rankValue.add(list_entries.get(0).getValue());
+			rankValue.add(list_entries.get(2).getValue());
+
 			request.setAttribute("rank", list_entries);
 			request.setAttribute("rank_img", imgMap);
+			request.setAttribute("rankValue", rankValue);
 		}
 		return "/main/main.jsp";
 	}

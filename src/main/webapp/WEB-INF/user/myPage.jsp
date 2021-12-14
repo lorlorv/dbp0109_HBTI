@@ -33,7 +33,12 @@
 	}
 	function userQuit(targetUri) {
 		form.action = targetUri;
-		form.submit();
+		if (confirm("정말 HBTI에서 탈퇴하시겠습니까?") == true) {
+			form.submit();
+		} 
+		else { //취소
+			return false;
+		}
 	}
 	function HBTIreTest(targetUri) {
 		form.action = targetUri;
@@ -41,12 +46,19 @@
 	}
 	function groupQuit(targetUri) {
 		form.action = targetUri;
-		form.submit();
+		if (confirm("정말 그룹에서 탈퇴하시겠습니까?") == true) {
+			form.submit();
+		} 
+		else { //취소
+			return false;
+		}
 	}
 	function goToGroup(targetURI) {
 		form.action = targetURI;
 		form.submit();
 	}
+	
+	
 	
 	/* Calendar  */
 	var paramDate = ""; //DB에서 가져온 값과 일치하는 지 확인 할 Date + parameter로 보낼 Date (yyyy-mm-dd)
@@ -112,20 +124,20 @@
    			
       		<c:forEach items="${isTodo}" var="isTodo">
 				if(paramDate2 == "${isTodo}"){
-					var str = i + "<br>"+ "<a href='<c:url value='/todo/date'/>?todo_date=";
+					var str = i + "<br>"+ "<a style='color: inherit;'" + "href='<c:url value='/todo/date'/>?todo_date=";
 					str += paramDate2 + "'>";
-					str += "⭐";				
+					str += "<i class='far fa-check-circle'></i>";				
 					str += "</a>";
 					<c:forEach items="${isChallenged}" var="isChallenged">
 						if(paramDate2 == "${isChallenged}")
-							str += " ✔ ";
+							str += "&nbsp;" + "<i class='fas fa-check-circle'></i>";
 					</c:forEach>
 					
 					cell.innerHTML = str;
 					cnt++;
 					
 					if (cnt % 7 == 0){
-						cell.innerHTML = "<font color=#3F72AF>" + str;
+						cell.innerHTML = "<font color=#3F72AF> " + str;
 			            row = calendar.insertRow();
 			          }
 					if (cnt % 7 == 1){
@@ -147,7 +159,7 @@
             
       		<c:forEach items="${isChallenged}" var="isChallenged">
 			if(paramDate2 == "${isChallenged}"){
-				var str = i + "<br>"+ " ✔ ";
+				var str = i + "<br>"+ "<i class='fas fa-check-circle'></i>";
 				
 				cell.innerHTML = str;
 				cnt++;
@@ -204,10 +216,12 @@
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">
-					<li class="menu-li"><a href="<c:url value='/todo/view'/>" id="text-deco">ToDo</a></li>
+					<li class="menu-li"><a href="<c:url value='/todo/view'/>"
+						id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />"
 						id="text-deco">Group</a></li>
-					<li class="menu-li"><a href="<c:url value='/user/myPage' />" id="text-deco">MyPage</a></li>
+					<li class="menu-li"><a href="<c:url value='/user/myPage' />"
+						id="text-deco">MyPage</a></li>
 				</ul>
 			</div>
 			<div class="nav-logout">
@@ -269,12 +283,21 @@
 
 						<div class="info-group">
 							<p id="contents-title">GROUP</p>
-							<c:if test="${user.group_id eq 0}">
+							<c:if test="${user.group_id eq 0 && groupNum ne 0}">
 								<p id="group-name">
 									가입된 그룹이 없습니다. <br> ${groupNum}개의 그룹들이 ${user.name}님을 기다리고
 									있습니다!
 								</p>
-								<button id="group-recommend" type="button" onClick="goToGroup('<c:url value='/group/main' />')">그룹
+								<button id="group-recommend" type="button"
+									onClick="goToGroup('<c:url value='/group/main' />')">그룹
+									구경하러 가기</button>
+							</c:if>
+							<c:if test="${user.group_id eq 0 && groupNum eq 0}">
+								<p id="group-name">
+									가입된 그룹이 없습니다. <br> ${user.name}님만의 그룹을 새로 만들어 팀원들을 모아보세요!
+								</p>
+								<button id="group-recommend" type="button"
+									onClick="goToGroup('<c:url value='/group/main' />')">그룹
 									구경하러 가기</button>
 							</c:if>
 							<c:if test="${user.group_id ne 0}">
@@ -296,13 +319,19 @@
 		<p id="sub-title">MyCalendar</p>
 		<div class="contents" style="margin: -150px 0 0 0;">
 			<div class="contents-split">
-				<p id="contents-title" style="padding: 10px 30px;">My DONE Calendar</p>
+				<p id="contents-title" style="padding: 10px 30px;">My DONE
+					Calendar</p>
+				<p id="calendar-info">
+					<i class='far fa-check-circle'></i> Todo 달성 여부 확인 </br>
+					<i class='fas fa-check-circle'></i> Challenge 달성 여부 확인 </br>
+					</br>
+					<i class='far fa-check-circle'></i> 아이콘을 클릭하시면 해당 TodoList로 이동합니다!
+				</p>
 				<table id="calendar">
 					<tr>
-						<!-- label은 마우스로 클릭을 편하게 해줌 -->
 						<td><label onclick="prevCalendar()"><i
 								class="fas fa-chevron-left"></i></label></td>
-						<td align="center" id="tbCalendarYM" colspan="5">yyyy년 m월</td>
+						<td align="center" id="tbCalendarYM" colspan="5" style="font-size:20px;">yyyy년 m월</td>
 						<td><label onclick="nextCalendar()"><i
 								class="fas fa-chevron-right"></i></label></td>
 					</tr>
@@ -317,8 +346,8 @@
 					</tr>
 				</table>
 				<script>
-		    buildCalendar();
-			</script>
+		    		buildCalendar();
+				</script>
 			</div>
 		</div>
 	</div>

@@ -35,10 +35,12 @@
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">
-					<li class="menu-li"><a href="<c:url value='/todo/view'/>" id="text-deco">ToDo</a></li>
+					<li class="menu-li"><a href="<c:url value='/todo/view'/>"
+						id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />"
 						id="text-deco">Group</a></li>
-					<li class="menu-li"><a href="<c:url value='/user/myPage' />" id="text-deco">MyPage</a></li>
+					<li class="menu-li"><a href="<c:url value='/user/myPage' />"
+						id="text-deco">MyPage</a></li>
 				</ul>
 			</div>
 			<div class="nav-logout">
@@ -52,7 +54,7 @@
 		<p id="sub-title">👻WELCOME TO HBTI!👻</p>
 		<div class="contents-split">
 
-		<!-- 그룹에 가입되지 않았을 때  -->
+			<!-- 그룹에 가입되지 않았을 때  -->
 			<c:if test="${user.group_id eq 0 }">
 				<p id=intro>
 				<p style="font-size: 30px;">
@@ -66,17 +68,18 @@
 			그룹에 가입한 뒤 오늘의 챌린지를 인증하면 ${user.name }님이 속한 HBTI의 랭킹이 쭉쭉 올라갑니다! <br>
 			그럼, HBTI를 자유롭게 즐겨보세요!
 			</p>
-				<span style="color: #dfdfdf"> <i class="fas fa-plane-departure fa-3x"></i></i>
+				<span style="color: #dfdfdf"> <i
+					class="fas fa-plane-departure fa-3x"></i></i>
 				</span>
 			</c:if>
-			
-			
-		<!-- 그룹에 가입되어 있을 때 -->
-		<c:if test="${user.group_id ne 0 }">
+
+
+			<!-- 그룹에 가입되어 있을 때 -->
+			<c:if test="${user.group_id ne 0 }">
 				<p id=intro>
 				<p style="font-size: 30px;">
-					<i class="fas fa-quote-left"></i>&nbsp;HBTI에 다시 오신 것을 환영합니다!&nbsp; <i
-						class="fas fa-quote-right"></i>
+					<i class="fas fa-quote-left"></i>&nbsp;HBTI에 다시 오신 것을 환영합니다!&nbsp;
+					<i class="fas fa-quote-right"></i>
 				</p>
 				<br> ${user.name }님, 오늘의 해야할 일이나 형성하고 싶은 습관을 TODO에 기록해보세요.<br>
 				<br> 혹시라도, HBTI를 다시 검사하고 싶거나 개인정보를 수정해야할 일이 있을 땐 MYPAGE가 있답니다.<br>
@@ -84,10 +87,11 @@
 			오늘의 챌린지를 꾸준히 인증해주세요! ${user.name }님이 속한 HBTI의 랭킹이 쭉쭉 올라갑니다! <br>
 			앞으로도 HBTI를 자유롭게 즐겨주세요!
 			</p>
-				<span style="color: #dfdfdf"> <i class="fab fa-fort-awesome fa-3x"></i>
+				<span style="color: #dfdfdf"> <i
+					class="fab fa-fort-awesome fa-3x"></i>
 				</span>
 			</c:if>
-			
+
 		</div>
 		<div class="contents-split">
 			<div class="hbti-info">
@@ -142,23 +146,56 @@
 				<tr class="tr1">
 					<c:forEach var="img" items="${rank_img }" varStatus="status">
 						<c:if test="${status.index ne 1 }">
-							<td class="td1"><img id="ranking-image"
-								style="width: 150px;"
-								src="<c:url value='/images/hbti_img/${img.value}.JPG'/>" /></td>
+							<c:if
+								test="${rankValue[status.index] ne 0.0 || rankValue[status.index] ne 0.0}">
+								<td class="td1"><img id="ranking-image"
+									style="width: 150px;"
+									src="<c:url value='/images/hbti_img/${img.value}.JPG'/>" /></td>
+							</c:if>
+
+							<c:if
+								test="${rankValue[status.index] eq 0.0 || rankValue[status.index] eq 0.0}">
+								<td class="td1"><img id="ranking-image"
+									style="width: 150px;"
+									src="<c:url value='/images/mypage_img/profile-image.jpg'/>" /></td>
+							</c:if>
 						</c:if>
+
 						<c:if test="${status.index eq 1  }">
-							<td class="td1"><img id="ranking-image"
-								src="<c:url value='/images/hbti_img/${img.value}.JPG'/>" /></td>
+						<c:if
+								test="${rankValue[status.index] ne 0.0 || rankValue[status.index] ne 0.0}">
+								<td class="td1"><img id="ranking-image"
+									src="<c:url value='/images/hbti_img/${img.value}.JPG'/>" /></td>
+							</c:if>
+
+							<c:if
+								test="${rankValue[status.index] eq 0.0 || rankValue[status.index] eq 0.0}">
+								<td class="td1"><img id="ranking-image"
+									style="width: 150px;"
+									src="<c:url value='/images/mypage_img/profile-image.jpg'/>" /></td>
+							</c:if>
 						</c:if>
 					</c:forEach>
 				</tr>
 				<tr class="tr1">
 					<c:forEach var="img" items="${rank_img }" varStatus="status">
 						<c:if test="${status.index ne 1 }">
-							<td style="font-size: 15px;">${img.key }</td>
+							<c:if
+								test="${rankValue[status.index] ne 0.0 || rankValue[status.index] ne 0.0}">
+								<td style="font-size: 15px;">${img.key }</td>
+							</c:if>
+							<c:if test="${rankValue[status.index] eq 0.0}">
+								<td></td>
+							</c:if>
 						</c:if>
 						<c:if test="${status.index eq 1  }">
-							<td style="font-size: 15px;">${img.key }</td>
+							<c:if
+								test="${rankValue[status.index] ne 0.0 || rankValue[status.index] ne 0.0}">
+								<td style="font-size: 15px;">${img.key }</td>
+							</c:if>
+							<c:if test="${rankValue[status.index] eq 0.0}">
+								<td></td>
+							</c:if>
 						</c:if>
 					</c:forEach>
 				</tr>
@@ -170,37 +207,82 @@
 						<table class="table2">
 							<tr class="tr2">
 								<td class="td2">
-									<!-- 1등 --> <c:if test="${status.index eq 0}">
-										<p class="ranking" style="color: gold; font-size: 20px;">
-											<i class="fas fa-medal"></i> ${status.index + 1}등
-										</p>
-										<p style="font-size: 20px;">
-											<i class="fas fa-quote-left"></i>&nbsp;${rank.key}&nbsp;<i
-												class="fas fa-quote-right"></i>
-										</p>
-									</c:if> <!-- 2등 --> <c:if test="${status.index eq 1}">
-										<p class="ranking" style="color: silver; font-size: 20px;">
-											<i class="fas fa-medal"></i> ${status.index + 1}등
-										</p>
-										<p style="font-size: 20px;">
-											<i class="fas fa-quote-left"></i>&nbsp;${rank.key}&nbsp;<i
-												class="fas fa-quote-right"></i>
-										</p>
-									</c:if> <!-- 3등 --> <c:if test="${status.index eq 2}">
-										<p class="ranking" style="color: bronze; font-size: 20px;">
-											<i class="fas fa-medal"></i> ${status.index + 1}등
-										</p>
-										<p style="font-size: 20px;">
-											<i class="fas fa-quote-left"></i>&nbsp;${rank.key}&nbsp;<i
-												class="fas fa-quote-right"></i>
-										</p>
-									</c:if> <c:if
+									<!-- 1등 --> 
+									<c:if test="${status.index eq 0}">
+										<!-- 랭킹 퍼센트가 없을 때 -->
+										<c:if test="${rank.value eq 0.0 }">
+											<p class="ranking" style="font-size: 17px;">
+												${rank.key}&nbsp;</p>
+										</c:if>
+
+										<!-- 랭킹 퍼센트가 있을 때 -->
+										<c:if test="${rank.value ne 0.0 }">
+											<p class="ranking" style="color: gold; font-size: 20px;">
+												<i class="fas fa-medal"></i> ${status.index + 1}등
+											</p>
+											<p style="font-size: 20px;">
+												<i class="fas fa-quote-left"></i>&nbsp;${rank.key}&nbsp;<i
+													class="fas fa-quote-right"></i>
+											</p>
+										</c:if>
+									</c:if> 
+									
+									<!-- 2등 --> 
+									<c:if test="${status.index eq 1}">
+										<!-- 랭킹 퍼센트가 없을 때 -->
+										<c:if test="${rank.value eq 0.0 }">
+											<p class="ranking" style="font-size: 17px;">
+												${rank.key}&nbsp;</p>
+										</c:if>
+
+										<!-- 랭킹 퍼센트가 있을 때 -->
+										<c:if test="${rank.value ne 0.0 }">
+											<p class="ranking" style="color: silver; font-size: 20px;">
+												<i class="fas fa-medal"></i> ${status.index + 1}등
+											</p>
+											<p style="font-size: 20px;">
+												<i class="fas fa-quote-left"></i>&nbsp;${rank.key}&nbsp;<i
+													class="fas fa-quote-right"></i>
+											</p>
+										</c:if>
+									</c:if> 
+									
+									<!-- 3등 --> 
+									<c:if test="${status.index eq 2}">
+										<!-- 랭킹 퍼센트가 없을 때 -->
+										<c:if test="${rank.value eq 0.0 }">
+											<p class="ranking" style="font-size: 17px;">
+												${rank.key}&nbsp;</p>
+										</c:if>
+										
+										<!-- 랭킹 퍼센트가 있을 때 -->
+										<c:if test="${rank.value ne 0.0 }">
+											<p class="ranking" style="color: bronze; font-size: 20px;">
+												<i class="fas fa-medal"></i> ${status.index + 1}등
+											</p>
+											<p style="font-size: 20px;">
+												<i class="fas fa-quote-left"></i>&nbsp;${rank.key}&nbsp;<i
+													class="fas fa-quote-right"></i>
+											</p>
+										</c:if>
+									</c:if> 
+									
+									<!-- 나머지 등수 -->
+									<c:if
 										test="${status.index ne 0 && status.index ne 1 && status.index ne 2}">
-										<p class="ranking" style="font-size: 17px;">
-											${status.index + 1}등
-											<!-- <i class="fas fa-quote-left"></i>&nbsp; -->${rank.key}&nbsp;<!-- <i
-												class="fas fa-quote-right"></i> -->
-										</p>
+										<!-- 랭킹 퍼센트가 없을 때 -->
+										<c:if test="${rank.value eq 0.0 }">
+											<p class="ranking" style="font-size: 17px;">
+												${rank.key}&nbsp;</p>
+										</c:if>
+										
+										<!-- 랭킹 퍼센트가 있을 때 -->
+										<c:if test="${rank.value ne 0.0 }">
+											<p class="ranking" style="font-size: 17px;">
+												${status.index + 1}등
+												${rank.key}&nbsp;
+											</p>
+										</c:if>
 									</c:if>
 
 								</td>

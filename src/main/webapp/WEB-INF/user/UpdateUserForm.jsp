@@ -32,6 +32,11 @@
 			form.name.focus();
 			return false;
 		}
+		if (confirm("정말 수정하시겠습니까?") == true) {
+			document.form.submit();
+		} else { //취소
+			return false;
+		}
 		form.submit();
 	}
 

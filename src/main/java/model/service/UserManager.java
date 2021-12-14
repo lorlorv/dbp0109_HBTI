@@ -2,7 +2,9 @@ package model.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import model.Group;
 import model.User;
@@ -265,11 +267,11 @@ public class UserManager {
 	}
 
 
-	// user_id의 todo 정보를 받아옴 ** 개선사항 : 날짜 파라미터를 받아 해당하는 달의 레코드만 select **
+	// user_id의 todo 정보를 받아옴
 	public List<String> isTodo(String user_id) throws SQLException {
 		return userDAO.isTodo(user_id);
 	}
-
+	// user_id의 Challenge 정보를 받아옴
 	public List<String> isChallenged(String user_id) throws SQLException {
 		return userDAO.isChallenged(user_id);
 	}
@@ -291,37 +293,28 @@ public class UserManager {
 		return sum;
 	}
 
+	
 	public int numOfUserWhoDidChallengeInGroup(int hbti_id) {
 		// 일단 hbti_id인 group이 뭐가 있는지 group_id 찾아오기
 		List<Integer> groupList = new ArrayList<>();
 		groupList = hbtiDAO.group_idByHBTI(hbti_id);
 
 		// groupList의 List하나 씩 돌려보며 그 group의 User_id 가져오기 List로
-		List<String> userList = new ArrayList<>();
 		List<String> userListEachGroup = new ArrayList<>();
+		int cnt = 0;
 		for (int i = 0; i < groupList.size(); i++) {
 			int group_id = groupList.get(i);
 
 			userListEachGroup = hbtiDAO.userListEachGroup(group_id); // 그룹에 있는 user리스트 불러오기
-
+			
+			List<String> userList = new ArrayList<>();
 			for (int j = 0; j < userListEachGroup.size(); j++) {
-				userList.add(userListEachGroup.get(j)); // 그룹마다 가져오기
-			} // 여기까지 하면 한 hbti에 속한 모든 user_id list
-		}
-
-		int cnt = 0;
-		for (int i = 0; i < userList.size(); i++) {
-			int flag = hbtiDAO.didChallengeUser(userList.get(i));
-			if (flag != 0)
-				cnt++;
+				userList.add(userListEachGroup.get(j));
+			}
+			
+			cnt += hbtiDAO.todayChallegeUserNum(userList);
 		}
 		return cnt;
-	}
-
-	// 랭킹 구하기
-	public int ranking(int hbti_id) {
-		return numOfUserWhoDidChallengeInGroup(hbti_id);
-
 	}
 
 	// 퍼센트 구하기

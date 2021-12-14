@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -66,11 +67,11 @@ public class HbtiDAO {
 		}
 	}
 
-	/* 오늘 이 user가 챌린지를 했는지? */
-	public int didChallengeUser(String user_id) {
+	
+	public int todayChallegeUserNum(List<String> userList) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			return sqlSession.getMapper(HbtiMapper.class).selectTodayChallengeByUserId(user_id);
+			return sqlSession.getMapper(HbtiMapper.class).countTodayChallengeUserByUserId(userList);
 		} finally {
 			sqlSession.close();
 		}
