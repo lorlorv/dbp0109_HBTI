@@ -39,14 +39,18 @@
 		WHERE group_id = #{group_id}
 	</select>
 
-	<!-- 해당 user가 오늘 챌린지를 했는지 -->
-	<select id="selectTodayChallengeByUserId" parameterType="string"
+
+	<!-- 특정 그룹의 오늘 Challenge를 완료한 회원 수 -> push 추가--> 
+	<select id="countTodayChallengeUserByUserId"
 		resultType="int">
-		SELECT COUNT(*)
+		SELECT COUNT(writer_id)
 		FROM CHALLENGEPOST
-		WHERE TO_DATE(sysdate) &lt;= write_date AND writer_id = #{user_id}
+		WHERE TO_DATE(sysdate)
+		<![CDATA[ < write_date ]]>  AND
+		writer_id IN 
+		<foreach collection="list" item="value" index="index" open="(" close=")" separator=",">
+			#{value}
+		</foreach>
 	</select>
-
-
 
 </mapper>
