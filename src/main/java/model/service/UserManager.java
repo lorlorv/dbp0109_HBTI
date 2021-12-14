@@ -2,9 +2,7 @@ package model.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import model.Group;
 import model.User;
@@ -134,9 +132,7 @@ public class UserManager {
 		return user;
 	}
 
-
 	// user의 hbti ID를 반환 (HBTI 테스트를 안했다면 0이 반환)
-
 	public int findHBTI(String user_id) throws SQLException, UserHbtiException {
 		int hbti_id = userDAO.findUser(user_id).getHbti_id();
 
@@ -220,7 +216,6 @@ public class UserManager {
 		return userDAO.updateUserGroupInfo(group_id, user_id);
 	}
 
-
 	//그룹 생성
 	public int createGroup(Group group) throws SQLException, OverTheLimitException, ExistingGroupException {
 		 if(group.getLimitation() > 30) {
@@ -259,13 +254,11 @@ public class UserManager {
 		return groupDAO.update(group);
 	}
 
-
 	// 그룹 삭제
 	public int deleteGroup(int group_id) throws SQLException {
 		userDAO.deleteGroup(group_id);
 		return groupDAO.delete(group_id);
 	}
-
 
 	// user_id의 todo 정보를 받아옴
 	public List<String> isTodo(String user_id) throws SQLException {
@@ -274,59 +267,5 @@ public class UserManager {
 	// user_id의 Challenge 정보를 받아옴
 	public List<String> isChallenged(String user_id) throws SQLException {
 		return userDAO.isChallenged(user_id);
-	}
-
-	/* main에서 사용 */
-	/* hbti_id에 해당하는 그룹의 총 인원 수 */
-	public int numOfGroupMem(int hbti_id) {
-		// 일단 hbti_id인 group이 뭐가 있는지 group_id 찾아오기
-		List<Integer> groupList = new ArrayList<>();
-		groupList = hbtiDAO.group_idByHBTI(hbti_id);// groupDAO로 바꾸기
-
-		// groupList의 List하나 씩 돌려보며 그 group의 인원 수 얻어와서 총 인원 수 구하기
-		int sum = 0;
-		for (int i = 0; i < groupList.size(); i++) {
-			int group_id = groupList.get(i);
-			sum += hbtiDAO.getNumberOfUsersInGroup(group_id);// groupDAO로 바꾸기
-		}
-
-		return sum;
-	}
-
-	
-	public int numOfUserWhoDidChallengeInGroup(int hbti_id) {
-		// 일단 hbti_id인 group이 뭐가 있는지 group_id 찾아오기
-		List<Integer> groupList = new ArrayList<>();
-		groupList = hbtiDAO.group_idByHBTI(hbti_id);
-
-		// groupList의 List하나 씩 돌려보며 그 group의 User_id 가져오기 List로
-		List<String> userListEachGroup = new ArrayList<>();
-		int cnt = 0;
-		for (int i = 0; i < groupList.size(); i++) {
-			int group_id = groupList.get(i);
-
-			userListEachGroup = hbtiDAO.userListEachGroup(group_id); // 그룹에 있는 user리스트 불러오기
-			
-			List<String> userList = new ArrayList<>();
-			for (int j = 0; j < userListEachGroup.size(); j++) {
-				userList.add(userListEachGroup.get(j));
-			}
-			
-			cnt += hbtiDAO.todayChallegeUserNum(userList);
-		}
-		return cnt;
-	}
-
-	// 퍼센트 구하기
-	public double percentOfChallenge(int hbti_id) {
-		double A = (double) numOfUserWhoDidChallengeInGroup(hbti_id);
-		double B = (double) numOfGroupMem(hbti_id);
-		double percentage = 0;
-		if (A == 0 || B == 0) {
-			percentage = 0;
-		} else
-			percentage = A / B * 100.0;
-
-		return percentage;
 	}
 }

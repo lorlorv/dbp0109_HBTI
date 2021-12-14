@@ -40,8 +40,7 @@ public class LoginController implements Controller {
 		}	
 		catch (PasswordMismatchException e) {
 			/* UserNotFoundException이나 PasswordMismatchException 발생 시
-			 * 다시 login form을 사용자에게 전송하고 오류 메세지도 출력
-			 */
+			 * 다시 login form을 사용자에게 전송하고 오류 메세지도 출력 */
             request.setAttribute("loginFailed", true);
 			request.setAttribute("exception", e);
 			

@@ -9,7 +9,6 @@
 <meta charset="UTF-8">
 <title>Main</title>
 
-
 <!--  MainContainer 스타일시트 -->
 <link rel="stylesheet" href="<c:url value='/css/mainContainer.css' />"
 	type="text/css">

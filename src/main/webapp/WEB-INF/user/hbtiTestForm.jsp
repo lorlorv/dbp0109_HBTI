@@ -16,7 +16,6 @@
 <link rel="stylesheet" href="<c:url value='/css/mainContainer.css' />"
 	type="text/css">
 
-
 <!-- 아이콘 -->
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
@@ -97,11 +96,6 @@
 	<div class="test-container">
 		<p id="test-title">HBTI TEST</p>
 
-		<!-- 프로그레스 바 추후 구현 -->
-		<!-- 		<div class="progress-bar">
-			<progress value="20" max="100" id="jb"></progress>
-		</div> -->
-
 		<div class="contents-split">
 			<p id=intro>
 				회원 가입의 마지막 단계, 자신의 운동/습관 유형을 알아볼 수 있는 HBTI TEST입니다. <br> 문제를
@@ -116,16 +110,11 @@
 		<form name="form" action="<c:url value='/user/hbtiTestResult'/>"
 			method="POST">
 			<!-- 1번 -->
-			<%-- <c:forEach var="q" items="${qnaList}" varStatus="status"> --%>
 			<p class="q-no">01.</p>
 
 			<div class="q-container">
-
 				<div class="q-box">
-
-					<%-- <p class="q-desc">${q.quesition}</p> --%>
 					<p class="q-desc">Q : 새해를 맞은 당신! 야심차게 운동을 시작해보려고 한다. 당신의 선택은?</p>
-
 				</div>
 				<div class="a-box">
 					<label class="box-radio-input"><input type="radio"
@@ -134,20 +123,15 @@
 						type="radio" name="a1" value="B" onclick="jbFunc()"><span>B
 							: 운동은 자고로 나에게 집중해야 하는 법! 홈트로 시작한다.</span></label>
 				</div>
-
 			</div>
-			<%-- 			</c:forEach> --%>
-
 
 			<!-- 2번 -->
-
 			<p class="q-no">02.</p>
 			<div class="q-container">
 				<div class="q-box">
 					<p class="q-desc">Q : 운동을 꾸준히 했더니 근육이 좀 생긴 것 같다. SNS에 자랑 좀 해볼까?</p>
 				</div>
 				<div class="a-box">
-
 					<label class="box-radio-input"><input type="radio"
 						name="a2" value="A"><span>A : 당장 올리자! 뭐라고 올려야 멋있다고
 							소문날지 고민한다.</span></label> <label class="box-radio-input"><input
@@ -163,7 +147,6 @@
 					<p class="q-desc">Q : 헬스장에 처음 간 당신, 아무것도 모르겠다. 이럴 땐?</p>
 				</div>
 				<div class="a-box">
-
 					<label class="box-radio-input"><input type="radio"
 						name="a3" value="A"><span>A : 다른 사람들에게 먼저 말을 걸어
 							물어본다.</span></label> <label class="box-radio-input"><input type="radio"
@@ -178,7 +161,6 @@
 					<p class="q-desc">Q : 헬스장에 있다가 갑자기 이상한 소리가 들렸을 때 당신은?</p>
 				</div>
 				<div class="a-box">
-
 					<label class="box-radio-input"><input type="radio"
 						name="a4" value="A"><span>A : 에이 뭐 별거 아니겠지~ 현재에
 							집중한다.</span></label> <label class="box-radio-input"><input type="radio"
@@ -194,7 +176,6 @@
 					<p class="q-desc">Q : 운동할 때 당신의 머릿속에는?</p>
 				</div>
 				<div class="a-box">
-
 					<label class="box-radio-input"><input type="radio"
 						name="a5" value="A"><span>A : 아무 생각도 하지 않고 지금 하는
 							자세에 집중한다.</span></label> <label class="box-radio-input"><input
@@ -210,7 +191,6 @@
 					<p class="q-desc">Q : 한 번도 해보지 않은 운동을 해보라고 추천받았을 때?</p>
 				</div>
 				<div class="a-box">
-
 					<label class="box-radio-input"><input type="radio"
 						name="a6" value="A"><span>A : 전에 경험해본 적이 없었으므로 보류하고
 							전문적으로 배우기를 기다린다.</span></label> <label class="box-radio-input"><input
@@ -226,7 +206,6 @@
 					<p class="q-desc">Q : 다이어트 식단 관리로 인해 힘들다는 친구가 있을 때, 당신은?</p>
 				</div>
 				<div class="a-box">
-
 					<label class="box-radio-input"><input type="radio"
 						name="a7" value="A"><span>A : 어떤 식단하고 있는데? 물어본다.</span></label> <label
 						class="box-radio-input"><input type="radio" name="a7"
@@ -241,7 +220,6 @@
 					<p class="q-desc">Q : 다이어트 중 맛있는 음식이 눈에 들어올 때, 당신은?</p>
 				</div>
 				<div class="a-box">
-
 					<label class="box-radio-input"><input type="radio"
 						name="a8" value="A"><span>A : 오늘을 미루면 내일도 미룬다.
 							참아본다.</span></label> <label class="box-radio-input"><input type="radio"
@@ -257,7 +235,6 @@
 					<p class="q-desc">Q : 운동 중 나의 몸매를 보고 친구의 지적을 듣는다면?</p>
 				</div>
 				<div class="a-box">
-
 					<label class="box-radio-input"><input type="radio"
 						name="a9" value="A"><span>A : 어디가 더 운동이 필요할까? 어디
 							부분? 물어본다.</span></label> <label class="box-radio-input"><input
@@ -274,7 +251,6 @@
 						가까워지는데.. 이때 당신이라면??</p>
 				</div>
 				<div class="a-box">
-
 					<label class="box-radio-input"><input type="radio"
 						name="a10" value="A"><span>A : 일단 운동을 갔다오고 나서 다시
 							한다.</span></label> <label class="box-radio-input"><input type="radio"
@@ -292,7 +268,6 @@
 						끌리는 운동은?</p>
 				</div>
 				<div class="a-box">
-
 					<label class="box-radio-input"><input type="radio"
 						name="a11" value="A"><span>A : 월요일은 등, 화요일은 하체.. 내
 							입맛대로 계획해서 운동할 수 있는 헬스장으로 가자!</span></label> <label class="box-radio-input"><input
@@ -308,7 +283,6 @@
 					<p class="q-desc">Q : 올해 큰맘먹고 계획했던 다이어트가 목표를 달성하지 못했다. 이때 당신은?</p>
 				</div>
 				<div class="a-box">
-
 					<label class="box-radio-input"><input type="radio"
 						name="a12" value="A"><span>A : 너무 수고했지만, 아쉽다. 내년에는
 							더 체계적으로 계획해서 꼭 성공할거야!</span></label> <label class="box-radio-input"><input

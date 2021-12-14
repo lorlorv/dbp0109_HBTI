@@ -55,7 +55,6 @@ public class HBTIController implements Controller {
 			manager.updateHBTI(user_id, testRst); // type결정 -> hbti_id로 변경 -> updateHBTI()
 		}
 		
-		
 		// 세션에 사용자 이이디 저장
 		HttpSession session = request.getSession();
 		session.setAttribute(UserSessionUtils.USER_SESSION_KEY, user_id);

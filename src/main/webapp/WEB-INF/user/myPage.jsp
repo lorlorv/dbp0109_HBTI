@@ -59,7 +59,6 @@
 	}
 	
 	
-	
 	/* Calendar  */
 	var paramDate = ""; //DB에서 가져온 값과 일치하는 지 확인 할 Date + parameter로 보낼 Date (yyyy-mm-dd)
 	var today = new Date(); //오늘 날짜
@@ -185,7 +184,6 @@
 			
         </c:forEach>
            
-            
             cell.innerHTML = i;
             cnt++;
    			
@@ -268,7 +266,6 @@
 							</p>
 						</div>
 
-
 						<div class="my-btn">
 
 							<button id="info-ud" type="button" onClick="userUpdate()">회원
@@ -306,9 +303,7 @@
 									onClick="groupQuit('<c:url value='/group/quit' />')">그룹
 									탈퇴</button>
 							</c:if>
-
 						</div>
-
 					</div>
 				</div>
 
