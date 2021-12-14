@@ -39,7 +39,7 @@ public class ConnectionManager {
 		} 
 		
 		try {
-    		// DataSource ìƒì„± ë° ì„¤ì •
+    		// DataSource »ı¼º ¹× ¼³Á¤
 			BasicDataSource bds = new BasicDataSource();
 	        bds.setDriverClassName(prop.getProperty("db.driver"));
 	        bds.setUrl(prop.getProperty("db.url"));
@@ -47,7 +47,7 @@ public class ConnectionManager {
 	        bds.setPassword(prop.getProperty("db.password"));     
 			ds = bds;
 			
-			// ì°¸ê³ : WASì˜ DataSourceë¥¼ ì´ìš©í•  ê²½ìš°: 
+			// Âü°í: WASÀÇ DataSource¸¦ ÀÌ¿ëÇÒ °æ¿ì: 
 			// Context init = new InitialContext();
 			// ds = (DataSource)init.lookup("java:comp/env/jdbc/OracleDS");
 		} catch (Exception ex) {
@@ -74,7 +74,7 @@ public class ConnectionManager {
 		}
 	}
 
-	// í˜„ì¬ í™œì„±í™” ìƒíƒœì¸ Connection ì˜ ê°œìˆ˜ì™€ ë¹„í™œì„±í™” ìƒíƒœì¸ Connection ê°œìˆ˜ ì¶œë ¥
+	// ÇöÀç È°¼ºÈ­ »óÅÂÀÎ Connection ÀÇ °³¼ö¿Í ºñÈ°¼ºÈ­ »óÅÂÀÎ Connection °³¼ö Ãâ·Â
 	public void printDataSourceStats() {
 		try {
 			BasicDataSource bds = (BasicDataSource) ds;

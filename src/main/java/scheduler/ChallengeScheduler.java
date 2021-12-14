@@ -10,13 +10,13 @@ import org.quartz.JobExecutionException;
 
 import model.service.GroupManager;
 
-// ë™ê¸°í™” ì²˜ë¦¬ë¥¼ ìœ„í•´ ì–´ë…¸í…Œì´ì…˜ ì¶”ê°€ : í•´ë‹¹ ìŠ¤ì¼€ì¤„ëŸ¬ê°€ ëë‚ ë•Œ ê¹Œì§€ ë‹¤ìŒ ìš”ì²­ ëŒ€ê¸°
+// µ¿±âÈ­ Ã³¸®¸¦ À§ÇØ ¾î³ëÅ×ÀÌ¼Ç Ãß°¡ : ÇØ´ç ½ºÄÉÁÙ·¯°¡ ³¡³¯¶§ ±îÁö ´ÙÀ½ ¿äÃ» ´ë±â
 @DisallowConcurrentExecution 
 public class ChallengeScheduler implements Job{
 	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		// ë™ì‘ ì‹œí‚¬ ë‚´ìš© ì •ì˜
+		// µ¿ÀÛ ½ÃÅ³ ³»¿ë Á¤ÀÇ
 		System.out.println("test : " + new Date(System.currentTimeMillis()));
 		
 		GroupManager groupManager = GroupManager.getInstance();

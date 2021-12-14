@@ -8,59 +8,59 @@ import model.Group;
 import model.User;
 
 public interface GroupMapper {
-	// hbti_idì˜ ê·¸ë£¹ ë¦¬ìŠ¤íŠ¸ë¥¼ êµ¬í•¨
+	// hbti_idÀÇ ±×·ì ¸®½ºÆ®¸¦ ±¸ÇÔ
 	public List<Group> selectGroupListByGroupId(int hbti_id);
 	
-	// í‚¤ì›Œë“œì— ë§ëŠ” ê·¸ë£¹ ë¦¬ìŠ¤íŠ¸ë¥¼ ë°˜í™˜
+	// Å°¿öµå¿¡ ¸Â´Â ±×·ì ¸®½ºÆ®¸¦ ¹İÈ¯
 	public List<Group> selectGroupListByKeyword(@Param("hbti_id") int hbti_id,
 										@Param("keyword") String keyword);
-	// group_idì˜ ê·¸ë£¹ì› ë¦¬ìŠ¤íŠ¸ë¥¼ êµ¬í•¨
+	// group_idÀÇ ±×·ì¿ø ¸®½ºÆ®¸¦ ±¸ÇÔ
 	public List<User> selectUserListByGroupId(int group_id);
 	
-	//group_idì˜ ê·¸ë£¹ ì •ë³´ ë°˜í™˜
+	//group_idÀÇ ±×·ì Á¤º¸ ¹İÈ¯
 	public Group selectGroupByGroupId(int group_id);
 	
-	//user_idì˜ group_idë¥¼ êµ¬í•¨
+	//user_idÀÇ group_id¸¦ ±¸ÇÔ
 	public int selectGroupIdByUserId(String user_id);
 	
-	// group_idì˜ ê·¸ë£¹ì› ì¸ì›ì„ ë°˜í™˜
+	// group_idÀÇ ±×·ì¿ø ÀÎ¿øÀ» ¹İÈ¯
 	public int selectGroupNumByGroupId(int group_id);
 	
-	//group_idë¥¼ í†µí•´ ê·¸ë£¹ ì´ë¦„ì„ ë°˜í™˜
+	//group_id¸¦ ÅëÇØ ±×·ì ÀÌ¸§À» ¹İÈ¯
 	public String selectGroupNameByGroupId(int group_id);
 	
-	// hbti_idë³„ ìƒì„±ëœ ê·¸ë£¹ì˜ ì´ ê°œìˆ˜ ë°˜í™˜
+	// hbti_idº° »ı¼ºµÈ ±×·ìÀÇ ÃÑ °³¼ö ¹İÈ¯
 	public int selectGroupCntByHbtiId(int hbti_id);
 	
-	//group_idì˜ ë¦¬ë” idë¥¼ ë°˜í™˜
+	//group_idÀÇ ¸®´õ id¸¦ ¹İÈ¯
 	public Group selectGroupLeaderByGroupId(int group_id);
 	
-	//ê·¸ë£¹ì¥ idë¥¼ ì œì™¸í•œ ë‹¤ìŒ ë¦¬ë” í›„ë³´ë¥¼ ë°˜í™˜
+	//±×·ìÀå id¸¦ Á¦¿ÜÇÑ ´ÙÀ½ ¸®´õ ÈÄº¸¸¦ ¹İÈ¯
 	public String selectNextLeaderByGroupId(@Param("leader_id") String leader_id,
 											@Param("group_id") int group_id);
 	
-	// ê·¸ë£¹ì˜ ë¦¬ë” ë³€ê²½
+	// ±×·ìÀÇ ¸®´õ º¯°æ
 	public int updateLeader(@Param("leader_id") String leader_id,
 							@Param("group_id") int group_id);
 	
-	// ê·¸ë£¹ ì´ë¦„ì´ ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸
+	// ±×·ì ÀÌ¸§ÀÌ Á¸ÀçÇÏ´ÂÁö È®ÀÎ
 	public String selectExistingGroupName(String group_name);
 	
-	// ê·¸ë£¹ ì´ë¦„ìœ¼ë¡œ ê·¸ë£¹ ì•„ì´ë””ë¥¼ ì°¾ì•„ëƒ„
+	// ±×·ì ÀÌ¸§À¸·Î ±×·ì ¾ÆÀÌµğ¸¦ Ã£¾Æ³¿
 	public int selectGroupIdByGroupName(String group_name);
 	
-	// ê·¸ë£¹ ìƒì„±
+	// ±×·ì »ı¼º
 	public int insertGroup(Group group);
 	
-	// ê·¸ë£¹ ì •ë³´ ìˆ˜ì •
+	// ±×·ì Á¤º¸ ¼öÁ¤
 	public int updateGroup(Group group);
 	
-	// ê·¸ë£¹ ì‚­ì œ
+	// ±×·ì »èÁ¦
 	public int deleteGroup(int group_id);
 	
-	// ì±Œë¦°ì§€ ë¦¬ìŠ¤íŠ¸ ê°œìˆ˜ ë°˜í™˜
+	// Ã§¸°Áö ¸®½ºÆ® °³¼ö ¹İÈ¯
 	public int selectChallengeListCnt();
 	
-	// ì±Œë¦°ì§€ ë¦¬ìŠ¤íŠ¸ ì—…ë°ì´íŠ¸ (ìŠ¤ì¼€ì¤„ëŸ¬ìš©)
+	// Ã§¸°Áö ¸®½ºÆ® ¾÷µ¥ÀÌÆ® (½ºÄÉÁÙ·¯¿ë)
 	public int updateChallengeList(int cntList);
 }

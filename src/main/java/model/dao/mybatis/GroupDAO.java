@@ -15,7 +15,7 @@ public class GroupDAO {
 
 	private SqlSessionFactory sqlSessionFactory;
 	
-	// sqlSessionFactory ìƒì„±
+	// sqlSessionFactory »ı¼º
 	public GroupDAO() {
 		String resource = "mybatis-config.xml";
 		InputStream inputStream;
@@ -28,7 +28,7 @@ public class GroupDAO {
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 	}
 	
-	// hbti_idì˜ ê·¸ë£¹ ë¦¬ìŠ¤íŠ¸ë¥¼ êµ¬í•¨ O
+	// hbti_idÀÇ ±×·ì ¸®½ºÆ®¸¦ ±¸ÇÔ O
 	public List<Group> findGroupList(int hbti_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -38,7 +38,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// í‚¤ì›Œë“œì— ë§ëŠ” ê·¸ë£¹ ë¦¬ìŠ¤íŠ¸ë¥¼ ë°˜í™˜ O
+	// Å°¿öµå¿¡ ¸Â´Â ±×·ì ¸®½ºÆ®¸¦ ¹İÈ¯ O
 	public List<Group> searchGroupList(int hbti_id, String keyword) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -48,7 +48,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// group_idì˜ ê·¸ë£¹ì› ë¦¬ìŠ¤íŠ¸ë¥¼ êµ¬í•¨ O
+	// group_idÀÇ ±×·ì¿ø ¸®½ºÆ®¸¦ ±¸ÇÔ O
 	public List<User> findUserList(int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -58,7 +58,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// group_idì˜ ê·¸ë£¹ ì •ë³´ë¥¼ ë°˜í™˜ O
+	// group_idÀÇ ±×·ì Á¤º¸¸¦ ¹İÈ¯ O
 	public Group findGroup(int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -68,7 +68,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// ìœ ì €IDì˜ ê·¸ë£¹IDë¥¼ ì°¾ì•„ì˜´
+	// À¯ÀúIDÀÇ ±×·ìID¸¦ Ã£¾Æ¿È
 	public int findGroupUserId(String user_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -78,7 +78,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// group_idì˜ ê·¸ë£¹ì› ì¸ì›ì„ ë°˜í™˜
+	// group_idÀÇ ±×·ì¿ø ÀÎ¿øÀ» ¹İÈ¯
 	public int findNumberOfMember(int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -88,7 +88,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// group_idë¥¼ í†µí•´ ê·¸ë£¹ ì´ë¦„ì„ ë°˜í™˜
+	// group_id¸¦ ÅëÇØ ±×·ì ÀÌ¸§À» ¹İÈ¯
 	public String findGroupName(int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -98,7 +98,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// ìƒì„±ëœ ê·¸ë£¹ì˜ ì´ ê°œìˆ˜ ë°˜í™˜ O
+	// »ı¼ºµÈ ±×·ìÀÇ ÃÑ °³¼ö ¹İÈ¯ O
 	public int findGroupCnt(int hbti_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -108,7 +108,7 @@ public class GroupDAO {
 		}
 	}
 	
-	//group_idì˜ ë¦¬ë” ì •ë³´(name, id) ë°˜í™˜
+	//group_idÀÇ ¸®´õ Á¤º¸(name, id) ¹İÈ¯
 	public Group findLeader(int group_id) { 
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -118,7 +118,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// ë‹¤ìŒ ë¦¬ë” í›„ë³´ë¥¼ ë°˜í™˜
+	// ´ÙÀ½ ¸®´õ ÈÄº¸¸¦ ¹İÈ¯
 	public String findNextLeader(String user_id, int group_id) { 
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -129,7 +129,7 @@ public class GroupDAO {
 	}
 	
 
-	// ê·¸ë£¹ì˜ ë¦¬ë” ë³€ê²½
+	// ±×·ìÀÇ ¸®´õ º¯°æ
 	public int updateLeader(String leader_id, int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -143,7 +143,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// ê·¸ë£¹ ì´ë¦„ì´ ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸
+	// ±×·ì ÀÌ¸§ÀÌ Á¸ÀçÇÏ´ÂÁö È®ÀÎ
 	public boolean existingGroupName(String group_name) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -156,7 +156,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// ê·¸ë£¹ ì´ë¦„ìœ¼ë¡œ ê·¸ë£¹ ì•„ì´ë””ë¥¼ ì°¾ì•„ëƒ„
+	// ±×·ì ÀÌ¸§À¸·Î ±×·ì ¾ÆÀÌµğ¸¦ Ã£¾Æ³¿
 	public int findGroupId(String group_name) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -166,7 +166,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// ê·¸ë£¹ ìƒì„± O
+	// ±×·ì »ı¼º O
 	public int create(Group group) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -180,7 +180,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// ê·¸ë£¹ ì •ë³´ ìˆ˜ì • O
+	// ±×·ì Á¤º¸ ¼öÁ¤ O
 	public int update(Group group) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -194,7 +194,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// ê·¸ë£¹ ì‚­ì œ
+	// ±×·ì »èÁ¦
 	public int delete(int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -208,7 +208,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// ì±Œë¦°ì§€ ë¦¬ìŠ¤íŠ¸ ê°œìˆ˜ ë°˜í™˜
+	// Ã§¸°Áö ¸®½ºÆ® °³¼ö ¹İÈ¯
 	public int cntOfChallengeList() {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -217,7 +217,7 @@ public class GroupDAO {
 			sqlSession.close();
 		}
 	}
-	// ëœë¤ìœ¼ë¡œ ì±Œë¦°ì§€ ë°°ì •
+	// ·£´ıÀ¸·Î Ã§¸°Áö ¹èÁ¤
 	public int assignChallenge(int cntList) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {

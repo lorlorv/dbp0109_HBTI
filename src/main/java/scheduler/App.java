@@ -17,29 +17,29 @@ public class App {
 	private static final Logger logger = LoggerFactory.getLogger(App.class);
 
 	public void startScheduler() {
-		//Quartz Ïù∏Ïä§ÌÑ¥Ïä§ ÏÉùÏÑ±
-		SchedulerFactory schedulerFactory = new StdSchedulerFactory();
-		try {
-            Scheduler scheduler = schedulerFactory.getScheduler();
+		//Quartz ¿ŒΩ∫≈œΩ∫ ª˝º∫
+				SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+				try {
+		            Scheduler scheduler = schedulerFactory.getScheduler();
 
-            //job ÏÑ∏Î∂Ä Ï†ïÎ≥¥
-            JobDetail job = newJob(ChallengeScheduler.class)
-            		.withIdentity("jobName", Scheduler.DEFAULT_GROUP)
-            		.build();
+		            //job ºº∫Œ ¡§∫∏
+		            JobDetail job = newJob(ChallengeScheduler.class)
+		            		.withIdentity("jobName", Scheduler.DEFAULT_GROUP)
+		            		.build();
 
-            // Îß§Ïùº 12Ïãú(ÏûêÏ†ï) 0 0 0 * * ?
-            // ÌÖåÏä§Ìä∏ ÏòàÏ†úÎäî 30Ï¥à
-            Trigger trigger = newTrigger()
-            		.withIdentity("trggerName", Scheduler.DEFAULT_GROUP)
-                    .withSchedule(cronSchedule("0 0 0 * * ?"))
-                    .build();
+		            // ∏≈¿œ 12Ω√(¿⁄¡§) 0 0 0 * * ?
+		            // ≈◊Ω∫∆Æ øπ¡¶¥¬ 30√ 
+		            Trigger trigger = newTrigger()
+		            		.withIdentity("trggerName", Scheduler.DEFAULT_GROUP)
+		                    .withSchedule(cronSchedule("0 0 0 * * ?"))
+		                    .build();
 
-            scheduler.scheduleJob(job, trigger);
-            scheduler.start();
-            
-        } catch (Exception e) {
-        	 logger.debug(e.toString());
-        }
+		            scheduler.scheduleJob(job, trigger);
+		            scheduler.start();
+		            
+		        } catch (Exception e) {
+		        	 logger.debug(e.toString());
+		        }
 	}
 	
 
