@@ -43,8 +43,7 @@
 	<!-- Quit Group 해당 유저는 그룹을 탈퇴 -->
 	<update id="quitGroup" parameterType="String">
 		UPDATE UserInfo
-		SET group_id
-		= null
+		SET group_id = null
 		WHERE user_id = #{user_id}
 	</update>
 
