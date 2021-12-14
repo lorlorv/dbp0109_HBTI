@@ -8,7 +8,7 @@ import model.service.exception.OverTheLimitException;
 import model.service.UserManager;
 
 import model.Group;
-
+import model.User;
 import controller.Controller;
 import controller.user.UserSessionUtils;
 
@@ -22,14 +22,15 @@ public class CreateGroupController implements Controller{
 		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		
 		Group group = new Group(
+				0,
 				request.getParameter("name"),
 				request.getParameter("descr"),
 				request.getParameter("icon"),
-				user_id,
 				Integer.parseInt(request.getParameter("limit")),
 				userManager.findHBTI(user_id)
 				);
-
+		
+		group.setLeader_id(user_id);
 		try {
 			userManager.createGroup(group);
 			return "redirect:/group/main";

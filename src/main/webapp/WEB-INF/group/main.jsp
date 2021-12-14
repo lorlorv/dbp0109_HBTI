@@ -16,6 +16,23 @@
 <link rel="stylesheet" href="<c:url value='/css/group/groupMain.css' />"
 	type="text/css">
 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+
+$(function(){
+    $("#table tr").slice(0, 5).show(); // select the first ten
+    $("#load").click(function(e){ // click event for load more
+        e.preventDefault();
+        $("#table tr:hidden").slice(0, 5).show(); // select next 10 hidden divs and show them
+        if($("#table tr:hidden").length == 0){ // check if any hidden divs still exist
+            alert("더 이상 가져올 챌린지 게시물이 없습니다."); // alert if there are none left
+        }
+    });
+});
+
+</script>
 </head>
 <body>
 	<div class="page-wrapper">
@@ -25,10 +42,12 @@
 			</div>
 			<div class="nav-menu">
 				<ul class="menu-ul">
-					<li class="menu-li"><a href="<c:url value='/todo/view'/>" id="text-deco">ToDo</a></li>
+					<li class="menu-li"><a href="<c:url value='/todo/view'/>"
+						id="text-deco">ToDo</a></li>
 					<li class="menu-li"><a href="<c:url value='/group/main' />"
 						id="text-deco">Group</a></li>
-					<li class="menu-li"><a href="<c:url value='/user/myPage' />" id="text-deco">MyPage</a></li>
+					<li class="menu-li"><a href="<c:url value='/user/myPage' />"
+						id="text-deco">MyPage</a></li>
 				</ul>
 			</div>
 			<div class="nav-logout">
@@ -60,7 +79,8 @@
 					href="<c:url value='/group/updateForm'>
 							<c:param name="group_id" value='${groupInfo.group_id}' />
 							<c:param name="leader_id" value='${groupInfo.leader_id}' />
-							</c:url>">그룹정보 수정하기</a>
+							</c:url>">그룹정보
+					수정하기</a>
 			</c:if>
 		</div>
 		<!-- 그룹원 정보 출력 -->
@@ -68,27 +88,64 @@
 			<p id="contents-title">GROUP MEMBER</p>
 			<p id="intro">그룹원들의 목록을 확인할 수 있습니다.</p>
 
-			<table>
-				<c:forEach var="user" items="${userList}" varStatus="status">
-					<c:choose>
-						<c:when test="${status.first || status.index % 5 == 0}">
-							<tr>
-								<td>
-								<img class="member-img"
-									src="<c:url value='/upload/${user.image }' />"><br>${user.name}</td>
-						</c:when>
-						<c:when test="${status.last || status.index % 4 == 0}">
-							<td><img class="member-img"
-								src="<c:url value='/upload/${user.image }' />"><br>${user.name}</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<td><img class="member-img"
-								src="<c:url value='/upload/${user.image }' />"><br>${user.name}</td>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-			</table>
+		<table>
+            <c:forEach var="user" items="${userList}" varStatus="status">
+               <c:choose>
+                  <c:when test="${status.first || status.index % 5 == 0}">
+                     <tr>
+                       
+                              <c:if test="${user.image == null }">
+                                 <td>
+                                 <img class="member-img"
+                                       src="<c:url value='/images/mypage_img/profile-image.jpg'/>" />
+                                 <br>
+                                 </td>
+                              </c:if>
+                              <c:if test="${user.image != null}" >
+                                 <td>
+                                 <img class="member-img"
+                                       src="<c:url value='/upload/${user.image }' />">
+                                 <br>${user.name}
+                                 </td>
+                              </c:if>
+                       
+                  </c:when>
+                  <c:when test="${status.last || status.index % 4 == 0}">
+                       <c:if test="${user.image == null }">
+                                 <td>
+                                 <img class="member-img"
+                                       src="<c:url value='/images/mypage_img/profile-image.jpg'/>" />
+                                 <br>
+                                 </td>
+                              </c:if>
+                              <c:if test="${user.image != null}" >
+                                 <td>
+                                 <img class="member-img"
+                                       src="<c:url value='/upload/${user.image }' />">
+                                 <br>${user.name}
+                                 </td>
+                              </c:if>
+                     </tr>
+                  </c:when>
+                  <c:otherwise>
+                          <c:if test="${user.image == null }">
+                                 <td>
+                                 <img class="member-img"
+                                       src="<c:url value='/images/mypage_img/profile-image.jpg'/>" />
+                                 <br>
+                                 </td>
+                              </c:if>
+                              <c:if test="${user.image != null}" >
+                                 <td>
+                                 <img class="member-img"
+                                       src="<c:url value='/upload/${user.image }' />">
+                                 <br>${user.name}
+                                 </td>
+                              </c:if>
+                  </c:otherwise>
+               </c:choose>
+            </c:forEach>
+         </table>
 		</div>
 		<!-- 챌린지 정보 -->
 		<div class="contents-split">
@@ -101,7 +158,8 @@
 			</div>
 			<p id="contents-title">CHALLENGE POST</p>
 			<p id="intro">
-				오늘의 챌린지를 완료해서 HBTI 랭킹 1등을 차지하세요!<br>
+				오늘의 챌린지를 완료해서 HBTI 랭킹 1등을 차지하세요!<br> 게시물을 클릭해 상세 내용을 확인할 수
+				있습니다.
 			</p>
 			<div class="challenge-list">
 				<table class="challenge-table">
@@ -122,9 +180,7 @@
 						</tr>
 					</c:forEach>
 				</table>
-			</div>
-			<div style="cursor: pointer;" onclick="window.scrollTo(0,0);">
-				<i class="fas fa-caret-square-up fa-3x"></i>
+				<a href="#" id="load">more</a>
 			</div>
 		</div>
 	</div>

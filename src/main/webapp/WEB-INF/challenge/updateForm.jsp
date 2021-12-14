@@ -28,14 +28,6 @@ function postUpdate() {
 	form.submit();
 }
 
-function postDelete(targetURI) {
-	 if (confirm("챌린지를 정말 삭제하시겠습니까??") == true){
-		 form.action = targetURI;
-		form.submit();
-	 } else{
-	     return false;
-	 }	
-}
 //이미지 업로드
 function PreviewImage() {
    // 파일리더 생성 
@@ -87,11 +79,8 @@ function PreviewImage() {
 			
 			<div id="len"></div>
 				<span><a onclick="postUpdate()" id="a-deco">
-			<i class="fas fa-pencil-alt"></i>&nbsp;수정하기&nbsp;</a></span>
-			<span><a onclick="postDelete('<c:url value='/challenge/delete'>
-											<c:param name="post_id" value='${postInfo.post_id}'/>
-											</c:url>')" id="a-deco-remove">
-			<i class="fas fa-trash-alt"></i>&nbsp;삭제하기&nbsp;</a></span>
+			<i class="fas fa-pencil-alt"></i>&nbsp;완료&nbsp;</a></span>
+			
 			
 		</form>
 		</div>

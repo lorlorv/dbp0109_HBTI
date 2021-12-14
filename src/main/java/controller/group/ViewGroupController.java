@@ -24,30 +24,29 @@ public class ViewGroupController implements Controller{
 		GroupManager groupManager = GroupManager.getInstance();
 		
 		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
-		
-		// ÇöÀç ·Î±×ÀÎÇÑ user_Id°¡ ±×·ì¿¡ ¼ÓÇØÁ® ÀÖ´ÂÁö¸¦ È®ÀÎ
 		int group_id = userManager.belongToGroup(user_id);
 		
 		if(group_id != 0) {
-			// ±×·ìÀÌ ÀÖ´Ù¸é ¸ŞÀÎ ÆäÀÌÁö¸¦ º¸¿©ÁÖ¾î¾ß ÇÑ´Ù
-			
-			// ±×·ì Á¤º¸¸¦ Ãâ·Â
 			Group group = userManager.findGroup(group_id);
 			group.setGroup_id(group_id);
 			
 			String leader = groupManager.findLeaderName(group_id);
 			group.setLeader_name(leader);
 			
-			// ±×·ìÀåÀÌ¶ó¸é ±×·ìÀåÀÓÀ» ³ªÅ¸³»´Â Á¤º¸¸¦ ³Ñ°ÜÁÜ.
+			/*
+			 * User leader = new User();
+			 * leader.setName(groupManager.findLeaderName(group_id));
+			 * group.setLeader(leader);
+			 */
+			
 			if(user_id.equals(group.getLeader_id())) {
 				request.setAttribute("isLeader", true);
 			}
-			// ±×·ì¿ø Á¤º¸¸¦ Ãâ·Â
 			List<User> userList = groupManager.findUserList(group_id);
 			
-			// Ã§¸°Áö list¸¦ Ãâ·Â
+			// ì±Œë¦°ì§€ listë¥¼ ì¶œë ¥
 			List<ChallengePost> postList = groupManager.findPostList(group_id);
-			
+						
 			request.setAttribute("groupInfo", group);
 			request.setAttribute("userList", userList);
 			request.setAttribute("postList", postList);
@@ -55,7 +54,7 @@ public class ViewGroupController implements Controller{
 			return "/group/main.jsp";
 			
 		} else {
-			// ±×·ìÀÌ ¾ø´Ù¸é ±×·ì ¸®½ºÆ® ÆäÀÌÁö¸¦ º¸¿©ÁÖ¾î¾ß ÇÑ´Ù.
+			// ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ ï¿½Ñ´ï¿½.
 			int user_HBTI = userManager.findHBTI(user_id);
 			
 			List<Group> groupList = userManager.findGroupList(user_HBTI);
