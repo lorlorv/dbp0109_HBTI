@@ -124,20 +124,20 @@
    			
       		<c:forEach items="${isTodo}" var="isTodo">
 				if(paramDate2 == "${isTodo}"){
-					var str = i + "<br>"+ "<a href='<c:url value='/todo/date'/>?todo_date=";
+					var str = i + "<br>"+ "<a style='color: inherit;'" + "href='<c:url value='/todo/date'/>?todo_date=";
 					str += paramDate2 + "'>";
-					str += "⭐";				
+					str += "<i class='far fa-check-circle'></i>";				
 					str += "</a>";
 					<c:forEach items="${isChallenged}" var="isChallenged">
 						if(paramDate2 == "${isChallenged}")
-							str += " ✔ ";
+							str += "&nbsp;" + "<i class='fas fa-check-circle'></i>";
 					</c:forEach>
 					
 					cell.innerHTML = str;
 					cnt++;
 					
 					if (cnt % 7 == 0){
-						cell.innerHTML = "<font color=#3F72AF>" + str;
+						cell.innerHTML = "<font color=#3F72AF> " + str;
 			            row = calendar.insertRow();
 			          }
 					if (cnt % 7 == 1){
@@ -159,7 +159,7 @@
             
       		<c:forEach items="${isChallenged}" var="isChallenged">
 			if(paramDate2 == "${isChallenged}"){
-				var str = i + "<br>"+ " ✔ ";
+				var str = i + "<br>"+ "<i class='fas fa-check-circle'></i>";
 				
 				cell.innerHTML = str;
 				cnt++;
@@ -321,9 +321,14 @@
 			<div class="contents-split">
 				<p id="contents-title" style="padding: 10px 30px;">My DONE
 					Calendar</p>
+				<p id="calendar-info">
+					<i class='far fa-check-circle'></i> Todo 달성 여부 확인 </br>
+					<i class='fas fa-check-circle'></i> Challenge 달성 여부 확인 </br>
+					</br>
+					<i class='far fa-check-circle'></i> 아이콘을 클릭하시면 해당 TodoList로 이동합니다!
+				</p>
 				<table id="calendar">
 					<tr>
-						<!-- label은 마우스로 클릭을 편하게 해줌 -->
 						<td><label onclick="prevCalendar()"><i
 								class="fas fa-chevron-left"></i></label></td>
 						<td align="center" id="tbCalendarYM" colspan="5" style="font-size:20px;">yyyy년 m월</td>
