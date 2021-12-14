@@ -269,10 +269,17 @@
 
 						<div class="info-group">
 							<p id="contents-title">GROUP</p>
-							<c:if test="${user.group_id eq 0}">
+							<c:if test="${user.group_id eq 0 && groupNum ne 0}">
 								<p id="group-name">
 									가입된 그룹이 없습니다. <br> ${groupNum}개의 그룹들이 ${user.name}님을 기다리고
 									있습니다!
+								</p>
+								<button id="group-recommend" type="button" onClick="goToGroup('<c:url value='/group/main' />')">그룹
+									구경하러 가기</button>
+							</c:if>
+							<c:if test="${user.group_id eq 0 && groupNum eq 0}">
+								<p id="group-name">
+									가입된 그룹이 없습니다. <br> ${user.name}님만의 그룹을 새로 만들어 팀원들을 모아보세요!
 								</p>
 								<button id="group-recommend" type="button" onClick="goToGroup('<c:url value='/group/main' />')">그룹
 									구경하러 가기</button>
