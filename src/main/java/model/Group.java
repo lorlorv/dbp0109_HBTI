@@ -45,6 +45,7 @@ public class Group implements Serializable{
 
 	public void setLeader_id(String leader_id) {
 		this.leader_id = leader_id;
+
 	}
 	
 	public int getNumberOfMem() {

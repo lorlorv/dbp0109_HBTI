@@ -24,7 +24,7 @@ public class ChallengePost {
 		this.like_btn = like_btn;
 	}
 	
-	//add에 쓰이는 생성자
+	
 	public ChallengePost(String writer_name, String writer_id, String content, String image) {
 		this.writer_name = writer_name;
 		this.writer_id = writer_id;

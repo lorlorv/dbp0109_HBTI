@@ -1,4 +1,4 @@
-package model.dao;
+package model.dao.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +33,7 @@ public class HBTIDAO {
 		return null;
 	}
 	
-	// hbti_idÀÇ hbtiÀÇ ÀÌ¸§À» ¹ÝÈ¯
+	// hbti_idï¿½ï¿½ hbtiï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
 	public String findHbtiName(int hbti_id) throws SQLException {
 		String sql = "SELECT name " + "FROM HBTI " + " WHERE hbti_id=?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { hbti_id}); 

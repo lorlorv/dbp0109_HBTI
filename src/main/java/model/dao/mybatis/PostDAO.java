@@ -14,7 +14,7 @@ public class PostDAO {
 
 	private SqlSessionFactory sqlSessionFactory;
 	
-	// sqlSessionFactory 생성
+	
 	public PostDAO() {
 		String resource = "mybatis-config.xml";
 		InputStream inputStream;
@@ -27,7 +27,7 @@ public class PostDAO {
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 	}
 	
-	// user_id의 오늘 날짜 post를 찾음
+
 	public ChallengePost findPost(String user_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
@@ -38,7 +38,7 @@ public class PostDAO {
 		}
 	}
 	
-	// group_id의 오늘 날짜의 post list를 구함.
+	
 	public List<ChallengePost> findPostList(int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
@@ -49,7 +49,7 @@ public class PostDAO {
 		}
 	}
 	
-	//post 추가
+	
 	public int addPost(ChallengePost post) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
@@ -64,7 +64,7 @@ public class PostDAO {
 		}
 	}
 		
-	//post 수정
+	
 	public int updatePost(ChallengePost post) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
@@ -79,7 +79,7 @@ public class PostDAO {
 		}
 	}
 	
-	// 좋아요 버튼 1 추가
+	
 	public int updatePostLike(int post_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
@@ -94,7 +94,7 @@ public class PostDAO {
 		}
 	}
 	
-	// post 삭제
+	
 	public int deletePost(int post_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
@@ -109,7 +109,7 @@ public class PostDAO {
 		}
 	}
 	
-	// group_id의 모든 포스트 삭제 (그룹 삭제용)
+
 	public int deleteAllPost(int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
@@ -124,7 +124,7 @@ public class PostDAO {
 		}
 	}
 	
-	// user_id의 모든 포스트 삭제 (그룹 탈퇴용)
+	
 	public int deleteUserAllPost(String user_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		

@@ -3,7 +3,7 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 import model.Todo;
-import model.dao.jdbc.TodoDAO;
+import model.dao.TodoDAO;
 import model.service.exception.TodoNotFoundException;
 
 public class TodoManager {
@@ -63,11 +63,7 @@ public class TodoManager {
 		public Todo findTodo(int todo_id, String user_id) throws SQLException {
 			return todoDAO.findTodo(todo_id, user_id);
 		}
-<<<<<<< HEAD
-		// ���� ���θ� ������ ���θ���Ʈ
-=======
 		
->>>>>>> branch 'dev' of https://github.com/Jeongminyooa/dbp0109_HBTI.git
 		public List<Todo> findNotSelectTodoList(java.util.Date date, int todo_id, String user_id) throws SQLException {
 			java.sql.Date date1 = new java.sql.Date(date.getTime());
 			return todoDAO.findNotSelectTodoList(date1, todo_id, user_id);

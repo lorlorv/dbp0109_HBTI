@@ -1,4 +1,4 @@
-package model.dao;
+package model.dao.jdbc;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -151,7 +151,7 @@ public class TodoDAO {
 						todo_date,
 						rs.getString("user_id"),
 						rs.getInt("is_done"));
-				todoList.add(todo);				
+				todoList.add(todo);				// List에 Community 객체 저장
 			}		
 			return todoList;					
 			
@@ -191,7 +191,7 @@ public class TodoDAO {
 		return null;
 	}
 	
-	// 검색 날짜의 수정할 todo의 정보를 가져옴
+	// 수정할 todo의 정보를 가져옴
 	public Todo findTodo(java.sql.Date todo_date, int todo_id, String user_id) throws SQLException {
         String sql = "SELECT todo_id, content, todo_date, is_done " 
      		   + "FROM TODO "
@@ -217,7 +217,6 @@ public class TodoDAO {
 		return todo;
 	}
 	
-	// 수정할 todo의 정보를 가져옴
 	public Todo findTodo(int todo_id, String user_id) throws SQLException {
         String sql = "SELECT todo_id, content, todo_date, is_done " 
      		   + "FROM TODO "
@@ -269,7 +268,7 @@ public class TodoDAO {
 		}
 		return null;
 	}
-		
+	
 	public List<Todo> findNotSelectTodoList(int todo_id, String user_id) throws SQLException{
 		String sql = "SELECT todo_id, content, todo_date, user_id, is_done " 
      		   + "FROM TODO "
