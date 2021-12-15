@@ -40,7 +40,7 @@ public class UpdateChallengeController implements Controller {
 			try {
 				if(!user_id.equals(writer_id)) {
 					 post = groupManager.findPost(writer_id);
-					throw new WriterMismatchException("�Խù� �ۼ��ڸ� ������ �����մϴ�.");
+					throw new WriterMismatchException("작성자만 수정할 수 있습니다.");
 				}
 				request.setAttribute("postInfo", post);
 				return "/challenge/updateForm.jsp";
