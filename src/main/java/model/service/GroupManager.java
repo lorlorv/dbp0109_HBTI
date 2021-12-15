@@ -47,7 +47,7 @@ public class GroupManager {
 
 	public boolean isPost(String user_id) throws SQLException, ExistingChallengePostException {
 		if(postDAO.findPost(user_id) != null) {
-			throw new ExistingChallengePostException("�̹� ç������ �����ϼ̽��ϴ�. ������ ç������ ������ּ���!");
+			throw new ExistingChallengePostException("오늘은 챌린지를 완료했습니다. 내일의 챌린지를 기대해주세요 :)");
 		}
 		return false;
 	}
@@ -75,7 +75,7 @@ public class GroupManager {
 	
 	public int quitMember(int group_id, String quit_id, String user_id) throws DoNotQuitLeaderException {
 		if(quit_id.equals(user_id)) {
-			throw new DoNotQuitLeaderException("�׷����� ������ �� �����ϴ�.");
+			throw new DoNotQuitLeaderException("그룹장은 강퇴할 수 없습니다.");
 		}
 		return userDAO.quitGroup(quit_id);
 	}
