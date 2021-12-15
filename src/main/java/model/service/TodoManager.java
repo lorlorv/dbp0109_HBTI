@@ -63,7 +63,7 @@ public class TodoManager {
 		public Todo findTodo(int todo_id, String user_id) throws SQLException {
 			return todoDAO.findTodo(todo_id, user_id);
 		}
-		// ���� ���θ� ������ ���θ���Ʈ
+		
 		public List<Todo> findNotSelectTodoList(java.util.Date date, int todo_id, String user_id) throws SQLException {
 			java.sql.Date date1 = new java.sql.Date(date.getTime());
 			return todoDAO.findNotSelectTodoList(date1, todo_id, user_id);

@@ -15,7 +15,7 @@ public class CheckTodoController implements Controller{
 		
 		TodoManager todoManager = TodoManager.getInstance();
 		
-		// 체크를 한 경우
+		
 		if(request.getServletPath().equals("/todo/doCheck")) {
 			todoManager.updateIs_done(todo_id, 0);
 		} else {

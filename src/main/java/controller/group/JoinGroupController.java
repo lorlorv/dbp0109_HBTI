@@ -25,7 +25,7 @@ public class JoinGroupController implements Controller{
 			userManager.joinGroup(Integer.parseInt(group_id), user_id);
 			return "redirect:/group/main";
 		} catch(OverTheLimitException e) {
-			// 그룹 정원 초과 시 가입하지 못함.
+		
 			request.setAttribute("joinFailed", true);
 			request.setAttribute("exception", e);
 			

@@ -11,7 +11,7 @@ public class UserDAO {
 	private JDBCUtil jdbcUtil = null;
 	
 	public UserDAO() {
-		jdbcUtil = new JDBCUtil(); //JDBCUtil ��ü ����
+		jdbcUtil = new JDBCUtil(); 
 	}
 	
 	public int updateLoginDate(String user_id) throws SQLException {
@@ -32,7 +32,7 @@ public class UserDAO {
 		}
 		return 0;
 	}
-	// ���� ����
+	
 	public int create(User user) throws SQLException {
 		String sql = "INSERT INTO UserInfo (user_id, password, name, descr, image) VALUES (?, ?, ?, ?, ?)";
 		Object[] param = new Object[] { user.getUser_id(), user.getPassword(), user.getName(),
@@ -52,7 +52,7 @@ public class UserDAO {
 		return 0;
 	}
 	
-	//user_id�� �����ϴ��� Ȯ��
+	
 	public boolean existingUser(String user_id) throws SQLException {
 		String sql = "SELECT count(*) FROM USERINFO WHERE user_id=?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { user_id }); 
@@ -71,7 +71,7 @@ public class UserDAO {
 		return false;
 	}
 	
-	// ���� ���� ����
+	
 	public int update(User user) throws SQLException {
 		String sql = "UPDATE USERINFO "
 					+ "SET password=?, name=?, descr=?, image=? "
@@ -94,7 +94,7 @@ public class UserDAO {
 		return 0;
 	}
 	
-	// ���� ����
+	
 	public int remove(String user_id) throws SQLException {
 		String sql = "DELETE FROM USERINFO WHERE user_id=?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { user_id }); 
@@ -112,8 +112,7 @@ public class UserDAO {
 		return 0;
 	}
 	
-	// �̸��� exitstingGroup���� ����?
-	// user�� �׷��� �ִ��� Ȯ�� + groupId�� �����´�.
+	
 	public int belongToGroup(String user_id) throws SQLException {
 		String sql = "SELECT group_id "
 				+ "FROM UserInfo "
@@ -131,10 +130,10 @@ public class UserDAO {
 		} finally {
 			jdbcUtil.close();
 		}
-		return 0; // �׷� ������ ������ 0�� ��ȯ
+		return 0; 
 	}
 	
-	// �ش� �׷쿡 ���� ��� ������ �׷� ������ ����
+
 	public int deleteGroup(int group_id) {
 		String sql = "UPDATE UserInfo "
 				+ "SET group_id=null "
@@ -149,12 +148,12 @@ public class UserDAO {
 			ex.printStackTrace();
 		} finally {		
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ��ȯ
+			jdbcUtil.close();	
 		}		
 		return 0;
 	}
 	
-	//user_id�� HBTI_id�� ã��
+	
 	public int findHBTI(String user_id) throws SQLException {
 		String sql = "SELECT NVL(hbti_id, 0) AS hbti_id "
 				+ "FROM UserInfo "
@@ -173,15 +172,15 @@ public class UserDAO {
 		} finally {
 			jdbcUtil.close();
 		}
-		return 0; //hbti_id�� ���ٸ� 0�� ��ȯ
+		return 0; 
 	}
 	
-	// user ������ ã�Ƽ� ��ȯ
+	
 	public User findUser(String user_id) throws SQLException {
 	      String sql = "SELECT password, name, descr, image, NVL(group_id, 0) AS group_id, hbti_id "
 	            + "FROM USERINFO " 
 	    		+ "WHERE user_id=?";
-	      jdbcUtil.setSqlAndParameters(sql, new Object[] { user_id }); // JDBCUtil   query문과 ׺��  �     ��  
+	      jdbcUtil.setSqlAndParameters(sql, new Object[] { user_id });   
 
 	      try {
 	         ResultSet rs = jdbcUtil.executeQuery(); 
@@ -199,25 +198,24 @@ public class UserDAO {
 	      return null;
 	   }
 	
-	// ������ �׷� ���� ����
+	
 	public int updateUserGroupInfo(int group_id, String user_id) {
 		String sql = "UPDATE UserInfo " + "SET group_id=?" + "WHERE user_id=? ";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { group_id, user_id });
 
 		try {
-			int result = jdbcUtil.executeUpdate(); // update �� ����
+			int result = jdbcUtil.executeUpdate(); 
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
-			jdbcUtil.close(); // resource ��ȯ
+			jdbcUtil.close(); 
 		}
 		return 0;
 	}
 
-	//�ش� ������ �׷��� Ż��
 	public int quitGroup(String user_id) {
 		String sql = "UPDATE UserInfo " 
 					+ "SET group_id=null " 
@@ -225,19 +223,19 @@ public class UserDAO {
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { user_id });
 
 		try {
-			int result = jdbcUtil.executeUpdate(); // update �� ����
+			int result = jdbcUtil.executeUpdate(); 
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
-			jdbcUtil.close(); // resource ��ȯ
+			jdbcUtil.close(); 
 		}
 		return 0;
 	}
 	
-	//hbti�� ������Ʈ
+	
 	public int updateHBTI(String user_id, int hbti_id) throws SQLException {
 		String sql = "UPDATE USERINFO " + "SET hbti_id=? " + "WHERE user_id=?";
 		Object[] param = new Object[] { hbti_id, user_id };
@@ -298,7 +296,7 @@ public class UserDAO {
 		return null;
 	}
 	
-	/* hbti�� hbti_id�� group_id ��ȯ */
+
 	public List<Integer> group_idByHBTI(int hbti_id) {
 		String sql = "SELECT group_id FROM GROUPINFO WHERE hbti_id=?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { hbti_id });
@@ -318,7 +316,7 @@ public class UserDAO {
 		return null;
 	}
 
-	/* �� group�� �ش��ϴ� member�� ���ϱ� */
+	
 	public int getNumberOfUsersInGroup(int group_id) {
 		String sql = "SELECT COUNT(user_id) FROM UserInfo " + "WHERE group_id = ?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { group_id });
@@ -335,7 +333,7 @@ public class UserDAO {
 		return 0;
 	}
 
-	/* �� group�� �ش��ϴ� user_id ����Ʈ ���ϱ� */
+	
 	public List<String> userListEachGroup(int group_id){
 		String sql = "SELECT user_id FROM UserInfo WHERE group_id=?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { group_id });
@@ -355,7 +353,7 @@ public class UserDAO {
 		return null;
 	}
 	
-	/* ���� �� user�� ç������ �ߴ���? */
+
 	public boolean didChallengeUser(String user_id) {
 		String sql = "SELECT COUNT(writer_id) AS cnt "
 				+ "FROM CHALLENGEPOST "

@@ -19,7 +19,7 @@ public class HBTIController implements Controller {
 
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (request.getMethod().equals("GET")) {
-			// GET request: hbti test form 요청
+			
 			log.debug("hbtiTestForm Request");
 
 			return "/user/hbtiTestForm.jsp";
@@ -29,34 +29,32 @@ public class HBTIController implements Controller {
 			return "/user/hbtiTestForm.jsp";
 		}
 
-		// POST request
-		//검사 결과 파라미터로 받아오기
 		String[] testRst = new String[12];
 		for (int i = 0; i < 12; i++) {
 			testRst[i] = request.getParameter("a" + (i + 1));
 		}
 
-		// Join에서 넘겨준 user_id값 가져오기 || Login에서 넘겨준 user_id값 가져오기
+		
 		UserManager manager = UserManager.getInstance();
 		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		
-		int oldHbti = manager.findHBTI(user_id); //update전 hbti 저장
+		int oldHbti = manager.findHBTI(user_id); 
 		
-		// hbti가 존재한다면 그룹 정보도 바꾸어 주어야 한다.
+		
 		if(oldHbti != 0) {
-			manager.updateHBTI(user_id, testRst); // type결정 -> hbti_id로 변경 -> updateHBTI()
+			manager.updateHBTI(user_id, testRst); 
 			
 			int group_id = manager.belongToGroup(user_id);
-			//그룹 판별 후 그룹 있으면 +  leader이면 변경 후 탈퇴 아니면 그냥 탈퇴, 그룹 없으면 그냥 탈퇴  -> manager에게 역할 위임
+			
 			if(group_id != 0) {
 				manager.updateHBTIGroup(user_id, oldHbti, group_id);
 			}
 		} else {
-			manager.updateHBTI(user_id, testRst); // type결정 -> hbti_id로 변경 -> updateHBTI()
+			manager.updateHBTI(user_id, testRst); 
 		}
 		
 		
-		// 세션에 사용자 이이디 저장
+		
 		HttpSession session = request.getSession();
 		session.setAttribute(UserSessionUtils.USER_SESSION_KEY, user_id);
 		

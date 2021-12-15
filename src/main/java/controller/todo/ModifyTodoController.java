@@ -47,7 +47,7 @@ public class ModifyTodoController implements Controller {
  	
     	 else if (request.getServletPath().equals("/todo/modifyForm")){
     		 
-    		// ������ ���� ������ ����
+    		
     		int todo_id = Integer.parseInt(request.getParameter("todo_id"));
     	
     		Todo selectTodo = manager.findTodo(todo_id, user_id);

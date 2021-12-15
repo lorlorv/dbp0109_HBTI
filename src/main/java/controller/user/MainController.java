@@ -44,18 +44,18 @@ public class MainController implements Controller {
 			Map<String, Double> percentMap = new HashMap<String, Double>();
 			for (int i = 0; i < 16; i++) {
 				String hbtiName = manager.findHbtiName(i + 1);
-				double percentage = manager.percentOfChallenge(i + 1); // hbtiº°·Î ÆÛ¼¾Æ® ¹Þ¾Æ¿À±â
+				double percentage = manager.percentOfChallenge(i + 1); // hbtiï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½Æ® ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
 				percentMap.put(hbtiName, percentage);
 			}
 
-			// Map.Entry ¸®½ºÆ® ÀÛ¼º
+			
 			List<Entry<String, Double>> list_entries = new ArrayList<Entry<String, Double>>(percentMap.entrySet());
 
-			// ºñ±³ÇÔ¼ö Comparator¸¦ »ç¿ëÇÏ¿© ³»¸² Â÷¼øÀ¸·Î Á¤·Ä
+			
 			Collections.sort(list_entries, new Comparator<Entry<String, Double>>() {
-				// compare·Î °ªÀ» ºñ±³
+				
 				public int compare(Entry<String, Double> obj1, Entry<String, Double> obj2) {
-					// ³»¸² Â÷¼øÀ¸·Î Á¤·Ä
+					
 					return obj2.getValue().compareTo(obj1.getValue());
 				}
 			});

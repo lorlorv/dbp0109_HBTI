@@ -28,11 +28,11 @@ public class UpdateGroupController implements Controller {
 		if (request.getServletPath().equals("/group/updateForm")) {
 			int group_id = userManager.belongToGroup(user_id);
 
-			// form에 미리 출력할 그룹 정보를 얻어옴.
+			
 			Group group = userManager.findGroup(group_id);
 			group.setGroup_id(group_id);
 
-			// form에 출력할 그룹원 정보를 얻어옴.
+			
 			List<User> userList = groupManager.findUserList(group_id);
 
 			request.setAttribute("groupInfo", group);
@@ -41,7 +41,7 @@ public class UpdateGroupController implements Controller {
 			return "/group/updateForm.jsp";
 		}
 		if (request.getServletPath().equals("/group/manageUser")) {
-			// 그룹 강퇴 요청
+			
 			String quit_id = request.getParameter("quit_id");
 			int group_id = Integer.parseInt(request.getParameter("group_id"));
 

@@ -15,7 +15,7 @@ public class GroupDAO {
 
 	private SqlSessionFactory sqlSessionFactory;
 	
-	// sqlSessionFactory 생성
+	
 	public GroupDAO() {
 		String resource = "mybatis-config.xml";
 		InputStream inputStream;
@@ -28,7 +28,7 @@ public class GroupDAO {
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 	}
 	
-	// hbti_id의 그룹 리스트를 구함 O
+	
 	public List<Group> findGroupList(int hbti_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -38,7 +38,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// 키워드에 맞는 그룹 리스트를 반환 O
+
 	public List<Group> searchGroupList(int hbti_id, String keyword) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -48,7 +48,6 @@ public class GroupDAO {
 		}
 	}
 	
-	// group_id의 그룹원 리스트를 구함 O
 	public List<User> findUserList(int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -58,7 +57,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// group_id의 그룹 정보를 반환 O
+
 	public Group findGroup(int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -68,7 +67,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// 유저ID의 그룹ID를 찾아옴
+	
 	public int findGroupUserId(String user_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -78,7 +77,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// group_id의 그룹원 인원을 반환
+
 	public int findNumberOfMember(int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -88,7 +87,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// group_id를 통해 그룹 이름을 반환
+	
 	public String findGroupName(int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -98,7 +97,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// 생성된 그룹의 총 개수 반환 O
+	
 	public int findGroupCnt(int hbti_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -108,7 +107,7 @@ public class GroupDAO {
 		}
 	}
 	
-	//group_id의 리더 정보(name, id) 반환
+	
 	public Group findLeader(int group_id) { 
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -118,7 +117,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// 다음 리더 후보를 반환
+
 	public String findNextLeader(String user_id, int group_id) { 
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -129,7 +128,7 @@ public class GroupDAO {
 	}
 	
 
-	// 그룹의 리더 변경
+	
 	public int updateLeader(String leader_id, int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -143,7 +142,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// 그룹 이름이 존재하는지 확인
+	
 	public boolean existingGroupName(String group_name) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -156,7 +155,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// 그룹 이름으로 그룹 아이디를 찾아냄
+	
 	public int findGroupId(String group_name) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -166,7 +165,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// 그룹 생성 O
+	
 	public int create(Group group) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -180,7 +179,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// 그룹 정보 수정 O
+
 	public int update(Group group) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -194,7 +193,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// 그룹 삭제
+	
 	public int delete(int group_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -208,7 +207,7 @@ public class GroupDAO {
 		}
 	}
 	
-	// 챌린지 리스트 개수 반환
+	
 	public int cntOfChallengeList() {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -217,7 +216,7 @@ public class GroupDAO {
 			sqlSession.close();
 		}
 	}
-	// 랜덤으로 챌린지 배정
+
 	public int assignChallenge(int cntList) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {

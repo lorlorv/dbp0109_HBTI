@@ -15,33 +15,29 @@ public class LoginController implements Controller {
 		String password = request.getParameter("password");
 		
 		try {
-			// 모델에 로그인 처리를 위임
+			
 			UserManager manager = UserManager.getInstance();
 			manager.login(user_id, password);
 			int hbti_id = manager.findHBTI(user_id);
 			if(hbti_id == 0) {
-				throw new UserHbtiException(user_id +"의 HBTI가 존재하지 않습니다.");
+				throw new UserHbtiException(user_id +"占쏙옙 HBTI占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占십쏙옙占싹댐옙.");
 			}
 			manager.updateLoginDate(user_id);
 	
-			// 세션에 사용자 이이디 저장
+			
 			HttpSession session = request.getSession();
             session.setAttribute(UserSessionUtils.USER_SESSION_KEY, user_id);
             
             return "redirect:/main";			
 		} catch (UserNotFoundException e) {
-			/* UserNotFoundException이나 PasswordMismatchException 발생 시
-			 * 다시 login form을 사용자에게 전송하고 오류 메세지도 출력
-			 */
+			
             request.setAttribute("loginFailed", true);
 			request.setAttribute("exception", e);
 			
             return "/user/loginForm.jsp";			
 		}	
 		catch (PasswordMismatchException e) {
-			/* UserNotFoundException이나 PasswordMismatchException 발생 시
-			 * 다시 login form을 사용자에게 전송하고 오류 메세지도 출력
-			 */
+			
             request.setAttribute("loginFailed", true);
 			request.setAttribute("exception", e);
 			
