@@ -40,7 +40,7 @@ public interface TodoMapper {
          @Param("todo_id") int todo_id,
          @Param("user_id") int user_id);
    
-   public int deleteUserAllTodo(int user_id);
+   public int deleteUserAllTodo(String user_id);
    
    public java.sql.Date findDateByTodoID(int todo_id);
 

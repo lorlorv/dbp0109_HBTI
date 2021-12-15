@@ -77,7 +77,7 @@
       ]]>   
    </select>  
    
-   <delete id="deleteUserAllTodo" parameterType="int">
+   <delete id="deleteUserAllTodo" parameterType="String">
       DELETE FROM TODO
       WHERE user_id = #{user_id}
    </delete>

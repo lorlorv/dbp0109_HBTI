@@ -146,7 +146,7 @@ private SqlSessionFactory sqlSessionFactory;
 	}
 	
 	
-	public int deleteUserAllTodo(int user_id) {
+	public int deleteUserAllTodo(String user_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
 			int result = sqlSession.getMapper(TodoMapper.class).deleteUserAllTodo(user_id);
