@@ -33,12 +33,6 @@ public class ViewGroupController implements Controller{
 			String leader = groupManager.findLeaderName(group_id);
 			group.setLeader_name(leader);
 			
-			/*
-			 * User leader = new User();
-			 * leader.setName(groupManager.findLeaderName(group_id));
-			 * group.setLeader(leader);
-			 */
-			
 			if(user_id.equals(group.getLeader_id())) {
 				request.setAttribute("isLeader", true);
 			}
