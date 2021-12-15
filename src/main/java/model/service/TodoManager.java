@@ -3,7 +3,7 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 import model.Todo;
-import model.dao.TodoDAO;
+import model.dao.mybatis.TodoDAO;
 import model.service.exception.TodoNotFoundException;
 
 public class TodoManager {
