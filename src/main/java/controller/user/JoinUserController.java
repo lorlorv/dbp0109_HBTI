@@ -17,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
-//import model.Community;
 import model.User;
 import model.service.exception.ExistingUserException;
 import model.service.UserManager;
@@ -34,8 +33,11 @@ public class JoinUserController implements Controller {
 
 		// POST request
 		boolean check = ServletFileUpload.isMultipartContent(request);
-		// Àü¼ÛµÈ µ¥ÀÌÅÍÀÇ ÀÎÄÚµå Å¸ÀÔÀÌ multipart ÀÎÁö ¿©ºÎ¸¦ Ã¼Å©ÇÑ´Ù.
-		// ¸¸¾à multipart°¡ ¾Æ´Ï¶ó¸é ÆÄÀÏ Àü¼ÛÀ» Ã³¸®ÇÏÁö ¾Ê´Â´Ù.
+
+	
+
+		// ì „ì†¡ëœ ë°ì´í„°ì˜ ì¸ì½”ë“œ íƒ€ì…ì´ multipart ì¸ì§€ ì—¬ë¶€ë¥¼ ì²´í¬í•œë‹¤.
+		// ë§Œì•½ multipartê°€ ì•„ë‹ˆë¼ë©´ íŒŒì¼ ì „ì†¡ì„ ì²˜ë¦¬í•˜ì§€ ì•ŠëŠ”ë‹¤.
 		String user_id = null;
 		String password = null;
 		String name = null;
@@ -43,84 +45,81 @@ public class JoinUserController implements Controller {
 
 		String filename = null;
 
-		if (check) {// ÆÄÀÏ Àü¼ÛÀÌ Æ÷ÇÔµÈ »óÅÂ°¡ ¸Â´Ù¸é
+		if (check) {
 
-			// ¾Æ·¡¿Í °°ÀÌ ÇÏ¸é Tomcat ³»ºÎ¿¡ º¹»çµÈ ÇÁ·ÎÁ§Æ®ÀÇ Æú´õ ¹Ø¿¡ upload Æú´õ°¡ »ı¼ºµÊ
+			
 			ServletContext context = request.getServletContext();
 			String path = context.getRealPath("/upload");
 			File dir = new File(path);
+			
 
-			// Tomcat ¿ÜºÎÀÇ Æú´õ¿¡ ÀúÀåÇÏ·Á¸é ¾Æ·¡¿Í °°ÀÌ Àı´ë °æ·Î·Î Æú´õ ÀÌ¸§À» ÁöÁ¤ÇÔ
+			// Tomcat ì™¸ë¶€ì˜ í´ë”ì— ì €ì¥í•˜ë ¤ë©´ ì•„ë˜ì™€ ê°™ì´ ì ˆëŒ€ ê²½ë¡œë¡œ í´ë” ì´ë¦„ì„ ì§€ì •í•¨
 			// File dir = new File("C:/Temp");
 
 			if (!dir.exists())
 				dir.mkdir();
-			// Àü¼ÛµÈ ÆÄÀÏÀ» ÀúÀåÇÒ ½ÇÁ¦ °æ·Î¸¦ ¸¸µç´Ù.
+		
 
 			try {
 				DiskFileItemFactory factory = new DiskFileItemFactory();
-				// ÆÄÀÏ Àü¼Û¿¡ ´ëÇÑ ±âº»ÀûÀÎ ¼³Á¤ Factory Å¬·¡½º¸¦ »ı¼ºÇÑ´Ù.
+				
 				factory.setSizeThreshold(10 * 1024);
-				// ¸Ş¸ğ¸®¿¡ ÇÑ¹ø¿¡ ÀúÀåÇÒ µ¥ÀÌÅÍÀÇ Å©±â¸¦ ¼³Á¤ÇÑ´Ù.
-				// 10kb ¾¿ ¸Ş¸ğ¸®¿¡ µ¥ÀÌÅÍ¸¦ ÀĞ¾î µéÀÎ´Ù.
+				
+			
 				factory.setRepository(dir);
-				// Àü¼ÛµÈ µ¥ÀÌÅÍÀÇ ³»¿ëÀ» ÀúÀåÇÒ ÀÓ½Ã Æú´õ¸¦ ÁöÁ¤ÇÑ´Ù.
-
+				
 				ServletFileUpload upload = new ServletFileUpload(factory);
-				// Factory Å¬·¡½º¸¦ ÅëÇØ ½ÇÁ¦ ¾÷·Îµå µÇ´Â ³»¿ëÀ» Ã³¸®ÇÒ °´Ã¼¸¦ ¼±¾ğÇÑ´Ù.
+			
 				upload.setSizeMax(10 * 1024 * 1024);
-				// ¾÷·Îµå µÉ ÆÄÀÏÀÇ ÃÖ´ë ¿ë·®À» 10MB±îÁö Àü¼Û Çã¿ëÇÑ´Ù.
+				
 				upload.setHeaderEncoding("utf-8");
-				// ¾÷·Îµå µÇ´Â ³»¿ëÀÇ ÀÎÄÚµùÀ» ¼³Á¤ÇÑ´Ù.
-
+				
 				List<FileItem> items = (List<FileItem>) upload.parseRequest(request);
 
-				// upload °´Ã¼¿¡ Àü¼ÛµÇ¾î ¿Â ¸ğµç µ¥ÀÌÅÍ¸¦ Collection °´Ã¼¿¡ ´ã´Â´Ù.
+				
 				for (int i = 0; i < items.size(); ++i) {
 					FileItem item = (FileItem) items.get(i);
-					// commons-fileupload¸¦ »ç¿ëÇÏ¿© Àü¼Û¹ŞÀ¸¸é
-					// ¸ğµç parameter´Â FileItem Å¬·¡½º¿¡ ÇÏ³ª¾¿ ÀúÀåµÈ´Ù.
+				
 
 					String value = item.getString("utf-8");
-					// ³Ñ¾î¿Â °ª¿¡ ´ëÇÑ ÇÑ±Û Ã³¸®¸¦ ÇÑ´Ù.
+				
 
-					if (item.isFormField()) {// ÀÏ¹İ Æû µ¥ÀÌÅÍ¶ó¸é...
+					if (item.isFormField()) {
 
-						// key °ªÀÌ nameÀÌ¸é name º¯¼ö¿¡ °ªÀ» ÀúÀåÇÑ´Ù.
+					
 						if (item.getFieldName().equals("user_id"))
 							user_id = value;
-						// key °ªÀÌ idÀÌ¸é id º¯¼ö¿¡ °ªÀ» ÀúÀåÇÑ´Ù.
+						
 						else if (item.getFieldName().equals("password"))
 							password = value;
-						// key °ªÀÌ pwÀÌ¸é pw º¯¼ö¿¡ °ªÀ» ÀúÀåÇÑ´Ù.
+					
 						else if (item.getFieldName().equals("name"))
 							name = value;
 						else if (item.getFieldName().equals("descr"))
 							descr = value;
 
-					} else {// ÆÄÀÏÀÌ¶ó¸é...
+					} else {
 						if (item.getFieldName().equals("image")) {
-							// key °ªÀÌ pictureÀÌ¸é ÆÄÀÏ ÀúÀåÀ» ÇÑ´Ù.
-							filename = item.getName();// ÆÄÀÏ ÀÌ¸§ È¹µæ (ÀÚµ¿ ÇÑ±Û Ã³¸® µÊ)
+						
+							filename = item.getName();
 							if (filename == null || filename.trim().length() == 0)
 								continue;
-							// ÆÄÀÏÀÌ Àü¼ÛµÇ¾î ¿ÀÁö ¾Ê¾Ò´Ù¸é °Ç³Ê ¶Ú´Ù.
+						
 							filename = filename.substring(filename.lastIndexOf("\\") + 1);
-							// ÆÄÀÏ ÀÌ¸§ÀÌ ÆÄÀÏÀÇ ÀüÃ¼ °æ·Î±îÁö Æ÷ÇÔÇÏ±â ¶§¹®¿¡ ÀÌ¸§ ºÎºĞ¸¸ ÃßÃâÇØ¾ß ÇÑ´Ù.
-							// ½ÇÁ¦ C:\Web_Java\aaa.gif¶ó°í ÇÏ¸é aaa.gif¸¸ ÃßÃâÇÏ±â À§ÇÑ ÄÚµåÀÌ´Ù.
+							
+							
 							File file = new File(dir, filename);
 							item.write(file);
-							// ÆÄÀÏÀ» upload °æ·Î¿¡ ½ÇÁ¦·Î ÀúÀåÇÑ´Ù.
-							// FileItem °´Ã¼¸¦ ÅëÇØ ¹Ù·Î Ãâ·Â ÀúÀåÇÒ ¼ö ÀÖ´Ù.
+							
 						}
 					}
 				}
 
 			} catch (SizeLimitExceededException e) {
-				// ¾÷·Îµå µÇ´Â ÆÄÀÏÀÇ Å©±â°¡ ÁöÁ¤µÈ ÃÖ´ë Å©±â¸¦ ÃÊ°úÇÒ ¶§ ¹ß»ıÇÏ´Â ¿¹¿ÜÃ³¸®
+				
 				e.printStackTrace();
 			} catch (FileUploadException e) {
-				// ÆÄÀÏ ¾÷·Îµå¿Í °ü·ÃµÇ¾î ¹ß»ıÇÒ ¼ö ÀÖ´Â ¿¹¿Ü Ã³¸®
+				
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();

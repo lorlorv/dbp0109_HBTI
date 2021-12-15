@@ -63,7 +63,7 @@ public class TodoManager {
 		public Todo findTodo(int todo_id, String user_id) throws SQLException {
 			return todoDAO.findTodo(todo_id, user_id);
 		}
-		// 수정 투두를 제외한 투두리스트
+		
 		public List<Todo> findNotSelectTodoList(java.util.Date date, int todo_id, String user_id) throws SQLException {
 			java.sql.Date date1 = new java.sql.Date(date.getTime());
 			return todoDAO.findNotSelectTodoList(date1, todo_id, user_id);

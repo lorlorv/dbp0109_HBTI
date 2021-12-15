@@ -28,11 +28,11 @@ public class UpdateGroupController implements Controller {
 		if (request.getServletPath().equals("/group/updateForm")) {
 			int group_id = userManager.belongToGroup(user_id);
 
-			// form�� �̸� ����� �׷� ������ ����.
+			
 			Group group = userManager.findGroup(group_id);
 			group.setGroup_id(group_id);
 
-			// form�� ����� �׷�� ������ ����.
+		
 			List<User> userList = groupManager.findUserList(group_id);
 
 			request.setAttribute("groupInfo", group);
@@ -41,7 +41,7 @@ public class UpdateGroupController implements Controller {
 			return "/group/updateForm.jsp";
 		}
 		if (request.getServletPath().equals("/group/manageUser")) {
-			// �׷� ���� ��û
+
 			String quit_id = request.getParameter("quit_id");
 			int group_id = Integer.parseInt(request.getParameter("group_id"));
 

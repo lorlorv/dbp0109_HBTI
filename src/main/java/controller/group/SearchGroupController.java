@@ -13,6 +13,7 @@ public class SearchGroupController implements Controller{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
 	
+
     	UserManager userManager = UserManager.getInstance();	
     	
     	String keyword = request.getParameter("searchKeyword");
