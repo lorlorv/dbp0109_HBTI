@@ -81,10 +81,13 @@ function postDelete() {
 					<span><a href="<c:url value='/challenge/updateForm'>
 							<c:param name="writer_id" value="${postInfo.writer_id }"/>
 							</c:url>" id="a-deco">&nbsp;수정하기&nbsp;</a></span>
-					<span><a href="<c:url value='/challenge/delete'>
+							
+					<c:if test="${isWriter}">
+						<span><a href="<c:url value='/challenge/delete'>
 							<c:param name="post_id" value='${postInfo.post_id}'/>
 							</c:url>" onclick=" return postDelete()" id="a-deco-remove">
 			<i class="fas fa-trash-alt"></i>&nbsp;삭제하기&nbsp;</a></span>
+					</c:if>
 				</div>
 			
 		</div>
