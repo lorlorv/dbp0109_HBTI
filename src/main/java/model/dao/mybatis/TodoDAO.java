@@ -58,10 +58,10 @@ private SqlSessionFactory sqlSessionFactory;
       }
       
       // 투두 체크 수정
-      public int updateIs_done(int is_done, int todo_id) {
+      public int updateIs_done(int todo_id, int is_done) {
          SqlSession sqlSession = sqlSessionFactory.openSession();
          try {
-            int result = sqlSession.getMapper(TodoMapper.class).updateIs_done(is_done, todo_id);
+            int result = sqlSession.getMapper(TodoMapper.class).updateIs_done(todo_id, is_done);
             if (result > 0) {
                sqlSession.commit();
             }

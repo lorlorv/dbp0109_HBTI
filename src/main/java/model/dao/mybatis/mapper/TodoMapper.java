@@ -13,8 +13,8 @@ public interface TodoMapper {
    public int updateTodo(@Param("content") String content,
          @Param("todo_id") int todo_id);
    
-   public int updateIs_done(@Param("is_done") int is_done,
-         @Param("todo_id") int todo_id);
+   public int updateIs_done(
+         @Param("todo_id") int todo_id, @Param("is_done") int is_done);
    
    public int deleteTodo(int todo_id);
    
