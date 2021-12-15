@@ -33,7 +33,11 @@ public class JoinUserController implements Controller {
 
 		// POST request
 		boolean check = ServletFileUpload.isMultipartContent(request);
+
 	
+
+		// 전송된 데이터의 인코드 타입이 multipart 인지 여부를 체크한다.
+		// 만약 multipart가 아니라면 파일 전송을 처리하지 않는다.
 		String user_id = null;
 		String password = null;
 		String name = null;
@@ -47,8 +51,10 @@ public class JoinUserController implements Controller {
 			ServletContext context = request.getServletContext();
 			String path = context.getRealPath("/upload");
 			File dir = new File(path);
-
 			
+
+			// Tomcat 외부의 폴더에 저장하려면 아래와 같이 절대 경로로 폴더 이름을 지정함
+			// File dir = new File("C:/Temp");
 
 			if (!dir.exists())
 				dir.mkdir();

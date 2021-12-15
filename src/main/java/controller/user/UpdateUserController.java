@@ -27,6 +27,10 @@ public class UpdateUserController implements Controller {
 		
 		if (request.getMethod().equals("GET")) {
 			
+
+			// GET request: 회원정보 수정 form 요청
+			// 원래는 UpdateUserFormController가 처리하던 작업을 여기서 수행
+
 			UserManager manager = UserManager.getInstance();
 			String update_id = UserSessionUtils.getLoginUserId(request.getSession());
 
@@ -48,8 +52,12 @@ public class UpdateUserController implements Controller {
 		String image = user.getImage();
 		log.debug("image: " , image);
 		
-		boolean check = ServletFileUpload.isMultipartContent(request);
+		boolean check = ServletFileUpload.isMultipartContent(request){
 		
+
+		// 전송된 데이터의 인코드 타입이 multipart 인지 여부를 체크한다.
+		// 만약 multipart가 아니라면 파일 전송을 처리하지 않는다.
+
 		String user_id = null;
 		String password = null;
 		String name = null;

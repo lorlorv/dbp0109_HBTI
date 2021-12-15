@@ -32,7 +32,7 @@ public class UpdateGroupController implements Controller {
 			Group group = userManager.findGroup(group_id);
 			group.setGroup_id(group_id);
 
-			
+		
 			List<User> userList = groupManager.findUserList(group_id);
 
 			request.setAttribute("groupInfo", group);
@@ -41,7 +41,7 @@ public class UpdateGroupController implements Controller {
 			return "/group/updateForm.jsp";
 		}
 		if (request.getServletPath().equals("/group/manageUser")) {
-			
+
 			String quit_id = request.getParameter("quit_id");
 			int group_id = Integer.parseInt(request.getParameter("group_id"));
 
@@ -63,11 +63,14 @@ public class UpdateGroupController implements Controller {
 
 		}
 		if(request.getServletPath().equals("/group/update")) {
-			Group group = new Group(request.getParameter("name"), request.getParameter("descr"),
-					request.getParameter("icon"), user_id, Integer.parseInt(request.getParameter("limit")),
-					userManager.findHBTI(user_id));
-			group.setGroup_id(Integer.parseInt(request.getParameter("group_id")));
-
+			Group group = new Group(
+					Integer.parseInt(request.getParameter("group_id")),
+					request.getParameter("name"),
+					request.getParameter("descr"),
+					request.getParameter("icon"),
+					Integer.parseInt(request.getParameter("limit")),
+					userManager.findHBTI(user_id)
+					);
 			try {
 				userManager.updateGroup(group);
 				return "redirect:/group/main";

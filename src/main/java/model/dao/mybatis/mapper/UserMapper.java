@@ -34,5 +34,4 @@ public interface UserMapper {
 	
 	public List<String> selectChallengePostListByUserId(String user_id);
 	
-
 }

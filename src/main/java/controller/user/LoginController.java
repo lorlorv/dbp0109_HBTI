@@ -20,7 +20,7 @@ public class LoginController implements Controller {
 			manager.login(user_id, password);
 			int hbti_id = manager.findHBTI(user_id);
 			if(hbti_id == 0) {
-				throw new UserHbtiException(user_id +"�� HBTI�� �������� �ʽ��ϴ�.");
+				throw new UserHbtiException(user_id +"占쏙옙 HBTI占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占십쏙옙占싹댐옙.");
 			}
 			manager.updateLoginDate(user_id);
 	
@@ -38,6 +38,10 @@ public class LoginController implements Controller {
 		}	
 		catch (PasswordMismatchException e) {
 			
+
+			/* UserNotFoundException이나 PasswordMismatchException 발생 시
+			 * 다시 login form을 사용자에게 전송하고 오류 메세지도 출력 */
+      
             request.setAttribute("loginFailed", true);
 			request.setAttribute("exception", e);
 			

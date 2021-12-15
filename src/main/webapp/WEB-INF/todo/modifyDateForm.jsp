@@ -93,6 +93,7 @@ function modifyDateTodo() {
 			</div>
 			
 			<p>
+
 			 <a id="a-deco" 
 					href="<c:url value="/todo/dateOk">
 					<c:param name="date" value='${date}'/>	

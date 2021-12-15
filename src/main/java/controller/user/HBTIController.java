@@ -52,9 +52,7 @@ public class HBTIController implements Controller {
 		} else {
 			manager.updateHBTI(user_id, testRst); 
 		}
-		
-		
-		
+    
 		HttpSession session = request.getSession();
 		session.setAttribute(UserSessionUtils.USER_SESSION_KEY, user_id);
 		

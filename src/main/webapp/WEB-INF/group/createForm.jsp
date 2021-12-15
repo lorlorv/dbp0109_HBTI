@@ -103,9 +103,11 @@ function groupCreate() {
 				그룹의 이름을 지어주세요.<br>
 				관심있는 운동이나 취향이 드러나면 더욱 좋습니다. 
 			</p>
-			<input type="text" name="name" maxlength="10" placeholder="최대  10글자">	
 			
-			<div class="split"> </div>
+			<input id="name" type="text" name="name" placeholder="그룹 이름">
+			
+			
+			
 			<p id="contents-title">NUMBER OF MEMBER</p>
 			<p id="intro">
 				우리 그룹이 가입할 수 있는 정원을 입력해주세요.<br>
@@ -113,7 +115,7 @@ function groupCreate() {
 			</p>
 			<input type="text" name="limit" placeholder="2~30" required>	
 			
-			<div class="split"> </div>
+		
 			<p id="contents-title">DESCRIPTION</p>
 			<p id="intro">
 				우리 그룹을 재치있게 한마디로 소개해주세요!<br> 

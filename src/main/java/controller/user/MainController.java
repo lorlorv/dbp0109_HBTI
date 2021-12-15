@@ -31,8 +31,8 @@ public class MainController implements Controller {
 			/* HBTI Profile */
 			User user = manager.findUser(user_id);
 			HBTI hbti = hbtiManager.findHBTI(manager.findUser(user_id).getHbti_id());
-			String goodName = hbtiManager.findHbtiName(hbti.getGoodHbti());
-			String badName = hbtiManager.findHbtiName(hbti.getBadHbti());
+			String goodName = hbtiManager.findHBTI(hbti.getGoodHbti()).getName();
+			String badName = hbtiManager.findHBTI(hbti.getBadHbti()).getName();
 
 			request.setAttribute("user", user);
 			request.setAttribute("hbti", hbti);
@@ -44,7 +44,8 @@ public class MainController implements Controller {
 			Map<String, Double> percentMap = new HashMap<String, Double>();
 			for (int i = 0; i < 16; i++) {
 				String hbtiName = manager.findHbtiName(i + 1);
-				double percentage = manager.percentOfChallenge(i + 1); // hbti���� �ۼ�Ʈ �޾ƿ���
+
+				double percentage = hbtiManager.percentOfChallenge(i + 1); // hbti별로 퍼센트 받아오기
 				percentMap.put(hbtiName, percentage);
 			}
 

@@ -1,49 +1,34 @@
 package model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Group {
+@SuppressWarnings("serial")
+public class Group implements Serializable{
 
 	private int group_id;
 	private String name;
 	private Date create_date;
 	private String icon;
 	private String descr;
+	private int limitation;
 	private int hbti_id;
+	private String challengeContent;
+	private int numberOfMem;
 	private String leader_id;
 	private String leader_name;
-	private int numberOfMem;
-	private String challengeContent;
-	private int limitation;
-
-
+	
 	public Group() {
 		
 	}
 	
-	public Group(String name, String descr, String icon, String leader_id, int limitation, int hbti_id) {
-		this.name = name;
-		this.descr = descr;
-		this.icon = icon;
-		this.leader_id = leader_id;
-		this.limitation = limitation;
-		this.hbti_id = hbti_id;
-	}
-
-	
-	public Group(int group_id, String name, String icon, String descr, int limitation) {
+	public Group(int group_id, String name, String descr, String icon, int limitation, int hbti_id) {
 		this.group_id = group_id;
 		this.name = name;
-		this.icon = icon;
 		this.descr = descr;
+		this.icon = icon;
 		this.limitation = limitation;
-	}
-		public int getLimitation() {
-		return limitation;
-	}
-
-	public void setLimitation(int limitation) {
-		this.limitation = limitation;
+		this.hbti_id = hbti_id;
 	}
 
 	public String getLeader_name() {
@@ -53,6 +38,32 @@ public class Group {
 	public void setLeader_name(String leader_name) {
 		this.leader_name = leader_name;
 	}
+	
+	public String getLeader_id() {
+		return leader_id;
+	}
+
+	public void setLeader_id(String leader_id) {
+		this.leader_id = leader_id;
+
+	}
+	
+	public int getNumberOfMem() {
+		return numberOfMem;
+	}
+
+	public void setNumberOfMem(int numberOfMem) {
+		this.numberOfMem = numberOfMem;
+	}
+
+	public int getLimitation() {
+		return limitation;
+	}
+
+	public void setLimitation(int limitation) {
+		this.limitation = limitation;
+	}
+
 	public String getChallengeContent() {
 		return challengeContent;
 	}
@@ -109,19 +120,4 @@ public class Group {
 		this.hbti_id = hbti_id;
 	}
 
-	public String getLeader_id() {
-		return leader_id;
-	}
-
-	public void setLeader_id(String leader_id) {
-		this.leader_id = leader_id;
-	}
-
-	public int getNumberOfMem() {
-		return numberOfMem;
-	}
-
-	public void setNumberOfMem(int numberOfMem) {
-		this.numberOfMem = numberOfMem;
-	}
 }

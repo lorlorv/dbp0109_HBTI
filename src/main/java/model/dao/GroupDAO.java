@@ -13,6 +13,7 @@ public class GroupDAO {
 	private JDBCUtil jdbcUtil = null;
 
 	public GroupDAO() {
+
 		jdbcUtil = new JDBCUtil(); 
 	}
 
@@ -24,15 +25,23 @@ public class GroupDAO {
 		List<Group> groupList = new ArrayList<Group>();
 		try {
 			ResultSet rs = jdbcUtil.executeQuery(); 
+
+
 			while (rs.next()) {
-				Group g = new Group(rs.getInt("group_id"), rs.getString("name"), rs.getString("icon"),
-						rs.getString("descr"), rs.getInt("limitation"));
+				Group g = new Group(
+						rs.getInt("group_id"),
+						rs.getString("name"),
+						rs.getString("icon"),
+						rs.getString("descr"),
+						rs.getInt("limitation"),
+						hbti_id);
 				groupList.add(g);
 			}
 			return groupList;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
+
 			jdbcUtil.close();
 		}
 		return null;
@@ -46,17 +55,25 @@ public class GroupDAO {
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { hbti_id, keyword });
 		List<Group> groupList = new ArrayList<Group>();
 		try {
+
 			ResultSet rs = jdbcUtil.executeQuery(); 
 			while (rs.next()) {
-				Group g = new Group(rs.getInt("group_id"), rs.getString("name"), rs.getString("icon"),
-						rs.getString("descr"), rs.getInt("limitation"));
+				Group g = new Group(
+						rs.getInt("group_id"),
+						rs.getString("name"),
+						rs.getString("icon"),
+						rs.getString("descr"),
+						rs.getInt("limitation"),
+						hbti_id);
 				groupList.add(g);
 			}
 			return groupList;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
+
 			jdbcUtil.close(); 
+
 		}
 		return null;
 	}
@@ -66,7 +83,9 @@ public class GroupDAO {
 		String sql = "SELECT user_id, name, image, login_date " + "FROM UserInfo " + "WHERE group_id = ? ";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { group_id });
 		try {
+
 			ResultSet rs = jdbcUtil.executeQuery();
+
 			List<User> userList = new ArrayList<User>();
 			while (rs.next()) {
 				userList.add(new User(rs.getString("user_id"), rs.getString("name"), rs.getString("image"),
@@ -76,12 +95,14 @@ public class GroupDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
+
 			jdbcUtil.close(); 
+
 		}
 		return null;
 	}
 	
-	
+
 	public Group findGroup(int group_id) throws SQLException {
 		String sql = "SELECT  g.name AS g_name, icon, g.descr AS g_descr, leader_id , g.hbti_id AS hbti_id, content, limitation "
 				+ "FROM GroupInfo g, DayOfChallenge d, Challenge c "
@@ -90,10 +111,16 @@ public class GroupDAO {
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
 			if (rs.next()) {
-				Group group = new Group(group_id, rs.getString("g_name"), rs.getString("icon"), rs.getString("g_descr"),
-						rs.getInt("limitation"));
+				Group group = new Group(
+						group_id,
+						rs.getString("g_name"),
+						rs.getString("icon"), 
+						rs.getString("g_descr"),
+						rs.getInt("limitation"),
+						rs.getInt("hbti_id")
+						);
 				group.setLeader_id(rs.getString("leader_id"));
-				group.setHbti_id(rs.getInt("hbti_id"));
+				
 				group.setChallengeContent(rs.getString("content"));
 
 				return group;
@@ -105,7 +132,6 @@ public class GroupDAO {
 		}
 		return null;
 	}
-	
 	
 	public int findGroupUserId(String user_id) {
 		String sql = "SELECT group_id "
@@ -189,6 +215,7 @@ public class GroupDAO {
 	
 	
 	public String findLeaderId(int group_id) {
+
 		String sql = "SELECT leader_id " 
 					+ "FROM GROUPINFO " 
 					+ "WHERE group_id=? ";
@@ -209,7 +236,7 @@ public class GroupDAO {
 		return null;
 	}
 	
-	
+
 	public String findLeaderName(int group_id) throws SQLException {
 		String sql = "SELECT u.name AS name " 
 					+ "FROM GroupInfo g JOIN UserInfo u ON g.leader_id = u.user_id "
@@ -227,8 +254,7 @@ public class GroupDAO {
 		}
 		return null;
 	}
-	
-	
+
 	public String findNextLeader(String user_id, int group_id) { 
 		String sql = "SELECT user_id " 
 					+ "FROM USERINFO " 
@@ -241,7 +267,7 @@ public class GroupDAO {
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
 			
-			
+
 			if (rs.next()) {
 				return rs.getString("user_id");
 			}
@@ -250,10 +276,10 @@ public class GroupDAO {
 		} finally {
 			jdbcUtil.close();
 		}
+
 		return null; 
 	}
 
-	
 	public int updateLeader(String leader_id, int group_id) throws SQLException{
 		String sql = "UPDATE GROUPINFO " 
 					+ "SET leader_id=? " 
@@ -273,8 +299,7 @@ public class GroupDAO {
 		}
 		return 0;
 	}
-	
-	
+
 	public boolean existingGroupName(String group_name) throws SQLException {
 		String sql = "SELECT name " + "FROM GroupInfo " + "WHERE name = ?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { group_name });
@@ -309,8 +334,7 @@ public class GroupDAO {
 		}
 		return 0;
 	}
-	
-	
+
 	public int create(Group group) throws SQLException {
 		String sql = "INSERT INTO GroupInfo VALUES (GROUP_SEQ.NEXTVAL, ?, SYSDATE, ?, ?, ?, ?, ?)";
 		Object[] param = new Object[] { group.getName(), group.getIcon(), group.getDescr(), group.getHbti_id(),
@@ -318,18 +342,21 @@ public class GroupDAO {
 		jdbcUtil.setSqlAndParameters(sql, param);
 
 		try {
+
 			int result = jdbcUtil.executeUpdate(); 
+
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
+
 			jdbcUtil.close();
+
 		}
 		return 0;
 	}
-
 
 	public int update(Group group) {
 		String sql = "UPDATE GroupInfo " + "SET name=?, icon=?, descr=?, limitation=? " + "WHERE group_id=?";
@@ -338,19 +365,23 @@ public class GroupDAO {
 		jdbcUtil.setSqlAndParameters(sql, param);
 
 		try {
+
 			int result = jdbcUtil.executeUpdate(); 
+
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
+
 			jdbcUtil.close(); 
+
 		}
 		return 0;
 	}
 
-	
+
 	public int delete(int group_id) throws SQLException {
 		String sql = "DELETE FROM GroupInfo " + "WHERE group_id=? ";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { group_id });
@@ -363,11 +394,13 @@ public class GroupDAO {
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
+
 			jdbcUtil.close(); 
+
 		}
 		return 0;
 	}
-	
+
 	public int cntOfChallengeList() {
 		String sql = "SELECT COUNT(*) AS cnt " 
 					+ "FROM Challenge";
@@ -385,7 +418,7 @@ public class GroupDAO {
 		return 0;
 	}
 	
-	
+
 	public int assignChallenge(int cntList) throws SQLException {
 		String sql = "UPDATE DayOfChallenge d "
 					+ "SET d.challenge_id = ROUND(DBMS_RANDOM.VALUE(1, ?)) " 
@@ -394,7 +427,9 @@ public class GroupDAO {
 		jdbcUtil.setSqlAndParameters(sql, param);
 
 		try {
+
 			int result = jdbcUtil.executeUpdate(); 
+
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -402,6 +437,7 @@ public class GroupDAO {
 		} finally {
 			jdbcUtil.commit();
 			jdbcUtil.close(); 
+
 		}
 		return 0;
 	}

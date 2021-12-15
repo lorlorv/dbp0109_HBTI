@@ -18,6 +18,11 @@
 <link rel="stylesheet" href="<c:url value='/css/challenge/challengeView.css' />"
 	type="text/css">
 
+<script>
+function postDelete() {
+		return confirm("챌린지를 정말 삭제하시겠습니까??");
+}
+</script>
 </head>
 <body>
 	<div class="page-wrapper">
@@ -54,8 +59,6 @@
 	<div class="contents">
 		<p id="sub-title">CHALLENGE POST</p>
 		<div class="contents-split">
-			<form name="form" method="POST"
-				action="<c:url value='/challenge/add' />">
 				<p id="contents-title">${postInfo.writer_name} 님의 챌린지 인증</p>
 				<p id="intro">
 					<a href="<c:url value='/challenge/updateLike_btn'>
@@ -72,12 +75,18 @@
 				<div class="challenge-content">${postInfo.content }</div>
 				<p>
 				<div>
-					<span><a href="<c:url value='/group/main'/> " id="a-deco">&nbsp;돌아가기&nbsp;</a></span>
+					<span>
+						<a href="<c:url value='/group/main'/> " id="a-deco" class="right">&nbsp;돌아가기&nbsp;</a>
+					</span>
 					<span><a href="<c:url value='/challenge/updateForm'>
 							<c:param name="writer_id" value="${postInfo.writer_id }"/>
 							</c:url>" id="a-deco">&nbsp;수정하기&nbsp;</a></span>
+					<span><a href="<c:url value='/challenge/delete'>
+							<c:param name="post_id" value='${postInfo.post_id}'/>
+							</c:url>" onclick=" return postDelete()" id="a-deco-remove">
+			<i class="fas fa-trash-alt"></i>&nbsp;삭제하기&nbsp;</a></span>
 				</div>
-			</form>
+			
 		</div>
 
 	</div>

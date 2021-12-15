@@ -91,7 +91,6 @@
 			</div>
 		</div>
 
-
 		<div class="left-HBTI-info">
 			<div class="left-box">
 				<p class="info-title">02. 같은 HBTI를 가진 회원끼리 그룹을 결성해 챌린지를 달성하세요</p>
@@ -116,7 +115,6 @@
 				<p class="info"></p>
 			</div>
 		</div>
-
 	</div>
 
 
@@ -145,8 +143,7 @@
 				</c:if>
 				<input type="submit" value="LOGIN" onClick="login()"> <input
 					type="button" value="JOIN"
-					onClick="userCreate(
-								'<c:url value='/user/join'/>')">
+					onClick="userCreate('<c:url value='/user/join'/>')">
 			</form>
 		</div>
 	</div>

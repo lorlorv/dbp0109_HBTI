@@ -24,28 +24,26 @@ public class ViewGroupController implements Controller{
 		GroupManager groupManager = GroupManager.getInstance();
 		
 		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
-		
-		
+
 		int group_id = userManager.belongToGroup(user_id);
 		
 		if(group_id != 0) {
-			
+
 			Group group = userManager.findGroup(group_id);
 			group.setGroup_id(group_id);
 			
 			String leader = groupManager.findLeaderName(group_id);
 			group.setLeader_name(leader);
 			
-		
+
 			if(user_id.equals(group.getLeader_id())) {
 				request.setAttribute("isLeader", true);
 			}
-			
 			List<User> userList = groupManager.findUserList(group_id);
 			
-			
+			// 챌린지 list를 출력
 			List<ChallengePost> postList = groupManager.findPostList(group_id);
-			
+						
 			request.setAttribute("groupInfo", group);
 			request.setAttribute("userList", userList);
 			request.setAttribute("postList", postList);
@@ -53,7 +51,7 @@ public class ViewGroupController implements Controller{
 			return "/group/main.jsp";
 			
 		} else {
-		
+
 			int user_HBTI = userManager.findHBTI(user_id);
 			
 			List<Group> groupList = userManager.findGroupList(user_HBTI);

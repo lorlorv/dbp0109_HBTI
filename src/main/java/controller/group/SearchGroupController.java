@@ -13,18 +13,15 @@ public class SearchGroupController implements Controller{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
 	
-    	
+
     	UserManager userManager = UserManager.getInstance();	
     	
     	String keyword = request.getParameter("searchKeyword");
     	String user_id = UserSessionUtils.getLoginUserId(request.getSession());
-    	
-    	
+
     	keyword = keyword + "%";
-    	System.out.println(keyword);
-    	
     	int hbti_id = userManager.findHBTI(user_id);
-    	System.out.println(hbti_id);
+ 
     	List<Group> searchList = userManager.searchGroupList(hbti_id, keyword);
     	
     	request.setAttribute("groupList", searchList);
