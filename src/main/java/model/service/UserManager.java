@@ -10,7 +10,7 @@ import model.dao.mybatis.HbtiDAO;
 import model.dao.mybatis.UserDAO;
 import model.dao.mybatis.GroupDAO;
 import model.dao.mybatis.PostDAO;
-import model.dao.TodoDAO;
+import model.dao.mybatis.TodoDAO;
 import model.service.exception.ExistingGroupException;
 import model.service.exception.ExistingUserException;
 import model.service.exception.OverTheLimitException;
