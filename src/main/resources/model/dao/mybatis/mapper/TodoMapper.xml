@@ -31,7 +31,7 @@
       <![CDATA[
        SELECT todo_id, content, todo_date, user_id, is_done
           FROM TODO
-          WHERE todo_date >= #{todo_date} AND todo_date < #{todo_date} + 1 AND user_id = #{user_id}
+          WHERE todo_date >= to_date(#{todo_date}) AND todo_date < to_date(#{todo_date}) + 1 AND user_id = #{user_id}
       ]]>   
    </select>
 
