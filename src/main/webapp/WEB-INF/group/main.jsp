@@ -98,7 +98,7 @@ $(function(){
                                  <td>
                                  <img class="member-img"
                                        src="<c:url value='/images/mypage_img/profile-image.jpg'/>" />
-                                 <br>
+                                 <br>${user.name}
                                  </td>
                               </c:if>
                               <c:if test="${user.image != null}" >
@@ -115,7 +115,7 @@ $(function(){
                                  <td>
                                  <img class="member-img"
                                        src="<c:url value='/images/mypage_img/profile-image.jpg'/>" />
-                                 <br>
+                                 <br>${user.name}
                                  </td>
                               </c:if>
                               <c:if test="${user.image != null}" >
@@ -132,7 +132,7 @@ $(function(){
                                  <td>
                                  <img class="member-img"
                                        src="<c:url value='/images/mypage_img/profile-image.jpg'/>" />
-                                 <br>
+                                 <br>${user.name}
                                  </td>
                               </c:if>
                               <c:if test="${user.image != null}" >
