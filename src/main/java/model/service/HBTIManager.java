@@ -30,39 +30,44 @@ public class HBTIManager {
 		return hbti;
 	}
 	
+
+	public String findHbtiName(int hbti_id) throws SQLException{
+		return hbtiDAO.findHbtiName(hbti_id);
+	}
+
 	public String findHbtiImg(String name) throws SQLException {
 		return hbtiDAO.findHbtiImg(name);
 	}
 	
 	/* Ranking */
-	/* hbti_id¿¡ ÇØ´çÇÏ´Â ±×·ìÀÇ ÃÑ ÀÎ¿ø ¼ö */
+	/* hbti_idì— í•´ë‹¹í•˜ëŠ” ê·¸ë£¹ì˜ ì´ ì¸ì› ìˆ˜ */
 	public int numOfGroupMem(int hbti_id) {
-		// ÀÏ´Ü hbti_idÀÎ groupÀÌ ¹¹°¡ ÀÖ´ÂÁö group_id Ã£¾Æ¿À±â
+		// ì¼ë‹¨ hbti_idì¸ groupì´ ë­ê°€ ìˆëŠ”ì§€ group_id ì°¾ì•„ì˜¤ê¸°
 		List<Integer> groupList = new ArrayList<>();
-		groupList = hbtiDAO.group_idByHBTI(hbti_id);// groupDAO·Î ¹Ù²Ù±â
+		groupList = hbtiDAO.group_idByHBTI(hbti_id);// groupDAOë¡œ ë°”ê¾¸ê¸°
 
-		// groupListÀÇ ListÇÏ³ª ¾¿ µ¹·Áº¸¸ç ±× groupÀÇ ÀÎ¿ø ¼ö ¾ò¾î¿Í¼­ ÃÑ ÀÎ¿ø ¼ö ±¸ÇÏ±â
+		// groupListì˜ Listí•˜ë‚˜ ì”© ëŒë ¤ë³´ë©° ê·¸ groupì˜ ì¸ì› ìˆ˜ ì–»ì–´ì™€ì„œ ì´ ì¸ì› ìˆ˜ êµ¬í•˜ê¸°
 		int sum = 0;
 		for (int i = 0; i < groupList.size(); i++) {
 			int group_id = groupList.get(i);
-			sum += hbtiDAO.getNumberOfUsersInGroup(group_id);// groupDAO·Î ¹Ù²Ù±â
+			sum += hbtiDAO.getNumberOfUsersInGroup(group_id);// groupDAOë¡œ ë°”ê¾¸ê¸°
 		}
 
 		return sum;
 	}
 
 	public int numOfUserWhoDidChallengeInGroup(int hbti_id) {
-		// ÀÏ´Ü hbti_idÀÎ groupÀÌ ¹¹°¡ ÀÖ´ÂÁö group_id Ã£¾Æ¿À±â
+		// ì¼ë‹¨ hbti_idì¸ groupì´ ë­ê°€ ìˆëŠ”ì§€ group_id ì°¾ì•„ì˜¤ê¸°
 		List<Integer> groupList = new ArrayList<>();
 		groupList = hbtiDAO.group_idByHBTI(hbti_id);
 
-		// groupListÀÇ ListÇÏ³ª ¾¿ µ¹·Áº¸¸ç ±× groupÀÇ User_id °¡Á®¿À±â List·Î
+		// groupListì˜ Listí•˜ë‚˜ ì”© ëŒë ¤ë³´ë©° ê·¸ groupì˜ User_id ê°€ì ¸ì˜¤ê¸° Listë¡œ
 		List<String> userListEachGroup = new ArrayList<>();
 		int cnt = 0;
 		for (int i = 0; i < groupList.size(); i++) {
 			int group_id = groupList.get(i);
 
-			userListEachGroup = hbtiDAO.userListEachGroup(group_id); // ±×·ì¿¡ ÀÖ´Â user¸®½ºÆ® ºÒ·¯¿À±â
+			userListEachGroup = hbtiDAO.userListEachGroup(group_id); // ê·¸ë£¹ì— ìˆëŠ” userë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°
 			
 			List<String> userList = new ArrayList<>();
 			for (int j = 0; j < userListEachGroup.size(); j++) {
@@ -74,7 +79,7 @@ public class HBTIManager {
 		return cnt;
 	}
 
-	// ÆÛ¼¾Æ® ±¸ÇÏ±â
+	// í¼ì„¼íŠ¸ êµ¬í•˜ê¸°
 	public double percentOfChallenge(int hbti_id) {
 		double A = (double) numOfUserWhoDidChallengeInGroup(hbti_id);
 		double B = (double) numOfGroupMem(hbti_id);

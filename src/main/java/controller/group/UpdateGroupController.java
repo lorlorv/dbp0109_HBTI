@@ -28,11 +28,18 @@ public class UpdateGroupController implements Controller {
 		if (request.getServletPath().equals("/group/updateForm")) {
 			int group_id = userManager.belongToGroup(user_id);
 
-			// form�� �̸� ����� �׷� ������ ����.
+<<<<<<< HEAD
+=======
+			
+>>>>>>> branch 'dev' of https://github.com/Jeongminyooa/dbp0109_HBTI.git
+			
 			Group group = userManager.findGroup(group_id);
 			group.setGroup_id(group_id);
 
-			// form�� ����� �׷�� ������ ����.
+<<<<<<< HEAD
+=======
+		
+>>>>>>> branch 'dev' of https://github.com/Jeongminyooa/dbp0109_HBTI.git
 			List<User> userList = groupManager.findUserList(group_id);
 
 			request.setAttribute("groupInfo", group);
@@ -41,7 +48,10 @@ public class UpdateGroupController implements Controller {
 			return "/group/updateForm.jsp";
 		}
 		if (request.getServletPath().equals("/group/manageUser")) {
-			// �׷� ���� ��û
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'dev' of https://github.com/Jeongminyooa/dbp0109_HBTI.git
 			String quit_id = request.getParameter("quit_id");
 			int group_id = Integer.parseInt(request.getParameter("group_id"));
 
@@ -53,7 +63,7 @@ public class UpdateGroupController implements Controller {
 				request.setAttribute("Exception", e);
 
 				Group group = userManager.findGroup(group_id);
-				List<User> userList = groupManager.findUserList(group.getGroup_id());
+				List<User> userList = groupManager.findUserList(group_id);
 
 				request.setAttribute("userList", userList);
 				request.setAttribute("groupInfo", group);

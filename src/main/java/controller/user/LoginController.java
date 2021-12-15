@@ -15,32 +15,33 @@ public class LoginController implements Controller {
 		String password = request.getParameter("password");
 		
 		try {
-			// ¸ğµ¨¿¡ ·Î±×ÀÎ Ã³¸®¸¦ À§ÀÓ
+			
 			UserManager manager = UserManager.getInstance();
 			manager.login(user_id, password);
 			int hbti_id = manager.findHBTI(user_id);
 			if(hbti_id == 0) {
-				throw new UserHbtiException(user_id +"ÀÇ HBTI°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+				throw new UserHbtiException(user_id +"å ì™ì˜™ HBTIå ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì‹­ì™ì˜™å ì‹¹ëŒì˜™.");
 			}
 			manager.updateLoginDate(user_id);
 	
-			// ¼¼¼Ç¿¡ »ç¿ëÀÚ ÀÌÀÌµğ ÀúÀå
+			
 			HttpSession session = request.getSession();
             session.setAttribute(UserSessionUtils.USER_SESSION_KEY, user_id);
             
             return "redirect:/main";			
 		} catch (UserNotFoundException e) {
-			/* UserNotFoundExceptionÀÌ³ª PasswordMismatchException ¹ß»ı ½Ã
-			 * ´Ù½Ã login formÀ» »ç¿ëÀÚ¿¡°Ô Àü¼ÛÇÏ°í ¿À·ù ¸Ş¼¼Áöµµ Ãâ·Â
-			 */
+			
             request.setAttribute("loginFailed", true);
 			request.setAttribute("exception", e);
 			
             return "/user/loginForm.jsp";			
 		}	
 		catch (PasswordMismatchException e) {
-			/* UserNotFoundExceptionÀÌ³ª PasswordMismatchException ¹ß»ı ½Ã
-			 * ´Ù½Ã login formÀ» »ç¿ëÀÚ¿¡°Ô Àü¼ÛÇÏ°í ¿À·ù ¸Ş¼¼Áöµµ Ãâ·Â */
+			
+
+			/* UserNotFoundExceptionì´ë‚˜ PasswordMismatchException ë°œìƒ ì‹œ
+			 * ë‹¤ì‹œ login formì„ ì‚¬ìš©ìì—ê²Œ ì „ì†¡í•˜ê³  ì˜¤ë¥˜ ë©”ì„¸ì§€ë„ ì¶œë ¥ */
+      
             request.setAttribute("loginFailed", true);
 			request.setAttribute("exception", e);
 			

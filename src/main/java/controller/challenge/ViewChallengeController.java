@@ -24,7 +24,7 @@ public class ViewChallengeController implements Controller{
 			
 			return "/challenge/view.jsp";
 		}
-		// 다른 사람의 챌린지 인증글을 볼 때
+		
 		String user_id = request.getParameter("writer_id");
 		
 		ChallengePost post = groupManager.findPost(user_id);
