@@ -7,7 +7,7 @@ import model.ChallengePost;
 import model.User;
 import model.dao.mybatis.GroupDAO;
 import model.dao.mybatis.PostDAO;
-import model.dao.UserDAO;
+import model.dao.mybatis.UserDAO;
 import model.service.exception.DoNotQuitLeaderException;
 import model.service.exception.ExistingChallengePostException;
 
