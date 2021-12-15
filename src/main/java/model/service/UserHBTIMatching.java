@@ -17,12 +17,11 @@ public class UserHBTIMatching {
 	public int matchingHBTIResult(String user_id, String[] testRst) throws SQLException {
 		String hbtiType = new String();
 		int hbti_id = 0;
-		int A = 0, B = 0;
+		int A = 0;
 		for (int i = 0; i < 3; i++) {
 			if (testRst[i].equals("A")) {
 				A++;
-			} else
-				B++;
+			}
 		}
 		if (A > 1)
 			hbtiType += "E";
@@ -30,12 +29,10 @@ public class UserHBTIMatching {
 			hbtiType += "I";
 
 		A = 0;
-		B = 0;
 		for (int i = 3; i < 6; i++) {
 			if (testRst[i].equals("A")) {
 				A++;
-			} else
-				B++;
+			}
 		}
 		if (A > 1)
 			hbtiType += "S";
@@ -43,12 +40,10 @@ public class UserHBTIMatching {
 			hbtiType += "N";
 
 		A = 0;
-		B = 0;
 		for (int i = 6; i < 9; i++) {
 			if (testRst[i].equals("A")) {
 				A++;
-			} else
-				B++;
+			}
 		}
 		if (A > 1)
 			hbtiType += "T";
@@ -56,12 +51,10 @@ public class UserHBTIMatching {
 			hbtiType += "F";
 
 		A = 0;
-		B = 0;
 		for (int i = 9; i < testRst.length; i++) {
 			if (testRst[i].equals("A")) {
 				A++;
-			} else
-				B++;
+			}
 		}
 		if (A > 1)
 			hbtiType += "J";

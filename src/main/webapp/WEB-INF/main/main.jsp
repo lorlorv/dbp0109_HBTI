@@ -66,9 +66,9 @@
 				<br>
 			그룹에 가입한 뒤 오늘의 챌린지를 인증하면 ${user.name }님이 속한 HBTI의 랭킹이 쭉쭉 올라갑니다! <br>
 			그럼, HBTI를 자유롭게 즐겨보세요!
-			</p>
+			<p>
 				<span style="color: #dfdfdf"> <i
-					class="fas fa-plane-departure fa-3x"></i></i>
+					class="fas fa-plane-departure fa-3x"></i>
 				</span>
 			</c:if>
 
@@ -85,7 +85,7 @@
 				<br>
 			오늘의 챌린지를 꾸준히 인증해주세요! ${user.name }님이 속한 HBTI의 랭킹이 쭉쭉 올라갑니다! <br>
 			앞으로도 HBTI를 자유롭게 즐겨주세요!
-			</p>
+			<p>
 				<span style="color: #dfdfdf"> <i
 					class="fab fa-fort-awesome fa-3x"></i>
 				</span>
