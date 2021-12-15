@@ -30,11 +30,6 @@ public class HBTIManager {
 		return hbti;
 	}
 	
-
-	public String findHbtiName(int hbti_id) throws SQLException{
-		return hbtiDAO.findHbtiName(hbti_id);
-	}
-
 	public String findHbtiImg(String name) throws SQLException {
 		return hbtiDAO.findHbtiImg(name);
 	}
