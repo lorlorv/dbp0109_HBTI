@@ -69,7 +69,6 @@ public class UpdateGroupController implements Controller {
 					Integer.parseInt(request.getParameter("limit")),
 					userManager.findHBTI(user_id)
 					);
-			System.out.println(Integer.parseInt(request.getParameter("group_id")) + " : " + userManager.findHBTI(user_id));
 			try {
 				userManager.updateGroup(group);
 				return "redirect:/group/main";
