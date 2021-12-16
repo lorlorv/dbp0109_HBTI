@@ -21,6 +21,9 @@ public class ViewChallengeController implements Controller{
 			
 			request.setAttribute("postInfo", post);
 			
+			boolean isWriter = true;
+			request.setAttribute("isWriter", isWriter);
+			
 			return "/challenge/view.jsp";
 		}
 		

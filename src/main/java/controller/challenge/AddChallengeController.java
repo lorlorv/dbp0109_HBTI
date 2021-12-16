@@ -48,6 +48,11 @@ public class AddChallengeController implements Controller {
 				post = groupManager.findPost(user_id);
 				request.setAttribute("postInfo", post);
 				
+				
+				boolean isWriter = true;
+				request.setAttribute("isWriter", isWriter);
+				
+				
 				return "/challenge/view.jsp";
 			}
 		}
