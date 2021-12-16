@@ -21,6 +21,7 @@ function addTodo() {
 	if(form.content.value == "") {
 		alert('TODO를 입력하세요.');
 		form.content.focus();
+		return false;
 	}
 	form.submit();
 }
