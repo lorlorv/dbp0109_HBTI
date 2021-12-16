@@ -69,6 +69,7 @@ public class UpdateGroupController implements Controller {
 					Integer.parseInt(request.getParameter("limit")),
 					userManager.findHBTI(user_id)
 					);
+			System.out.println(Integer.parseInt(request.getParameter("group_id")) + " : " + userManager.findHBTI(user_id));
 			try {
 				userManager.updateGroup(group);
 				return "redirect:/group/main";
@@ -88,6 +89,8 @@ public class UpdateGroupController implements Controller {
 				
 				List<User> userList = groupManager.findUserList(group.getGroup_id());
 
+				group.setNumberOfMem(Integer.parseInt(request.getParameter("limit")));
+				
 				request.setAttribute("userList", userList);
 				request.setAttribute("groupInfo", group);
 				

@@ -184,6 +184,7 @@ public class GroupDAO {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
 			int result = sqlSession.getMapper(GroupMapper.class).updateGroup(group);
+			System.out.println(result);
 			if (result > 0) {
 				sqlSession.commit();
 			}

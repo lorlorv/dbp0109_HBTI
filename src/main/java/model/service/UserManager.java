@@ -245,11 +245,16 @@ public class UserManager {
 		} else if (group.getLimitation() < 2) {
 			throw new OverTheLimitException("그룹 정원은 적어도 2명 이상이어야 합니다.");
 		}
-    
-		boolean exist = groupDAO.existingGroupName(group.getName());
-		if(exist) {
-			throw new ExistingGroupException("이미 존재하는 그룹 이름입니다.");
+	
+		String name = groupDAO.findGroupName(group.getGroup_id());
+		
+		if(!name.equals(group.getName())) {
+			boolean exist = groupDAO.existingGroupName(group.getName());
+				if(exist) {
+					throw new ExistingGroupException("이미 존재하는 그룹 이름입니다.");
+				}
 		}
+		
 		return groupDAO.update(group);
 	}
 

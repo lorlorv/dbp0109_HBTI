@@ -79,7 +79,13 @@ function groupDelete(targetURI) {
 			alert('${Exception.getMessage()}');
 		</script>
 	</c:if>
-	
+	<!-- 이미 그룹이름이 존재한다면 경고창 -->
+		<c:if test="${existingName}">
+			<script>
+				alert('${Exception.getMessage()}');
+			</script>
+		</c:if>
+		
 	<div class="contents">
 		<p id="sub-title">HBTI GROUP UPDATE</p>
 		<div class="contents-split">
