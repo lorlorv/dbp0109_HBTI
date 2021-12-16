@@ -19,7 +19,7 @@ public class SearchGroupController implements Controller{
     	String keyword = request.getParameter("searchKeyword");
     	String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 
-    	keyword = keyword + "%";
+    	keyword = "%" + keyword + "%";
     	int hbti_id = userManager.findHBTI(user_id);
  
     	List<Group> searchList = userManager.searchGroupList(hbti_id, keyword);
