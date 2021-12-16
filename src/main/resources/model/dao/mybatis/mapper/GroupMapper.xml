@@ -85,7 +85,7 @@
 		SELECT user_id
 		FROM USERINFO
 		WHERE group_id = #{group_id} AND NOT user_id = #{leader_id}
-		AND NOT login_date IS NULL
+		AND NOT login_date IS NULL AND ROWNUM = 1
 		ORDER BY login_date DESC
 	</select>
 	
