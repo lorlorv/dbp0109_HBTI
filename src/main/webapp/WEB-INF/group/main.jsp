@@ -22,12 +22,12 @@
 <script>
 
 $(function(){
-    $("#table tr").slice(0, 5).show(); // select the first ten
+    $("#challTable tr").slice(0, 3).show(); // select the first ten
     $("#load").click(function(e){ // click event for load more
         e.preventDefault();
-        $("#table tr:hidden").slice(0, 5).show(); // select next 10 hidden divs and show them
-        if($("#table tr:hidden").length == 0){ // check if any hidden divs still exist
-            alert("더 이상 가져올 챌린지 게시물이 없습니다."); // alert if there are none left
+        $("#challTable tr:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
+        if($("#challTable tr:hidden").length == 0){ // check if any hidden divs still exist
+            alert("챌린지 게시물을 모두 불러왔습니다."); // alert if there are none left
         }
     });
 });
@@ -162,9 +162,9 @@ $(function(){
 				있습니다.
 			</p>
 			<div class="challenge-list">
-				<table class="challenge-table">
-					<c:forEach var="post" items="${postList}">
-						<tr
+				<table id="challTable" class="challenge-table">
+					<c:forEach var="post" items="${postList}" varStatus="status">
+						<tr id="list"
 							onClick="location.href='<c:url value='/challenge/view'>
 												<c:param name="writer_id" value='${post.writer_id}'/>
 												</c:url>'">
