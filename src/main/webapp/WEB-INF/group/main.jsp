@@ -25,10 +25,10 @@ $(function(){
     $("#challTable tr").slice(0, 3).show(); // select the first ten
     $("#load").click(function(e){ // click event for load more
         e.preventDefault();
-        $("#challTable tr:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
         if($("#challTable tr:hidden").length == 0){ // check if any hidden divs still exist
             alert("챌린지 게시물을 모두 불러왔습니다."); // alert if there are none left
         }
+        $("#challTable tr:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
     });
 });
 
