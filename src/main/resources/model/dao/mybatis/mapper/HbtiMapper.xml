@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.dao.mybatis.mapper.HbtiMapper">
+	<cache />
+
+	<!-- 해당 hbti_id의 Hbti 모든 정보 반환 -->
+	<select id="selectHbtiByHbtiId" parameterType="int"
+		resultType="HBTI">
+		SELECT name, goodhbti, badhbti, icon, good_descr,
+		bad_descr, exercise
+		FROM HBTI
+		WHERE hbti_id = #{hbti_id}
+	</select>
+	
+	<select id="selectHbtiImgByName" parameterType="String"
+		resultType="String">
+		SELECT icon
+		FROM HBTI
+		WHERE name = #{name}
+	</select>
+
+	<!-- 랭킹에 사용 -->
+
+	<!-- 특정 hbti의 group_id 반환 -->
+	<select id="selectGroupByHbtiId" resultType="int">
+		SELECT group_id
+		FROM
+		GroupInfo
+		WHERE hbti_id = #{hbti_id}
+	</select>
+
+	<!-- 특정 그룹의 member 수 구하기 -->
+	<select id="selectGroupMemberNumByGroupId" parameterType="int"
+		resultType="int">
+		SELECT COUNT(user_id)
+		FROM UserInfo
+		WHERE group_id =
+		#{group_id}
+	</select>
+
+	<!-- 특정 그룹에 해당하는 user_id 리스트 구하기 -->
+	<select id="selectUserListByGroupId" resultType="string">
+		SELECT user_id
+		FROM UserInfo
+		WHERE group_id = #{group_id}
+	</select>
+
+
+	<!-- 특정 그룹의 오늘 Challenge를 완료한 회원 수 -> push 추가--> 
+	<select id="countTodayChallengeUserByUserId"
+		resultType="int">
+		SELECT COUNT(writer_id)
+		FROM CHALLENGEPOST
+		WHERE TO_DATE(sysdate)
+		<![CDATA[ < write_date ]]>  AND
+		writer_id IN 
+		<foreach collection="list" item="value" index="index" open="(" close=")" separator=",">
+			#{value}
+		</foreach>
+	</select>
+
+</mapper>

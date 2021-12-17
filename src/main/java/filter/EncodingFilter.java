@@ -19,7 +19,7 @@ import javax.servlet.ServletResponse;
 public class EncodingFilter implements Filter {
 	private String encoding = null;
 	
-	/**
+	/**s
 	 * ServletRequest객체에 web.xml에서 전달된 인코딩 방식을 설정
 	 */
     @Override
