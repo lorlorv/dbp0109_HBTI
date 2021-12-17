@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # **HBTI** : MBTI 건강습관 형성 서비스 :running:
 > 21-2 데이터베이스프로그래밍 01분반 09팀 코딩궁딩
 >> 신유정(팀장), 이은서(팀원), 유정민(팀원)
@@ -33,3 +34,7 @@
 - 투두. 챌린지, 랭킹은 자정마다 초기화되므로, 당일 게시물이 없다면 아무것도 출력되지 않습니다.
 
 - Chrome 브라우저에 최적화하여 개발을 진행했습니다.
+=======
+# dbp0109_HBTI
+2021-2 Database Programming(01) Team.09 HBTI Service Team Project 
+>>>>>>> refs/remotes/origin/master
