@@ -116,7 +116,7 @@ td {
 .login {
 	position: fixed;
 	top: 0px;
-	margin: 0 0 0 1020px; height : 500px;
+	margin: 0 0 0 70%;
 	width: 300px;
 	font-family: 'SDSamliphopangche_Basic';
 	flex-wrap: nowrap; /*너비 초과 시, 줄 바꿈 */
