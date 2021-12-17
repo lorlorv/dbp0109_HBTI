@@ -8,7 +8,6 @@ import model.service.exception.OverTheLimitException;
 import model.service.UserManager;
 
 import model.Group;
-import model.User;
 import controller.Controller;
 import controller.user.UserSessionUtils;
 

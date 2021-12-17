@@ -1,8 +1,6 @@
 package scheduler;
 
 import java.sql.SQLException;
-import java.util.Date;
-
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -10,15 +8,12 @@ import org.quartz.JobExecutionException;
 
 import model.service.GroupManager;
 
-// µø±‚»≠ √≥∏Æ∏¶ ¿ß«ÿ æÓ≥Î≈◊¿Ãº« √ﬂ∞° : «ÿ¥Á Ω∫ƒ…¡Ÿ∑Ø∞° ≥°≥Ø∂ß ±Ó¡ˆ ¥Ÿ¿Ω ø‰√ª ¥Î±‚
 @DisallowConcurrentExecution 
 public class ChallengeScheduler implements Job{
 	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		// µø¿€ Ω√≈≥ ≥ªøÎ ¡§¿«
-		System.out.println("test : " + new Date(System.currentTimeMillis()));
-		
+		// Ïã§Ï†ú job
 		GroupManager groupManager = GroupManager.getInstance();
 		try {
 			int rlt = groupManager.assignChallenge();

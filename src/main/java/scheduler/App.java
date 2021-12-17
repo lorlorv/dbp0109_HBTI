@@ -17,18 +17,17 @@ public class App {
 	private static final Logger logger = LoggerFactory.getLogger(App.class);
 
 	public void startScheduler() {
-		//Quartz ÀÎ½ºÅÏ½º »ý¼º
+		//Quartz ë¼ì´ë¸ŒëŸ¬ë¦¬
 				SchedulerFactory schedulerFactory = new StdSchedulerFactory();
 				try {
 		            Scheduler scheduler = schedulerFactory.getScheduler();
 
-		            //job ¼¼ºÎ Á¤º¸
+		            //job ë“±ë¡
 		            JobDetail job = newJob(ChallengeScheduler.class)
 		            		.withIdentity("jobName", Scheduler.DEFAULT_GROUP)
 		            		.build();
 
-		            // ¸ÅÀÏ 12½Ã(ÀÚÁ¤) 0 0 0 * * ?
-		            // Å×½ºÆ® ¿¹Á¦´Â 30ÃÊ
+		            // ìžì • -> 0 0 0 * * ?
 		            Trigger trigger = newTrigger()
 		            		.withIdentity("trggerName", Scheduler.DEFAULT_GROUP)
 		                    .withSchedule(cronSchedule("0 0 0 * * ?"))

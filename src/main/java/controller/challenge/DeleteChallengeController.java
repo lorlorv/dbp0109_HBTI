@@ -18,6 +18,4 @@ public class DeleteChallengeController implements Controller {
 		
 		return "redirect:/group/main";
 	}
-	
-
 }

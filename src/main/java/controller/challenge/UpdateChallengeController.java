@@ -53,52 +53,40 @@ public class UpdateChallengeController implements Controller {
 				return "/challenge/view.jsp";
 			}
 		} else if (request.getServletPath().equals("/challenge/update")) {
-		
-			String exist_img = post.getImage();
-			
+			String exist_img = post.getImage();	
 			String content = null;
 			String fileName = null;
 
-			
 			boolean check = ServletFileUpload.isMultipartContent(request);
 
-			if (check) {
-				
+			if (check) {	
 				ServletContext context = request.getServletContext();
 				String path = context.getRealPath("/upload");
 				File dir = new File(path);
 
 				if (!dir.exists())
 					dir.mkdir();
-
 				try {
 					DiskFileItemFactory factory = new DiskFileItemFactory();
 				
 					factory.setSizeThreshold(10 * 1024);
-					
-				
+
 					factory.setRepository(dir);
 					
-
 					ServletFileUpload upload = new ServletFileUpload(factory);
 					
-					upload.setSizeMax(10 * 1024 * 1024);
-					
+					upload.setSizeMax(10 * 1024 * 1024);		
 					upload.setHeaderEncoding("utf-8");
-				
-
+		
 					List<FileItem> items = (List<FileItem>) upload.parseRequest(request);
 
-					
 					for (int i = 0; i < items.size(); ++i) {
 						FileItem item = (FileItem) items.get(i);
-					
 						String value = item.getString("utf-8");
 						
 						if (item.isFormField()) {
 							if (item.getFieldName().equals("content"))
 								content = value;
-							
 						} else {
 							if (item.getFieldName().equals("image")) {
 								
@@ -116,17 +104,14 @@ public class UpdateChallengeController implements Controller {
 							}
 						}
 					}
-				} catch (SizeLimitExceededException e) {
-					
+				} catch (SizeLimitExceededException e) {	
 					e.printStackTrace();
 				} catch (FileUploadException e) {
-				
 					e.printStackTrace();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				try {
-					
 					post = groupManager.findPost(user_id);
 				
 					post.setContent(content);
@@ -155,5 +140,4 @@ public class UpdateChallengeController implements Controller {
 
 		return null;
 	}
-
 }

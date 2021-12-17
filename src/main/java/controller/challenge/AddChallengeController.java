@@ -37,7 +37,6 @@ public class AddChallengeController implements Controller {
 		
 		if(request.getServletPath().equals("/challenge/addForm")) {
 			try {
-				
 				groupManager.isPost(user_id);
 				return "/challenge/addForm.jsp";
 				
@@ -48,53 +47,38 @@ public class AddChallengeController implements Controller {
 				post = groupManager.findPost(user_id);
 				request.setAttribute("postInfo", post);
 				
-				
-				boolean isWriter = true;
-				request.setAttribute("isWriter", isWriter);
-				
+				// post 작성자 여부
+				request.setAttribute("isWriter", true);
 				
 				return "/challenge/view.jsp";
 			}
 		}
-		
 		String content = null;
 		String fileName = null;
 		
-		
 		boolean check = ServletFileUpload.isMultipartContent(request);
-		
 		if(check) {
-			
 			ServletContext context = request.getServletContext();
 			String path = context.getRealPath("/upload");
 			File dir = new File(path);
 			
 			if(!dir.exists()) dir.mkdir();
-		
-		
+
 			try {
 				DiskFileItemFactory factory = new DiskFileItemFactory();
 	          
 	            factory.setSizeThreshold(10 * 1024);
-	          
-	    
-	            factory.setRepository(dir);
-	                   
+	            factory.setRepository(dir);  
 	            
 	            ServletFileUpload upload = new ServletFileUpload(factory);
-	           
-	            upload.setSizeMax(10 * 1024 * 1024);
 	            
+	            upload.setSizeMax(10 * 1024 * 1024);
 	            upload.setHeaderEncoding("utf-8");
 	          
-	            
 	            List<FileItem> items = (List<FileItem>)upload.parseRequest(request);
-	            
 	            
 	            for(int i = 0; i < items.size(); ++i) {
 	            	FileItem item = (FileItem)items.get(i);
-	            	
-	            	
 	            	String value = item.getString("utf-8");
 	          	
 	            	if(item.isFormField()) {              		
@@ -116,11 +100,9 @@ public class AddChallengeController implements Controller {
 	            	}
 	            }
 			} catch(SizeLimitExceededException e) {
-			
 				e.printStackTrace();           
             }catch(FileUploadException e) {
-    
-                e.printStackTrace();
+                    e.printStackTrace();
             }catch(Exception e) {            
                 e.printStackTrace();
             }
@@ -138,14 +120,9 @@ public class AddChallengeController implements Controller {
 				post.setGroup_id(group_id);
 				groupManager.addPost(post);
 				
-				
-				
 				return "redirect:/challenge/myView";
 			} catch (Exception e) { e.printStackTrace(); }
-		
-		}
-		
+		}	
 		return null;
 	}
-
 }

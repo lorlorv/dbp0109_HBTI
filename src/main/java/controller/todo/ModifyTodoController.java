@@ -43,8 +43,6 @@ public class ModifyTodoController implements Controller {
 	 			
 				return "/todo/dateResult.jsp";
     	 }
-				
- 	
     	 else if (request.getServletPath().equals("/todo/modifyForm")){
     		 
     		
@@ -61,7 +59,6 @@ public class ModifyTodoController implements Controller {
    
 			return "/todo/modifyForm.jsp";  
     	 }
-    	 
     	 else {
     		int todo_id = Integer.parseInt(request.getParameter("todo_id"));
     	    	

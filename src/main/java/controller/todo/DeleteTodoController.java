@@ -28,17 +28,13 @@ public class DeleteTodoController implements Controller {
 			Todo selectTodo = manager.findTodo(selectId, user_id);
 			request.setAttribute("selectTodo", selectTodo);
 
-
 			List<Todo> todoList = manager.findNotSelectTodoList(selectId, user_id);
 			request.setAttribute("todoList", todoList);	
 			
 			request.setAttribute("select_id", selectId);
-			
-			
-			return "/todo/modifyForm.jsp"; 
-			
-		 }
-		 
+				
+			return "/todo/modifyForm.jsp"; 		
+		 }	 
 		 else {
 		
 				int deleteId = Integer.parseInt(request.getParameter("todo_id"));
@@ -49,8 +45,7 @@ public class DeleteTodoController implements Controller {
 				
 	     		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 	     		Date todo_date = (Date) sdf.parse(date);
-	    
-	     		
+
 				Todo selectTodo = manager.findTodo(todo_date, selectId, user_id);
 	     		request.setAttribute("selectTodo", selectTodo);
 	     		
@@ -62,7 +57,5 @@ public class DeleteTodoController implements Controller {
 		
 				return "/todo/modifyDateForm.jsp";  
 			 }
-		 }
-			
-			
+		 }	
 	}
