@@ -47,16 +47,17 @@
 - HTML, CSS, JS
 - Quartz Scheduler
 
-#### 🖥️담당한 기능(Group, Challenge, TodoList)
+#### 🖥️담당한 기능(Main, Join, MyPage, User)
 
 - 기능별로 파트를 나누어 MVC 모델을 기반으로 구현했습니다
-    - 그룹 CRUD, 그룹 검색, 그룹원 강퇴, 그룹 탈퇴, 그룹원 확인 기능
-    - 챌린지 CRUD, 챌린지 인증 사진 파일 업로드
-    - 챌린지 포스트 좋아요
-    - 챌린지 스케줄러 : 자정마다 일일 챌린지 부여
-    - 투두리스트 CRUD(JDBC), 체크 달성 여부
-- Container, Group, Challenge, TodoList UI 기획 및 구현
-- Group, HBTI, Challenge DB 테이블 스키마 설계 및 구현
+    - User의 로그인, 회원가입 등 전반적인 User CRUD 및 MVC 구현
+    - HBTI 관련 MVC 구현
+    - MyPage 관련 MVC 구현
+    - Todo/Challenge Callendar 구현
+    - Main Page MVC 구현
+    - 랭킹 기능 구현
+- Main, MyPage, Login, 회원가입, HBTI Test UI 기획 및 구현
+- User, HBTI DB 테이블 스키마 설계 및 구현
 
 ---
 
